@@ -1,0 +1,10 @@
+<ng-container *ngIf="getSupportedLanguages().length>1">
+        <button mat-icon-button attr.aria-label="{{'kiilib.language' | translate | async}}" [matMenuTriggerFor]="menu" class="btn">        
+            <div class="flag" [ngStyle]="{'background-position': getFlagPosition(currentLanguage) }"></div>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button *ngFor="let language of getSupportedLanguages()" mat-menu-item  class="item" (click)="selectLanguage(language.iso);">
+                <div  class="flag" [ngStyle]="{'background-position': getFlagPosition(language.code) }"></div><span>{{language.name}}</span>  
+          </button>
+        </mat-menu>
+</ng-container>

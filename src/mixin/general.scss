@@ -1,0 +1,28 @@
+//MATERIAL THEME
+@import '~@angular/material/theming';
+
+
+// Defines the scrollbar style
+@mixin general-mixin($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background:map-get($theme,background);
+
+
+    //Set global text color
+    body {
+        color:mat-color(map-get($theme, foreground),text);
+    }
+
+    //Redefine buttons
+    app-root,.cdk-overlay-container {
+        .mat-stroked-button,.mat-flat-button,.mat-raised-button {
+            border-radius: 50vh;
+        }
+        .mat-stroked-button {
+            border:1.5px solid;
+        }
+    }
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="175px" height="175px" display="block" style="margin:auto" preserveAspectRatio="xMidYMid" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path transform="rotate(329.153 50 51)" d="m10 50a40 40 0 0 0 80 0 40 42 0 0 1-80 0" fill="#cddc39">
+<animateTransform attributeName="transform" dur="1s" keyTimes="0;1" repeatCount="indefinite" type="rotate" values="0 50 51;360 50 51"/>
+</path>
+</svg>

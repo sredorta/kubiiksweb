@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50" height="50" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<g transform="translate(0 -283.77)">
+<rect x=".2835" y="284.1" width="12.7" height="12.7" ry="6.3463" fill="#ccc" stroke-miterlimit="3.4" stroke-width="0" style="paint-order:stroke fill markers"/>
+<rect x="1.0823" y="284.92" width="11.112" height="11.112" ry="5.553" fill="#1a1a1a" stroke-miterlimit="3.4" stroke-width="0" style="paint-order:stroke fill markers"/>
+<g transform="translate(.17407 -.015824)" fill="#cddc39" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+<path d="m3.5689 288.74c0.59789-3.8864 3.9353-0.55094 6.0663-0.97141-0.83613 2.1229-5.031-1.0157-6.0663 0.97141z" stroke-width=".039391" style="paint-order:stroke markers fill"/>
+<path d="m3.5689 291.04c0.59789-3.8864 3.9353-0.55094 6.0663-0.97141-0.83613 2.1229-5.031-1.0157-6.0663 0.97141z" stroke-width=".039391" style="paint-order:stroke markers fill"/>
+<path d="m3.5686 293.34c0.59789-3.8864 3.9353-0.55094 6.0663-0.97141-0.83613 2.1229-5.031-1.0157-6.0663 0.97141z" stroke-width=".038894" style="paint-order:stroke markers fill"/>
+</g>
+</g>
+</svg>

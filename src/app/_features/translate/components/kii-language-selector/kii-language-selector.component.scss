@@ -1,0 +1,30 @@
+
+.btn {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.flag {
+    background: url('/assets/kiilib/images/language-flags.svg');
+    background-repeat:  no-repeat;
+    background-size: 520px 390px;
+    width:16px;
+    min-width: 16px;
+    max-width: 16px;
+    transform:scale(1.2);
+    height:11px;
+    opacity:0.8;
+}
+.item {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    span {
+        margin-left:15px;
+    }
+
+}
+
+
+

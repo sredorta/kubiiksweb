@@ -1,0 +1,17 @@
+{
+    "m.accept" : "Accept",
+    "m.decline" : "Decline",
+    "m.cookies.title" : "Cookies usage",
+    "m.cookies.subtitle": "This website or its third-party tools use cookies, which are necessary for some functionalities like statistics and social sharing among others. Do you accept the cookies usage ?",
+    "m.cookies.link" : "Know more about what we use for cookies",
+    "m.footer.created": "Application created by",
+    "kiilib.language": "Language in english",
+    "test" : "Test in english",
+    "test1" : "Test in english",
+    "test2" : "Test in english",
+    "test3" : "Test in english",
+    "test4" : "Test in english",
+    "test5" : "Test in english"
+
+
+}

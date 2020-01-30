@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="50" height="50" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+<metadata>
+<rdf:RDF>
+<cc:Work rdf:about="">
+<dc:format>image/svg+xml</dc:format>
+<dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+<dc:title/>
+</cc:Work>
+</rdf:RDF>
+</metadata>
+<g transform="translate(0 -283.77)">
+<rect x=".047248" y="283.82" width="13.229" height="13.153" ry="6.5766" fill="#afb42d" stroke-miterlimit="3.4" stroke-width="0" style="paint-order:stroke fill markers"/>
+<rect x="1.7921" y="287.27" width="9.8606" height="6.4525" rx="4.9303" ry="2.9672" fill="#fff" stroke-miterlimit="3.4" stroke-width="0" style="paint-order:stroke fill markers"/>
+<rect x="2.8135" y="289.45" width="7.9866" height="3.1085" ry="1.5543" fill="#afb42d" stroke-miterlimit="3.4" stroke-width="0" style="paint-order:stroke fill markers"/>
+<rect x="3.2969" y="289.83" width="6.9849" height="2.3542" ry="1.1771" fill="#82771b" stroke-miterlimit="3.4" stroke-width="0" style="paint-order:stroke fill markers"/>
+<path d="m5.7039 289.45h1.6458l-1.1842 3.1061-1.7675-0.012z" fill="#fff" opacity=".4" stroke-miterlimit="3.4" stroke-width="0" style="paint-order:stroke fill markers"/>
+<path d="m7.3902 289.42 0.82431 0.0242-1.1621 3.1303h-0.85751z" fill="#fff" opacity=".4" stroke-miterlimit="3.4" stroke-width="0" style="paint-order:stroke fill markers"/>
+<rect x="4.8501" y="290.44" width=".68868" height="1.1658" ry=".37718" fill="#fff" stroke-miterlimit="3.4" stroke-width="0" style="paint-order:stroke fill markers"/>
+<rect x="8.0964" y="290.44" width=".68868" height="1.1658" ry=".37718" fill="#fff" stroke-miterlimit="3.4" stroke-width="0" style="paint-order:stroke fill markers"/>
+<rect x="1.7921" y="287.27" width=".70158" height="3.8921" rx=".35079" ry=".32572" fill="#fff" style="paint-order:stroke markers fill"/>
+<rect x="10.951" y="287.27" width=".70158" height="3.8921" rx=".35079" ry=".32572" fill="#fff" style="paint-order:stroke markers fill"/>
+</g>
+</svg>

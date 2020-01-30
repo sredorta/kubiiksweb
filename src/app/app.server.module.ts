@@ -1,16 +1,29 @@
 import { NgModule } from '@angular/core';
-import { ServerModule } from '@angular/platform-server';
+import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
+
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
 import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
+import { KiiTranslateService } from './_features/translate/services/kii-translate.service';
+import { Router } from '@angular/router';
+import { KiiTranslateModule } from './_features/translate/kii-translate.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     AppModule,
     ServerModule,
     ModuleMapLoaderModule,
+    NoopAnimationsModule,
+    ServerTransferStateModule,
+    KiiTranslateModule.forRoot(),
   ],
   bootstrap: [AppComponent],
 })
-export class AppServerModule {}
+export class AppServerModule {
+  constructor(private kiiTrans : KiiTranslateService, private router: Router) {
+    console.log("CONSTRUCTOR APP_MODULE");
+    this.router.navigate([this.kiiTrans.getCurrent()]);
+  }
+}

@@ -1,4 +1,164 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    //width:100vw;
+    overflow-x:hidden;
+    background:black;
+    box-sizing: content-box;
+    font-family: "Montserrat","Roboto","Helvetica Neue",sans-serif;  //Main font
+}
+//Avoid blue outline on any element
+* {
+    //border: none;    //TO BE ADDED !!!
+    outline: none;
+}
+
+//Avoid text selection and blue outline
+span,p,h1,h2,h3,small,div,a {
+    -webkit-touch-callout: none !important;
+/*    &:not(.angular-editor-textarea) {
+        -webkit-user-select: none !important;
+        -khtml-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+    }*/
+    box-sizing: content-box;
+}
+
+/*Remove Chrome autofill automatic settings on inputs*/
+input,textarea,select {
+        background-color: transparent;
+}
+input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+            -webkit-transition-delay: 99999s;
+            transition-delay: 999999s;
+}
+
+////////////////////////////////////////////////////////////////////////////    
+// FONTS
+////////////////////////////////////////////////////////////////////////////
+
+
+@font-face {
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-style: normal;    
+    src: url("/assets/fonts/Montserrat/Montserrat-Regular.eot");
+    src: url("/assets/fonts/Montserrat/Montserrat-Regular.eot?#iefix") format('embedded-opentype'),
+         url("/assets/fonts/Montserrat/Montserrat-Regular.woff2") format("woff2"),
+         url("/assets/fonts/Montserrat/Montserrat-Regular.woff") format("woff");
+
+    font-display: swap;
+}
+@font-face {
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-style: normal;
+    src: url("/assets/fonts/Montserrat/Montserrat-SemiBold.eot");
+    src: url("/assets/fonts/Montserrat/Montserrat-SemiBold.eot?#iefix") format('embedded-opentype'),
+         url("/assets/fonts/Montserrat/Montserrat-SemiBold.woff2") format("woff2"),
+         url("/assets/fonts/Montserrat/Montserrat-SemiBold.woff") format("woff");
+    font-display: swap;
+}
+
+//GENERAL CLASSES THAT ARE OFTEN USED
+.w100 {
+    width:100%;
+}
+.mw100 {
+    min-width: 100%;
+}
+.h100 {
+    height:100%;
+}
+
+
+
+//Flex center-center
+.fcc {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.fcr {
+    display:flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+//Text alignments
+.txt-ac {
+    text-align: center;
+}
+.txt-al {
+    text-align: left;
+}
+.txt-ar {
+    text-align: right;
+}
+
+//Text style
+.txt-b {
+    font-weight: bold;
+}
+.txt-i {
+    font-style: italic;
+}
+.txt-nb {
+    font-weight: normal;
+}
+
+
+.txt-xs {
+    font-size: 12px;
+}
+.txt-s {
+    font-size: 14px;
+}
+.txt-m {
+    font-size: 16px;
+}
+.txt-l {
+    font-size: 18px;
+}
+.txt-xl {
+    font-size:26px;
+}
+.txt-xxl {
+    font-size:34px;
+}
+
+@media only screen and (min-width: 700px) { 
+    .txt-xs {
+        font-size: 14px;
+    }
+    .txt-s {
+        font-size: 16px;
+    }
+    .txt-m {
+        font-size: 18px;
+    }
+    .txt-l {
+        font-size: 22px;
+    }
+    .txt-xl {
+        font-size:32px;
+    }
+    .txt-xxl {
+        font-size:42px;
+    }
+}
+
