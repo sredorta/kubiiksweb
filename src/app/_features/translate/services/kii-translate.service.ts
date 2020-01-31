@@ -6,6 +6,7 @@ import {catchError} from 'rxjs/operators';
 import { isPlatformBrowser} from '@angular/common';
 import { StateKey, makeStateKey, TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 declare var require: any;
 const fs = require('fs');
@@ -63,6 +64,7 @@ export  class KiiTranslateService  {
     @Inject(PLATFORM_ID) private platform: any,
     private transfer : TransferState,
     private http: HttpClient,
+    private router: Router,
     ) { 
         this.currentLang = this.get();
         console.log("CONSTRUCTOR: KIILANGSERVICE")
@@ -74,6 +76,7 @@ export  class KiiTranslateService  {
     this.currentLang = this.sanitize(lang);
     console.log("LANGUAGE SET:", this.currentLang);
     this.loadTranslation(this.requiredContext,true);
+    this.router.navigate(['/'+this.getCurrent()]);
   }
 
 

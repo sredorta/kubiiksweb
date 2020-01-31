@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KiiTransComponent } from './kii-trans.component';
+import { KiiHomeComponent } from './kii-home.component';
 
-describe('KiiTransComponent', () => {
-  let component: KiiTransComponent;
-  let fixture: ComponentFixture<KiiTransComponent>;
+describe('KiiHomeComponent', () => {
+  let component: KiiHomeComponent;
+  let fixture: ComponentFixture<KiiHomeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KiiTransComponent ]
+      declarations: [ KiiHomeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KiiTransComponent);
+    fixture = TestBed.createComponent(KiiHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

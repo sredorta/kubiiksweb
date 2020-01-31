@@ -4,38 +4,25 @@
 
 import { NgModule, PLATFORM_ID, Injector, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { KiiTransComponent } from './components/kii-trans/kii-trans.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, Router } from '@angular/router';
 import { KiiTranslateService } from './services/kii-translate.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { KiiTranslatePipe } from './pipes/kii-translate.pipe';
 import { KiiLanguageSelectorComponent } from './components/kii-language-selector/kii-language-selector.component';
 import {
-  MatBottomSheetModule,
   MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatListModule,
   MatMenuModule,
-  MatRippleModule,
-  MatSnackBarModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatDividerModule,
-  MatInputModule,
 } from '@angular/material';
+import { KiiTranslateRoutingModule } from './kii-translate-routing.module';
+import { KiiMainModule } from '../main/kii-main.module';
+import { KiiMainRoutingModule } from '../main/kii-main-routing.module';
 
-const routes: Routes = [
-  { path: '',  component: KiiTransComponent },
-  { path: 'fr',  component: KiiTransComponent },
-  { path: 'es', component:KiiTransComponent}
-];
+
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes),
+    KiiTranslateRoutingModule,
     [
       MatMenuModule,
       MatButtonModule
@@ -44,7 +31,6 @@ const routes: Routes = [
   declarations: [
     KiiTranslatePipe,
     KiiLanguageSelectorComponent,
-    KiiTransComponent
   ],
   providers:[KiiTranslateService],
   exports:[
@@ -53,11 +39,17 @@ const routes: Routes = [
   ]
 })
 export class KiiTranslateModule {
+
+  constructor(private kiiTrans : KiiTranslateService, private router: Router) {
+      console.log("CONSTRUCTOR KII-TRANSLATE MODULE");
+      this.router.navigate([this.kiiTrans.getCurrent()]);
+  }
+
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: KiiTranslateModule,
       providers: [
-        KiiTranslateService
+        KiiTranslateService,KiiTranslatePipe
       ],
     }
   }
@@ -66,7 +58,9 @@ export class KiiTranslateModule {
   static forChild(): ModuleWithProviders {
     return {
       ngModule: KiiTranslateModule,
-      providers: []
+      providers: [
+        KiiTranslateService,KiiTranslatePipe
+      ],
     }
   }
  }

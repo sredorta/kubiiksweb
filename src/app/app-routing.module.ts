@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { KiiTransComponent } from './_features/translate/components/kii-trans/kii-trans.component';
 import { environment } from 'src/environments/environment.prod';
+import { KiiHomeComponent } from './_features/main/components/kii-home/kii-home.component';
+import { KiiAppComponent } from './_features/main/components/kii-app/kii-app.component';
 
-//Create dynamically all the paths for each language
+
 let routes: Routes = [
-  { path: '',  redirectTo: environment.languages[0], pathMatch:'full' }];
-for (let lang of environment.languages) {
-    routes.push({path:lang, component: KiiTransComponent});
-}
+  {path:'', redirectTo: 'home',pathMatch:'full'},
+  { path: 'home', component: KiiHomeComponent}
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
