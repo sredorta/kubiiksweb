@@ -12,8 +12,7 @@ import { KiiAppComponent } from '../main/components/kii-app/kii-app.component';
 export class KiiTranslateRoutingModule {
   constructor(private router : Router) {
     console.log("KII TRANSLATE ROUTING constructor")
-    let routes: Routes = [
-      { path: '',  redirectTo: environment.languages[0], pathMatch:'full' }];
+    let routes: Routes = [{ path: '',  redirectTo: environment.languages[0], pathMatch:'full' }];
     for (let lang of environment.languages) {
         routes.push({path:lang, children: this.router.config});
     }

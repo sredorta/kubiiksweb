@@ -9,6 +9,7 @@ import { KiiTranslateService } from './_features/translate/services/kii-translat
 import { Router } from '@angular/router';
 import { KiiTranslateModule } from './_features/translate/kii-translate.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { KiiMainModule } from './_features/main/kii-main.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     ModuleMapLoaderModule,
     NoopAnimationsModule,
     ServerTransferStateModule,
+    KiiMainModule,
     KiiTranslateModule.forRoot(),
   ],
   bootstrap: [AppComponent],
@@ -24,6 +26,5 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 export class AppServerModule {
   constructor(private kiiTrans : KiiTranslateService, private router: Router) {
     console.log("CONSTRUCTOR APP_MODULE");
-    this.router.navigate([this.kiiTrans.getCurrent()]);
   }
 }
