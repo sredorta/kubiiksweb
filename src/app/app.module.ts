@@ -14,6 +14,7 @@ import { KiiTranslatePipe } from './_features/translate/pipes/kii-translate.pipe
 import { AppRoutingModule } from './app-routing.module';
 import { KiiAppComponent } from './_features/main/components/kii-app/kii-app.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [DeviceDetectorService
+  ],
   entryComponents: [KiiAppComponent],
   bootstrap: [AppComponent],
   exports: [

@@ -40,6 +40,8 @@ import { KiiSpinnerComponent } from './components/kii-spinner/kii-spinner.compon
 import { KiiNewsletterFormComponent } from './components/kii-newsletter-form/kii-newsletter-form.component';
 import { KiiShareComponent } from './components/kii-share/kii-share.component';
 import { ShareModule } from '@ngx-share/core';
+import { KiiHeaderComponent } from './components/kii-header/kii-header.component';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 
@@ -66,6 +68,8 @@ import { ShareModule } from '@ngx-share/core';
     KiiSpinnerOverlayComponent,
     KiiToolbarComponent,
     ToolbarComponent,
+    KiiHeaderComponent,
+    HeaderComponent,
     KiiFooterComponent,
     FooterComponent,
     KiiNewsletterComponent,
@@ -86,7 +90,6 @@ export class KiiMainModule {
   return {
     ngModule: KiiMainModule,
     providers: [
-      //KiiTranslateService
     ],
   }
 }
