@@ -17,10 +17,10 @@ export class KiiBottomSheetCookiesComponent implements OnInit {
 
 
   reject() {
-    this.ref.dismiss(false);
+    this.ref.dismiss({result:"reject"});
   }
 
   accept() {
-    this.ref.dismiss(true);
+    this.ref.dismiss({result:"accept"});
   }
 }

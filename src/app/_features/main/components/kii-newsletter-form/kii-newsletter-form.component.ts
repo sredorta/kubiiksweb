@@ -19,12 +19,7 @@ export class KiiNewsletterFormComponent implements OnInit {
   constructor( private kiiForm : KiiFormRestoreService, private r: Renderer2) { }
 
   ngOnInit() {
-    const restored = this.kiiForm.restore("newsletter");
-    if (restored) {
-      if (restored['firstName']) this.first.nativeElement.value = restored['firstName'];
-      if (restored['lastName']) this.first.nativeElement.value = restored['lastName'];
-      if (restored['email']) this.first.nativeElement.value = restored['email'];
-    }
+
   }
 
   onSubmit() {
@@ -58,9 +53,5 @@ export class KiiNewsletterFormComponent implements OnInit {
   }
   private validateName(name:string) {
     return name.length<1?true:false;
-  }
-
-  saveForm() {
-     this.kiiForm.store('newsletter',{firstName:this.first.nativeElement.value, lastName:this.last.nativeElement.value, email:this.email.nativeElement.value});
   }
 }

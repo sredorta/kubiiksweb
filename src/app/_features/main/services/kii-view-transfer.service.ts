@@ -35,7 +35,6 @@ export class KiiViewTransferService {
     } else {
       this.isTransfer = this.transferState.get(key, false);
     }
-    console.log("isFirstBrowser returns", this.isTransfer);
     this.router.events.subscribe(e => {
       if (e instanceof Scroll) {
         if (e.position) {

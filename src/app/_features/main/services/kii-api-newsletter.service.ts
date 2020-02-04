@@ -18,7 +18,6 @@ export class KiiApiNewsletterService {
 
    /**Update article in database*/
    public subscribeNews(news:INewsletter) {
-       console.log("SENDING TO SERVER :", news);
     return this.http.post<any>(environment.apiURL + '/newsletter/subscribe', news);
   } 
    /**Update article in database*/

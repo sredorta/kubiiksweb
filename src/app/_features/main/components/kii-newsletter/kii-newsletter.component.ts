@@ -20,9 +20,7 @@ export class KiiNewsletterComponent extends KiiBaseAbstract implements OnInit {
     this.loading = true;
     this.addSubscriber(
       this.kiiApiNews.subscribeNews(value).subscribe(res => {
-        console.log("GOT RESULT : ", res);
       }, error => {
-        console.log("GOT ERROR : ",error);
         this.loading = false;
       }, () => {
         this.loading = false;

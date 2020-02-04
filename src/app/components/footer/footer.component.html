@@ -1,6 +1,6 @@
 <div class="wrp">
              <div class="column">
-               <button mat-button class="item" [routerLink]="'home'">{{'m.menu.home' | translate | async}}</button>
+               <button mat-button class="item" [routerLink]="'home' | translateRoute | async">{{'m.menu.home' | translate | async}}</button>
                <button mat-button class="item" [routerLink]="'blog'">{{'m.menu.blog' | translate | async}}</button>
                <button mat-button class="item" [routerLink]="'contact'">{{'m.menu.contact' | translate | async}}</button>
              </div>
@@ -12,6 +12,5 @@
              </div>
              <div class="column">
                <p class="txt-b title">CONTACT</p>   
-
              </div>
 </div>

@@ -12,7 +12,6 @@ export class KiiTranslateRoutePipe implements PipeTransform {
   transform(value: any, ...args: any[]): any {
       const _subject = new BehaviorSubject(this.getTranslatedRoute(value,this.trans.getCurrent()));
       this.subscription.push(this.trans.onChange.subscribe(res => {
-        console.log("LANGUAGE CHNAGED TO:", res );
           _subject.next(this.getTranslatedRoute(value,res));
       }));
       return _subject;

@@ -70,11 +70,9 @@ export  class KiiTranslateService  {
     private location:Location
     ) { 
         this.currentLang = this.get();
-        console.log("CONSTRUCTOR: KIILANGSERVICE");
 
         //Handle back/forth and change languages
         this.subscr = this.location.subscribe(res => {
-          console.log("LOCATION:",res.url);
           let lang = this.getFromUrl(res.url);
           if (lang != this.currentLang) {
             this.changeLanguage(lang);
@@ -86,9 +84,7 @@ export  class KiiTranslateService  {
   /**Changes language */
   public changeLanguage(lang:string) {
     this.currentLang = this.sanitize(lang);
-    console.log("LANGUAGE SET:", this.currentLang);
     this.loadTranslation(this.requiredContext,true);
-    console.log("CURRENT URL", this.router.url);
     this.onChange.next(this.currentLang);
     this.router.navigate(['/'+this.getCurrent()+'/' +this.router.url.slice(4)]);
   }
@@ -147,8 +143,6 @@ export  class KiiTranslateService  {
     this.getLangFromBrowser();
 
     this.requiredContext = context;
-    console.log("REQUIRED: ",this.requiredContext);
-    console.log("CURRENT", this.contextLoaded,this.translations);
     this.loadTranslation(context);
   }
 
@@ -156,19 +150,13 @@ export  class KiiTranslateService  {
   private loadTranslation(context:string[], isLanguageChange:boolean = false)  {
         //Loads any missing context
         let wait :Observable<any>[] = [];
-        console.log("loadTranslation !!!!!!!!!!! start")
         for (let ctx of context) {
           //If context already available do nothing
           if (this.isContextAvailable(ctx)) {
-            console.log("Context already available");
-            console.log(this);
             //Notify pipes !
             this.onLoaded.next(!this._onLoaded);
-            //wait.push(this.loadContextFromAvailable(ctx));
-
           } else {
             //Load context
-            console.log("Loading context data: ", ctx) 
             if (isPlatformBrowser(this.platform))  
               wait.push(this.loadContextFromHttp(ctx));
             else
@@ -176,17 +164,14 @@ export  class KiiTranslateService  {
           }
         }
         for (let ctx of context) { this.createContext(ctx); }
-        console.log("!!!!!!!!!!!!!!!!!!!!!!loadTranslation end");
         forkJoin(wait).subscribe(results => {
             for (let res of results) {
                 if (!this.translations[this.currentLang]) this.translations[this.currentLang] = res;
                 else this.translations[this.currentLang] = Object.assign({},this.translations[this.currentLang],res);
             }
             //Notify pipes that we have completed loading
-            console.log("LOADED TRANS",this.translations);
             this.onLoaded.next(!this._onLoaded);
             if (isLanguageChange) {
-              console.log("LANGUAGE CHANGE SENDING");
               this.onChange.next(this.currentLang);
             }
         })
@@ -197,8 +182,6 @@ export  class KiiTranslateService  {
   private loadContextFromTrasferState(contextName:string):Observable<any> {
     const key: StateKey<number> = makeStateKey<number>('transfer-' + contextName + this.currentLang);
     const data = this.transfer.get(key, null);
-    if (data) console.log("LOADED FROM STATETABLE !!!!",data);
-    else console.log("NOT LOADED FROM TRANSFER STATE !");
     return data;
   }
 
@@ -236,7 +219,6 @@ export  class KiiTranslateService  {
 
   /**Checks if translation is in transfer table if not, get from http */
   private getTranslation(lang: string) {
-    console.log("Translations",this.translations);
     if (this.translations[lang]) return this.translations[lang];
     return {};
   }
@@ -270,7 +252,6 @@ export  class KiiTranslateService  {
         const found = url.match(/\/[a-z][a-z]\//g);
         if (found)
             if (found[0]) {
-                console.log("DETECTED LANGUAGE FROM URL :",found[0].replace(/\//gi, ''),url);
                 return found[0].replace(/\//gi, '');
             }
     }
@@ -292,26 +273,18 @@ export  class KiiTranslateService  {
        } catch(error) {
          lang = environment.languages[0];
        }
-       console.log("DETECTED LANGUAGE FROM HEADERS:",lang);
        return lang;
   }
 
 
   /**Returns language that should be used initially */
   public get() {
-//    const key: StateKey<string> = makeStateKey<string>('transfer-lang');
     if (isPlatformBrowser(this.platform)) {
-      console.log("GET LANGUAGE : ", window.location.href)
-/*      if (this.transfer.get(key,null)){
-        console.log("RESTORED LANG FROM TRANSFER !!!");
-        return this.transfer.get(key,null);
-      } */
       let lang = this.getFromUrl(window.location.href);
       if (lang) return this.sanitize(lang);
       return this.getLangFromBrowser();
     } else {
       let lang = this.getLangFromRequest();
-//      this.transfer.set(key,lang);
       return lang;
     }
   }

@@ -42,6 +42,5 @@ export class KiiShareComponent implements OnInit {
   }
 
   myGet(event) {
-    console.log("MyGet: ",event);
   }
 }
