@@ -13,10 +13,11 @@ import { KiiMainRoutingModule } from './_features/main/kii-main-routing.module';
 import { KiiTranslatePipe } from './_features/translate/pipes/kii-translate.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { KiiAppComponent } from './_features/main/components/kii-app/kii-app.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

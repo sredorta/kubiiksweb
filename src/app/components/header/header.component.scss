@@ -1,0 +1,118 @@
+.wrp {
+    height:100vh;
+    position: relative;
+}
+
+.fbk {
+    position:absolute;
+    z-index: 5;
+    height:100vh;
+    width:100vw;
+    min-height: 300px;
+    transition: opacity 1s ease-in-out;
+}
+.fbk.mob {
+    background: url('/assets/images/header-m.webp') no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+.fbk.desk {
+    background: url('/assets/images/header.webp') no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.btn {
+    position: absolute;
+    top:80%;
+    left:calc(50vw - 60px);
+    width:120px;
+    //border-radius: 50vh;
+    z-index: 6;
+
+}
+.btn:not(:hover) {
+    background:white;
+    color:black;
+}
+
+.fbk.is-playing {
+    opacity:0;
+}
+video {
+    pointer-events: none;
+    position:absolute;
+    top: 0;
+    right: 0;
+    height:100%;
+    min-height: 300px;
+    z-index: 4;
+}
+.bottom-decorator {
+    position:absolute;
+    bottom:-2px;
+    left:0;
+    z-index: 6;
+    width:100%;
+    min-height: 80px;
+    background-image: url("/assets/images/header-background.svg");
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: cover;
+}
+
+.cnt {
+    background:none;
+    position:relative;
+    padding-left:10vw;
+    padding-top:20vh;
+    padding-right:20px;
+    z-index: 6;
+    display:block;
+
+}
+.title {
+    font-size: 32px; 
+    font-weight: normal;
+    margin-bottom:0px;
+    margin-top:0px;
+    color:white;
+}
+.sub {
+    margin-top:12px;
+    font-size: 18px;
+    font-weight: normal;
+    color:rgba(white,0.6);
+}
+
+//Enable animations if we are not in transfer
+.wrp:not(.is-transfer) {
+    .title {
+        opacity:0;
+        animation: 1s cubic-bezier(0, 0.9, 0.3, 1.2) .2s textAnimationH1 forwards;
+    }
+    .sub {
+        opacity:0;
+        animation: 1s cubic-bezier(0, 0.9, 0.3, 1.2) .4s textAnimationH2 forwards;
+    }
+}
+@keyframes textAnimationH1 {
+    0%   { 
+        opacity:0; 
+        transform:translateY(-100px);
+    }
+    50% {
+        opacity:1;
+    }
+    100% {opacity:1; transform:none;}
+  }
+@keyframes textAnimationH2 {
+    0%   { 
+        opacity:0; 
+        transform:translateY(-100px);
+    }
+    50% {
+        opacity:1;
+    }
+    100% {opacity:1; transform:none;}
+  }     

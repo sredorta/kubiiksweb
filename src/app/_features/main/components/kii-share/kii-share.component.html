@@ -1,0 +1,18 @@
+        <button mat-icon-button shareButton="facebook" [style.color]="share.prop.facebook.color" [url]="getUrl()" (click)="sendStats('facebook')">
+                <fa-icon [icon]="icons['facebook']" size="lg"></fa-icon>
+        </button>
+        <button mat-icon-button shareButton="twitter" [style.color]="share.prop.twitter.color" [url]="getUrl()" (click)="sendStats('twitter')">
+          <fa-icon [icon]="icons['twitter']" size="lg"></fa-icon>
+        </button>
+        <button mat-icon-button shareButton="linkedin" [style.color]="share.prop.linkedin.color" [url]="getUrl()" (click)="sendStats('linkedin')">
+          <fa-icon [icon]="icons['linkedin']" size="lg"></fa-icon>
+        </button>
+        <button mat-icon-button shareButton="whatsapp" [style.color]="share.prop.whatsapp.color" [url]="getUrl()" (click)="sendStats('whatsapp')">
+            <fa-icon [icon]="icons['whatsapp']" size="lg"></fa-icon>
+        </button>
+        <button mat-icon-button shareButton="telegram" [style.color]="share.prop.telegram.color" [url]="getUrl()" (click)="sendStats('telegram')">
+          <fa-icon [icon]="icons['telegram']" size="lg"></fa-icon>
+        </button>
+        <button mat-icon-button shareButton="email" [style.color]="share.prop.email.color" [url]="getUrl()" (click)="sendStats('email')">
+          <fa-icon [icon]="icons['email']" size="lg"></fa-icon>
+        </button>

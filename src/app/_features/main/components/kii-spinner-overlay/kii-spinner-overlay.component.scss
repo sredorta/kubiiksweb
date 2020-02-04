@@ -1,0 +1,14 @@
+:host {
+    display: block;
+}
+.ovl-wrp {
+    display:block;
+    position:relative;
+    .overlay {
+        width:100%;
+        height:100%;
+        position: absolute;
+        z-index: 3;
+    }
+}
+    

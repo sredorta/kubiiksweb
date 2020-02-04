@@ -13,6 +13,16 @@
   $is-dark-theme: map-get($theme, is-dark);
 
     kii-footer {
+        kii-newsletter-form {
+            input {
+                border:1px solid;
+                border-radius: 5px;
+                color: mat-color(map-get($theme, foreground),text);
+            }
+            input:focus {
+                border-color: mat-color($primary);
+            }
+        }
         kii-newsletter .wrp {
             background-image: url("/assets/images/newsletter-background.svg");
             background-repeat: no-repeat;

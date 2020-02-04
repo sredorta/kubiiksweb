@@ -64,7 +64,7 @@ export  class KiiTranslateService  {
     @Inject(PLATFORM_ID) private platform: any,
     private transfer : TransferState,
     private http: HttpClient,
-    private router: Router,
+    private router: Router
     ) { 
         this.currentLang = this.get();
         console.log("CONSTRUCTOR: KIILANGSERVICE")
@@ -79,12 +79,6 @@ export  class KiiTranslateService  {
     this.router.navigate(['/'+this.getCurrent()]);
   }
 
-
-
-  //TO BE REMOVED
-  public set(lang:string) {
-    //this._translate.use(lang);
-  }
 
   /**Returns current language loaded */
   getCurrent() {
@@ -189,6 +183,7 @@ export  class KiiTranslateService  {
     const key: StateKey<number> = makeStateKey<number>('transfer-' + contextName + this.currentLang);
     const data = this.transfer.get(key, null);
     if (data) console.log("LOADED FROM STATETABLE !!!!",data);
+    else console.log("NOT LOADED FROM TRANSFER STATE !");
     return data;
   }
 
@@ -235,7 +230,7 @@ export  class KiiTranslateService  {
 
 
   /**Returns browser lang and if not supported the default */
-  private getLangFromBrowser() {
+  public getLangFromBrowser() {
     if (typeof window === 'undefined' || typeof window.navigator === 'undefined') {
       return environment.languages[0];
     }
@@ -289,11 +284,21 @@ export  class KiiTranslateService  {
 
 
   /**Returns language that should be used initially */
-  private get() {
+  public get() {
+//    const key: StateKey<string> = makeStateKey<string>('transfer-lang');
     if (isPlatformBrowser(this.platform)) {
+      console.log("GET LANGUAGE : ", window.location.href)
+/*      if (this.transfer.get(key,null)){
+        console.log("RESTORED LANG FROM TRANSFER !!!");
+        return this.transfer.get(key,null);
+      } */
+      let lang = this.getFromUrl(window.location.href);
+      if (lang) return this.sanitize(lang);
       return this.getLangFromBrowser();
     } else {
-      return this.getLangFromRequest();
+      let lang = this.getLangFromRequest();
+//      this.transfer.set(key,lang);
+      return lang;
     }
   }
 }

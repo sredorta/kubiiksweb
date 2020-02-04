@@ -1,0 +1,13 @@
+<div class="title">
+        <img src="./assets/kiilib/images/cookies.svg"  alt="cookies">
+        <p class="txt-b txt-l">{{'m.cookies.title' | translate | async}}</p>
+</div>
+<mat-divider></mat-divider> 
+<p class="txt-s txt-nb">{{'m.cookies.subtitle' | translate | async}} </p>
+<a mat-button color="primary" title="{{'m.cookies.link' | translate | async}}" routerLink="/legal/cookies">{{'m.cookies.link' | translate | async}}</a>
+<div class="fcc">
+        <button mat-stroked-button (click)="reject()">{{'m.decline' | translate | async}}</button>
+        <button mat-flat-button  color="primary" (click)="accept()">{{'m.accept' | translate | async}}</button>
+</div>
+
+

@@ -1,0 +1,11 @@
+<form onsubmit="this.onSubmit()">
+    <div class="ctrls">
+            <input #firstName placeholder="{{'m.news.first.l' | translate | async}}" required type="text" autocomplete="name">          
+            <input #lastName placeholder="{{'m.news.last.l' | translate | async}}" required type="text"  autocomplete="fname">
+            <input #email placeholder="{{'m.news.email.l' | translate | async}}" required type="email" autocomplete="email">
+    </div>
+    <a mat-button color="primary" title="{{'m.news.legal' | translate | async}}" (click)="saveForm()" routerLink="/legal/user-data"><span class="txt-xs">{{'m.news.legal' | translate | async}}</span></a>
+    <div class="fcr w100">
+        <button mat-flat-button type="button" color="primary" (click)="onSubmit()">{{'m.register' | translate | async}}</button>
+    </div>
+</form>

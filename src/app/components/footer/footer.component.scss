@@ -1,0 +1,21 @@
+.wrp {
+    max-width: 1100px;
+    margin:0 auto;
+    padding-top:30px;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    color:rgba(white,0.6);
+    .column {
+        margin:0 auto;
+        min-width:250px;
+        max-width: 320px;
+        flex-direction: column;
+        flex:1;
+        .item {
+            display: block;
+            width:100%;
+            text-align: left;
+        }
+    }
+}

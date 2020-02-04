@@ -14,8 +14,6 @@ import {
   MatMenuModule,
 } from '@angular/material';
 import { KiiTranslateRoutingModule } from './kii-translate-routing.module';
-import { KiiMainModule } from '../main/kii-main.module';
-import { KiiMainRoutingModule } from '../main/kii-main-routing.module';
 
 
 
@@ -40,16 +38,11 @@ import { KiiMainRoutingModule } from '../main/kii-main-routing.module';
 })
 export class KiiTranslateModule {
 
-  constructor(private kiiTrans : KiiTranslateService, private router: Router) {
-      console.log("CONSTRUCTOR KII-TRANSLATE MODULE");
-      this.router.navigate([this.kiiTrans.getCurrent()]);
-  }
-
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: KiiTranslateModule,
       providers: [
-        KiiTranslateService,KiiTranslatePipe
+        KiiTranslatePipe
       ],
     }
   }
@@ -59,7 +52,7 @@ export class KiiTranslateModule {
     return {
       ngModule: KiiTranslateModule,
       providers: [
-        KiiTranslateService,KiiTranslatePipe
+        KiiTranslatePipe
       ],
     }
   }

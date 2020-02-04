@@ -1,0 +1,18 @@
+<footer>
+        <div class="w100 fcr">
+            <kii-share></kii-share>
+        </div>
+        <kii-newsletter></kii-newsletter>
+        <app-footer></app-footer>
+        <div class="end "> 
+            <div class="copyright txt-s">
+                <small>{{'m.footer.created' | translate | async}} <a class="link text-b" title="kubiiks" href="https://www.kubiiks.com" rel="follow">kubiiks</a></small>
+                <small style="font-style: italic; margin-left:10px">© kubiiks 2020</small>
+            </div>
+            <div class="social">
+                <ng-container *ngFor="let social of links">
+                    <a *ngIf="social.link" [title]="social.name" [href]="social.link" mat-icon-button (click)="onClick(social.name)"><fa-icon [icon]="social.icon"></fa-icon></a>
+                </ng-container>
+            </div>
+        </div> 
+</footer>

@@ -1,0 +1,21 @@
+<div itemscope="itemscope" itemtype="http://schema.org/WPHeader" class="wrp" [ngClass]="{'is-short' : format == 'short', 'is-transfer': isTransfer}">
+    <div *ngIf="isMobile" class="fbk mob" [ngClass]="{'is-playing': isPlaying}"></div>
+    <div *ngIf="!isMobile" class="fbk desk" [ngClass]="{'is-playing': isPlaying}"></div>
+     <div class="bottom-decorator"></div>
+     <video *ngIf="showVideo" #videoPlayer loop muted playsinline autoplay oncanplay="this.play();" onloadedmetadata="this.muted = true" [ngClass]="{'is-playing': isPlaying}">
+         <source *ngIf="!isMobile" src="./assets/videos/header-desktop.webm" type="video/webm">
+         <source *ngIf="!isMobile" src="./assets/videos/header-desktop.mp4" type="video/mp4">
+         <source *ngIf="isMobile"  src="./assets/videos/header-mobile.webm" type="video/webm">
+         <source *ngIf="isMobile"  src="./assets/videos/header-mobile.mp4" type="video/mp4">
+     </video> 
+     <!--<div class="content-wrapper">
+         <p itemprop="name" class="header-title"><span class="header-icon" *ngIf="myData.page=='alerts'"><i class="fas fa-bell" [matBadge]="alertCount" [matBadgeHidden]="alertCount==0"></i></span>{{myData.title | translate | async}}</p>
+         <p itemprop="description" class="header-subtitle">{{myData.subtitle | translate | async}}</p>
+     </div>-->
+     <div class="cnt">
+        <p itemprop="name" class="title">{{'test' | translate | async}}</p>
+        <p itemprop="description" class="sub">{{'test' | translate | async}}</p>
+    </div>
+     <!--<img class="icon" src="./assets/images/more.svg" alt="more" />-->
+     <button class="btn txt-l" mat-stroked-button>MORE</button>
+</div>
