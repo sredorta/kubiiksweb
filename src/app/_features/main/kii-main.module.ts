@@ -82,10 +82,6 @@ import { ShareModule } from '@ngx-share/core';
   ]
 })
 export class KiiMainModule { 
-  constructor()
- {
-     console.log("KII_MAIN_MODULE CONSTRUCTOR!!!");
- }
  static forRoot(): ModuleWithProviders {
   return {
     ngModule: KiiMainModule,

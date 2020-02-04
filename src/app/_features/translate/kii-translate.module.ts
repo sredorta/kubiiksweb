@@ -14,6 +14,7 @@ import {
   MatMenuModule,
 } from '@angular/material';
 import { KiiTranslateRoutingModule } from './kii-translate-routing.module';
+import { KiiTranslateRoutePipe } from './pipes/kii-translate-route.pipe';
 
 
 
@@ -28,12 +29,14 @@ import { KiiTranslateRoutingModule } from './kii-translate-routing.module';
   ],
   declarations: [
     KiiTranslatePipe,
+    KiiTranslateRoutePipe,
     KiiLanguageSelectorComponent,
   ],
   providers:[KiiTranslateService],
   exports:[
     KiiLanguageSelectorComponent,
-    KiiTranslatePipe
+    KiiTranslatePipe,
+    KiiTranslateRoutePipe
   ]
 })
 export class KiiTranslateModule {
@@ -42,7 +45,9 @@ export class KiiTranslateModule {
     return {
       ngModule: KiiTranslateModule,
       providers: [
-        KiiTranslatePipe
+        KiiTranslateService,
+        KiiTranslatePipe,
+        KiiTranslateRoutePipe
       ],
     }
   }
@@ -52,7 +57,9 @@ export class KiiTranslateModule {
     return {
       ngModule: KiiTranslateModule,
       providers: [
-        KiiTranslatePipe
+        KiiTranslatePipe,
+        KiiTranslateRoutePipe
+
       ],
     }
   }

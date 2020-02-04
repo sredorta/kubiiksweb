@@ -23,8 +23,4 @@ import { KiiMainModule } from './_features/main/kii-main.module';
   ],
   bootstrap: [AppComponent],
 })
-export class AppServerModule {
-  constructor(private kiiTrans : KiiTranslateService, private router: Router) {
-    console.log("CONSTRUCTOR APP_MODULE");
-  }
-}
+export class AppServerModule {}

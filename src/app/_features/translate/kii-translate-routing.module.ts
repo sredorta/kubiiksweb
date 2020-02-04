@@ -12,13 +12,14 @@ import { KiiTranslateService } from './services/kii-translate.service';
 })
 export class KiiTranslateRoutingModule {
   constructor(private router : Router, private kiiTrans: KiiTranslateService) {
-    console.log("KII TRANSLATE ROUTING constructor")
-    let routes: Routes = [{ path: '',  redirectTo: this.kiiTrans.getLangFromBrowser(), pathMatch:'full' }];
-    for (let lang of environment.languages) {
-        routes.push({path:lang, children: this.router.config});
+    if (!this.router.config.find(obj=> obj.path == environment.languages[0])) {
+      let routes: Routes = [{ path: '',  redirectTo: this.kiiTrans.getLangFromBrowser(), pathMatch:'full' }];
+      for (let lang of environment.languages) {
+          routes.push({path:lang, children: this.router.config});
+      }
+      //Add dynamically the routes
+      this.router.resetConfig(routes);
+      console.log("NEW ROUTER : !!!!!!!!!!!!!!!!!!! ",this.router.config);
     }
-    //Add dynamically the routes
-    this.router.resetConfig(routes);
-    console.log(this.router.config);
   }
- }
+}

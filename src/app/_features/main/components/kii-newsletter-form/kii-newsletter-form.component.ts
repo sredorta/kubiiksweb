@@ -42,7 +42,6 @@ export class KiiNewsletterFormComponent implements OnInit {
     } else       
       this.r.removeClass(this.last.nativeElement, 'has-error');
     if (this.validateEmail(this.email.nativeElement.value)) {
-      console.log("Adding error class");
       this.r.addClass(this.email.nativeElement, 'has-error');
       hasError=true;
     } else       

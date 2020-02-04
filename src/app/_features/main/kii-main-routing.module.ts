@@ -47,7 +47,6 @@ export const routes: Routes = [
 export class KiiMainRoutingModule {
   constructor()
  {
-     console.log("KII_MAIN_ROUTING_MODULE CONSTRUCTOR!!!");
  }
 
  }

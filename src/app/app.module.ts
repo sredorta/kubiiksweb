@@ -35,8 +35,4 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
   exports: [
   ]
 })
-export class AppModule { 
-  constructor(private kiiTrans : KiiTranslateService, private router: Router) {
-    console.log("CONSTRUCTOR APP_MODULE");
-  }
-}
+export class AppModule { }

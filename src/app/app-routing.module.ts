@@ -7,7 +7,15 @@ import { KiiAppComponent } from './_features/main/components/kii-app/kii-app.com
 
 let routes: Routes = [
   {path:'', redirectTo: 'home',pathMatch:'full'},
-  { path: 'home', component: KiiHomeComponent}
+  { 
+    path: 'home', 
+    component: KiiHomeComponent
+  },
+    //Lazy load legal module
+    {
+      path: 'legal',
+      loadChildren : () => import('./_features/legal/kii-legal.module').then(m => m.KiiLegalModule), 
+    },
 ]
 
 @NgModule({

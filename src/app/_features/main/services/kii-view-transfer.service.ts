@@ -41,7 +41,6 @@ export class KiiViewTransferService {
         if (e.position) {
           // backward navigation
           this.viewportScroller.scrollToPosition(e.position);
-          console.log("RESTORED SCROLL POSITION !!!!");
         } else if (this.isTransfer) {
           // Do not touch scroll if we come from server
           this.isTransfer = false;

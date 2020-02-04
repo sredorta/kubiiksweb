@@ -3,7 +3,7 @@ import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { environment } from '../../../../environments/environment';
 import { Observable,of, forkJoin, Subject, BehaviorSubject } from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import { isPlatformBrowser} from '@angular/common';
+import { isPlatformBrowser, Location} from '@angular/common';
 import { StateKey, makeStateKey, TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -41,6 +41,8 @@ export  class KiiTranslateService  {
   /**Contains the current translations table per language */
   public translations:any = {};
 
+  private subscr;
+
   /**All languages that can potentially be used, use the environment to select a subset */
   private kiiLanguages : IKiiLanguage[] = [
     {name: "Francais",
@@ -64,10 +66,20 @@ export  class KiiTranslateService  {
     @Inject(PLATFORM_ID) private platform: any,
     private transfer : TransferState,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private location:Location
     ) { 
         this.currentLang = this.get();
-        console.log("CONSTRUCTOR: KIILANGSERVICE")
+        console.log("CONSTRUCTOR: KIILANGSERVICE");
+
+        //Handle back/forth and change languages
+        this.subscr = this.location.subscribe(res => {
+          console.log("LOCATION:",res.url);
+          let lang = this.getFromUrl(res.url);
+          if (lang != this.currentLang) {
+            this.changeLanguage(lang);
+          }
+        })
     }
 
 
@@ -76,7 +88,9 @@ export  class KiiTranslateService  {
     this.currentLang = this.sanitize(lang);
     console.log("LANGUAGE SET:", this.currentLang);
     this.loadTranslation(this.requiredContext,true);
-    this.router.navigate(['/'+this.getCurrent()]);
+    console.log("CURRENT URL", this.router.url);
+    this.onChange.next(this.currentLang);
+    this.router.navigate(['/'+this.getCurrent()+'/' +this.router.url.slice(4)]);
   }
 
 
@@ -134,6 +148,7 @@ export  class KiiTranslateService  {
 
     this.requiredContext = context;
     console.log("REQUIRED: ",this.requiredContext);
+    console.log("CURRENT", this.contextLoaded,this.translations);
     this.loadTranslation(context);
   }
 
@@ -245,7 +260,6 @@ export  class KiiTranslateService  {
     if (browserLang.indexOf('_') !== -1) {
       browserLang = browserLang.split('_')[0];
     }
-    console.log("DETECTED BROWSER LANG", this.sanitize(browserLang));
     return this.sanitize(browserLang);
   }
 
@@ -300,5 +314,9 @@ export  class KiiTranslateService  {
 //      this.transfer.set(key,lang);
       return lang;
     }
+  }
+
+  ngOnDestroy() {
+    if (this.subscr) this.subscr.unsubscribe();
   }
 }
