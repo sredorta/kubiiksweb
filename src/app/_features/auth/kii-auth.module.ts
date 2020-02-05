@@ -51,7 +51,7 @@ import {MatAutocompleteModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TransferState } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { KiiLoginComponent } from './routes/kii-login/kii-login.component';
 import { KiiAuthRoutingModule } from './kii-auth-routing.module';
 import { KiiSignupComponent } from './routes/kii-signup/kii-signup.component';
@@ -82,7 +82,8 @@ import { KiiSignupFormComponent } from './components/kii-signup-form/kii-signup-
     KiiSignupFormComponent,
     KiiSignupComponent,
   ],
-  providers:[],
+  providers:[
+  ],
   exports:[
   ]
 })

@@ -9,6 +9,7 @@ import { KiiBottomSheetCookiesComponent } from '../kii-bottom-sheet-cookies/kii-
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { KiiViewTransferService } from '../../services/kii-view-transfer.service';
 import { KiiCookiesService } from '../../services/kii-cookies.service';
+import { KiiHttpErrorComponent } from '../kii-http-error/kii-http-error.component';
 
 @Component({
   selector: 'kii-app',
@@ -48,7 +49,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
           }
         })
     );
-
   }
 
   openBottomSheetCookies(): void {

@@ -15,7 +15,6 @@ import {
   MatListModule,
   MatMenuModule,
   MatRippleModule,
-  MatSnackBarModule,
   MatToolbarModule,
   MatTooltipModule,
   MatDividerModule,
@@ -42,6 +41,9 @@ import { KiiShareComponent } from './components/kii-share/kii-share.component';
 import { ShareModule } from '@ngx-share/core';
 import { KiiHeaderComponent } from './components/kii-header/kii-header.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { KiiHttpInterceptor } from './utils/kii-http-interceptor';
+import { KiiHttpErrorComponent } from './components/kii-http-error/kii-http-error.component';
 
 
 
@@ -77,10 +79,14 @@ import { DeviceDetectorService } from 'ngx-device-detector';
     HeaderComponent,
     KiiAppComponent,
     KiiBottomSheetCookiesComponent,
-    KiiHomeComponent
+    KiiHomeComponent,
+    KiiHttpErrorComponent
   ],
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
-  entryComponents:[KiiBottomSheetCookiesComponent],
+  entryComponents:[KiiBottomSheetCookiesComponent, KiiHttpErrorComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
+  ],
   exports:[
     KiiAppComponent,
     KiiSpinnerComponent,
@@ -109,7 +115,9 @@ export class KiiMainModule {
 static forChild(): ModuleWithProviders {
   return {
     ngModule: KiiMainModule,
-    providers: [],
+    providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
+    ],
   }
 }
 }

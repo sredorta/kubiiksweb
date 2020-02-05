@@ -51,7 +51,8 @@ import { KiiInputErrorDirective } from './directives/kii-input-error.directive';
   declarations: [
     KiiInputErrorDirective
   ],
-  providers:[],
+  providers:[
+  ],
   exports:[
     FormsModule,
     ReactiveFormsModule,

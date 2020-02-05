@@ -2,6 +2,11 @@
 <div class="signup-wrp">
         <kii-spinner-overlay [show]="isLoading">
             <mat-card>
+                <mat-card-header>
+                    <div mat-card-avatar class="logo"></div>
+                    <mat-card-title>{{'a.signup.t' | translate | async}}</mat-card-title>
+                    <mat-card-subtitle>{{'a.signup.s' | translate | async}}</mat-card-subtitle>
+                </mat-card-header>
                 <kii-passports></kii-passports>
                 <kii-signup-form  (kiiOnSubmit)="onSubmit($event)"></kii-signup-form>
             </mat-card>

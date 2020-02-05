@@ -34,7 +34,7 @@ export class KiiSignupFormComponent extends KiiFormAbstract implements OnInit {
         Validators.required,
         Validators.minLength(2)
       ])),
-      username: new FormControl('', Validators.compose([
+      email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.email,
         Validators.minLength(5)
@@ -73,6 +73,7 @@ export class KiiSignupFormComponent extends KiiFormAbstract implements OnInit {
 
   /**When form is submitted */
   onSubmit(value:any) {
-    console.log("Submitting:",value);
+    //if (this.myForm.valid) 
+        this.kiiOnSubmit.emit(value);
   }
 }
