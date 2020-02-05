@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { KiiLoginComponent } from './routes/kii-login/kii-login.component';
 import { KiiSignupComponent } from './routes/kii-signup/kii-signup.component';
 import { KiiResetPasswordComponent } from './routes/kii-reset-password/kii-reset-password.component';
+import { KiiEmailValidateComponent } from './routes/kii-email-validate/kii-email-validate.component';
 
 
 const routes: Routes = [
@@ -10,6 +11,8 @@ const routes: Routes = [
   { path: 'login',  component: KiiLoginComponent },
   { path: 'signup', component:KiiSignupComponent},
   { path: 'reset-password', component:KiiResetPasswordComponent},
+  { path: 'validate-email', component:KiiEmailValidateComponent},
+
 
 ];
 

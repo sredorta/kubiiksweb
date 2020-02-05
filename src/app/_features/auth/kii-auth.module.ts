@@ -63,6 +63,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KiiPassportsComponent } from './components/kii-passports/kii-passports.component';
 import { KiiResetPasswordComponent } from './routes/kii-reset-password/kii-reset-password.component';
 import { KiiSignupFormComponent } from './components/kii-signup-form/kii-signup-form.component';
+import { KiiEmailValidateComponent } from './routes/kii-email-validate/kii-email-validate.component';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { KiiSignupFormComponent } from './components/kii-signup-form/kii-signup-
     KiiLoginComponent,
     KiiSignupFormComponent,
     KiiSignupComponent,
+    KiiEmailValidateComponent,
   ],
   providers:[
   ],

@@ -3,6 +3,7 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 import { isPlatformBrowser } from '@angular/common';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiApiAuthService } from '../../services/kii-api-auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-kii-signup',
@@ -15,6 +16,7 @@ export class KiiSignupComponent extends KiiBaseAbstract implements OnInit {
   constructor(
     private kiiTrans: KiiTranslateService,
     private kiiApiAuth: KiiApiAuthService,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: any
     ) { super()  }
 
@@ -28,7 +30,7 @@ export class KiiSignupComponent extends KiiBaseAbstract implements OnInit {
       this.isLoading = true;
       this.addSubscriber(
         this.kiiApiAuth.signup(value).subscribe(res => {
-          console.log("Recieved:",res);
+          this.router.navigate([""]); //Go back home
           this.isLoading = false;
         }, () => {
           this.isLoading = false;

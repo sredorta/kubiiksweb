@@ -52,6 +52,9 @@
         form.ng-touched .mat-checkbox.ng-invalid .mat-checkbox-frame {
             border-color: mat-color($warn);
         }
+        form.ng-touched .mat-checkbox.ng-invalid .mat-checkbox-label {
+            color:mat-color($warn);
+        }
 
 
     }
