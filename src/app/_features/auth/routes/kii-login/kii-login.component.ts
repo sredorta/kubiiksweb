@@ -12,7 +12,11 @@ export class KiiLoginComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['auth']);
+    this.kiiTrans.setRequiredContext(['auth', 'form']);
+  }
+
+  onSubmit(value:any) {
+    console.log("OnSubmit !",value);
   }
 
 }

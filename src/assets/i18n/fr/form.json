@@ -1,0 +1,9 @@
+{
+    "f.err.required" : "Champ obligatoire",
+    "f.err.minlength" : "Champ trop court",
+    "f.err.maxlength" : "Champ trop long",
+    "f.err.min"       : "Valeur trop basse",
+    "f.err.max"       : "Valeur trop grande",
+    "f.err.email"     : "Format de courriel incorrecte",
+    "f.err.password"  : "Format de mot de passe incorrecte"
+}

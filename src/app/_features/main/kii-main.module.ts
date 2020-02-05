@@ -82,7 +82,17 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
   entryComponents:[KiiBottomSheetCookiesComponent],
   exports:[
-    KiiAppComponent
+    KiiAppComponent,
+    KiiSpinnerComponent,
+    KiiSpinnerOverlayComponent,
+    [ 
+      MatDividerModule,
+      MatBottomSheetModule,
+      MatButtonModule,
+      MatMenuModule,
+      MatRippleModule,
+      MatToolbarModule,
+    ],
   ]
 })
 export class KiiMainModule { 

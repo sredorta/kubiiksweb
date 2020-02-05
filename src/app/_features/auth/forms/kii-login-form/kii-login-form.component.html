@@ -1,0 +1,28 @@
+<kii-spinner-overlay [show]="isFormLoading">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate> 
+     <mat-form-field [appearance]="kiiInputAppearance">
+         <mat-label>{{'a.email.l' | translate | async}}</mat-label>
+         <input matInput formControlName="username" placeholder="{{'a.email.p' | translate | async}}" required type="email">
+         <mat-icon matPrefix class="icon"><i class="fas fa-at"></i></mat-icon>
+         <mat-hint>{{'a.email.h' | translate | async}}</mat-hint>
+         <mat-error kiiInputError="username"></mat-error>    
+     </mat-form-field>
+
+     <mat-form-field [appearance]="kiiInputAppearance">
+         <mat-label>{{'a.password.l' | translate | async}}</mat-label>
+         <input matInput formControlName="password" placeholder="{{'a.password.p' | translate | async}}" required type="password">
+         <mat-icon matPrefix class="icon"><i class="fas fa-key"></i></mat-icon>
+         <mat-hint>{{'a.password.h' | translate| async}}</mat-hint>
+         <mat-error kiiInputError="password"></mat-error>
+     </mat-form-field>
+     <mat-checkbox formControlName="keepconnected">{{'a.keepconnected' | translate | async}}</mat-checkbox>
+ 
+     <div class="control-wrapper-submit">
+         <button mat-flat-button type="submit" color="primary">{{'a.login.submit' | translate | async}}</button>
+     </div>
+     <div class="control-wrapper-forgot">
+        <button mat-button type="button" color="primary" [routerLink]="'auth/reset-password' | translateRoute | async">{{'a.forgot' | translate | async}}</button>
+     </div>
+
+   </form>
+</kii-spinner-overlay>
