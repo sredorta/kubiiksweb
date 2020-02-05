@@ -11,11 +11,16 @@ let routes: Routes = [
     path: 'home', 
     component: KiiHomeComponent
   },
-    //Lazy load legal module
-    {
+  //Lazy load legal module
+  {
       path: 'legal',
       loadChildren : () => import('./_features/legal/kii-legal.module').then(m => m.KiiLegalModule), 
-    },
+  },
+  //Lazy load auth module
+  {
+    path: 'auth',
+    loadChildren : () => import('./_features/auth/kii-auth.module').then(m => m.KiiAuthModule), 
+  },    
 ]
 
 @NgModule({

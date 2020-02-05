@@ -5,8 +5,8 @@
                <button mat-button class="item" [routerLink]="'contact'">{{'m.menu.contact' | translate | async}}</button>
              </div>
              <div class="column">
-               <button mat-button class="item" [routerLink]="'auth/login'">{{'m.menu.login' | translate | async}}</button>
-               <button mat-button class="item" [routerLink]="'auth/signup'">{{'m.menu.signup' | translate | async}}</button>
+               <button mat-button class="item" [routerLink]="'auth/login' | translateRoute | async">{{'m.menu.login' | translate | async}}</button>
+               <button mat-button class="item" [routerLink]="'auth/signup' | translateRoute | async">{{'m.menu.signup' | translate | async}}</button>
                <button mat-button class="item" [routerLink]="'legal/cookies' | translateRoute | async ">{{'m.menu.cookies' | translate | async}}</button>
                <button mat-button class="item" [routerLink]="'legal/user-data' | translateRoute | async ">{{'m.menu.user-data' | translate | async}}</button>
              </div>
