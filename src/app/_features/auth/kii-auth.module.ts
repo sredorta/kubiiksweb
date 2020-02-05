@@ -57,30 +57,29 @@ import { KiiAuthRoutingModule } from './kii-auth-routing.module';
 import { KiiSignupComponent } from './routes/kii-signup/kii-signup.component';
 import { KiiMainModule } from '../main/kii-main.module';
 import { KiiTranslateModule } from '../translate/kii-translate.module';
-import { KiiLoginFormComponent } from './forms/kii-login-form/kii-login-form.component';
+import { KiiLoginFormComponent } from './components/kii-login-form/kii-login-form.component';
 import { KiiFormModule } from '../form/kii-form.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KiiPassportsComponent } from './components/kii-passports/kii-passports.component';
+import { KiiResetPasswordComponent } from './routes/kii-reset-password/kii-reset-password.component';
+import { KiiSignupFormComponent } from './components/kii-signup-form/kii-signup-form.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-/*    FormsModule,
-    MatInputModule,
-    MatIconModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,*/
     KiiFormModule,
     KiiTranslateModule.forChild(),
     KiiMainModule,
     KiiAuthRoutingModule,
   ],
   declarations: [
+    KiiResetPasswordComponent,
     KiiPassportsComponent,
     KiiLoginFormComponent,
     KiiLoginComponent,
+    KiiSignupFormComponent,
     KiiSignupComponent,
   ],
   providers:[],

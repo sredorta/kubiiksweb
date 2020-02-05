@@ -11,7 +11,8 @@ export class KiiSignupComponent implements OnInit {
   constructor(private kiiTrans: KiiTranslateService) {  }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['auth']);
+    this.kiiTrans.setRequiredContext(['auth', 'form']);
+
 
   }
 

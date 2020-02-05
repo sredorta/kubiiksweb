@@ -1,19 +1,10 @@
 
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
-<p>kii-signup works!</p>
+<div class="signup-wrp">
+        <kii-spinner-overlay [show]="isLoading">
+            <mat-card>
+                <kii-passports></kii-passports>
+                <kii-signup-form  (kiiOnSubmit)="onSubmit($event)"></kii-signup-form>
+            </mat-card>
+        </kii-spinner-overlay>
+    </div>
 

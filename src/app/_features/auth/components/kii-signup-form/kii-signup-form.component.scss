@@ -1,0 +1,24 @@
+form {
+    display:flex;
+    flex-direction: column;
+    mat-form-field {margin:10px 0px;}
+}
+
+.control-wrapper-submit {
+    margin:20px 0px;
+    display:flex;
+    justify-content: space-around;
+}
+.control-wrapper-forgot {
+    display:flex;
+    justify-content: center;
+}
+.icon {
+    margin-right: 5px;
+    font-size: 16px;
+    opacity: 0.6;
+}
+
+mat-checkbox {
+    margin:5px 0;
+}

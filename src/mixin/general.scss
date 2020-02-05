@@ -23,6 +23,36 @@
         }
         .mat-stroked-button {
             border:1.5px solid;
+            border-color: mat-color(map-get($theme, foreground),text);
+            &.mat-primary {
+                border-color:mat-color($primary);
+            }
+            &.mat-accent {
+                border-color:mat-color($accent);
+            }
+            &.mat-warn {
+                border-color:mat-color($warn);
+            }
         }
+        .mat-stroked-button:hover {
+            background:mat-color(map-get($theme, foreground),text);
+            color:mat-color(map-get($theme, background),background);
+            &.mat-primary {
+                background:mat-color($primary);
+            }
+            &.mat-accent {
+                background:mat-color($accent);
+            }
+            &.mat-warn {
+                background:mat-color($warn);
+            }                        
+        }
+        //WA for multiline checkbox
+        .mat-checkbox-layout { white-space: normal; }
+        form.ng-touched .mat-checkbox.ng-invalid .mat-checkbox-frame {
+            border-color: mat-color($warn);
+        }
+
+
     }
 }

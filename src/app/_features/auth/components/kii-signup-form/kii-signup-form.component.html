@@ -1,0 +1,48 @@
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate autocomplete="on"> 
+        <mat-form-field [appearance]="kiiInputAppearance">
+            <mat-label>{{'a.firstName.l' | translate | async}}</mat-label>
+            <input matInput formControlName="firstName" placeholder="{{'a.firstName.p' | translate | async}}" required type="text" autocomplete="given-name">
+            <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['name']"></fa-icon></mat-icon>
+            <mat-hint>{{'a.firstName.h' | translate | async}}</mat-hint>
+            <mat-error kiiInputError="firstName"></mat-error>            
+        </mat-form-field>
+        <mat-form-field [appearance]="kiiInputAppearance">
+            <mat-label>{{'a.lastName.l' | translate | async}}</mat-label>
+            <input matInput formControlName="lastName" placeholder="{{'a.lastName.p' | translate | async}}" required type="text" autocomplete="family-name">
+            <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['name']"></fa-icon></mat-icon>
+            <mat-hint>{{'a.lastName.h' | translate | async}}</mat-hint>
+            <mat-error kiiInputError="lastName"></mat-error>            
+        </mat-form-field>        
+        <mat-form-field [appearance]="kiiInputAppearance">
+            <mat-label>{{'a.email.l' | translate | async}}</mat-label>
+            <input matInput formControlName="username" placeholder="{{'a.email.p' | translate | async}}" required type="email" autocomplete="email">
+            <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['email']"></fa-icon></mat-icon>
+            <mat-hint>{{'a.email.h' | translate | async}}</mat-hint>
+            <mat-error kiiInputError="username"></mat-error>    
+        </mat-form-field>
+        <mat-form-field [appearance]="kiiInputAppearance">
+            <mat-label>{{'a.password.l' | translate | async}}</mat-label>
+            <input matInput formControlName="password" placeholder="{{'a.password.p' | translate | async}}" required type="password" autocomplete="current-password">
+            <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['password']"></fa-icon></mat-icon>
+            <mat-hint>{{'a.password.h' | translate| async}}</mat-hint>
+            <mat-error kiiInputError="password"></mat-error>
+        </mat-form-field>
+      
+        <mat-form-field [appearance]="kiiInputAppearance">
+            <mat-label>{{'a.passwordConfirm.l' | translate | async}}</mat-label>
+            <input matInput formControlName="passwordConfirm" placeholder="{{'a.passwordConfirm.p' | translate | async}}" required type="password">
+            <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['password']"></fa-icon></mat-icon>
+            <mat-hint>{{'a.passwordConfirm.h' | translate | async}}</mat-hint>
+            <mat-error kiiInputError="passwordConfirm"></mat-error>             
+        </mat-form-field>
+        <mat-checkbox #newsletterCheckbox formControlName="newsletter"><small>{{'a.newsletter' | translate | async}}</small></mat-checkbox>
+        <mat-checkbox #termsCheckbox formControlName="terms" [ngClass]="{'is-valid':validTerms}"><small>{{'a.terms' | translate | async}}</small></mat-checkbox> 
+        <button mat-button type="button" [routerLink]="'legal/user-data' | translateRoute | async" (click)="storeForm()" color="primary"><small>{{'a.legal.user-data' | translate | async}}</small></button>
+            
+     <div class="control-wrapper-submit">
+        <a mat-stroked-button type="button" color="primary" [routerLink]="'auth/login' | translateRoute | async" >{{'a.login.submit' | translate | async}}</a>
+        <button mat-flat-button type="submit" color="primary">{{'a.signup.submit' | translate | async}}</button>
+     </div>
+
+
+   </form>
