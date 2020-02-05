@@ -8,6 +8,8 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 })
 export class KiiLoginComponent implements OnInit {
 
+  isLoading:boolean = false;
+
   constructor(private kiiTrans: KiiTranslateService) {
    }
 

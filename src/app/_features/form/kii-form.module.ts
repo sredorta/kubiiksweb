@@ -15,6 +15,7 @@ import {MatAutocompleteModule,
   MatTooltipModule,
   MatIconModule,
   MatCheckboxModule,
+  MatCardModule,
   //MatTreeModule,
   //MatPaginatorIntl,
   //MatSnackBar,
@@ -39,6 +40,7 @@ import { KiiInputErrorDirective } from './directives/kii-input-error.directive';
     FormsModule,
     MatInputModule,
     MatIconModule,
+    MatCardModule,
     MatCheckboxModule,
     ReactiveFormsModule,
     [  MatAutocompleteModule, //MATERIAL DESIGN
@@ -56,6 +58,7 @@ import { KiiInputErrorDirective } from './directives/kii-input-error.directive';
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
+    MatCardModule,
     KiiInputErrorDirective
   ]
 })

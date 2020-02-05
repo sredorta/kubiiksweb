@@ -1,8 +1,7 @@
-<kii-spinner-overlay [show]="isFormLoading">
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate> 
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate autocomplete="on"> 
      <mat-form-field [appearance]="kiiInputAppearance">
          <mat-label>{{'a.email.l' | translate | async}}</mat-label>
-         <input matInput formControlName="username" placeholder="{{'a.email.p' | translate | async}}" required type="email">
+         <input matInput formControlName="username" placeholder="{{'a.email.p' | translate | async}}" required type="email" autocomplete="email">
          <mat-icon matPrefix class="icon"><i class="fas fa-at"></i></mat-icon>
          <mat-hint>{{'a.email.h' | translate | async}}</mat-hint>
          <mat-error kiiInputError="username"></mat-error>    
@@ -10,7 +9,7 @@
 
      <mat-form-field [appearance]="kiiInputAppearance">
          <mat-label>{{'a.password.l' | translate | async}}</mat-label>
-         <input matInput formControlName="password" placeholder="{{'a.password.p' | translate | async}}" required type="password">
+         <input matInput formControlName="password" placeholder="{{'a.password.p' | translate | async}}" required type="password" autocomplete="current-password">
          <mat-icon matPrefix class="icon"><i class="fas fa-key"></i></mat-icon>
          <mat-hint>{{'a.password.h' | translate| async}}</mat-hint>
          <mat-error kiiInputError="password"></mat-error>
@@ -25,4 +24,3 @@
      </div>
 
    </form>
-</kii-spinner-overlay>

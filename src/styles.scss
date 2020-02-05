@@ -19,17 +19,10 @@ body {
 //Avoid text selection and blue outline
 span,p,h1,h2,h3,small,div,a {
     -webkit-touch-callout: none !important;
-/*    &:not(.angular-editor-textarea) {
-        -webkit-user-select: none !important;
-        -khtml-user-select: none !important;
-        -moz-user-select: none !important;
-        -ms-user-select: none !important;
-        user-select: none !important;
-    }*/
     box-sizing: content-box;
 }
 
-/*Remove Chrome autofill automatic settings on inputs*/
+//Remove Chrome autofill automatic settings on inputs
 input,textarea,select {
         background-color: transparent;
 }

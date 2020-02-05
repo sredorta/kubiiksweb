@@ -1,0 +1,16 @@
+.passport-wrp {
+    display:flex;
+    justify-content: center;
+    fa-icon {
+        font-size: 24px;
+    }
+    a {
+        margin:20px;
+    }
+    a.fb {
+        background-color:rgba(#3C5A99,0.9);
+    }
+    a.google {
+        background-color:rgba(#DC4E41,0.9);
+    }
+}

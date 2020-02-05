@@ -92,6 +92,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
       MatMenuModule,
       MatRippleModule,
       MatToolbarModule,
+      FontAwesomeModule
     ],
   ]
 })

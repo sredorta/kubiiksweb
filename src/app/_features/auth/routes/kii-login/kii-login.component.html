@@ -1,13 +1,10 @@
 
-
-<p>kii-login works!</p>
-<p>kii-login works!</p>
-<h1>{{'auth-test' | translate | async}}</h1>
-<p>kii-login works!</p>
-<p>kii-login works!</p>
-<p>kii-login works!</p>
-<p>kii-login works!</p>
-<p>kii-login works!</p>
-<p>kii-login works!</p>
-<kii-login-form    (kiiOnSubmit)="onSubmit($event)"></kii-login-form>
+<div class="login-wrp">
+    <kii-spinner-overlay [show]="isLoading">
+    <mat-card>
+        <kii-passports></kii-passports>
+        <kii-login-form  (kiiOnSubmit)="onSubmit($event)"></kii-login-form>
+    </mat-card>
+    </kii-spinner-overlay>
+</div>
 

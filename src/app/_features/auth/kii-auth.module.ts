@@ -60,6 +60,7 @@ import { KiiTranslateModule } from '../translate/kii-translate.module';
 import { KiiLoginFormComponent } from './forms/kii-login-form/kii-login-form.component';
 import { KiiFormModule } from '../form/kii-form.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { KiiPassportsComponent } from './components/kii-passports/kii-passports.component';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     KiiAuthRoutingModule,
   ],
   declarations: [
+    KiiPassportsComponent,
     KiiLoginFormComponent,
     KiiLoginComponent,
     KiiSignupComponent,
