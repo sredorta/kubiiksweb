@@ -15,6 +15,7 @@ import {
 } from '@angular/material';
 import { KiiTranslateRoutingModule } from './kii-translate-routing.module';
 import { KiiTranslateRoutePipe } from './pipes/kii-translate-route.pipe';
+import { KiiHttpLangInterceptor } from './utils/kii-http-lang-interceptor';
 
 
 
@@ -47,7 +48,8 @@ export class KiiTranslateModule {
       providers: [
         KiiTranslateService,
         KiiTranslatePipe,
-        KiiTranslateRoutePipe
+        KiiTranslateRoutePipe,
+        { provide: HTTP_INTERCEPTORS, useClass: KiiHttpLangInterceptor, multi: true }
       ],
     }
   }

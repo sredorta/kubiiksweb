@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { MatBottomSheet } from '@angular/material';
 import { Router, NavigationEnd } from '@angular/router';
@@ -23,6 +23,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private bottomSheet: MatBottomSheet,
   private router : Router,
   private cookies : KiiCookiesService,
+  private r: Renderer2,
   private location : Location) { super() }
 
   ngOnInit() {
@@ -32,7 +33,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     this.kiiTrans.setRequiredContext(['main']);
 
     //Handle cookies
-
     this.addSubscriber(
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe( (res : NavigationEnd) => {
           if (res.url.includes('cookies')) {
@@ -48,7 +48,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
           }
         })
     );
-   
+
   }
 
   openBottomSheetCookies(): void {
@@ -69,4 +69,8 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
         //if (this.router.url.includes('cookies')) this.location.back();
       })    
   }
+
+ 
+
+
 }
