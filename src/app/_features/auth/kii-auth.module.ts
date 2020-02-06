@@ -64,6 +64,8 @@ import { KiiPassportsComponent } from './components/kii-passports/kii-passports.
 import { KiiResetPasswordComponent } from './routes/kii-reset-password/kii-reset-password.component';
 import { KiiSignupFormComponent } from './components/kii-signup-form/kii-signup-form.component';
 import { KiiEmailValidateComponent } from './routes/kii-email-validate/kii-email-validate.component';
+import { KiiLoginOauthComponent } from './routes/kii-login-oauth/kii-login-oauth.component';
+import { KiiOauthFormComponent } from './components/kii-oauth-form/kii-oauth-form.component';
 
 
 @NgModule({
@@ -76,6 +78,8 @@ import { KiiEmailValidateComponent } from './routes/kii-email-validate/kii-email
     KiiAuthRoutingModule,
   ],
   declarations: [
+    KiiOauthFormComponent,
+    KiiLoginOauthComponent,
     KiiResetPasswordComponent,
     KiiPassportsComponent,
     KiiLoginFormComponent,

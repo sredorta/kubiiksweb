@@ -1,0 +1,12 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate autocomplete="on"> 
+     
+    <button mat-button type="button" [routerLink]="'legal/user-data' | translateRoute | async" (click)="storeForm()" color="primary" class="data"><small>{{'a.legal.user-data' | translate | async}}</small></button>
+
+    <mat-checkbox formControlName="newsletter"><small>{{'a.newsletter' | translate | async}}</small></mat-checkbox>
+    <mat-checkbox formControlName="terms"><small>{{'a.terms' | translate | async}}</small></mat-checkbox> 
+
+    <div class="controls">
+        <button mat-stroked-button type="button" color="primary" (click)="onRefuse()">{{'a.decline' | translate | async}}</button>
+        <button mat-flat-button type="submit" color="primary">{{'a.accept' | translate | async}}</button>
+    </div>
+</form>

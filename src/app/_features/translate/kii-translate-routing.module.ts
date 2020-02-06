@@ -19,6 +19,7 @@ export class KiiTranslateRoutingModule {
       }
       //Add dynamically the routes
       this.router.resetConfig(routes);
+      console.log("NEW ROUTES",routes);
     }
   }
 }

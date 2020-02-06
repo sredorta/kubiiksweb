@@ -10,11 +10,11 @@
   <p>contact</p>
   <div class="highlight-menu"></div>
 </a>
-<a mat-button class="kii-kat-button" title="test" routerLink="/auth/login">
+<a mat-button class="kii-kat-button" title="test" [routerLink]="'auth/login' | translateRoute | async">
     <p>login</p>
     <div class="highlight-menu"></div>
 </a>
-<a mat-button class="kii-kat-button" title="test" routerLink="/auth/signup">
+<a mat-button class="kii-kat-button" title="test" [routerLink]="'auth/signup' | translateRoute | async">
     <p>signup</p>
     <div class="highlight-menu"></div>
 </a>

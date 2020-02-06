@@ -7,6 +7,7 @@ import {  MatBottomSheet } from '@angular/material';
 import { KiiTranslateService } from '../../translate/services/kii-translate.service';
 import { isPlatformBrowser } from '@angular/common';
 import { KiiHttpErrorComponent } from '../components/kii-http-error/kii-http-error.component';
+import { User } from '../../auth/models/user';
 
 
 //We intercept all http requests and do some things here
@@ -32,17 +33,23 @@ export class KiiHttpInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        let tmpHeaders: any = {};
+        tmpHeaders['Accept-Language'] = this.kiiTrans.getCurrent();
+        if (!isPlatformBrowser(this._platformId)) {
+            if (request.headers.has("Authorization"))
+                tmpHeaders['Authorization'] = request.headers.get('Authorization');
+        } else {
+            if (User.getToken())
+                tmpHeaders['Authorization'] =  'Bearer ' + User.getToken();
+        }     
         let headers : HttpHeaders;
-        headers = new HttpHeaders({
-            'Accept-Language': this.kiiTrans.getCurrent(),
-        });     
+        headers = new HttpHeaders(tmpHeaders);     
         //Handle the response
         let newRequest = request.clone({headers});
-        console.log("INTERCEPTING !!");
         return next.handle(newRequest).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    console.log(event);
+                    //console.log(event);
                 if (event.body)
                     if (event.body.message)
                         if (event.body.message.show) 
