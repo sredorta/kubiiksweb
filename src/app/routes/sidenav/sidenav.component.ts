@@ -23,7 +23,8 @@ export class SidenavComponent extends KiiBaseAbstract implements OnInit {
     @Inject(PLATFORM_ID) private platformId: any) {super(); }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['main']);
+    //this.kiiTrans.setRequiredContext(['main']);
+    this.kiiTrans.reload();
     this.icons['close'] = faTimes;
 
     this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => this.loggedInUser = res));

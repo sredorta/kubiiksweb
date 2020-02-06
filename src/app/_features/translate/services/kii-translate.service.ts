@@ -70,7 +70,7 @@ export  class KiiTranslateService  {
     private location:Location
     ) { 
         this.currentLang = this.get();
-
+        console.log("RUNNING TRANSLATE CONSTRUCTOR !");
         //Handle back/forth and change languages
         this.subscr = this.location.subscribe(res => {
           let lang = this.getFromUrl(res.url);
@@ -180,6 +180,9 @@ export  class KiiTranslateService  {
         })
   }
 
+  public reload() {
+    this.onLoaded.next(!this._onLoaded);
+  }
 
   /**Loads the context from the TransferState if exists */
   private loadContextFromTrasferState(contextName:string):Observable<any> {
