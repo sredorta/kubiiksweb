@@ -9,14 +9,12 @@ mat-toolbar {
     background:transparent;
 }
 .wrp {
-    border:1px solid yellow;
     flex:1 1 auto;
     display:flex;
     align-items: center;
 }
 .icons {
     height:100%;
-    border:1px solid red;
 }
 
 .avatar {
@@ -26,4 +24,15 @@ mat-toolbar {
 }
 fa-icon {
     font-size: 18px;
+}
+
+.kii-main-btn {
+/*    position:absolute;
+    top:10px;
+    left:5px;
+    z-index: 11;*/
+    background-image: url("/assets/kiilib/images/menu.svg");
+    background-size: cover;
+    background-position: center center;
+    transition: all 0.2s ease-in-out;
 }

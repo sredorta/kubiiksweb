@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
 import { KiiHomeComponent } from './_features/main/components/kii-home/kii-home.component';
 import { KiiAppComponent } from './_features/main/components/kii-app/kii-app.component';
+import { SidenavComponent } from './routes/sidenav/sidenav.component';
 
 
 let routes: Routes = [
@@ -10,6 +11,14 @@ let routes: Routes = [
   { 
     path: 'home', 
     component: KiiHomeComponent
+  },
+  { 
+    path: 'sidenav', 
+    loadChildren: () => import('./routes/sidenav/sidenav.module').then(m => m.SidenavModule), 
+  },
+  { 
+    path: 'blog', 
+    loadChildren: () => import('./routes/blog/blog.module').then(m => m.BlogModule), 
   },
   //Lazy load legal module
   {

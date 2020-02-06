@@ -1,8 +1,8 @@
-<a mat-button class="kii-kat-button" title="test" routerLink="/home">
+<a mat-button class="kii-kat-button" title="test" [routerLink]="'home' | translateRoute | async">
     <p>home</p>
     <div class="highlight-menu"></div>
 </a>
-<a mat-button class="kii-kat-button" title="test" routerLink="/blog">
+<a mat-button class="kii-kat-button" title="test" [routerLink]="'blog' | translateRoute | async">
   <p>blog</p>
   <div class="highlight-menu"></div>
 </a>

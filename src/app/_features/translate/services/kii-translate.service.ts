@@ -151,8 +151,10 @@ export  class KiiTranslateService  {
         //Loads any missing context
         let wait :Observable<any>[] = [];
         for (let ctx of context) {
+          console.log("context",ctx);
           //If context already available do nothing
           if (this.isContextAvailable(ctx)) {
+            console.log("Context available,skipping",ctx, this)
             //Notify pipes !
             this.onLoaded.next(!this._onLoaded);
           } else {
@@ -174,6 +176,7 @@ export  class KiiTranslateService  {
             if (isLanguageChange) {
               this.onChange.next(this.currentLang);
             }
+            console.log("Loaded",this.translations);
         })
   }
 

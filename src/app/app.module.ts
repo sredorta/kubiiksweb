@@ -15,6 +15,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { KiiAppComponent } from './_features/main/components/kii-app/kii-app.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { MatDividerModule, MatBottomSheetModule, MatButtonModule, MatMenuModule, MatRippleModule, MatToolbarModule, MatBadgeModule } from '@angular/material';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BlogModule } from './routes/blog/blog.module';
+import { SidenavComponent } from './routes/sidenav/sidenav.component';
+import { SidenavModule } from './routes/sidenav/sidenav.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
     BrowserAnimationsModule,
     BrowserTransferStateModule,
     HttpClientModule,
-    KiiMainModule,
+    KiiMainModule.forRoot(),
     KiiTranslateModule.forRoot(),
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })

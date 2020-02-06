@@ -21,6 +21,7 @@ import {
   MatInputModule,
   MatBadge,
   MatBadgeModule,
+  MatMenuItem,
 } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -47,6 +48,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { KiiHttpInterceptor } from './utils/kii-http-interceptor';
 import { KiiHttpErrorComponent } from './components/kii-http-error/kii-http-error.component';
 import { KiiAuthService } from './services/kii-auth.service';
+import { SidenavModule } from 'src/app/routes/sidenav/sidenav.module';
 
 
 
@@ -55,9 +57,6 @@ import { KiiAuthService } from './services/kii-auth.service';
     CommonModule,
     FontAwesomeModule,
     ShareModule,
-    MatInputModule,
-    KiiTranslateModule.forChild(),
-    RouterModule,
     [ 
       MatDividerModule,
       MatBottomSheetModule,
@@ -67,6 +66,8 @@ import { KiiAuthService } from './services/kii-auth.service';
       MatToolbarModule,
       MatBadgeModule
     ],
+    KiiTranslateModule.forChild(),
+    RouterModule,
   ],
   declarations: [
     KiiShareComponent,
@@ -95,16 +96,14 @@ import { KiiAuthService } from './services/kii-auth.service';
     KiiAppComponent,
     KiiSpinnerComponent,
     KiiSpinnerOverlayComponent,
-    [ 
-      MatDividerModule,
-      MatBottomSheetModule,
-      MatButtonModule,
-      MatMenuModule,
-      MatRippleModule,
-      MatToolbarModule,
-      FontAwesomeModule,
-      MatBadgeModule
-    ],
+    FontAwesomeModule,
+    MatDividerModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatRippleModule,
+    MatToolbarModule,
+    MatBadgeModule,
   ]
 })
 export class KiiMainModule { 
