@@ -32,7 +32,7 @@ import { KiiTranslateRoutePipe } from './pipes/kii-translate-route.pipe';
     KiiTranslateRoutePipe,
     KiiLanguageSelectorComponent,
   ],
-  providers:[KiiTranslateService],
+  providers:[],
   exports:[
     KiiLanguageSelectorComponent,
     KiiTranslatePipe,
