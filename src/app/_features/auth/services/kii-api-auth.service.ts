@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { tap, map, filter } from 'rxjs/operators';
 import { KiiTranslateService } from '../../translate/services/kii-translate.service';
 import { environment } from 'src/environments/environment';
-import { IUser, User } from '../models/user';
+import { IUser, User } from '../../main/models/user';
 
 export interface IOauth2 {
   /**Tells if the user has all fields */
@@ -46,11 +46,6 @@ export interface IMessage {
 })
 export class KiiApiAuthService {
 
-  /** Contains current loggedIn user */
-  private _user = new BehaviorSubject<User>(new User(null)); //Stores the current user
-
-  /**Contains current number of unread notifications of the user */
-  private _alerts = new BehaviorSubject<number>(0);
 
   constructor(private http: HttpClient, private kiiTrans: KiiTranslateService) { }
 
@@ -86,53 +81,11 @@ export class KiiApiAuthService {
     return this.http.post<any>(environment.apiURL + '/auth/validate-email',{id:params.id,key:params.key});
   }
 
-
-  /**Sets current loggedIn user */
-  public setLoggedInUser(user:User) {
-    //console.log("setLoggedInUser: Setting user value");
-    //console.log(user);
-    //console.log("----------------------------------");
-    this._user.next(user);
-    this._alerts.next(user.getUnreadAlertCount());
-  }
-
-  /**Gets current loggedIn user as an observable */
-  public getLoggedInUser() {
-    return this._user;
-  }
-
-  /**Gets current value of loggedInUser as an User object */
-  public getLoggedInUserValue() {
-    return this._user.value;
-  }
-
-
-  /**Sets unread notifications */
-  public setUnreadNotifications(count:number) {
-     this._alerts.next(count);
-  }
-  /**Gets observable with notifications unread */
-  public getUnreadNotifications() {
-    return this._alerts;
-  }
-
   /** getAuthUser expects that we send the bearer token and will return the current user details */
   public getAuthUser() {
     return this.http.get(environment.apiURL + '/auth/get').pipe(map(res => <IUser>res));
   }
 
-  /**Updates current user. Only need to be registered */
-  public updateAuthUser(value:any) {
-      return this.http.post(environment.apiURL + '/auth/update', value).pipe(map(res => <IUser>res));
-  }
 
-  /**Removes current user. Only need to be registered */
-  public deleteAuthUser() {
-    return this.http.delete(environment.apiURL + '/auth/delete');
-  }  
-  
-  public sendEmail(value:any) {
-    return this.http.post<any>(environment.apiURL + '/auth/send-email', value);
-  }
 
 }

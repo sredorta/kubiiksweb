@@ -3,7 +3,8 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { Router } from '@angular/router';
 import { KiiApiAuthService } from '../../services/kii-api-auth.service';
-import { User } from '../../models/user';
+import { User } from 'src/app/_features/main/models/user';
+import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
 
 @Component({
   selector: 'app-kii-login',
@@ -17,6 +18,7 @@ export class KiiLoginComponent extends KiiBaseAbstract implements OnInit {
   constructor(
     private kiiTrans: KiiTranslateService,
     private router : Router,
+    private kiiAuth: KiiAuthService,
     private kiiApiAuth: KiiApiAuthService
     ) {super();}
 
@@ -30,7 +32,7 @@ export class KiiLoginComponent extends KiiBaseAbstract implements OnInit {
     this.addSubscriber(
       this.kiiApiAuth.login(value).subscribe(res => {
         User.saveToken(res.token);
-        this.kiiApiAuth.setLoggedInUser(new User(res.user));
+        this.kiiAuth.setLoggedInUser(new User(res.user));
         this.router.navigate([""]);  
       }, () => this.isLoading = false)
     );

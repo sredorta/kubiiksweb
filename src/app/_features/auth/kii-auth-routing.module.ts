@@ -5,6 +5,8 @@ import { KiiSignupComponent } from './routes/kii-signup/kii-signup.component';
 import { KiiResetPasswordComponent } from './routes/kii-reset-password/kii-reset-password.component';
 import { KiiEmailValidateComponent } from './routes/kii-email-validate/kii-email-validate.component';
 import { KiiLoginOauthComponent } from './routes/kii-login-oauth/kii-login-oauth.component';
+import { KiiProfileComponent } from './routes/kii-profile/kii-profile.component';
+import { KiiAlertsComponent } from './routes/kii-alerts/kii-alerts.component';
 
 
 const routes: Routes = [
@@ -20,6 +22,9 @@ const routes: Routes = [
     //runGuardsAndResolvers: 'always',
     //canActivate: [UnregisteredGuard]
   },
+  { path: 'profile', component:KiiProfileComponent},
+  { path: 'notifications', component:KiiAlertsComponent},
+
 
 ];
 

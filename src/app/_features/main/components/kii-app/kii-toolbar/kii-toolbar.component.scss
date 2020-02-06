@@ -10,10 +10,20 @@ mat-toolbar {
 }
 .wrp {
     border:1px solid yellow;
+    flex:1 1 auto;
     display:flex;
     align-items: center;
 }
 .icons {
     height:100%;
     border:1px solid red;
+}
+
+.avatar {
+    width:20px;
+    height:20px;
+    border:1px solid white;
+}
+fa-icon {
+    font-size: 18px;
 }

@@ -66,6 +66,8 @@ import { KiiSignupFormComponent } from './components/kii-signup-form/kii-signup-
 import { KiiEmailValidateComponent } from './routes/kii-email-validate/kii-email-validate.component';
 import { KiiLoginOauthComponent } from './routes/kii-login-oauth/kii-login-oauth.component';
 import { KiiOauthFormComponent } from './components/kii-oauth-form/kii-oauth-form.component';
+import { KiiProfileComponent } from './routes/kii-profile/kii-profile.component';
+import { KiiAlertsComponent } from './routes/kii-alerts/kii-alerts.component';
 
 
 @NgModule({
@@ -78,6 +80,8 @@ import { KiiOauthFormComponent } from './components/kii-oauth-form/kii-oauth-for
     KiiAuthRoutingModule,
   ],
   declarations: [
+    KiiAlertsComponent,
+    KiiProfileComponent,
     KiiOauthFormComponent,
     KiiLoginOauthComponent,
     KiiResetPasswordComponent,

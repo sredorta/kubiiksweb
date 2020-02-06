@@ -1,0 +1,94 @@
+
+.wrapper {
+    min-height: 80vh;
+}
+
+.title {
+    margin-top:5px;
+    margin-bottom:2px;
+}
+.description {
+    opacity:0.6;
+}
+
+//Table part
+.table {
+    width:100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    background:transparent !important;
+}
+mat-paginator {
+    background:transparent !important;
+}
+
+tr.detail-row {
+    height:0;
+}
+
+tr.mat-row.is-read {
+    opacity:0.5;
+}
+
+tr.element-row:not(.expanded-row):hover {
+    cursor:pointer;
+}
+.element-row td {
+    //border-bottom-width:0;
+    padding-left:4px;
+    padding-right:4px;
+}
+.element-detail {
+    overflow: hidden;
+    display: flex;
+}
+.element-detail-wrapper {
+    width:100%;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+.mat-column-id {
+    width:40px;
+    min-width:40px;
+    max-width:40px;
+}
+.mat-column-isRead {
+    min-width:70px;
+}
+.mat-column-id {
+    display: none;
+}
+
+@media only screen and (max-width: 500px) {
+    .title,.description {
+        font-size: 90%;
+    }
+    .mat-column-createdAt {
+        font-size: 60%;
+    }
+}
+
+
+//Detail part
+.kii-detail-button-wrapper {
+    padding:10px;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    button {
+        margin:5px;
+        i {
+            margin-right:10px;
+            font-size: 18px;
+        }
+    }
+}
+@media only screen and (max-width: 500px) {
+    .kii-detail-button-wrapper {
+        flex-direction: column-reverse;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}

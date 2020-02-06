@@ -8,6 +8,8 @@
     "m.menu.contact" : "Contactez-nous",
     "m.menu.login"  : "Se connecter",
     "m.menu.signup" : "Creer un compte",
+    "m.menu.profile" : "Mon compte",
+    "m.menu.logout" : "Se deconnecter",
     "m.menu.cookies" : "Utilisation de Cookies",
     "m.menu.user-data" : "Utilisation des données personnelles",
 
@@ -18,12 +20,5 @@
     "m.news.first.l"    : "Prénom",
     "m.news.last.l"    : "Nom",
     "m.news.email.l"    : "Courriel électronique",
-    "m.news.legal"      : "Conditions d'utilisation des données personnelles",
-    "kiilib.language": "Language en francais",
-    "test" : "Test en francais",
-    "test1" : "Count1 is {{count1}} and count2 is {{count2}}",
-    "test2" : "Test2 en francais",
-    "test3" : "Test3 en francais",
-    "test4" : "Test4 en francais",
-    "test5" : "Test5 en francais"
+    "m.news.legal"      : "Conditions d'utilisation des données personnelles"
 }

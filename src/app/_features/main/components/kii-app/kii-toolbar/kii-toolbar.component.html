@@ -4,6 +4,19 @@
           <app-toolbar></app-toolbar>
           </div>
           <div class="icons fcc">
+              <ng-container *ngIf="loggedInUser.exists()">
+                <a mat-icon-button [routerLink]="'auth/profile' | translateRoute | async">
+                    <img  [src]= "loggedInUser.getAvatar()" class="avatar">
+                </a>
+                <a mat-icon-button [routerLink]="'auth/notifications' | translateRoute | async" [matBadge]="loggedInUser.getUnreadAlertCount()" [matBadgeOverlap]="true" [matBadgeHidden]="loggedInUser.getUnreadAlertCount()==0" matBadgeColor="warn">
+                    <fa-icon [icon]="icons['bell']"></fa-icon>
+                </a>
+              </ng-container>
+              <ng-container *ngIf="!loggedInUser.exists()">
+                  <a mat-icon-button [routerLink]="'auth/login' | translateRoute | async">
+                    <fa-icon [icon]="icons['login']"></fa-icon>
+                  </a>
+              </ng-container>
             <kii-language-selector></kii-language-selector>
           </div>
         </mat-toolbar-row>

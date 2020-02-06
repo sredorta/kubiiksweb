@@ -7,7 +7,7 @@ import {  MatBottomSheet } from '@angular/material';
 import { KiiTranslateService } from '../../translate/services/kii-translate.service';
 import { isPlatformBrowser } from '@angular/common';
 import { KiiHttpErrorComponent } from '../components/kii-http-error/kii-http-error.component';
-import { User } from '../../auth/models/user';
+import { User } from '../models/user';
 
 
 //We intercept all http requests and do some things here

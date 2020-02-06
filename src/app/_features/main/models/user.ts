@@ -65,6 +65,7 @@ export class User {
 
     /**Returns alert count */
     getUnreadAlertCount() {
+        return 10;
         if (this.alerts)
             return this.alerts.filter(obj => obj.isRead == false).length;
         return 0;    

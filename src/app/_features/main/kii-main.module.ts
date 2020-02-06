@@ -19,6 +19,8 @@ import {
   MatTooltipModule,
   MatDividerModule,
   MatInputModule,
+  MatBadge,
+  MatBadgeModule,
 } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -44,6 +46,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { KiiHttpInterceptor } from './utils/kii-http-interceptor';
 import { KiiHttpErrorComponent } from './components/kii-http-error/kii-http-error.component';
+import { KiiAuthService } from './services/kii-auth.service';
 
 
 
@@ -62,6 +65,7 @@ import { KiiHttpErrorComponent } from './components/kii-http-error/kii-http-erro
       MatMenuModule,
       MatRippleModule,
       MatToolbarModule,
+      MatBadgeModule
     ],
   ],
   declarations: [
@@ -98,7 +102,8 @@ import { KiiHttpErrorComponent } from './components/kii-http-error/kii-http-erro
       MatMenuModule,
       MatRippleModule,
       MatToolbarModule,
-      FontAwesomeModule
+      FontAwesomeModule,
+      MatBadgeModule
     ],
   ]
 })
@@ -107,6 +112,7 @@ export class KiiMainModule {
   return {
     ngModule: KiiMainModule,
     providers: [
+      KiiAuthService
     ],
   }
 }
