@@ -9,18 +9,18 @@ import { KiiApiAuthService } from '../../services/kii-api-auth.service';
   styleUrls: ['./kii-reset-password.component.scss']
 })
 export class KiiResetPasswordComponent extends KiiBaseAbstract implements OnInit {
-  loading:boolean = false;
+  isLoading:boolean = false;
   constructor(private kiiTrans: KiiTranslateService, private kiiApiAuth: KiiApiAuthService) {super() }
 
   ngOnInit() {
     this.kiiTrans.setRequiredContext(['auth', 'form']);
   }
   onSubmit(value:any) {
-    this.loading = true;
+    this.isLoading = true;
     this.addSubscriber(
       this.kiiApiAuth.resetpassword(value).subscribe(res => {
-        this.loading = false;
-      }, () => this.loading = false)
+        this.isLoading = false;
+      }, () => this.isLoading = false)
     );
   }
 }

@@ -64,6 +64,11 @@ export class KiiApiAuthService {
     return this.http.post<any>(environment.apiURL + '/auth/reset-password/email', value);
   }
 
+  /**Re-establish password after reset */
+  public establishpassword(value:any) {
+    return this.http.post<IUserWithToken>(environment.apiURL + '/auth/establish-password', value);
+  }
+
   /** Validate if oauth2 login has all required fields of signup */
   public oauth2Validate() {
     return this.http.get(environment.apiURL + '/auth/oauth2/validate').pipe(map(res => <IOauth2>res));;

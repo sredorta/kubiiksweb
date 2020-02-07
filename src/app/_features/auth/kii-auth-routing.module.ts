@@ -7,6 +7,7 @@ import { KiiEmailValidateComponent } from './routes/kii-email-validate/kii-email
 import { KiiLoginOauthComponent } from './routes/kii-login-oauth/kii-login-oauth.component';
 import { KiiProfileComponent } from './routes/kii-profile/kii-profile.component';
 import { KiiAlertsComponent } from './routes/kii-alerts/kii-alerts.component';
+import { KiiEstablishPasswordComponent } from './routes/kii-establish-password/kii-establish-password.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'login',  component: KiiLoginComponent },
   { path: 'signup', component:KiiSignupComponent},
   { path: 'reset-password', component:KiiResetPasswordComponent},
+  { path: 'establish-password', component:KiiEstablishPasswordComponent},
   { path: 'validate-email', component:KiiEmailValidateComponent},
   {
     path: 'login/validate/:token',

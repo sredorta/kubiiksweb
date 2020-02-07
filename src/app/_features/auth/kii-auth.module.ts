@@ -70,6 +70,8 @@ import { KiiProfileComponent } from './routes/kii-profile/kii-profile.component'
 import { KiiAlertsComponent } from './routes/kii-alerts/kii-alerts.component';
 import { KiiPasswordStrengthDirective } from './directives/kii-password-strength.directive';
 import { KiiResetPasswordFormComponent } from './components/kii-reset-password-form/kii-reset-password-form.component';
+import { KiiEstablishPasswordComponent } from './routes/kii-establish-password/kii-establish-password.component';
+import { KiiEstablishPasswordFormComponent } from './components/kii-establish-password-form/kii-establish-password-form.component';
 
 
 @NgModule({
@@ -89,6 +91,8 @@ import { KiiResetPasswordFormComponent } from './components/kii-reset-password-f
     KiiLoginOauthComponent,
     KiiResetPasswordFormComponent,
     KiiResetPasswordComponent,
+    KiiEstablishPasswordFormComponent,
+    KiiEstablishPasswordComponent,
     KiiPassportsComponent,
     KiiLoginFormComponent,
     KiiLoginComponent,
