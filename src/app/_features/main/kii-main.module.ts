@@ -97,6 +97,8 @@ import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.compon
     ToolbarComponent,
     KiiHeaderComponent,
     HeaderComponent,
+    KiiFooterComponent,
+    FooterComponent,
     KiiAppComponent,
     KiiSpinnerComponent,
     KiiSpinnerOverlayComponent,

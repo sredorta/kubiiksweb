@@ -20,6 +20,11 @@ let routes: Routes = [
     path: 'blog', 
     loadChildren: () => import('./routes/blog/blog.module').then(m => m.BlogModule), 
   },
+  { 
+    path: 'contact', 
+    loadChildren: () => import('./routes/contact/contact.module').then(m => m.ContactModule), 
+  },
+
   //Lazy load legal module
   {
       path: 'legal',

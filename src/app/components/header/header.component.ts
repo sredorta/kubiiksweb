@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, PLATFORM_ID, Inject, Input } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { isPlatformBrowser } from '@angular/common';
 import { KiiViewTransferService } from 'src/app/_features/main/services/kii-view-transfer.service';
+import { IHeader } from 'src/app/_features/main/components/kii-header/kii-header.component';
+
 
 @Component({
   selector: 'app-header',
@@ -9,6 +11,8 @@ import { KiiViewTransferService } from 'src/app/_features/main/services/kii-view
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  @Input() data: IHeader;
 
   showVideo:boolean = false;
   video : HTMLVideoElement = null;
@@ -26,6 +30,7 @@ export class HeaderComponent implements OnInit {
             ) { }
 
   ngOnInit() {
+      console.log("DATA IS:",this.data);
       this.showVideo = isPlatformBrowser(this.platformId);
   }
   ngAfterViewInit() {

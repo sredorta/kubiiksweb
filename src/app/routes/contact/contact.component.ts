@@ -7,11 +7,11 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  selector: 'kii-contact',
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.scss']
 })
-export class BlogComponent extends KiiBaseAbstract implements OnInit {
+export class ContactComponent extends KiiBaseAbstract implements OnInit {
 
   loggedInUser = new User(null);
   icons = [];
@@ -23,7 +23,7 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
     @Inject(PLATFORM_ID) private platformId: any) {super(); }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['main','blog']);
+    this.kiiTrans.setRequiredContext(['main','contact']);
     this.icons['close'] = faTimes;
 
     this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => this.loggedInUser = res));

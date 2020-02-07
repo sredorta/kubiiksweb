@@ -3,6 +3,9 @@
     "m.decline" : "Refuser",
     "m.register" : "S'enregistrer",
 
+    "m.header.t" : "kubiiks",
+    "m.header.s" : "Créateur d'expériences web",
+
     "m.menu.home" : "Accueil",
     "m.menu.blog" : "Technologie",
     "m.menu.contact" : "Contactez-nous",

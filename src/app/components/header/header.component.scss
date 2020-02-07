@@ -65,7 +65,7 @@ video {
     background:none;
     position:relative;
     padding-left:10vw;
-    padding-top:20vh;
+    padding-top:25vh;
     padding-right:20px;
     z-index: 6;
     display:block;
@@ -115,4 +115,14 @@ video {
         opacity:1;
     }
     100% {opacity:1; transform:none;}
-  }     
+}     
+
+@media only screen and (min-width: 700px) { 
+    .title {
+        font-size: 46px;
+    }
+
+    .sub {
+        font-size: 26px;
+    }
+}

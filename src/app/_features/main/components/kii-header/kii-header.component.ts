@@ -1,6 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Inject, PLATFORM_ID, Input } from '@angular/core';
 import {DeviceDetectorService } from 'ngx-device-detector';
 import { isPlatformBrowser } from '@angular/common';
+
+
+export interface IHeader {
+  title:string,
+  subtitle:string
+}
 
 @Component({
   selector: 'kii-header',
@@ -8,6 +14,10 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./kii-header.component.scss']
 })
 export class KiiHeaderComponent implements OnInit {
+
+  @Input() data: IHeader = {
+    title:"title",
+    subtitle:"subtitle"};
 
   constructor() { }
 
