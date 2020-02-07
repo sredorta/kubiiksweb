@@ -12,6 +12,7 @@ import { faKey } from '@fortawesome/free-solid-svg-icons/faKey';
 })
 export class KiiLoginFormComponent extends KiiFormAbstract implements OnInit {
   icon  = [];
+
   constructor() { 
     super(); 
     this.icon['email'] = faEnvelope;
@@ -31,10 +32,10 @@ export class KiiLoginFormComponent extends KiiFormAbstract implements OnInit {
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(3),
         KiiCustomValidators.password
       ])),
       keepconnected: new FormControl(false,null),
     });
   }
+
 }

@@ -9,7 +9,7 @@
 
      <mat-form-field [appearance]="kiiInputAppearance">
          <mat-label>{{'a.password.l' | translate | async}}</mat-label>
-         <input matInput formControlName="password" placeholder="{{'a.password.p' | translate | async}}" required type="password" autocomplete="current-password">
+         <input kiiPasswordStrength matInput formControlName="password" placeholder="{{'a.password.p' | translate | async}}" required type="password" autocomplete="current-password">
          <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['password']"></fa-icon></mat-icon>
          <mat-hint>{{'a.password.h' | translate| async}}</mat-hint>
          <mat-error kiiInputError="password"></mat-error>

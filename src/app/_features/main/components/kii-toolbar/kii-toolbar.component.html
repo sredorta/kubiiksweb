@@ -10,8 +10,8 @@
                 <a mat-icon-button [routerLink]="'auth/profile' | translateRoute | async">
                     <img  [src]= "loggedInUser.getAvatar()" class="avatar">
                 </a>
-                <a mat-icon-button [routerLink]="'auth/notifications' | translateRoute | async" [matBadge]="loggedInUser.getUnreadAlertCount()" [matBadgeOverlap]="true" [matBadgeHidden]="loggedInUser.getUnreadAlertCount()==0" matBadgeColor="warn">
-                    <fa-icon [icon]="icons['bell']"></fa-icon>
+                <a mat-icon-button [routerLink]="'auth/notifications' | translateRoute | async">
+                    <mat-icon [matBadge]="loggedInUser.getUnreadAlertCount()" [matBadgeOverlap]="true" [matBadgeHidden]="loggedInUser.getUnreadAlertCount()==0" matBadgeColor="warn"><fa-icon [icon]="icons['bell']"></fa-icon></mat-icon>
                 </a>
               </ng-container>
               <ng-container *ngIf="!loggedInUser.exists()">

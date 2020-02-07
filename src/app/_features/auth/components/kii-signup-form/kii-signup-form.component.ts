@@ -41,7 +41,6 @@ export class KiiSignupFormComponent extends KiiFormAbstract implements OnInit {
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(3),
         KiiCustomValidators.password
       ])),
       passwordConfirm: new FormControl('', Validators.compose([    //It needs to be called passwordConfirm so that validator works

@@ -15,6 +15,8 @@
     "m.menu.logout" : "Se deconnecter",
     "m.menu.cookies" : "Utilisation de Cookies",
     "m.menu.user-data" : "Utilisation des données personnelles",
+    "m.menu.admin"  : "Area administrateur",
+    "m.menu.install" : "Installer l'application",
 
     "m.cookies.title" : "Utilisation de Cookies",
     "m.cookies.subtitle": "Ce site utilise des cookies, qui sont nécessaires pour des fonctionnalités comme la génération de statistiques ou le partage dans les réseaux sociaux. Acceptez-vous l'utilisation de cookies ?",

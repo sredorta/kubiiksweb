@@ -22,6 +22,7 @@ import {
   MatBadge,
   MatBadgeModule,
   MatMenuItem,
+  MatIconModule,
 } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -64,7 +65,8 @@ import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.compon
       MatMenuModule,
       MatRippleModule,
       MatToolbarModule,
-      MatBadgeModule
+      MatBadgeModule,
+      MatIconModule
     ],
     KiiTranslateModule.forChild(),
     RouterModule,
@@ -110,6 +112,7 @@ import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.compon
     MatRippleModule,
     MatToolbarModule,
     MatBadgeModule,
+    MatIconModule
   ]
 })
 export class KiiMainModule { 

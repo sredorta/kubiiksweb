@@ -8,15 +8,8 @@
         fa-icon {font-size: 20px;}
     }
 }
-.logo {
-    width:50px;
-    height:50px;
-    margin:0 auto;
-    background-image: url('/server/public/images/defaults/icon-192x192.png');
-    background-size: cover;
-}
+
 .menu {
-    border:1px solid red;
     flex:1 1 auto;
     button {
         width:100%;
@@ -26,13 +19,28 @@
 .item.mat-button {
     text-align: left;
 }
+.install {
+    margin-top:20px;
+}
+.app {
+    display: inline-block;
+    margin-right: 10px;
+    width:25px;
+    height:25px;
+    background-image:url("/assets/kiilib/images/app-install-icon.svg");
+    background-size: contain;
+}
 
 .bottom {
-    border:1px solid yellow;
-    padding:10px 10px 30px 10px;
-    min-height:100px;
-    max-height: 100px;
+    padding:30px 10px 10px 10px;
     background-image: url("/assets/kiilib/images/sidenav-background.svg");
     background-size: cover;
     background-position: center top;
+    .logo {
+        width:70px;
+        height:70px;
+        margin:0 auto;
+        background-image:url("/assets/kiilib/images/logo-sidenav.svg");
+        background-size: cover;
+    }
 }

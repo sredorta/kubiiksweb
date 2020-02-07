@@ -68,6 +68,7 @@ import { KiiLoginOauthComponent } from './routes/kii-login-oauth/kii-login-oauth
 import { KiiOauthFormComponent } from './components/kii-oauth-form/kii-oauth-form.component';
 import { KiiProfileComponent } from './routes/kii-profile/kii-profile.component';
 import { KiiAlertsComponent } from './routes/kii-alerts/kii-alerts.component';
+import { KiiPasswordStrengthDirective } from './directives/kii-password-strength.directive';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { KiiAlertsComponent } from './routes/kii-alerts/kii-alerts.component';
     KiiAuthRoutingModule,
   ],
   declarations: [
+    KiiPasswordStrengthDirective,
     KiiAlertsComponent,
     KiiProfileComponent,
     KiiOauthFormComponent,
