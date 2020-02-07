@@ -1,11 +1,12 @@
 <div class="sidenav-wrp">
-    <div class="fcr">
+    <div class="fcr close">
         <button mat-icon-button [routerLink]="'home' | translateRoute | async"><fa-icon [icon]="icons['close']"></fa-icon></button>
     </div>
     <div class="logo"></div>
     <div class="menu">
         <button mat-button class="item" [routerLink]="'home' | translateRoute | async">{{'m.menu.home' | translate | async}}</button>
         <button mat-button class="item" [routerLink]="'blog' | translateRoute | async">{{'m.menu.blog' | translate | async}}</button>
+        <button mat-button class="item" [routerLink]="'contact' | translateRoute | async">{{'m.menu.contact' | translate | async}}</button>
 
         <ng-container *ngIf="loggedInUser.exists()">
                 <button mat-button class="item" [routerLink]="'auth/profile' | translateRoute | async">{{'m.menu.profile' | translate | async}}</button>
@@ -14,8 +15,10 @@
         <ng-container *ngIf="!loggedInUser.exists()">
                 <button mat-button class="item" [routerLink]="'auth/login' | translateRoute | async">{{'m.menu.login' | translate | async}}</button>
                 <button mat-button class="item" [routerLink]="'auth/signup' | translateRoute | async">{{'m.menu.signup' | translate | async}}</button>
-
         </ng-container>
+    </div>
+    <div class="bottom">
+        <small>hello</small>
     </div>
 
 </div>

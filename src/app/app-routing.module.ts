@@ -34,7 +34,11 @@ let routes: Routes = [
   {
     path: 'auth',
     loadChildren : () => import('./_features/auth/kii-auth.module').then(m => m.KiiAuthModule), 
-  },    
+  },   
+  {
+    path: 'admin',
+    loadChildren : () => import('./_features/admin/kii-admin.module').then(m => m.KiiAdminModule), 
+  },  
 ]
 
 @NgModule({
