@@ -1,5 +1,6 @@
 
 <div class="signup-wrp">
+    <div class="content">
         <kii-spinner-overlay [show]="isLoading">
             <mat-card>
                 <mat-card-header>
@@ -11,5 +12,6 @@
                 <kii-signup-form  (kiiOnSubmit)="onSubmit($event)"></kii-signup-form>
             </mat-card>
         </kii-spinner-overlay>
+    </div>
 </div>
 

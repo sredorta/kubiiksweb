@@ -1,8 +1,7 @@
-<!--<kii-header [data]="{page:'oauth'}"></kii-header>-->
 <kii-spinner-overlay [show]="loading">
-<div class="wrapper">
   <div *ngIf="showTerms" class="oauth-wrp">
-      <!--<kii-article class="test" key="legal-user-data"></kii-article>-->
+      <div class="content">
+
       <mat-card>
           <mat-card-header>
               <div mat-card-avatar class="logo"></div>
@@ -13,6 +12,7 @@
           <p>{{'a.legal.user-data.m' | translate | async}}</p>
           <kii-oauth-form (kiiOnSubmit)="onSubmit($event)"></kii-oauth-form>
       </mat-card>        
+
   </div>  
 </div>
 </kii-spinner-overlay>

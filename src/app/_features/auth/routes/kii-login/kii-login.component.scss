@@ -1,4 +1,5 @@
-.login-wrp {
+
+.content {
     margin:0 auto;
     width:100%;
     max-width: 400px;
@@ -8,4 +9,11 @@
 .logo {
     background-image: url('/server/public/images/defaults/icon-192x192.png');
     background-size: cover;
+}
+
+@media only screen and (min-width: 700px) { 
+    .login-wrp {
+        background: url('/assets/kiilib/images/background.webp');
+        background-size: cover;
+    }
 }
