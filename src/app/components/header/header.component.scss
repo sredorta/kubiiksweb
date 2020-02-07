@@ -3,6 +3,7 @@
     position: relative;
 }
 
+
 .fbk {
     position:absolute;
     z-index: 5;
@@ -124,5 +125,30 @@ video {
 
     .sub {
         font-size: 26px;
+    }
+}
+
+//Short header settings
+.wrp.is-short {
+    height:30vh;
+    min-height: 200px;
+    .cnt {
+        padding-top:80px;
+    }
+    .title {
+        font-size: 32px;
+    }
+    .sub {
+        font-size: 18px;
+    }
+    .fbk {
+        height:30vh;
+        min-height: 200px;
+    }
+    video {
+        min-height: 200px;
+    }
+    .btn {
+        display:none;
     }
 }

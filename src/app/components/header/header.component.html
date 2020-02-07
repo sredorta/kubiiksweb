@@ -1,4 +1,4 @@
-<div itemscope="itemscope" itemtype="http://schema.org/WPHeader" class="wrp" [ngClass]="{'is-short' : format == 'short', 'is-transfer': isTransfer}">
+<div itemscope="itemscope" itemtype="http://schema.org/WPHeader" class="wrp" [ngClass]="{'is-short' : data.isShort, 'is-transfer': isTransfer}">
     <div *ngIf="isMobile" class="fbk mob" [ngClass]="{'is-playing': isPlaying}"></div>
     <div *ngIf="!isMobile" class="fbk desk" [ngClass]="{'is-playing': isPlaying}"></div>
      <div class="bottom-decorator"></div>

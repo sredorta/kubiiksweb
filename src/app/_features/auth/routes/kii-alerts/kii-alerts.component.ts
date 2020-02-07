@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { MatSort, MatPaginator } from '@angular/material';
 import { User } from 'src/app/_features/main/models/user';
 import { KiiTableAbstract } from 'src/app/abstracts/kii-table.abstract';
+import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
+import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
 
 @Component({
   selector: 'kii-alerts',
@@ -42,9 +44,14 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
   }
-  constructor() { super() }
+  constructor(private kiiTrans: KiiTranslateService,private kiiAuth: KiiAuthService) { super() }
 
   ngOnInit() {
+    this.kiiTrans.setRequiredContext(['auth', 'form']);
+    this.currentLang = this.kiiTrans.getCurrent();
+    this.addSubscriber(
+      this.kiiAuth.getLoggedInUser().subscribe(res => {this.loggedInUser = res})
+    )
  /*   this.addSubscriber(
       this.kiiApiAuth.getLoggedInUser().subscribe(res => {
         this.loggedInUser = res;

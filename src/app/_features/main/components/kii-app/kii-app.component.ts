@@ -10,6 +10,9 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { KiiViewTransferService } from '../../services/kii-view-transfer.service';
 import { KiiCookiesService } from '../../services/kii-cookies.service';
 import { KiiHttpErrorComponent } from '../kii-http-error/kii-http-error.component';
+import { UseExistingWebDriver } from 'protractor/built/driverProviders';
+import { User } from '../../models/user';
+import { KiiAuthService } from '../../services/kii-auth.service';
 
 @Component({
   selector: 'kii-app',
@@ -20,6 +23,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
   constructor(@Inject(PLATFORM_ID) private platform: any,
   private kiiTrans: KiiTranslateService,
+  private kiiAuth: KiiAuthService,
   private viewTrans : KiiViewTransferService,
   private bottomSheet: MatBottomSheet,
   private router : Router,
@@ -49,6 +53,16 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
           }
         })
     );
+
+    //Get current user if any
+    if (isPlatformBrowser(this.platform)) {
+      if (User.hasToken()) 
+        this.addSubscriber(
+          this.kiiAuth.getAuthUser().subscribe(res => {
+            this.kiiAuth.setLoggedInUser(new User(res))
+          })
+        )
+    }
   }
 
   openBottomSheetCookies(): void {

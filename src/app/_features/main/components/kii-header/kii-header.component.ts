@@ -5,7 +5,8 @@ import { isPlatformBrowser } from '@angular/common';
 
 export interface IHeader {
   title:string,
-  subtitle:string
+  subtitle:string,
+  isShort?:boolean
 }
 
 @Component({
@@ -17,7 +18,9 @@ export class KiiHeaderComponent implements OnInit {
 
   @Input() data: IHeader = {
     title:"title",
-    subtitle:"subtitle"};
+    subtitle:"subtitle",
+    isShort:false
+  };
 
   constructor() { }
 
