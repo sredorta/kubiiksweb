@@ -10,8 +10,6 @@ mat-toolbar {
 }
 .wrp {
     flex:1 1 auto;
-    display:flex;
-    align-items: center;
 }
 .icons {
     height:100%;
@@ -27,12 +25,14 @@ fa-icon {
 }
 
 .kii-main-btn {
-/*    position:absolute;
-    top:10px;
-    left:5px;
-    z-index: 11;*/
     background-image: url("/assets/kiilib/images/menu.svg");
     background-size: cover;
-    background-position: center center;
     transition: all 0.2s ease-in-out;
+}
+
+@media only screen and (min-width: 700px) { 
+    .kii-main-btn {
+        display: none;
+    }
+
 }

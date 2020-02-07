@@ -31,7 +31,6 @@ import { KiiTranslateModule } from '../translate/kii-translate.module';
 import { KiiMainRoutingModule } from './kii-main-routing.module';
 import { RouterModule } from '@angular/router';
 import { KiiBottomSheetCookiesComponent } from './components/kii-bottom-sheet-cookies/kii-bottom-sheet-cookies.component';
-import { KiiToolbarComponent } from './components/kii-app/kii-toolbar/kii-toolbar.component';
 import { ToolbarComponent } from 'src/app/components/toolbar/toolbar.component';
 import { FooterComponent } from 'src/app/components/footer/footer.component';
 import { HeaderComponent } from 'src/app/components/header/header.component';
@@ -49,6 +48,7 @@ import { KiiHttpInterceptor } from './utils/kii-http-interceptor';
 import { KiiHttpErrorComponent } from './components/kii-http-error/kii-http-error.component';
 import { KiiAuthService } from './services/kii-auth.service';
 import { SidenavModule } from 'src/app/routes/sidenav/sidenav.module';
+import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.component';
 
 
 
@@ -93,6 +93,10 @@ import { SidenavModule } from 'src/app/routes/sidenav/sidenav.module';
     { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
   ],
   exports:[
+    KiiToolbarComponent,
+    ToolbarComponent,
+    KiiHeaderComponent,
+    HeaderComponent,
     KiiAppComponent,
     KiiSpinnerComponent,
     KiiSpinnerOverlayComponent,

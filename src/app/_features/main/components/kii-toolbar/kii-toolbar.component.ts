@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons/faSignInAlt';
-import { User } from '../../../models/user';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
-import { KiiAuthService } from '../../../services/kii-auth.service';
+import { User } from '../../models/user';
+import { KiiAuthService } from '../../services/kii-auth.service';
 
 @Component({
   selector: 'kii-toolbar',

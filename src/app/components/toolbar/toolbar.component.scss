@@ -1,2 +1,28 @@
+.item {
+    display:none;
+    padding-top:15px;
+    padding-bottom: 5px;
+    border-radius: 50vh;
+    small {
+        font-size: 16px;
+        text-shadow: 0px 0px 6px black; 
+    }
+    .under {
+        height:10px;
+        width:100%;
+        background-size: 100% auto;
+        background-position: left center;
+        background-repeat: no-repeat;
+    }
+    &.is-active {
+        .under {
+            background-image: url("/assets/images/menu-underline.svg");
+        }
+    }
+}
 
-
+@media only screen and (min-width: 700px) { 
+    .item {
+        display:inline-block;
+    }
+}

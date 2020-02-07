@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
 import { User } from 'src/app/_features/main/models/user';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
+import { Router, RoutesRecognized, NavigationEnd } from '@angular/router';
 
 
 @Component({
@@ -12,11 +13,19 @@ import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 export class ToolbarComponent extends KiiBaseAbstract implements OnInit {
 
 
+  /**Contains current page for highlighting menu */
+  page:string = "";
 
-  constructor() { super() }
+  constructor(private router: Router) { super() }
 
   ngOnInit() {
+    this.setCurrentPage(this.router.url);
+  }
 
+  /**Returns current page */
+  setCurrentPage(url:string) {
+    this.page = url.replace(/\/[a-z][a-z]\//,"");
+    console.log("PAGE :", this.page);
   }
 
 }

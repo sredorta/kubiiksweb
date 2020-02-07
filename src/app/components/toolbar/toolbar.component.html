@@ -1,20 +1,12 @@
-<a mat-button class="kii-kat-button" title="test" [routerLink]="'home' | translateRoute | async">
-    <p>home</p>
-    <div class="highlight-menu"></div>
+<a mat-button class="item" [ngClass]="{'is-active' : page=='home'}" title="{{'m.menu.home' | translate | async}}"  [routerLink]="'home' | translateRoute | async">
+    <small>{{'m.menu.home' | translate | async}}</small>
+    <div class="under"></div>
 </a>
-<a mat-button class="kii-kat-button" title="test" [routerLink]="'blog' | translateRoute | async">
-  <p>blog</p>
-  <div class="highlight-menu"></div>
+<a mat-button class="item" [ngClass]="{'is-active' : page=='blog'}" title="{{'m.menu.blog' | translate | async}}" [routerLink]="'blog' | translateRoute | async">
+    <small>{{'m.menu.blog' | translate | async}}</small>
+    <div class="under"></div>
 </a>
-<a mat-button class="kii-kat-button" title="test" routerLink="/contact">
-  <p>contact</p>
-  <div class="highlight-menu"></div>
-</a>
-<a mat-button class="kii-kat-button" title="test" [routerLink]="'auth/login' | translateRoute | async">
-    <p>login</p>
-    <div class="highlight-menu"></div>
-</a>
-<a mat-button class="kii-kat-button" title="test" [routerLink]="'auth/signup' | translateRoute | async">
-    <p>signup</p>
-    <div class="highlight-menu"></div>
+<a mat-button class="item" [ngClass]="{'is-active' : page=='contact'}" title="{{'m.menu.contact' | translate | async}}" [routerLink]="'contact' | translateRoute | async">
+    <small>{{'m.menu.contact' | translate | async}}</small>
+    <div class="under"></div>
 </a>
