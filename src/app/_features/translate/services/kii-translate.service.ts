@@ -221,9 +221,21 @@ export  class KiiTranslateService  {
   }
 
   /**Checks if translation is in transfer table if not, get from http */
-  private getTranslation(lang: string) {
+  /*private getTranslation(lang: string) {
     if (this.translations[lang]) return this.translations[lang];
     return {};
+  }*/
+
+  /**Gets current translated value */
+  getTranslation(key:string,params?:any) {
+    if (this.translations[this.getCurrent()][key]) {
+      let str :string = this.translations[this.getCurrent()][key];
+      for (let [key, value] of Object.entries(params)) {
+        let regex = new RegExp("\{\{"+key +"\}\}");
+        str = str.replace(regex,String(value));
+      }
+      return str;
+    }  
   }
 
 

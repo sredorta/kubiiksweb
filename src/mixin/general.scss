@@ -61,6 +61,15 @@
             opacity:0.5;
         }
 
+        .c-primary {
+            color:mat-color($primary);
+        }
+        .c-accent {
+            color:mat-color($accent);
+        }
+        .c-warn {
+            color:mat-color($warn);
+        }
 
     }
 }

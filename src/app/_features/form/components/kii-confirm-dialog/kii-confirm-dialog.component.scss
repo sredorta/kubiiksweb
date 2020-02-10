@@ -1,0 +1,21 @@
+.confirm-dialog {
+    display:flex;
+    flex-direction: column;
+    .head {
+        display:flex;
+        fa-icon {
+            font-size: 30px;
+            padding:10px;
+            margin-right: 20px;
+        }
+    }
+    .text {
+        display:flex;
+        flex-direction: column;
+    }
+    mat-card-actions {
+        margin-top:20px;
+        display:flex;
+        justify-content: space-between;
+    }
+}

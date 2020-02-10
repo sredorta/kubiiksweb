@@ -19,6 +19,7 @@ import {MatAutocompleteModule,
   MatDialogModule,
   MatSelectModule,
   MatOptionModule,
+  MatChipsModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TransferState } from '@angular/platform-browser';
@@ -31,6 +32,7 @@ import { KiiInputErrorDirective } from './directives/kii-input-error.directive';
 import { KiiInputDefaultValueDirective } from './directives/kii-input-default-value.directive';
 import { KiiInputDigitOnlyDirective } from './directives/kii-input-digit-only.directive';
 import { KiiDisableControlDirective } from './directives/kii-disable-control.directive';
+import { KiiConfirmDialogComponent } from './components/kii-confirm-dialog/kii-confirm-dialog.component';
 
 
 @NgModule({
@@ -50,7 +52,8 @@ import { KiiDisableControlDirective } from './directives/kii-disable-control.dir
       MatTooltipModule,
       MatDialogModule,
       MatSelectModule,
-      MatOptionModule
+      MatOptionModule,
+      MatChipsModule,
     ],
   ],
   declarations: [
@@ -58,8 +61,10 @@ import { KiiDisableControlDirective } from './directives/kii-disable-control.dir
     KiiInputErrorDirective,
     KiiInputDefaultValueDirective,
     KiiInputDigitOnlyDirective,
-    KiiNiceDateFormatPipe
+    KiiNiceDateFormatPipe,
+    KiiConfirmDialogComponent
   ],
+  entryComponents: [KiiConfirmDialogComponent],
   providers:[
   ],
   exports:[
@@ -72,11 +77,13 @@ import { KiiDisableControlDirective } from './directives/kii-disable-control.dir
     MatDialogModule,
     MatSelectModule,
     MatOptionModule,
+    MatChipsModule,
     KiiDisableControlDirective,
     KiiInputErrorDirective,
     KiiInputDefaultValueDirective,
     KiiInputDigitOnlyDirective,
-    KiiNiceDateFormatPipe
+    KiiNiceDateFormatPipe,
+    KiiConfirmDialogComponent
   ]
 })
 export class KiiFormModule { }

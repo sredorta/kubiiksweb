@@ -8,5 +8,8 @@
     "f.err.password"  : "Format de mot de passe incorrecte",
     "f.err.checkPasswordsMatch": "Les passwords ne sont pas identiques",
     "f.cancel"        : "Annuler",
-    "f.save"          : "Enregistrer"
+    "f.save"          : "Enregistrer",
+    "f.yes"           : "Oui",
+    "f.confirm.t"     : "Attention",
+    "f.confirm.s"     : "Opération irreversible"  
 }

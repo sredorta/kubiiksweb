@@ -1,3 +1,4 @@
+
 .content {
     margin:0 auto;
     width:100%;
@@ -5,10 +6,29 @@
     padding:20px 0px;
     min-height: 60vh;
 }
-.logo {
-    background-image: url('/server/public/images/defaults/icon-192x192.png');
-    background-size: cover;
+.btn.mat-button {
+    width:100%;
+    text-align: left;
+    margin:3px 0;
+    fa-icon {
+        margin-right: 10px;
+    }
 }
+.dates {
+    opacity: 0.6;
+    font-size: 12px;
+    text-align: right;
+    fa-icon{
+        margin-left:10px;
+    }
+}
+
+.title {
+    fa-icon {
+        margin-right: 10px;
+    }
+}
+
 
 @media only screen and (min-width: 700px) { 
     .profile-wrp {

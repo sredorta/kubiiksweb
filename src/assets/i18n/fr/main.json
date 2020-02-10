@@ -25,5 +25,16 @@
     "m.news.first.l"    : "Prénom",
     "m.news.last.l"    : "Nom",
     "m.news.email.l"    : "Courriel électronique",
-    "m.news.legal"      : "Conditions d'utilisation des données personnelles"
+    "m.news.legal"      : "Conditions d'utilisation des données personnelles",
+
+    "m.now"                : "Maintenant",
+    "m.yesterday"          : "Hier",
+    "m.minutesago.one"     : "Il y a une minute",
+    "m.hoursago.one"       : "Il y a une heure",
+    "m.daysago.one"        : "Il y a un jour",
+    "m.weeksago.one"       : "Il y a une semaine",
+    "m.minutesago.more"    : "Il y a {{count}} minutes",
+    "m.hoursago.more"      : "Il y a {{count}} heures",
+    "m.daysago.more"       : "Il y a {{count}} jours",
+    "m.weeksago.more"      : "Il y a {{count}} semaines"
 }

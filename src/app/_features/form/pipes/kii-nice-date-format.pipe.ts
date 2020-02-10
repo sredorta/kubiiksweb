@@ -21,11 +21,7 @@ export class KiiNiceDateFormatPipe implements PipeTransform {
     var dif = Math.floor( ( (Date.now() - _value) / 1000 ) / 86400 );
     if ( dif < 30 ){
       let result = convertToNiceDate(value).split(",");
-      console.log(result);
-      /*let subscription = this.translate.get(result[0],{count : result[1]}).subscribe((trans) => {
-        this.result = trans;
-      });
-      subscription.unsubscribe();*/
+      this.result = this.translate.getTranslation(result[0], {count: result[1]});
     } else{
         var datePipe = new DatePipe("en-US");
         value = datePipe.transform(value, 'dd-MMM-yyyy');
@@ -46,13 +42,13 @@ function convertToNiceDate(time: string) {
   }
 
   return  daydiff == 0 && (
-      diff < 60 && "kiilib.dateformat.now" ||
-      diff < 120 && "kiilib.dateformat.minutesago.one" ||
-      diff < 3600 && "kiilib.dateformat.minutesago.more," + Math.floor(diff / 60)  ||
-      diff < 7200 && "kiilib.dateformat.hoursago.one" ||
-      diff < 86400 && "kiilib.dateformat.hoursago.more," + Math.floor(diff / 3660)) ||
-      daydiff == 1 && "kiilib.dateformat.yesterday" ||
-      daydiff < 7 && "kiilib.dateformat.daysago.more," + daydiff  ||
-      daydiff < 31 && "kiilib.dateformat.weeksago.more," + Math.ceil(daydiff / 7) ;
+      diff < 60 && "m.now" ||
+      diff < 120 && "m.minutesago.one" ||
+      diff < 3600 && "m.minutesago.more," + Math.floor(diff / 60)  ||
+      diff < 7200 && "m.hoursago.one" ||
+      diff < 86400 && "m.hoursago.more," + Math.floor(diff / 3660)) ||
+      daydiff == 1 && "m.yesterday" ||
+      daydiff < 7 && "m.daysago.more," + daydiff  ||
+      daydiff < 31 && "m.weeksago.more," + Math.ceil(daydiff / 7) ;
 
 }

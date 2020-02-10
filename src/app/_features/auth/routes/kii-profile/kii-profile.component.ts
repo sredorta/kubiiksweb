@@ -12,6 +12,9 @@ import { faUserSlash } from '@fortawesome/free-solid-svg-icons/faUserSlash';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
 import { faUserClock } from '@fortawesome/free-solid-svg-icons/faUserClock';
 import { faHistory } from '@fortawesome/free-solid-svg-icons/faHistory';
+import { faUserLock } from '@fortawesome/free-solid-svg-icons/faUserLock';
+import { faIdCardAlt } from '@fortawesome/free-solid-svg-icons/faIdCardAlt';
+import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
 
 @Component({
   selector: 'kii-profile',
@@ -41,6 +44,8 @@ export class KiiProfileComponent extends KiiBaseAbstract implements OnInit {
                 this.icon['delete'] = faUserSlash;
                 this.icon['created'] = faUserClock;
                 this.icon['updated'] = faHistory;
+                this.icon['roles'] = faUserLock;
+                this.icon['card'] = faIdCardAlt;
               }
 
   ngOnInit() {
@@ -59,21 +64,21 @@ export class KiiProfileComponent extends KiiBaseAbstract implements OnInit {
   }
 
   /**deletes the auth account */
-  onDelete() {
-/*    let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
+  delete() {
+    let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
       disableClose:true,
       panelClass: "default-theme",
-      data: {title: "kiilib.confirm.title", text: "kiilib.confirm.text"}
+      data: {text: "a.delete.confirm"}
     })
     this.addSubscriber(
       dialogRef.afterClosed().subscribe((result:boolean) => {
         if (result) 
           this.addSubscriber(
             this.kiiApiAuth.deleteAuthUser().subscribe(res => {
-              this.onLogout();
+              this.logout();
             }))
       })
-    )*/
+    )
   }
 
   /**When the form is valid and submitted */
