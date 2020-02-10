@@ -1,0 +1,76 @@
+<kii-spinner-overlay [show]="isFormLoading">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate> 
+          <mat-form-field [appearance]="kiiInputAppearance">
+              <mat-label>{{'a.firstName.l' | translate | async}}</mat-label>
+              <input matInput formControlName="firstName" placeholder="{{'a.firstName.p' | translate | async}}" required type="text" [kiiInputDefaultValue]="defaults.firstName">
+              <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['name']"></fa-icon></mat-icon>
+              <mat-hint>{{'a.firstName.h' | translate | async}}</mat-hint>
+              <mat-error kiiInputError="firstName"></mat-error>            
+          </mat-form-field>
+          <mat-form-field  [appearance]="kiiInputAppearance">
+              <mat-label>{{'a.lastName.l' | translate | async}}</mat-label>
+              <input matInput formControlName="lastName" placeholder="{{'a.lastName.p' | translate | async}}" required type="text" [kiiInputDefaultValue]="defaults.lastName">
+              <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['name']"></fa-icon></mat-icon>
+              <mat-hint>{{'a.lastName.h' | translate | async}}</mat-hint>
+              <mat-error kiiInputError="lastName"></mat-error>            
+          </mat-form-field>
+          <mat-form-field [appearance]="kiiInputAppearance">
+              <mat-label>{{'a.phone.l' | translate | async}}</mat-label>
+              <input matInput formControlName="phone" placeholder="{{'a.phone.p' | translate | async}}" inputmode="numeric" pattern="[0-9]*" type="tel" kiiInputDigitOnly [kiiInputDefaultValue]="defaults.phone">
+              <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['phone']"></fa-icon></mat-icon>
+              <mat-hint>{{'a.phone.h' | translate | async}}</mat-hint>
+              <mat-error kiiInputError="phone"></mat-error>            
+          </mat-form-field>
+          <mat-form-field [appearance]="kiiInputAppearance">
+              <mat-label>{{'a.mobile.l' | translate | async}}</mat-label>
+              <input matInput formControlName="mobile" placeholder="{{'a.mobile.p' | translate | async}}"  inputmode="numeric" pattern="[0-9]*" type="tel" kiiInputDigitOnly [kiiInputDefaultValue]="defaults.mobile">
+              <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['mobile']"></fa-icon></mat-icon>
+              <mat-hint>{{'a.mobile.h' | translate | async}}</mat-hint>
+              <mat-error kiiInputError="mobile"></mat-error>            
+          </mat-form-field>  
+          <mat-form-field [appearance]="kiiInputAppearance">
+              <mat-label>{{'a.email.l' | translate | async}}</mat-label>
+              <input matInput formControlName="email" placeholder="{{'a.email.p' | translate | async}}" required type="email" [kiiInputDefaultValue]="defaults.email">
+              <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['email']"></fa-icon></mat-icon>
+              <mat-hint>{{'a.email.h' | translate | async}}</mat-hint>
+              <mat-error kiiInputError="email"></mat-error>            
+          </mat-form-field>
+          <mat-form-field [appearance]="kiiInputAppearance">
+            <mat-select formControlName="language" [kiiInputDefaultValue]="defaults.language">
+               <mat-option *ngFor="let language of languages" [value]="language.iso">{{language.name}}</mat-option>
+            </mat-select>
+            <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['lang']"></fa-icon></mat-icon>
+            <mat-hint>{{'a.language.h' | translate | async}}</mat-hint>
+          </mat-form-field> 
+          <button mat-button type="button" (click)="togglePassword()" class="password-button"><fa-icon [icon]="icon['edit']"></fa-icon>{{'a.password.modify' | translate | async}}</button> 
+<!--        <div class="password-area" [ngClass]="{'visible': modifyPassword}">
+                <mat-form-field [appearance]="kiiInputAppearance">
+                        <mat-label>{{'kiilib.input.password.old.label' | translate}}</mat-label>
+                        <input matInput formControlName="passwordOld" placeholder="{{'kiilib.input.password.placeholder' | translate}}" required type="password">
+                        <mat-icon matPrefix class="icon"><i class="fas fa-key"></i></mat-icon>
+                        <mat-hint>{{'kiilib.input.password.old.hint' | translate}}</mat-hint>
+                        <mat-error kiiInputError="passwordOld"></mat-error>             
+                </mat-form-field>        
+                <mat-form-field [appearance]="kiiInputAppearance" >
+                    <mat-label>{{'kiilib.input.password.new.label' | translate}}</mat-label>
+                    <input matInput formControlName="password" placeholder="{{'kiilib.input.password.placeholder' | translate}}" required type="password">
+                    <mat-icon matPrefix class="icon"><i class="fas fa-key"></i></mat-icon>
+                    <mat-icon matSuffix class="icon"  [matTooltip]="passwordInfo" matTooltipPosition="below"><i class="fas fa-info-circle"></i></mat-icon>
+                    <mat-hint>{{'kiilib.input.password.new.hint' | translate}}</mat-hint>
+                    <mat-error kiiInputError="password"></mat-error>             
+                </mat-form-field>
+                <mat-form-field [appearance]="kiiInputAppearance" >
+                    <mat-label>{{'kiilib.input.passwordConfirm.new.label' | translate}}</mat-label>
+                    <input matInput formControlName="passwordConfirm" placeholder="{{'kiilib.input.passwordConfirm.placeholder' | translate}}" required type="password">
+                    <mat-icon matPrefix class="icon"><i class="fas fa-key"></i></mat-icon>
+                    <mat-hint>{{'kiilib.input.passwordConfirm.new.hint' | translate}}</mat-hint>
+                    <mat-error kiiInputError="passwordConfirm"></mat-error>             
+                </mat-form-field>
+        </div>
+        <kii-image-upload storage="avatar" [maxSize]="200" [crop]="true" [image]="defaults.avatar" (onUpload)="onUpload($event)"></kii-image-upload>
+      -->
+        <div class="control-wrapper">
+            <button mat-fab color="primary" type="submit" color="primary" [disabled]="!myForm.dirty"><i class="fas fa-save" style="font-size:24px"></i></button>
+        </div>
+    </form>
+</kii-spinner-overlay>

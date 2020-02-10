@@ -17,6 +17,8 @@ import {MatAutocompleteModule,
   MatCheckboxModule,
   MatCardModule,
   MatDialogModule,
+  MatSelectModule,
+  MatOptionModule,
   //MatTreeModule,
   //MatPaginatorIntl,
   //MatSnackBar,
@@ -31,6 +33,8 @@ import { KiiTranslateModule } from '../translate/kii-translate.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KiiInputErrorDirective } from './directives/kii-input-error.directive';
 import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
+import { KiiInputDefaultValueDirective } from './directives/kii-input-default-value.directive';
+import { KiiInputDigitOnlyDirective } from './directives/kii-input-digit-only.directive';
 
 
 @NgModule({
@@ -48,11 +52,15 @@ import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
     [  MatAutocompleteModule, //MATERIAL DESIGN
       MatInputModule,
       MatTooltipModule,
-      MatDialogModule
+      MatDialogModule,
+      MatSelectModule,
+      MatOptionModule
     ],
   ],
   declarations: [
     KiiInputErrorDirective,
+    KiiInputDefaultValueDirective,
+    KiiInputDigitOnlyDirective,
     KiiNiceDateFormatPipe
   ],
   providers:[
@@ -65,7 +73,11 @@ import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
     MatCheckboxModule,
     MatCardModule,
     MatDialogModule,
+    MatSelectModule,
+    MatOptionModule,
     KiiInputErrorDirective,
+    KiiInputDefaultValueDirective,
+    KiiInputDigitOnlyDirective,
     KiiNiceDateFormatPipe
   ]
 })

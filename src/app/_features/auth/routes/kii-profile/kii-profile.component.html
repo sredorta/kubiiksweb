@@ -1,10 +1,16 @@
 <kii-toolbar></kii-toolbar>
 <kii-header [data]="{title:'a.profile.t',subtitle:loggedInUser.getFullName(),isShort:true}"></kii-header>
-<p>This is the profile</p>
-<p>This is the profile</p>
-<p>This is the profile</p>
-<p>This is the profile</p>
-<p>This is the profile</p>
+<div class="profile-wrp">
+    <div class="content">
+              <div>
+
+                  <button mat-button>Déconnexion</button>
+                  <button mat-button>Suprimer ce compte</button>
+
+                  <kii-profile-form  (kiiOnSubmit)="onSubmit($event)"></kii-profile-form>
+              </div>
+    </div>
+</div>
 
 <kii-footer></kii-footer>
 
