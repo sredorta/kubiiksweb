@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
             ) { }
 
   ngOnInit() {
-      console.log("DATA IS:",this.data);
       this.showVideo = isPlatformBrowser(this.platformId);
   }
   ngAfterViewInit() {

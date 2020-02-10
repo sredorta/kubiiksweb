@@ -12,6 +12,7 @@ import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone';
 import { faMobile } from '@fortawesome/free-solid-svg-icons/faMobile';
 import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons/faGlobeEurope';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
+import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
 
 @Component({
   selector: 'kii-profile-form',
@@ -50,13 +51,13 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
               this.icon['mobile'] = faMobile;
               this.icon['lang'] = faGlobeEurope;
               this.icon['edit'] = faEdit;
+              this.icon['save'] = faSave;
             }
 
   ngOnInit() {
     this.createForm();
     this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => {
         this.defaults = res;
-        console.log("DEFAULTS",res);
     }))
   }
 
@@ -73,12 +74,12 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
           Validators.minLength(2)
         ])),       
         phone: new FormControl('', Validators.compose([
-          Validators.required,
+          //Validators.required,
           Validators.minLength(10),
           Validators.maxLength(10)
         ])), 
         mobile: new FormControl('', Validators.compose([
-          Validators.required,
+          //Validators.required,
           Validators.minLength(10),
           Validators.maxLength(10)
         ])),
@@ -90,7 +91,6 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
         language: new FormControl('', Validators.compose([
           Validators.required,
         ])),
-/*        avatar: new FormControl('', Validators.compose([])),
         passwordOld: new FormControl('', Validators.compose([
           Validators.required,
           Validators.minLength(3),
@@ -103,68 +103,45 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
         ])),
         passwordConfirm: new FormControl('', Validators.compose([    //It needs to be called passwordConfirm so that validator works
           KiiCustomValidators.checkPasswordsMatch
-        ])),*/
+        ])),
+        /*        avatar: new FormControl('', Validators.compose([])),
+*/
       });
 //      this.myForm.controls["avatar"].patchValue(this.defaults.avatar);
-//      this.disableControls();
   }
 
+
+
   /**Patch the value of image once we recieve onUpload */
-  onUpload(url:string) {
+  /*onUpload(url:string) {
     this.myForm.controls["avatar"].setValue(url);
     this.myForm.controls["avatar"].enable();
     this.myForm.markAsDirty();
-  }
-
-  /**Disables all controls */
-  public disableControls() {
-    Object.keys(this.myForm.controls).forEach(key => {
-      this.myForm.get(key).disable();
-    });
-  }
-
-  /**Returns if controls is enabled or disabled */
-  isEnabled(control:string) {
-    return this.myForm.controls[control].enabled;
-  }
-  /**Closes and resets password area */
-  public resetPasswords() {
-    Object.keys(this.myForm.controls).forEach(key => {
-      if (key.search("password")>=0)
-        this.myForm.get(key).reset();
-        this.myForm.get(key).markAsPristine();
-        this.myForm.get(key).markAsUntouched();
-    })
-    if (this.modifyPassword)
-      this.togglePassword();
-  }
-
-  /**toggles enabled/disabled of control */
-  toggleControl(control:string)  {
-    if (this.myForm.controls[control].disabled) {
-      this.myForm.controls[control].enable();
-    } else {
-      //Only allow redisable if value has not changed !
-      if (this.myForm.controls[control].value != this.defaults[control]) {
-        this.myForm.controls[control].patchValue(this.defaults[control]);
-      }
-      this.myForm.controls[control].disable();
-    }
-  }
+  }*/
 
   /**Toggle password visibility */
   togglePassword() {
     this.modifyPassword = !this.modifyPassword;
-    if (this.modifyPassword == true)
-      Object.keys(this.myForm.controls).forEach(key => {
-        if (key.search("password")>=0)
-          this.myForm.get(key).enable();
-      })
-    else
-      Object.keys(this.myForm.controls).forEach(key => {
-        if (key.search("password")>=0)
-          this.myForm.get(key).disable();
-      })   
-  }    
+  }
+
+  /**Resets the form */
+  reset() {
+    this.myForm.controls['passwordOld'].patchValue("");
+    this.myForm.controls['password'].patchValue("");
+    this.myForm.controls['passwordConfirm'].patchValue("");
+    this.myForm.markAsPristine();
+    this.modifyPassword = false;
+  }
+
+  /**Send only the modified values */
+  onSubmit(value:any) {
+    let result = {};
+    Object.keys(this.myForm.controls).forEach(key => {
+      if (value[key] != this.defaults[key])
+        result[key] = value[key];
+    })
+
+    this.kiiOnSubmit.emit(result);
+  }
 
 }

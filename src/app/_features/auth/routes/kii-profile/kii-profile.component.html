@@ -3,11 +3,14 @@
 <div class="profile-wrp">
     <div class="content">
               <div>
-
-                  <button mat-button>Déconnexion</button>
-                  <button mat-button>Suprimer ce compte</button>
-
+                  <button mat-button (click)="logout()"><fa-icon [icon]="icon['logout']"></fa-icon>{{'m.menu.logout' | translate | async}}</button>
+                  <button mat-button><fa-icon [icon]="icon['delete']"></fa-icon> {{'a.profile.delete' | translate | async}}</button>
+                  <p class="creation-dates"><small>{{'a.created' | translate | async}} : {{{date:loggedInUser.createdAt,lang:currentLang} | kiiNiceDateFormat}}<fa-icon [icon]="icon['created']"></fa-icon></small></p>
+                  <p class="creation-dates"><small>{{'a.updated' | translate | async}} : {{{date:loggedInUser.updatedAt,lang:currentLang} | kiiNiceDateFormat}}<fa-icon [icon]="icon['updated']"></fa-icon></small></p>         
+          
+                  <kii-spinner-overlay [show]="isLoading">
                   <kii-profile-form  (kiiOnSubmit)="onSubmit($event)"></kii-profile-form>
+                  </kii-spinner-overlay>
               </div>
     </div>
 </div>

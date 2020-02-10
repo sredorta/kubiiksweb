@@ -72,11 +72,9 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
         scrollStrategy: new NoopScrollStrategy()   //Avoid scrolling to top !
         }) 
     let subs = this.bottomSheet._openedBottomSheetRef.afterDismissed().subscribe(res => {
-        console.log("DISPMISSERED", res);
         if (res) {
           if (res.result == "accept") this.cookies.accept();
           else this.cookies.refuse();
-          console.log("WE ARE HERE !!!!!!!!!!!!!!!!!!!!", res.result);
           subs.unsubscribe();
         }
         //If our current route is /auth/cookies then navigate back

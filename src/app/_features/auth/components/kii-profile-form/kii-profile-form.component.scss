@@ -25,14 +25,17 @@ mat-form-field {
     max-height: 0;
     height:auto;
     overflow: hidden;
-    transition: all 0.4s ease-in-out;
 }
 .password-area.visible {
     max-height: 600px;
 }
 
-.control-wrapper {
+.controls {
+    margin-top:10px;
     width:100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
+    fa-icon {
+        margin-right:10px;
+    }
 }

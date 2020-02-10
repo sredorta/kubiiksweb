@@ -27,7 +27,6 @@ export class KiiLoginComponent extends KiiBaseAbstract implements OnInit {
   }
 
   onSubmit(value:any) {
-    console.log("OnSubmit !",value);
     this.isLoading = true;
     this.addSubscriber(
       this.kiiApiAuth.login(value).subscribe(res => {

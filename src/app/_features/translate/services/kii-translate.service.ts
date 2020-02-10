@@ -70,7 +70,6 @@ export  class KiiTranslateService  {
     private location:Location
     ) { 
         this.currentLang = this.get();
-        console.log("RUNNING TRANSLATE CONSTRUCTOR !");
         //Handle back/forth and change languages
         this.subscr = this.location.subscribe(res => {
           let lang = this.getFromUrl(res.url);
@@ -151,10 +150,8 @@ export  class KiiTranslateService  {
         //Loads any missing context
         let wait :Observable<any>[] = [];
         for (let ctx of context) {
-          console.log("context",ctx);
           //If context already available do nothing
           if (this.isContextAvailable(ctx)) {
-            console.log("Context available,skipping",ctx, this)
             //Notify pipes !
             this.onLoaded.next(!this._onLoaded);
           } else {

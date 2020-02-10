@@ -43,34 +43,35 @@
             <mat-hint>{{'a.language.h' | translate | async}}</mat-hint>
           </mat-form-field> 
           <button mat-button type="button" (click)="togglePassword()" class="password-button"><fa-icon [icon]="icon['edit']"></fa-icon>{{'a.password.modify' | translate | async}}</button> 
-<!--        <div class="password-area" [ngClass]="{'visible': modifyPassword}">
+          <div class="password-area" [ngClass]="{'visible': modifyPassword}">
                 <mat-form-field [appearance]="kiiInputAppearance">
-                        <mat-label>{{'kiilib.input.password.old.label' | translate}}</mat-label>
-                        <input matInput formControlName="passwordOld" placeholder="{{'kiilib.input.password.placeholder' | translate}}" required type="password">
-                        <mat-icon matPrefix class="icon"><i class="fas fa-key"></i></mat-icon>
-                        <mat-hint>{{'kiilib.input.password.old.hint' | translate}}</mat-hint>
+                        <mat-label>{{'a.password.old.l' | translate | async}}</mat-label>
+                        <input matInput formControlName="passwordOld" placeholder="{{'a.password.p' | translate | async}}" required type="password" [kiiDisableControl]="!modifyPassword" >
+                        <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['password']"></fa-icon></mat-icon>
+                        <mat-hint>{{'a.password.old.h' | translate | async}}</mat-hint>
                         <mat-error kiiInputError="passwordOld"></mat-error>             
                 </mat-form-field>        
                 <mat-form-field [appearance]="kiiInputAppearance" >
-                    <mat-label>{{'kiilib.input.password.new.label' | translate}}</mat-label>
-                    <input matInput formControlName="password" placeholder="{{'kiilib.input.password.placeholder' | translate}}" required type="password">
-                    <mat-icon matPrefix class="icon"><i class="fas fa-key"></i></mat-icon>
-                    <mat-icon matSuffix class="icon"  [matTooltip]="passwordInfo" matTooltipPosition="below"><i class="fas fa-info-circle"></i></mat-icon>
-                    <mat-hint>{{'kiilib.input.password.new.hint' | translate}}</mat-hint>
+                    <mat-label>{{'a.password.new.l' | translate | async}}</mat-label>
+                    <input kiiPasswordStrength matInput formControlName="password" placeholder="{{'a.password.p' | translate | async}}" required type="password" [kiiDisableControl]="!modifyPassword" >
+                    <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['password']"></fa-icon></mat-icon>
+                    <mat-hint>{{'a.password.new.h' | translate | async}}</mat-hint>
                     <mat-error kiiInputError="password"></mat-error>             
                 </mat-form-field>
                 <mat-form-field [appearance]="kiiInputAppearance" >
-                    <mat-label>{{'kiilib.input.passwordConfirm.new.label' | translate}}</mat-label>
-                    <input matInput formControlName="passwordConfirm" placeholder="{{'kiilib.input.passwordConfirm.placeholder' | translate}}" required type="password">
-                    <mat-icon matPrefix class="icon"><i class="fas fa-key"></i></mat-icon>
-                    <mat-hint>{{'kiilib.input.passwordConfirm.new.hint' | translate}}</mat-hint>
+                    <mat-label>{{'a.passwordConfirm.new.l' | translate | async}}</mat-label>
+                    <input matInput formControlName="passwordConfirm" placeholder="{{'a.passwordConfirm.p' | translate | async}}" required type="password" [kiiDisableControl]="!modifyPassword">
+                    <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['password']"></fa-icon></mat-icon>
+                    <mat-hint>{{'a.passwordConfirm.new.h' | translate | async}}</mat-hint>
                     <mat-error kiiInputError="passwordConfirm"></mat-error>             
                 </mat-form-field>
         </div>
+<!--        
         <kii-image-upload storage="avatar" [maxSize]="200" [crop]="true" [image]="defaults.avatar" (onUpload)="onUpload($event)"></kii-image-upload>
       -->
-        <div class="control-wrapper">
-            <button mat-fab color="primary" type="submit" color="primary" [disabled]="!myForm.dirty"><i class="fas fa-save" style="font-size:24px"></i></button>
+        <div class="controls" *ngIf="myForm.dirty">
+            <button mat-stroked-button color="primary" type="reset" color="primary">{{'f.cancel' | translate | async}}</button>
+            <button mat-flat-button color="primary" type="submit" color="primary"><fa-icon [icon]="icon['save']"></fa-icon>{{'f.save' | translate | async}}</button>
         </div>
     </form>
 </kii-spinner-overlay>

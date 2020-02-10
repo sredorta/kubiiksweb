@@ -17,7 +17,6 @@ export class FooterComponent extends KiiBaseAbstract implements OnInit {
     this.addSubscriber(
       this.kiiAuth.getLoggedInUser().subscribe(res => {
         this.loggedInUser = res;
-        console.log("loggedInUser",this.loggedInUser);
       })
     )
   }

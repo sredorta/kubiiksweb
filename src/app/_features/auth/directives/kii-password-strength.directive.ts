@@ -19,11 +19,9 @@ export class KiiPasswordStrengthDirective {
       this.checkStrength();
   }
   constructor(private _el: ElementRef, private r:Renderer2) { 
-    console.log(this._el);
   }
 
   ngOnInit() {
-    console.log("kiiPasswordStrength Directive STARTED !!!")
   }
   ngAfterViewInit() {
     this.r.setStyle(this._el.nativeElement, 'position','relative');

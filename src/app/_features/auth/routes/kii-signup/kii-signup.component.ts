@@ -25,7 +25,6 @@ export class KiiSignupComponent extends KiiBaseAbstract implements OnInit {
   }
 
   onSubmit(value:any) {
-    console.log("Submitting",value);
     if (isPlatformBrowser(this.platformId)) {
       this.isLoading = true;
       this.addSubscriber(

@@ -6,5 +6,7 @@
     "f.err.max"       : "Valeur trop grande",
     "f.err.email"     : "Format de courriel incorrecte",
     "f.err.password"  : "Format de mot de passe incorrecte",
-    "f.err.checkPasswordsMatch": "Les passwords ne sont pas identiques"
+    "f.err.checkPasswordsMatch": "Les passwords ne sont pas identiques",
+    "f.cancel"        : "Annuler",
+    "f.save"          : "Enregistrer"
 }

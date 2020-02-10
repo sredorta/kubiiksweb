@@ -7,7 +7,7 @@
           </div>
           <div class="icons fcc">
               <ng-container *ngIf="loggedInUser.exists()">
-                <a mat-icon-button [routerLink]="'auth/profile' | translateRoute | async">
+                <a mat-icon-button [title]="loggedInUser.getFullName()" [routerLink]="'auth/profile' | translateRoute | async">
                     <img  [src]= "loggedInUser.getAvatar()" class="avatar">
                 </a>
                 <a mat-icon-button [routerLink]="'auth/notifications' | translateRoute | async">

@@ -91,6 +91,14 @@ export class KiiApiAuthService {
     return this.http.get(environment.apiURL + '/auth/get').pipe(map(res => <IUser>res));
   }
 
+  /**Updates current user. Only need to be registered */
+  public updateAuthUser(value:any) {
+    return this.http.post(environment.apiURL + '/auth/update', value).pipe(map(res => <IUser>res));
+  }
 
+  /**Removes current user. Only need to be registered */
+  public deleteAuthUser() {
+    return this.http.delete(environment.apiURL + '/auth/delete');
+  } 
 
 }

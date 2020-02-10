@@ -19,11 +19,6 @@ import {MatAutocompleteModule,
   MatDialogModule,
   MatSelectModule,
   MatOptionModule,
-  //MatTreeModule,
-  //MatPaginatorIntl,
-  //MatSnackBar,
-  //MatDialogRef,
-  //MatBottomSheetRef
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TransferState } from '@angular/platform-browser';
@@ -31,10 +26,11 @@ import { HttpClient } from '@angular/common/http';
 import { KiiMainModule } from '../main/kii-main.module';
 import { KiiTranslateModule } from '../translate/kii-translate.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KiiInputErrorDirective } from './directives/kii-input-error.directive';
 import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
+import { KiiInputErrorDirective } from './directives/kii-input-error.directive';
 import { KiiInputDefaultValueDirective } from './directives/kii-input-default-value.directive';
 import { KiiInputDigitOnlyDirective } from './directives/kii-input-digit-only.directive';
+import { KiiDisableControlDirective } from './directives/kii-disable-control.directive';
 
 
 @NgModule({
@@ -58,6 +54,7 @@ import { KiiInputDigitOnlyDirective } from './directives/kii-input-digit-only.di
     ],
   ],
   declarations: [
+    KiiDisableControlDirective,
     KiiInputErrorDirective,
     KiiInputDefaultValueDirective,
     KiiInputDigitOnlyDirective,
@@ -75,11 +72,11 @@ import { KiiInputDigitOnlyDirective } from './directives/kii-input-digit-only.di
     MatDialogModule,
     MatSelectModule,
     MatOptionModule,
+    KiiDisableControlDirective,
     KiiInputErrorDirective,
     KiiInputDefaultValueDirective,
     KiiInputDigitOnlyDirective,
     KiiNiceDateFormatPipe
   ]
 })
-export class KiiFormModule { 
-}
+export class KiiFormModule { }

@@ -86,7 +86,6 @@ export class KiiLoginOauthComponent extends KiiBaseAbstract implements OnInit {
       //Now we neet to update the user with the given extra data and move to home
       this.user.update({terms:true, language: this.kiiTrans.getCurrent(), isEmailValidated:true});
       this.addSubscriber(this.kiiApiAuth.oauth2Update(this.user.to("IUser"),value['newsletter']).subscribe(res => {
-        console.log("SETTING LOGGED INUSER TO", new User(res));
         this.kiiAuth.setLoggedInUser(new User(res));
         this.router.navigate([""]);
         this.loading = false;
