@@ -20,6 +20,7 @@ import {MatAutocompleteModule,
   MatSelectModule,
   MatOptionModule,
   MatChipsModule,
+  MatProgressBarModule,
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { TransferState } from '@angular/platform-browser';
@@ -56,6 +57,7 @@ import { KiiApiUploadFileService } from './services/kii-api-upload-image.service
       MatSelectModule,
       MatOptionModule,
       MatChipsModule,
+      MatProgressBarModule
     ],
   ],
   declarations: [
@@ -82,6 +84,7 @@ import { KiiApiUploadFileService } from './services/kii-api-upload-image.service
     MatSelectModule,
     MatOptionModule,
     MatChipsModule,
+    MatProgressBarModule,
     KiiDisableControlDirective,
     KiiInputErrorDirective,
     KiiInputDefaultValueDirective,

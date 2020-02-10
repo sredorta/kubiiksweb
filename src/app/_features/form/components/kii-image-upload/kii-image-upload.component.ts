@@ -2,6 +2,22 @@ import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, 
 import { HttpClient } from '@angular/common/http';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiApiUploadFileService, DiskType } from '../../services/kii-api-upload-image.service';
+import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { faRedoAlt } from '@fortawesome/free-solid-svg-icons/faRedoAlt';
+import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
+import {DomSanitizer} from '@angular/platform-browser';
+
+export interface IConfigImageUpload {
+  label?:string,
+  hint?:string,
+  buttonsPosition?: 'bottom' | 'right',
+  crop?:boolean,
+  maxSize?:number,
+  fileName?:string,    //When specified we do not regenerate a date name and keep this name
+  storage?: DiskType,
+  compression_rate: number
+}
 
 @Component({
   selector: 'kii-image-upload',
@@ -10,35 +26,19 @@ import { KiiApiUploadFileService, DiskType } from '../../services/kii-api-upload
 })
 export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
 
-  /**Contains the label of the element if any */
-  @Input() label : string = null;
+  /**Contains the icons */
+  icons = [];
 
-  /**Contains the label of the element if any */
-  @Input() hint : string = null;
+  /**Contains all the configuration */
+  @Input() config : IConfigImageUpload; 
 
   /**Contains the current image */
   @Input() image : string = './assets/kiilib/images/no-photo.svg';
-  
-  /**Maximum file width/height */
-  @Input() maxSize : number = 500;
-
-  /**Crop image or not */
-  @Input() crop : boolean = true;
-
-  /**Keep name of the file*/
-  @Input() keepName : string = null;
-
-
-  /**Storage to be used for images : content (default), blog */
-  @Input() storage : DiskType = DiskType.CONTENT;
 
   /**Emit link to the uploaded file */
   @Output() onUpload = new EventEmitter<string>();
 
-  /**Image compression rate */
-  compression_rate = 0.9;
-
-  /** Contains the current image */
+  /** Contains the current image in base64 format*/
   base64:string = "";
 
   /**Defines if image has been selected and can be uploaded */
@@ -48,7 +48,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   isUploaded : boolean = true;
 
   /**Contains original file name loaded */
-  fileName : string = "";
+  private _fileName : string = "";
 
   /**Show spinner when loading */
   isLoading:boolean = false;
@@ -56,100 +56,124 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   /**Upload progress */
   progress:number = 0;
 
-  /**When we upload svg file */
-  isSVG : boolean =false;
-
-  /**When we upload png file */
-  isPNG : boolean =false;
-
   /**Contains svg blob */
   svgBlob : Blob = new Blob();
 
   /**Formats of images accepted */
-  @Input() imageFormat : string = "image/*";
+  //@Input() imageFormat : string = "image/*";
 
 
   /**Shadow canvas for image manipulation */
   @ViewChild('shadowCanvas', {static:false}) shadowCanvasElem : ElementRef; //Shadow canvas for manipulation
+  @ViewChild('shadowImg', {static:false}) shadowImgElem : ElementRef; //Shadow image for manipulation
 
-  constructor(private kiiApiUpload: KiiApiUploadFileService ,private http: HttpClient) { super() }
+  constructor(private kiiApiUpload: KiiApiUploadFileService ,private http: HttpClient,private sanitizer: DomSanitizer) { 
+    super();
+    this.icons['reset'] = faTrash;
+    this.icons['rotate'] = faRedoAlt;
+    this.icons['photo'] = faCamera;
+    this.icons['upload'] = faUpload;
+  }
 
   ngOnInit() {
+    //Set default config
+    if (!this.config.buttonsPosition) this.config.buttonsPosition = "bottom";
+    if (!this.config.crop) this.config.crop = true;
+    if (!this.config.maxSize) this.config.maxSize = 100;
+    if (!this.config.storage) this.config.storage = DiskType.CONTENT;
+    if (!this.config.compression_rate)  this.config.compression_rate = 0.9;
+    this._fileName = this.image.replace(/.*\//,"");
+    console.log("Setting filename to", this._fileName);
+    console.log("Config:", this.config);
+  }
+
+  ngAfterViewInit() {
     this.setInitialImage();
   }
 
-  /**Sets the initial image */
-  setInitialImage() {
-    if (this.image) {
-      if (this.image.includes(".svg")) {
-        this.isSVG = true;
+  /**Returns if current file is SVG format */
+  isSVG() {
+      if (this._fileName.includes(".svg")) {
+        return true;
       }
-      if (this.image.includes(".png")) {
-        this.isPNG = true;
+      return false;
+  }
+  
+  /**Returns if current file is PNG format */
+  private _isPNG() {
+      if (this._fileName.includes(".png")) {
+        return true;
       }
-    }
-    if (!this.image)
-      this.base64 = "./assets/kiilib/images/no-photo.svg";
-    else {  
-      if (this.image == "none")
-        this.base64 = "./assets/kiilib/images/no-photo.svg";
-      else  
-        this.base64 = this.image; //Initial input image isbeing displayed
-    }
+      return false;
   }
 
-  /**Sets image to a new image */
-  setImage(image:string) {
-    this.image=image;
-    this.setInitialImage();
-  }
-
-
-  /**When input image changes */
+  /**When input image changes we reset everything */
   ngOnChanges(changes:SimpleChanges) {
     if (changes.image) {
       this.image = changes.image.currentValue;
+      this._fileName = this.image.replace(/.*\//,"");
       this.setInitialImage();
     }
   }
 
-  /**Loads the image file */
+  /**Sets the initial image */
+  setInitialImage() {
+    //Fill the canvas with the input image so that it can be rotated...
+      this.shadowImgElem.nativeElement.onload = () => {
+          this.shadowImgtoCanvas();
+      };
+  }
+
+  /**Creates a copy of the shadow image into the canvas*/
+  shadowImgtoCanvas() {
+    var obj = this;
+    var canvas = this.shadowCanvasElem;
+    let myImage = new Image();
+    myImage.crossOrigin = "anonymous";
+    myImage.src = this.image;
+    myImage.onload = function() {
+        if (obj.config.crop) obj.base64 = obj._resizeAndCropCanvas(myImage,canvas); 
+        else obj.base64 = obj._resizeCanvas(myImage,canvas); 
+    };
+  }
+
+  getUrl() {
+    return this.image = 'url("'+this.image+'")';
+  }
+
+  /**Loads the image file into the shadow */
   loadImage(event:any) {
-    if (event.target.files[0].name.includes(".svg")) {
-      this.isSVG = true;
-    }
-    if (event.target.files[0].name.includes(".png")) {
-      this.isPNG = true;
-    }
+    console.log(event);
     const reader = new FileReader();
     if(event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
       this.svgBlob = file;
       reader.onloadend = () => {
-        this.imageToCanvas(reader.result.toString());
-        this.fileName = event.target.files[0].name;
-        this.isUploadable = true;
-        this.isUploaded = false;
+          this._fileName = event.target.files[0].name;
+          this.image = reader.result.toString();
+          this.isUploadable = true;
       };
+
     }
   }
 
-  //We create all base64 array and this triggers the update of the list of thumbs
-  imageToCanvas(data: string) {
-      var obj = this;
-      var canvas = this.shadowCanvasElem;
-      let myImage = new Image();
-      myImage.crossOrigin = "anonymous";
-      myImage.src = data;
-      myImage.onload = function() {
-          if (obj.crop) obj.base64 = obj._resizeAndCropCanvas(myImage,canvas); 
-          else obj.base64 = obj._resizeCanvas(myImage,canvas);         
-        //Avoid that each time we call the function we redo the resize
-        myImage.onload = function() {};
-      };
+  /**Returns buttons position */
+  getButtonsPosition() {
+    if (!this.config.buttonsPosition) return "right";
+    return this.config.buttonsPosition.toString();
   }
 
+
+
+
+  /**Sets image to a new image */
+  setImage(image:string) {
+    this.image=image;
+  }
+
+
+  /**When image is rotated */
   rotateImage() {
     let obj = this;
     let myImage = new Image();
@@ -158,35 +182,40 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
       let result = obj._rotateImage(myImage,obj.shadowCanvasElem);
       obj.base64 = result;
       obj.isUploaded = false;
+      obj.isUploadable = true;
     };
   }  
 
   /**When we remove the image */
   removeImage() {
-    this.base64 = './assets/kiilib/images/no-photo.svg';
+    console.log("REMOVING IMAGE !!!");
+    this.image = null;
+    setTimeout(()=> {
+      this.image = './assets/kiilib/images/no-photo.svg';
+    });
     this.isUploadable = false;
     this.onUpload.emit("none");
     this.isUploaded = false;
-
   }
 
 
   //Give input image and canvas and resizes and returns base64
   private _resizeCanvas(img:HTMLImageElement,canvas:ElementRef) {
+
     let width : number = 0;
     let height : number = 0;
     var ctx = canvas.nativeElement.getContext("2d");
-    if (img.width>this.maxSize || img.height>this.maxSize) {
+    if (img.width>this.config.maxSize || img.height>this.config.maxSize) {
       if (img.width>img.height) {
-        width = this.maxSize;
-        height = Math.round(img.height / (img.width / this.maxSize));
+        width = this.config.maxSize;
+        height = Math.round(img.height / (img.width / this.config.maxSize));
         canvas.nativeElement.width = width;
         canvas.nativeElement.height = height;
         ctx.clearRect(0,0,canvas.nativeElement.width, canvas.nativeElement.height);
         ctx.drawImage(img, 0,0, img.width, img.height, 0, 0, width,height);
       } else {
-        height = this.maxSize;
-        width = Math.round(img.width / (img.height / this.maxSize));
+        height = this.config.maxSize;
+        width = Math.round(img.width / (img.height / this.config.maxSize));
         canvas.nativeElement.width = width;
         canvas.nativeElement.height = height;
         ctx.clearRect(0,0,canvas.nativeElement.width, canvas.nativeElement.height);
@@ -197,13 +226,15 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
       canvas.nativeElement.height = img.height;
       ctx.drawImage(img, 0, 0);
     }
-    if (!this.isPNG)
-      return canvas.nativeElement.toDataURL("image/jpeg",this.compression_rate);
+    if (!this._isPNG())
+      return canvas.nativeElement.toDataURL("image/jpeg",this.config.compression_rate);
     else {
       return canvas.nativeElement.toDataURL("image/png",1);
     }
-    //return canvas.nativeElement.toDataURL("image/jpeg",this.compression_rate);
   }
+
+
+
 
   /**Resizes and crops image */
   private _resizeAndCropCanvas(img:HTMLImageElement,canvas:ElementRef) {
@@ -221,13 +252,13 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
         var sourceY = (sourceHeight - sourceWidth)/2;
         sourceSize=sourceWidth;
     }    
-    canvas.nativeElement.width = this.maxSize;
-    canvas.nativeElement.height= this.maxSize;
+    canvas.nativeElement.width = this.config.maxSize;
+    canvas.nativeElement.height= this.config.maxSize;
     ctx.clearRect(0,0,canvas.nativeElement.width, canvas.nativeElement.height);
-    ctx.drawImage(img, sourceX,sourceY, sourceSize, sourceSize, 0, 0, this.maxSize,this.maxSize);
-   //Disable compression now
-   if (!this.isPNG)
-    return canvas.nativeElement.toDataURL("image/jpeg",this.compression_rate);
+    ctx.drawImage(img, sourceX,sourceY, sourceSize, sourceSize, 0, 0, this.config.maxSize,this.config.maxSize);
+    //Disable compression now
+   if (!this._isPNG)
+    return canvas.nativeElement.toDataURL("image/jpeg",this.config.compression_rate);
    else
     return canvas.nativeElement.toDataURL("image/png",1);
   }
@@ -255,7 +286,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
       var origY = -(canvas.nativeElement.height/2) - delta ;
     } 
     ctx.drawImage(img, 0,0,img.width,img.height,origX,origY,img.width,img.height); 
-    if (!this.isPNG)
+    if (!this._isPNG)
       return canvas.nativeElement.toDataURL("image/jpeg",1);
     else
       return canvas.nativeElement.toDataURL("image/png",1);
@@ -265,28 +296,31 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
 
 
   upload() {
-    if (!this.isSVG)
+    if (!this.isSVG())
       fetch(this.base64).then(res => res.blob()).then(blob => {
         this.uploadFile(blob);
       })
-    else  
+    else  {
+      console.log("UPLOADING SVG BLOB !");
       this.uploadFile(this.svgBlob);  
+    }
   }
 
 
   uploadFile(blob:Blob) {
     //Add random string on fileName so that we get unique name
-    let tmp = this.fileName.split('.');
-    this.fileName = tmp[0] + "__" + new Date().getTime() + '.' + tmp[1];
+    let tmp = this._fileName.split('.');
+    this._fileName = tmp[0] + "__" + new Date().getTime() + '.' + tmp[1];
     const formData = new FormData();
-    formData.append('file',blob,this.keepName==null?this.fileName:this.keepName);
+    formData.append('file',blob,this.config.fileName==null?this._fileName:this.config.fileName);
     //Now upload
     this.isLoading = true;
     this.addSubscriber(
-      this.kiiApiUpload.uploadImage(this.storage,formData).subscribe((res:any) => {
+      this.kiiApiUpload.uploadImage(this.config.storage,formData).subscribe((res:any) => {
         if (res.status == "completed") {
           this.onUpload.emit(res.message.imageUrl);
           this.isUploaded = true;
+          this.isUploadable = false;
           this.isLoading = false;
         }
       }, () => this.isLoading = false)
