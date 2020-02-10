@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  type:"development",
   languages: ['fr','en','es','ca'],
   kiiserverURL:  "http://localhost:3000",
   kiiserverExtURL: "https://localhost:4300/server",

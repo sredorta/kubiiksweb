@@ -1,5 +1,6 @@
 <kii-spinner-overlay [show]="isFormLoading">
     <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate> 
+      <div class="column">
           <mat-form-field [appearance]="kiiInputAppearance">
               <mat-label>{{'a.firstName.l' | translate | async}}</mat-label>
               <input matInput formControlName="firstName" placeholder="{{'a.firstName.p' | translate | async}}" required type="text" [kiiInputDefaultValue]="defaults.firstName">
@@ -66,6 +67,10 @@
                     <mat-error kiiInputError="passwordConfirm"></mat-error>             
                 </mat-form-field>
         </div>
+      </div>
+      <div class="column">
+        <kii-image-upload></kii-image-upload>
+      </div>
 <!--        
         <kii-image-upload storage="avatar" [maxSize]="200" [crop]="true" [image]="defaults.avatar" (onUpload)="onUpload($event)"></kii-image-upload>
       -->

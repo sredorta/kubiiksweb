@@ -33,6 +33,8 @@ import { KiiInputDefaultValueDirective } from './directives/kii-input-default-va
 import { KiiInputDigitOnlyDirective } from './directives/kii-input-digit-only.directive';
 import { KiiDisableControlDirective } from './directives/kii-disable-control.directive';
 import { KiiConfirmDialogComponent } from './components/kii-confirm-dialog/kii-confirm-dialog.component';
+import { KiiImageUploadComponent } from './components/kii-image-upload/kii-image-upload.component';
+import { KiiApiUploadFileService } from './services/kii-api-upload-image.service';
 
 
 @NgModule({
@@ -62,10 +64,12 @@ import { KiiConfirmDialogComponent } from './components/kii-confirm-dialog/kii-c
     KiiInputDefaultValueDirective,
     KiiInputDigitOnlyDirective,
     KiiNiceDateFormatPipe,
-    KiiConfirmDialogComponent
+    KiiConfirmDialogComponent,
+    KiiImageUploadComponent
   ],
   entryComponents: [KiiConfirmDialogComponent],
   providers:[
+    KiiApiUploadFileService
   ],
   exports:[
     FormsModule,
@@ -83,7 +87,8 @@ import { KiiConfirmDialogComponent } from './components/kii-confirm-dialog/kii-c
     KiiInputDefaultValueDirective,
     KiiInputDigitOnlyDirective,
     KiiNiceDateFormatPipe,
-    KiiConfirmDialogComponent
+    KiiConfirmDialogComponent,
+    KiiImageUploadComponent
   ]
 })
 export class KiiFormModule { }

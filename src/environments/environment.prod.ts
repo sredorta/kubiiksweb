@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   languages: ['fr','en','es','ca'],
+  type:"production",
   kiiserverURL:  "http://localhost:3000",
   kiiserverExtURL: "https://localhost:4300/server",
   apiURL: "http://localhost:3000/api",

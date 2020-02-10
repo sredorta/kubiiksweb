@@ -17,6 +17,15 @@ mat-form-field {
 
 
 
+form {
+    display:flex;
+    flex-wrap: wrap;
+}
+.column {
+    min-width: 300px;
+    border:1px solid red;
+    flex:1;
+}
 .password-area {
     width:100%;
     display:flex;
