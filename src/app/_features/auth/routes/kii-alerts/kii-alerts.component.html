@@ -4,7 +4,7 @@
         <div class="wrapper">
                   <table mat-table  [dataSource]="dataSource" matSort multiTemplateDataRows class="table" [trackBy]="trackById" matSortActive="id" matSortDirection="desc" matSortStart="desc">
                       <ng-container matColumnDef="id">
-                          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'a.alert.i' | translate | async}}</th>
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'id' | translate | async}}</th>
                           <td mat-cell *matCellDef="let element" (click)="rowClick(element)">{{element.id}}</td>
                       </ng-container>
                       <ng-container matColumnDef="message">
@@ -16,7 +16,7 @@
                       </ng-container>   
                       <ng-container matColumnDef="createdAt">
                           <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'a.created' | translate | async}}</th>
-                          <td mat-cell *matCellDef="let element" (click)="rowClick(element)">{{{date:element.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}</td>
+                          <td mat-cell *matCellDef="let element" (click)="rowClick(element)" class="txt-xs">{{{date:element.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}</td>
                       </ng-container>         
                       <ng-container matColumnDef="isRead">
                           <th mat-header-cell *matHeaderCellDef mat-sort-header></th>

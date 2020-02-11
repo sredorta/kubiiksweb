@@ -96,7 +96,8 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch (property) {
          case 'id': return item.id;
-         case 'title': return item.title;
+         case 'message': return item.id;
+         case 'createdAt' : return item.id;
          default: return item[property];
       }
     };
