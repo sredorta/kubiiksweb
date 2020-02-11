@@ -125,21 +125,22 @@ export class User {
     }
 
     /**Returns avatar */
-    getAvatar() {
+/*    getAvatar() {
         if (this.avatar == null || this.avatar == "none")
             return "./assets/kiilib/images/profile.svg";
         else
             return this.avatar;    
 
-    }
+    }*/
 
     /**Returns if has avatar */
-    hasAvatar() {
+/*    hasAvatar() {
         if (this.avatar == null || this.avatar == "none")
             return false;
         else
             return true;    
-    }
+    }*/
+
     /**Returns initials */
     getNameInitials() {
         return (this.firstName[0] + this.lastName[0]).toUpperCase();

@@ -11,13 +11,14 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 export interface IConfigImageUpload {
   label?:string,
   hint?:string,
+  defaultImage?:string,
   buttonsPosition?: 'bottom' | 'right',
   crop?:boolean,
   maxSize?:number,
   fileName?:string,    //When specified we do not regenerate a date name and keep this name
   storage?: DiskType,
-  compression_rate: number,
-  maxWidth: string    //Max width of the image element
+  compression_rate?: number,
+  maxWidth?: string    //Max width of the image element
 }
 
 @Component({
@@ -78,13 +79,15 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
 
   ngOnInit() {
     //Set default config
+    if (!this.config.defaultImage) this.config.defaultImage = './assets/kiilib/images/no-photo.svg';
     if (!this.config.buttonsPosition) this.config.buttonsPosition = "bottom";
     if (!this.config.crop) this.config.crop = true;
     if (!this.config.maxSize) this.config.maxSize = 100;
     if (!this.config.storage) this.config.storage = DiskType.CONTENT;
     if (!this.config.compression_rate)  this.config.compression_rate = 0.9;
     if (!this.config.maxWidth) this.config.maxWidth = "100%";
-    if (!this.image) this.image = './assets/kiilib/images/no-photo.svg';
+    if (!this.image) this.image = this.config.defaultImage;
+    if (this.image == "none") this.image = this.config.defaultImage;
     this._fileName = this.image.replace(/.*\//,"");
     console.log("Config:", this.config);
   }
@@ -116,16 +119,18 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
         this.image = changes.image.currentValue;
         this._fileName = this.image.replace(/.*\//,"");
         this.setInitialImage();
-      }
+      } 
     }
   }
 
   /**Sets the initial image */
   setInitialImage() {
     //Fill the canvas with the input image so that it can be rotated...
+    setTimeout(()=> {
       this.shadowImgElem.nativeElement.onload = () => {
           this.shadowImgtoCanvas();
       };
+    });
   }
 
   /**Creates a copy of the shadow image into the canvas*/
@@ -193,10 +198,9 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
 
   /**When we remove the image */
   removeImage() {
-    this.image = null;
-    setTimeout(()=> {
-      this.image = './assets/kiilib/images/no-photo.svg';
-    });
+    this.image = this.config.defaultImage;
+    this._fileName = this.image.replace(/.*\//,"");
+    this.setInitialImage();
     this.isUploadable = false;
     this.onUpload.emit("none");
     this.isUploaded = false;

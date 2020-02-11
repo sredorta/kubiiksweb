@@ -13,6 +13,8 @@ import { faMobile } from '@fortawesome/free-solid-svg-icons/faMobile';
 import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons/faGlobeEurope';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
+import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component';
+import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service';
 
 @Component({
   selector: 'kii-profile-form',
@@ -40,6 +42,9 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
   /**Contains all languages */
   languages : any = this.trans.getSupportedLanguages();
 
+  /**Contains the configuration of the image upload element */
+  config : IConfigImageUpload;
+
   constructor(
             private trans: KiiTranslateService, 
             private kiiAuth: KiiAuthService) {
@@ -52,6 +57,12 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
               this.icon['lang'] = faGlobeEurope;
               this.icon['edit'] = faEdit;
               this.icon['save'] = faSave;
+              this.config = {
+                label:'a.avatar.l', 
+                hint:'a.avatar.h',
+                storage:DiskType.AVATAR,
+                maxWidth:'200px',
+                defaultImage: './assets/kiilib/images/profile.svg'}
             }
 
   ngOnInit() {
@@ -112,11 +123,10 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
 
   /**Patch the value of image once we recieve onUpload */
   onUpload(url:string) {
-    console.log("SETTING AVATAR TO",url);
     this.myForm.controls["avatar"].setValue(url);
     this.myForm.controls["avatar"].enable();
     this.myForm.markAsDirty();
-    
+
   }
 
   /**Toggle password visibility */
