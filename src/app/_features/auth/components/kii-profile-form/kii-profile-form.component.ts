@@ -102,20 +102,22 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
         passwordConfirm: new FormControl('', Validators.compose([    //It needs to be called passwordConfirm so that validator works
           KiiCustomValidators.checkPasswordsMatch
         ])),
-        /*        avatar: new FormControl('', Validators.compose([])),
-*/
+                avatar: new FormControl('', Validators.compose([])),
+
       });
-//      this.myForm.controls["avatar"].patchValue(this.defaults.avatar);
+      this.myForm.controls["avatar"].patchValue(this.defaults.avatar);
   }
 
 
 
   /**Patch the value of image once we recieve onUpload */
-  /*onUpload(url:string) {
+  onUpload(url:string) {
+    console.log("SETTING AVATAR TO",url);
     this.myForm.controls["avatar"].setValue(url);
     this.myForm.controls["avatar"].enable();
     this.myForm.markAsDirty();
-  }*/
+    
+  }
 
   /**Toggle password visibility */
   togglePassword() {

@@ -16,7 +16,8 @@ export interface IConfigImageUpload {
   maxSize?:number,
   fileName?:string,    //When specified we do not regenerate a date name and keep this name
   storage?: DiskType,
-  compression_rate: number
+  compression_rate: number,
+  maxWidth: string    //Max width of the image element
 }
 
 @Component({
@@ -33,7 +34,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   @Input() config : IConfigImageUpload; 
 
   /**Contains the current image */
-  @Input() image : any = './assets/kiilib/images/no-photo.svg';
+  @Input() image : string;
 
   /**Emit link to the uploaded file */
   @Output() onUpload = new EventEmitter<string>();
@@ -82,8 +83,9 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
     if (!this.config.maxSize) this.config.maxSize = 100;
     if (!this.config.storage) this.config.storage = DiskType.CONTENT;
     if (!this.config.compression_rate)  this.config.compression_rate = 0.9;
+    if (!this.config.maxWidth) this.config.maxWidth = "100%";
+    if (!this.image) this.image = './assets/kiilib/images/no-photo.svg';
     this._fileName = this.image.replace(/.*\//,"");
-    console.log("Setting filename to", this._fileName);
     console.log("Config:", this.config);
   }
 
@@ -110,9 +112,11 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   /**When input image changes we reset everything */
   ngOnChanges(changes:SimpleChanges) {
     if (changes.image) {
-      this.image = changes.image.currentValue;
-      this._fileName = this.image.replace(/.*\//,"");
-      this.setInitialImage();
+      if (changes.image.currentValue != null) {
+        this.image = changes.image.currentValue;
+        this._fileName = this.image.replace(/.*\//,"");
+        this.setInitialImage();
+      }
     }
   }
 
@@ -167,9 +171,6 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
     if (!this.config.buttonsPosition) return "right";
     return this.config.buttonsPosition.toString();
   }
-
-
-
 
   /**Sets image to a new image */
   setImage(image:string) {
@@ -304,7 +305,6 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
         this.uploadFile(blob);
       })
     else  {
-      console.log("UPLOADING SVG BLOB !");
       this.uploadFile(this.svgBlob);  
     }
   }

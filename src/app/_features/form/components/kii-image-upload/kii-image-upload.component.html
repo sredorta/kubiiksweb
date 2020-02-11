@@ -7,7 +7,7 @@
     <div class="wrp-img">
         <input class="shadow" type="file" #fileInput (change)="loadImage($event)" [accept]="imageFormat">  
         <img  alt="picture" #shadowImg class="shadow" [src]="image" crossOrigin="anonymous">
-        <img  alt="picture" #realImg class="upload-view" [src]="base64" crossOrigin="anonymous">
+        <img  alt="picture" #realImg class="upload-view" [src]="base64" crossOrigin="anonymous" [style.maxWidth]="config.maxWidth">
         <mat-progress-bar mode="determinate" [value]="progress" [ngClass]="{'is-visible' : isLoading}"></mat-progress-bar>
     </div>
     <div class="icons">

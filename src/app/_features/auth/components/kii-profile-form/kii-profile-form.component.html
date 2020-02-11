@@ -69,14 +69,11 @@
         </div>
       </div>
       <div class="column">
-        <kii-image-upload [config]="{label:'a.avatar.l', hint:'a.avatar.h',storage:'avatar'}"></kii-image-upload>
+        <kii-image-upload [config]="{label:'a.avatar.l', hint:'a.avatar.h',storage:'avatar',maxWidth:'200px'}" [image]="defaults.avatar" (onUpload)="onUpload($event)"></kii-image-upload>
       </div>
-<!--        
-        <kii-image-upload storage="avatar" [maxSize]="200" [crop]="true" [image]="defaults.avatar" (onUpload)="onUpload($event)"></kii-image-upload>
-      -->
-        <div class="controls" *ngIf="myForm.dirty">
+      <div class="controls" *ngIf="myForm.dirty">
             <button mat-stroked-button color="primary" type="reset" color="primary">{{'f.cancel' | translate | async}}</button>
             <button mat-flat-button color="primary" type="submit" color="primary"><fa-icon [icon]="icon['save']"></fa-icon>{{'f.save' | translate | async}}</button>
-        </div>
+      </div>
     </form>
 </kii-spinner-overlay>
