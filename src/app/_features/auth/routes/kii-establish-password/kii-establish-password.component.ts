@@ -24,7 +24,7 @@ export class KiiEstablishPasswordComponent extends KiiBaseAbstract implements On
     ) {super() }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['auth', 'form']);
+    this.kiiTrans.setRequiredContext(['main','auth', 'form']);
     this.addSubscriber(
       this.route.queryParams.subscribe(params => {
         if (params['id']) this.id = params['id'];

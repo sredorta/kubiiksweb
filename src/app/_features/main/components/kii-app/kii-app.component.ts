@@ -37,6 +37,18 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     //Sets language required context
     this.kiiTrans.setRequiredContext(['main']);
 
+    //If we change language we reload auth user as it translates alerts
+    if (isPlatformBrowser(this.platform))
+      this.addSubscriber(
+        this.kiiTrans.onChange.subscribe(res => {
+          if (User.hasToken())
+            this.kiiAuth.getAuthUser().subscribe(res => {
+              this.kiiAuth.setLoggedInUser(new User(res));
+            })
+        })
+      )
+
+
     //Handle cookies
     this.addSubscriber(
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe( (res : NavigationEnd) => {

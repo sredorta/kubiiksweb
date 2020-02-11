@@ -62,7 +62,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   svgBlob : Blob = new Blob();
 
   /**Formats of images accepted */
-  //@Input() imageFormat : string = "image/*";
+  imageFormat : string = "image/*";
 
 
   /**Shadow canvas for image manipulation */

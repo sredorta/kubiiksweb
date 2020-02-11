@@ -34,7 +34,7 @@ export class KiiLoginOauthComponent extends KiiBaseAbstract implements OnInit {
     private kiiTrans : KiiTranslateService) {super() }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['auth', 'form']);
+    this.kiiTrans.setRequiredContext(['main','auth', 'form']);
 
     //If we navigate away and terms are not accepted we reset user
     this.addSubscriber(

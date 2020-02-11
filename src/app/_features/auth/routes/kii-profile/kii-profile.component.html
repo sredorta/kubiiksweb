@@ -5,8 +5,8 @@
               <div>
                   <button mat-button (click)="logout()" class="btn" color="primary"><fa-icon [icon]="icon['logout']"></fa-icon>{{'m.menu.logout' | translate | async}}</button>
                   <button mat-button (click)="delete()" class="btn"><fa-icon [icon]="icon['delete']"></fa-icon> {{'a.profile.delete' | translate | async}}</button>
-                  <p class="dates">{{'a.created' | translate | async}} : {{{date:loggedInUser.createdAt,lang:currentLang} | kiiNiceDateFormat}}<fa-icon [icon]="icon['created']"></fa-icon></p>
-                  <p class="dates">{{'a.updated' | translate | async}} : {{{date:loggedInUser.updatedAt,lang:currentLang} | kiiNiceDateFormat}}<fa-icon [icon]="icon['updated']"></fa-icon></p>        
+                  <p class="dates">{{'a.created' | translate | async}} : {{{date:loggedInUser.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}<fa-icon [icon]="icon['created']"></fa-icon></p>
+                  <p class="dates">{{'a.updated' | translate | async}} : {{{date:loggedInUser.updatedAt,lang:currentLang} | kiiNiceDateFormat | async}}<fa-icon [icon]="icon['updated']"></fa-icon></p>        
                   <p class="title c-accent txt-l"><fa-icon [icon]="icon['card']"></fa-icon>{{'a.card' | translate | async}}</p>
                   <kii-spinner-overlay [show]="isLoading">
                   <kii-profile-form  (kiiOnSubmit)="onSubmit($event)"></kii-profile-form>

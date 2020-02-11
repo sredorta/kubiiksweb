@@ -49,7 +49,7 @@ export class KiiProfileComponent extends KiiBaseAbstract implements OnInit {
               }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['auth', 'form']);
+    this.kiiTrans.setRequiredContext(['main','auth', 'form']);
     this.currentLang = this.kiiTrans.getCurrent();
     this.addSubscriber(
       this.kiiAuth.getLoggedInUser().subscribe(res => {this.loggedInUser = res})

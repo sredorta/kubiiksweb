@@ -21,7 +21,7 @@ export class KiiSignupComponent extends KiiBaseAbstract implements OnInit {
     ) { super()  }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['auth', 'form']);
+    this.kiiTrans.setRequiredContext(['main','auth', 'form']);
   }
 
   onSubmit(value:any) {

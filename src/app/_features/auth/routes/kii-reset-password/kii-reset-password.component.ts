@@ -13,7 +13,7 @@ export class KiiResetPasswordComponent extends KiiBaseAbstract implements OnInit
   constructor(private kiiTrans: KiiTranslateService, private kiiApiAuth: KiiApiAuthService) {super() }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['auth', 'form']);
+    this.kiiTrans.setRequiredContext(['main','auth', 'form']);
   }
   onSubmit(value:any) {
     this.isLoading = true;

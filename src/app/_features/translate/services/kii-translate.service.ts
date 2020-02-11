@@ -7,6 +7,7 @@ import { isPlatformBrowser, Location} from '@angular/common';
 import { StateKey, makeStateKey, TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {map} from 'rxjs/operators';
 
 declare var require: any;
 const fs = require('fs');
@@ -42,6 +43,7 @@ export  class KiiTranslateService  {
   public translations:any = {};
 
   private subscr;
+  private subscrGetTrans
 
   /**All languages that can potentially be used, use the environment to select a subset */
   private kiiLanguages : IKiiLanguage[] = [
@@ -228,14 +230,19 @@ export  class KiiTranslateService  {
 
   /**Gets current translated value */
   getTranslation(key:string,params?:any) {
-    if (this.translations[this.getCurrent()][key]) {
-      let str :string = this.translations[this.getCurrent()][key];
-      for (let [key, value] of Object.entries(params)) {
-        let regex = new RegExp("\{\{"+key +"\}\}");
-        str = str.replace(regex,String(value));
-      }
-      return str;
-    }  
+    let result  = new BehaviorSubject("");
+    this.subscrGetTrans = this.onLoaded.subscribe(res=> {
+      if (this.translations[this.getCurrent()])
+        if (this.translations[this.getCurrent()][key]) {
+          let str  = this.translations[this.getCurrent()][key];
+          for (let [key, value] of Object.entries(params)) {
+            let regex = new RegExp("\{\{"+key +"\}\}");
+            str = str.replace(regex,String(value));
+          }
+          result.next(str);
+        }  
+    })
+    return result;
   }
 
 
@@ -306,5 +313,6 @@ export  class KiiTranslateService  {
 
   ngOnDestroy() {
     if (this.subscr) this.subscr.unsubscribe();
+    if (this.subscrGetTrans) this.subscrGetTrans.unsubscribe();
   }
 }

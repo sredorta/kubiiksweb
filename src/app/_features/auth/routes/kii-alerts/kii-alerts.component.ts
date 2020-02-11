@@ -6,6 +6,7 @@ import { User } from 'src/app/_features/main/models/user';
 import { KiiTableAbstract } from 'src/app/abstracts/kii-table.abstract';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { Alert } from 'src/app/_features/main/models/alert';
 
 @Component({
   selector: 'kii-alerts',
@@ -47,13 +48,13 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
   constructor(private kiiTrans: KiiTranslateService,private kiiAuth: KiiAuthService) { super() }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['auth', 'form']);
+    this.kiiTrans.setRequiredContext(['main','auth', 'form']);
     this.currentLang = this.kiiTrans.getCurrent();
     this.addSubscriber(
       this.kiiAuth.getLoggedInUser().subscribe(res => {this.loggedInUser = res})
     )
- /*   this.addSubscriber(
-      this.kiiApiAuth.getLoggedInUser().subscribe(res => {
+   this.addSubscriber(
+      this.kiiAuth.getLoggedInUser().subscribe(res => {
         this.loggedInUser = res;
         this.displayedColumns = ['id', 'message', 'createdAt','isRead'];
         this.initTable(res.alerts.sort((a,b) => b.id - a.id));
@@ -62,7 +63,7 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
     )
     //Update nice time format language when we change language
     this.addSubscriber(
-      this.kiiApiLang.onChange().subscribe(res => {
+      this.kiiTrans.onChange.subscribe(res => {
             this.currentLang = res;
       })
     )
@@ -88,7 +89,7 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
 
   onDeleteAlert(alert:Alert) {
     this.isDataLoading = true;
-    this.addSubscriber(
+/*    this.addSubscriber(
       this.kiiApiAlert.delete(alert).subscribe(res => {
         const index = this.loggedInUser.alerts.findIndex(obj => obj.id == alert.id);
         if (index>=0) {
@@ -98,13 +99,13 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
         }
         this.isDataLoading = false;
       }, () => this.isDataLoading = false)
-    )
+    )*/
   }
 
   markAsRead(alert:Alert) {
     alert.isRead = !alert.isRead;
     this.isDataLoading = true;
-    this.addSubscriber(
+/*    this.addSubscriber(
       this.kiiApiAlert.update(alert).subscribe(res => {
         let index = this.loggedInUser.alerts.findIndex(obj => obj.id == res.id);
         if (index>=0) {
@@ -113,19 +114,19 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
         }
         this.isDataLoading = false;
       }, () => this.isDataLoading = false)
-    )
+    )*/
   }
 
   rowClick(alert:Alert) {
-    switch (alert.type) {
+    console.log("clicked on", alert.type);
+/*    switch (alert.type) {
         case "chat": 
           let translatedPath: any = this.localize.translateRoute('/admin-chats');
           this.router.navigate([translatedPath]);
           break;
         default: 
           //Do nothing  
-    }
-*/
+    }*/
   }
 
 }

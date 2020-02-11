@@ -21,13 +21,16 @@
     "m.news.email.l"    : "Email",
     "m.news.legal"      : "Personal data usage conditions",
 
-    "kiilib.language": "Language in english",
-    "test" : "Test in english",
-    "test1" : "Test in english",
-    "test2" : "Test in english",
-    "test3" : "Test in english",
-    "test4" : "Test in english",
-    "test5" : "Test in english"
+    "m.now"                : "Now",
+    "m.yesterday"          : "Yesterday",
+    "m.minutesago.one"     : "One minute ago",
+    "m.hoursago.one"       : "One hour ago",
+    "m.daysago.one"        : "One day ago",
+    "m.weeksago.one"       : "One week ago",
+    "m.minutesago.more"    : "{{count}} minutes ago",
+    "m.hoursago.more"      : "{{count}} hours ago",
+    "m.daysago.more"       : "{{count}} days ago",
+    "m.weeksago.more"      : "{{count}} weeks ago"
 
 
 }

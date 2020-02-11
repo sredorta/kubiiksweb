@@ -17,18 +17,3 @@
     </div>
   </div>
   <button mat-flat-button type="button" class="upld" color="primary" [disabled]="!isUploadable || isLoading" (click)="upload()"><fa-icon [icon]="icons['upload']"></fa-icon>Upload</button>
-
-<!--
-<div class="kii-image-upload-wrapper-all">
-  <mat-progress-bar mode="determinate" [value]="progress" [ngClass]="{'is-visible' : isLoading}"></mat-progress-bar>
-  <div class="kii-image-upload-wrapper">
-        <input class="shadow" type="file" #fileInput (change)="loadImage($event)" [accept]="imageFormat">  
-
-        <div class="kii-image-upload-image-wrapper" [ngClass]="{'is-uploaded' : isUploaded}">
-          <img  alt="picture" #realImg class="kii-image-upload-view" [src]="base64" crossOrigin="anonymous">
-        </div>
-
-  </div>
-  <button mat-flat-button type="button" color="primary" [disabled]="!isUploadable || isLoading" style="width:140px" (click)="upload()"><i class="fas fa-upload"></i></button>
-</div>
--->

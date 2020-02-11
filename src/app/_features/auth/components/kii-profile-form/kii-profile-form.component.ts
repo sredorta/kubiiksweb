@@ -149,8 +149,9 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
     Object.keys(this.myForm.controls).forEach(key => {
       if (value[key] != this.defaults[key])
         result[key] = value[key];
+      if (result[key]== null)
+        delete result[key];  
     })
-
     this.kiiOnSubmit.emit(result);
   }
 

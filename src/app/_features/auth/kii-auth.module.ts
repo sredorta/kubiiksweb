@@ -73,6 +73,7 @@ import { KiiResetPasswordFormComponent } from './components/kii-reset-password-f
 import { KiiEstablishPasswordComponent } from './routes/kii-establish-password/kii-establish-password.component';
 import { KiiEstablishPasswordFormComponent } from './components/kii-establish-password-form/kii-establish-password-form.component';
 import { KiiProfileFormComponent } from './components/kii-profile-form/kii-profile-form.component';
+import { KiiTableModule } from '../table/kii-table.module';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { KiiProfileFormComponent } from './components/kii-profile-form/kii-profi
     CommonModule,
     RouterModule,
     KiiFormModule,
+    KiiTableModule,
     KiiTranslateModule.forChild(),
     KiiMainModule,
     KiiAuthRoutingModule,

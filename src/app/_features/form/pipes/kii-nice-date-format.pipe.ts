@@ -1,33 +1,40 @@
 import { Pipe, PipeTransform, OnDestroy } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 import { KiiTranslateService } from '../../translate/services/kii-translate.service';
 
 @Pipe({
   name: 'kiiNiceDateFormat'
 })
 export class KiiNiceDateFormatPipe implements PipeTransform {
-  result : string = "";
+  subscr : Subscription;
   constructor(private translate: KiiTranslateService) {
 
   }
 
+  ngOnDestroy() {
+    console.log("DESTROYING PIPE")
+    if (this.subscr) this.subscr.unsubscribe();
+  }
 
 
   transform(obj:any) {  
     let value = obj.date;
     let lang = obj.lang;
     var _value = new Date(value).getTime();
+    let obs = new BehaviorSubject<string>("");
     var dif = Math.floor( ( (Date.now() - _value) / 1000 ) / 86400 );
     if ( dif < 30 ){
       let result = convertToNiceDate(value).split(",");
-      this.result = this.translate.getTranslation(result[0], {count: result[1]});
+      this.subscr = this.translate.getTranslation(result[0], {count: result[1]}).subscribe(res => {
+          obs.next(res);
+      })
     } else{
         var datePipe = new DatePipe("en-US");
         value = datePipe.transform(value, 'dd-MMM-yyyy');
-        this.result = convertToNiceDate(value);
+        obs.next(convertToNiceDate(value));
     }
-    return this.result;
+    return obs;
  }
 
 }
@@ -50,5 +57,4 @@ function convertToNiceDate(time: string) {
       daydiff == 1 && "m.yesterday" ||
       daydiff < 7 && "m.daysago.more," + daydiff  ||
       daydiff < 31 && "m.weeksago.more," + Math.ceil(daydiff / 7) ;
-
 }
