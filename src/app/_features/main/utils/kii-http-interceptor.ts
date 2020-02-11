@@ -8,6 +8,8 @@ import { KiiTranslateService } from '../../translate/services/kii-translate.serv
 import { isPlatformBrowser } from '@angular/common';
 import { KiiHttpErrorComponent } from '../components/kii-http-error/kii-http-error.component';
 import { User } from '../models/user';
+import { KiiAuthService } from '../services/kii-auth.service';
+import { Router } from '@angular/router';
 
 
 //We intercept all http requests and do some things here
@@ -16,6 +18,8 @@ import { User } from '../models/user';
 export class KiiHttpInterceptor implements HttpInterceptor {
     constructor(
         private kiiTrans: KiiTranslateService,
+        private kiiAuth: KiiAuthService,
+        private router : Router,
         @Inject(PLATFORM_ID) private _platformId: any, 
         private bottomSheet: MatBottomSheet, 
 
@@ -59,7 +63,15 @@ export class KiiHttpInterceptor implements HttpInterceptor {
             }
             ),
             catchError((error: HttpErrorResponse) => {
-                console.log("Got error",error.error.message);
+                if (error.status== 401)
+                    if (isPlatformBrowser(this._platformId)) {
+                        User.removeToken();
+                        this.kiiAuth.setLoggedInUser(new User(null));
+                        if (!error.error.message)
+                            error.error.message = this.kiiTrans.getTranslation('m.error.token');
+                        this.router.navigate(['/'+this.kiiTrans.getCurrent()+'/auth/login']);
+         
+                    }
                 this.openBottomSheet(error.error.message);
                 return throwError(error);
             })
