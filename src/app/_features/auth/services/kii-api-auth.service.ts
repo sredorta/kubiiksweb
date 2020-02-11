@@ -6,6 +6,7 @@ import { tap, map, filter } from 'rxjs/operators';
 import { KiiTranslateService } from '../../translate/services/kii-translate.service';
 import { environment } from 'src/environments/environment';
 import { IUser, User } from '../../main/models/user';
+import { Alert } from '../../main/models/alert';
 
 export interface IOauth2 {
   /**Tells if the user has all fields */
@@ -100,5 +101,15 @@ export class KiiApiAuthService {
   public deleteAuthUser() {
     return this.http.delete(environment.apiURL + '/auth/delete');
   } 
+
+  /**Updates alert from user */
+  public updateAlert(alert:Alert) {
+    return this.http.post<any>(environment.apiURL + '/alert/update', {alert: alert});//.pipe(map(res => new Alert(res)));
+  }
+
+  /**Deletes alert from user */
+  public deleteAlert(alert:Alert) {
+    return this.http.post<any>(environment.apiURL + '/alert/delete', {id: alert.id});//.pipe(map(res => new Alert(res)));
+  }
 
 }

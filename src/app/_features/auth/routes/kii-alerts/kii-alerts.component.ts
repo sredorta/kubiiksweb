@@ -7,6 +7,10 @@ import { KiiTableAbstract } from 'src/app/abstracts/kii-table.abstract';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
 import { Alert } from 'src/app/_features/main/models/alert';
+import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
+import { faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
+import { KiiApiAuthService } from '../../services/kii-api-auth.service';
+
 
 @Component({
   selector: 'kii-alerts',
@@ -22,6 +26,8 @@ import { Alert } from 'src/app/_features/main/models/alert';
 })
 export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
   
+  /**Contains used icons */
+  icons = [];
   
   /**When articles are loading we show spinner with this variable */
   isDataLoading : boolean = false;
@@ -45,7 +51,16 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
   }
-  constructor(private kiiTrans: KiiTranslateService,private kiiAuth: KiiAuthService) { super() }
+  constructor(
+    private kiiTrans: KiiTranslateService,
+    private kiiAuth: KiiAuthService,
+    private kiiApiAuth: KiiApiAuthService
+    
+    ) { 
+    super();
+    this.icons['eye'] = faEye;
+    this.icons['trash'] = faTrash;
+  }
 
   ngOnInit() {
     this.kiiTrans.setRequiredContext(['main','auth', 'form']);
@@ -89,32 +104,30 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
 
   onDeleteAlert(alert:Alert) {
     this.isDataLoading = true;
-/*    this.addSubscriber(
-      this.kiiApiAlert.delete(alert).subscribe(res => {
+    this.addSubscriber(
+      this.kiiApiAuth.deleteAlert(alert).subscribe(res => {
         const index = this.loggedInUser.alerts.findIndex(obj => obj.id == alert.id);
         if (index>=0) {
           this.loggedInUser.alerts.splice(index,1);
           this.deleteRow(alert.id);
-          this.kiiApiAuth.setUnreadNotifications(this.loggedInUser.getUnreadAlertCount());
         }
         this.isDataLoading = false;
       }, () => this.isDataLoading = false)
-    )*/
+    )
   }
 
   markAsRead(alert:Alert) {
     alert.isRead = !alert.isRead;
     this.isDataLoading = true;
-/*    this.addSubscriber(
-      this.kiiApiAlert.update(alert).subscribe(res => {
+    this.addSubscriber(
+      this.kiiApiAuth.updateAlert(alert).subscribe(res => {
         let index = this.loggedInUser.alerts.findIndex(obj => obj.id == res.id);
         if (index>=0) {
           this.loggedInUser.alerts[index] = res;
-          this.kiiApiAuth.setUnreadNotifications(this.loggedInUser.getUnreadAlertCount());
         }
         this.isDataLoading = false;
       }, () => this.isDataLoading = false)
-    )*/
+    )
   }
 
   rowClick(alert:Alert) {

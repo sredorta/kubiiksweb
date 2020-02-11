@@ -48,17 +48,10 @@ tr.element-row:not(.expanded-row):hover {
     padding-bottom:10px;
 }
 
-.mat-column-id {
-    width:40px;
-    min-width:40px;
-    max-width:40px;
-}
 .mat-column-isRead {
     min-width:70px;
 }
-.mat-column-id {
-    display: none;
-}
+
 
 @media only screen and (max-width: 500px) {
     .title,.description {
