@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: true, //TODO: CHANGE TO true !!!!!!!!!!!!!!!!!!!!!!!!
   languages: ['fr','en','es','ca'],
   type:"production",
   kiiserverURL:  "http://localhost:3000",

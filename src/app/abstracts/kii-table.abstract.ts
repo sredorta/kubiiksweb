@@ -17,6 +17,9 @@ export  class KiiTableAbstract extends KiiBaseAbstract  {
     keyUp = new Subject<string>();
     /** Current search string */
     searchString : string = "";
+
+    /**Explanded element reference */
+    expandedElement: any;
   
     /**Reference to the matTable */
     @ViewChild(MatTable, {static:false}) table : MatTable<any>;

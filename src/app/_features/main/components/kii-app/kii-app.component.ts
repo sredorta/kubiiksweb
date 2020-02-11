@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, PLATFORM_ID, ComponentFactoryResolver, Rende
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { MatBottomSheet } from '@angular/material';
 import { Router, NavigationEnd } from '@angular/router';
-import { Location, isPlatformBrowser } from '@angular/common';
+import { Location, isPlatformBrowser, ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiBottomSheetCookiesComponent } from '../kii-bottom-sheet-cookies/kii-bottom-sheet-cookies.component';
@@ -13,6 +13,7 @@ import { KiiHttpErrorComponent } from '../kii-http-error/kii-http-error.componen
 import { UseExistingWebDriver } from 'protractor/built/driverProviders';
 import { User } from '../../models/user';
 import { KiiAuthService } from '../../services/kii-auth.service';
+import { ViewportScrollPosition } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'kii-app',
@@ -28,6 +29,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private bottomSheet: MatBottomSheet,
   private router : Router,
   private cookies : KiiCookiesService,
+  private viewportScroller: ViewportScroller,
   private r: Renderer2,
   private location : Location) { super() }
 
@@ -93,8 +95,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
         //if (this.router.url.includes('cookies')) this.location.back();
       })    
   }
-
- 
 
 
 }

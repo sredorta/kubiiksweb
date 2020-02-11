@@ -10,6 +10,7 @@ import { KiiHttpErrorComponent } from '../components/kii-http-error/kii-http-err
 import { User } from '../models/user';
 import { KiiAuthService } from '../services/kii-auth.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 //We intercept all http requests and do some things here
@@ -45,6 +46,9 @@ export class KiiHttpInterceptor implements HttpInterceptor {
         } else {
             if (User.getToken())
                 tmpHeaders['Authorization'] =  'Bearer ' + User.getToken();
+            //We are in the browser and then we do the request directly from browser to server    
+            request= request.clone({url: request.url.replace(environment.kiiserverURL,environment.kiiserverExtURL)});
+            console.log("REQUEST IS: ",request.url)
         }     
         let headers : HttpHeaders;
         headers = new HttpHeaders(tmpHeaders);     

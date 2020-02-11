@@ -23,6 +23,7 @@ export class KiiPassportsComponent extends KiiBaseAbstract implements OnInit {
   }
   /**Returns the address that is required in href to trigger the fb passport */
   getOAuthAddress(type:string) {
+    console.log("OAUTH ADDRESS:",environment.apiExtURL + '/auth/' + type)
     return environment.apiExtURL + '/auth/' + type;
   }
 

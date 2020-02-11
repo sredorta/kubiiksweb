@@ -3,6 +3,7 @@ import { Routes, RouterModule, Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
 import { KiiAppComponent } from '../main/components/kii-app/kii-app.component';
 import { KiiTranslateService } from './services/kii-translate.service';
+import { ViewportScroller } from '@angular/common';
 
 //We dynamically change the routing by adding the root routes of each language
 

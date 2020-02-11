@@ -22,10 +22,7 @@ export class KiiViewTransferService {
             private viewportScroller: ViewportScroller,
             private transferState: TransferState,
             @Inject(PLATFORM_ID) private _platformId: any
-  ) { 
-    //this.router = router;
-    //this.viewportScroller = viewportScroller;
-  }
+  ) { }
 
   /**Handles the scroll when we transfer server/browser*/
   scroll() {
@@ -34,9 +31,11 @@ export class KiiViewTransferService {
       this.transferState.set(key, true);
     } else {
       this.isTransfer = this.transferState.get(key, false);
+      console.log("IS FIRST BROWSER",this.isTransfer);
     }
     this.router.events.subscribe(e => {
       if (e instanceof Scroll) {
+        console.log(e);
         if (e.position) {
           // backward navigation
           this.viewportScroller.scrollToPosition(e.position);
