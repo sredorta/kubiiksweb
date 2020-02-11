@@ -6,7 +6,7 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons/faCamera';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { faRedoAlt } from '@fortawesome/free-solid-svg-icons/faRedoAlt';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 export interface IConfigImageUpload {
   label?:string,
@@ -33,13 +33,13 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   @Input() config : IConfigImageUpload; 
 
   /**Contains the current image */
-  @Input() image : string = './assets/kiilib/images/no-photo.svg';
+  @Input() image : any = './assets/kiilib/images/no-photo.svg';
 
   /**Emit link to the uploaded file */
   @Output() onUpload = new EventEmitter<string>();
 
   /** Contains the current image in base64 format*/
-  base64:string = "";
+  base64:any = "";
 
   /**Defines if image has been selected and can be uploaded */
   isUploadable : boolean = false;
@@ -132,26 +132,30 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
     myImage.crossOrigin = "anonymous";
     myImage.src = this.image;
     myImage.onload = function() {
-        if (obj.config.crop) obj.base64 = obj._resizeAndCropCanvas(myImage,canvas); 
-        else obj.base64 = obj._resizeCanvas(myImage,canvas); 
+        if (!obj.isSVG()) {
+          if (obj.config.crop) obj.base64 =  obj._resizeAndCropCanvas(myImage,canvas); 
+          else obj.base64 = obj._resizeCanvas(myImage,canvas); 
+        } else {
+          obj.base64=obj.sanitizer.bypassSecurityTrustUrl(obj.image);
+        }
     };
   }
 
-  getUrl() {
-    return this.image = 'url("'+this.image+'")';
-  }
 
   /**Loads the image file into the shadow */
   loadImage(event:any) {
-    console.log(event);
     const reader = new FileReader();
     if(event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
       this.svgBlob = file;
+      let obj = this;
       reader.onloadend = () => {
           this._fileName = event.target.files[0].name;
-          this.image = reader.result.toString();
+          if (!this.isSVG())
+            this.image = reader.result.toString();
+          else 
+            this.base64 = obj.sanitizer.bypassSecurityTrustUrl(reader.result.toString());
           this.isUploadable = true;
       };
 
@@ -188,7 +192,6 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
 
   /**When we remove the image */
   removeImage() {
-    console.log("REMOVING IMAGE !!!");
     this.image = null;
     setTimeout(()=> {
       this.image = './assets/kiilib/images/no-photo.svg';
