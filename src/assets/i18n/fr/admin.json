@@ -1,3 +1,10 @@
 {
-    "admin.test": "Admin test"
+    "admin.menu.settings": "Configuration",
+    "admin.menu.users": "Utilizateurs",
+    "admin.menu.content":"Contenu",
+    "admin.menu.emails" : "Courriels",
+    "admin.menu.chats" : "Chats",
+    "admin.menu.popup" : "Message initial",
+    "admin.menu.disk" : "Espace disque",
+    "admin.menu.stats" : "Audience"
 }
