@@ -6,5 +6,16 @@
     "admin.menu.chats" : "Chats",
     "admin.menu.popup" : "Message initial",
     "admin.menu.disk" : "Espace disque",
-    "admin.menu.stats" : "Audience"
+    "admin.menu.stats" : "Audience",
+    "admin.users.search" : "Chercher",
+    "admin.users.lastName" : "Nom",
+    "admin.users.firstName" : "Prénom",
+    "admin.users.email"     : "Courriel électronique",
+    "admin.users.created"   : "Crée",
+    "admin.users.data" : "Données de contact",
+    "admin.users.rolescheckbox" : "Modifier les rôles pour cet utilizateur",
+    "admin.users.isvalidated": "Compte de courriel validé",
+    "admin.users.delete" : "Supprimer l'utilizateur",
+    "admin.users.delete.text": "Êtes vous sur de vouloir effacer cet utilizateur ?"
+
 }

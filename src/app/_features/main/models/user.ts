@@ -110,16 +110,10 @@ export class User {
 
     /**Returns if user has specified role */
     public hasRole(role:number | string) : boolean {
-        let hasRole : boolean = false;
         if (typeof role == "string") {
-            hasRole = this.roles.find(obj => obj.name == role) == undefined?false:true;
-            //Check if user is admin and return as it had the role
-            if (!hasRole) hasRole = this.roles.find(obj => obj.name == "admin") == undefined?false:true;
-            return hasRole;
+            return this.roles.find(obj => obj.name == role) == undefined?false:true;
         } else {
-            hasRole = this.roles.find(obj => obj.id == role) == undefined?false:true;
-            if (!hasRole) hasRole = this.roles.find(obj => obj.name == "admin") == undefined?false:true;
-            return hasRole;
+            return this.roles.find(obj => obj.id == role) == undefined?false:true;
         }
     }
     /**Returns if user has any special role */

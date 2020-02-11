@@ -1,0 +1,72 @@
+<kii-toolbar></kii-toolbar>
+<div class="admin-theme">  
+    <kii-spinner-overlay [show]="isDataLoading">
+      <div class="table-wrapper">
+        <mat-form-field appearance="standard" style="padding-top:10px;min-width:250px;max-width:350px">
+            <mat-label>{{'admin.users.search' | translate | async}}</mat-label>
+            <input matInput  (keyup)="keyUp.next($event.target.value)" autocomplete="off">
+            <i matSuffix class="fas fa-search"></i>
+        </mat-form-field>
+        <table mat-table  [dataSource]="dataSource" matSort multiTemplateDataRows class="table">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'id' | translate | async}}</th>
+                <td mat-cell *matCellDef="let element">{{element.id}}</td>
+            </ng-container>
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'admin.users.lastName' | translate | async}}</th>
+                <td mat-cell *matCellDef="let element">{{element.lastName}}</td>
+            </ng-container>
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'admin.users.firstName' | translate | async}}</th>
+                <td mat-cell *matCellDef="let element">{{element.firstName}}</td>
+            </ng-container>      
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'admin.users.email' | translate | async}}</th>
+                <td mat-cell *matCellDef="let element">{{element.email}}</td>
+            </ng-container> 
+            <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'admin.users.created' | translate | async}}</th>
+                <td mat-cell *matCellDef="let element">{{{date:element.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}</td>
+            </ng-container>         
+    
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                  <div class="element-detail"
+                      [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                      <div class="element-detail-wrapper">
+                        <mat-checkbox [checked]="element.isEmailValidated" (change)="enableAccount($event, element)">{{'admin.users.isvalidated' | translate | async}}</mat-checkbox>
+                        <h2>{{'admin.users.data' | translate | async}}</h2>
+                        <p><span><fa-icon [icon]="icons['email']"></fa-icon></span>{{element.email}}</p>
+                        <p *ngIf="element.mobile!=null && element.mobile!=undefined"><span><fa-icon [icon]="icons['mobile']"></fa-icon></span>{{element.mobile | kiiMobileFormat}}</p>
+                        <p *ngIf="element.phone!=null && element.phone!=undefined"><span><fa-icon [icon]="icons['phone']"></fa-icon></span>{{element.phone | kiiMobileFormat}}</p>
+                        <p><span><fa-icon [icon]="icons['language']"></fa-icon></span>{{element.language}}</p>
+
+                        <div class="button-icons">
+                            <a *ngIf="element.mobile!=null && element.mobile!=undefined && isMobile" href="tel:{{element.mobile}}" mat-button color="primary"><i class="fas fa-mobile-alt"></i></a>   
+                            <a *ngIf="element.phone!=null && element.phone!=undefined && isMobile" href="tel:{{element.phone}}" mat-button color="primary"><i class="fas fa-phone"></i></a>                    
+                            <a *ngIf="loggedInUser.hasRole('email') || loggedInUser.hasRole('admin')" mat-button color="primary" (click)="loadEmails()"><i class="fas fa-envelope"></i></a>
+                        </div>
+                        <!--<kii-email-compose-form *ngIf="emails.length>0" [emails]="emails" [user]="element"></kii-email-compose-form>-->
+                        <div class="roles-wrapper">
+                          <mat-checkbox  (change)="disableRoleSliders = !disableRoleSliders">{{'admin.users.rolescheckbox' | translate | async}}</mat-checkbox>
+                          <mat-slide-toggle *ngFor="let role of roles" [checked]="hasRole(element, role.id)" (change)="onRoleChange($event,element.id, role.id)" [disabled]="disableRoleSliders">{{role.name}}</mat-slide-toggle>
+                        </div>
+                        <div class="remove-wrapper width100">
+                          <button mat-button color="warn" (click)="onDelete(element)"><fa-icon [icon]="icons['user-delete']"></fa-icon>{{'admin.users.delete' | translate | async}}</button>
+                        </div>
+                      </div>
+                  </div>
+                </td>
+              </ng-container>        
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;" 
+                class="element-row"
+                [class.expanded-row] = "expandedElement === element"
+                (click)="expandedElement = expandedElement === element ? null : element;disableRoleSliders=true"></tr>
+            <tr mat-row *matRowDef="let element; columns: ['expandedDetail']" class="detail-row"></tr>
+        </table>  
+        <mat-paginator [pageSizeOptions]="[10, 20, 50]"></mat-paginator>
+      </div>
+    </kii-spinner-overlay>  
+    </div>
