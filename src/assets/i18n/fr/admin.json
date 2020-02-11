@@ -16,6 +16,8 @@
     "admin.users.rolescheckbox" : "Modifier les rôles pour cet utilizateur",
     "admin.users.isvalidated": "Compte de courriel validé",
     "admin.users.delete" : "Supprimer l'utilizateur",
-    "admin.users.delete.text": "Êtes vous sur de vouloir effacer cet utilizateur ?"
+    "admin.users.delete.text": "Êtes vous sur de vouloir effacer cet utilizateur ?",
+    "admin.popup.title": "Message initial",
+    "admin.popup.enable" : "Activer ou désactiver le message"
 
 }

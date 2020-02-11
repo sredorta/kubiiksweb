@@ -13,7 +13,8 @@ export class KiiAdminStatsComponent implements OnInit {
 
   ngOnInit() {
     //We require main + legal here
-    this.kiiTrans.setRequiredContext(['legal']);
+    this.kiiTrans.setRequiredContext(['main','auth','form','admin']);
+
   }
 
   goBack() {

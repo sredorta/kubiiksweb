@@ -62,6 +62,7 @@ import { KiiAdminUsersComponent } from './routes/kii-admin-users/kii-admin-users
 import { KiiFormModule } from '../form/kii-form.module';
 import { KiiTableModule } from '../table/kii-table.module';
 import { KiiMobileFormatPipe } from './pipes/kii-mobile-format.pipe';
+import { KiiAdminPopupComponent } from './routes/kii-admin-popup/kii-admin-popup.component';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { KiiMobileFormatPipe } from './pipes/kii-mobile-format.pipe';
     KiiAdminMenuComponent,
     KiiAdminStatsComponent,
     KiiAdminUsersComponent,
+    KiiAdminPopupComponent,
     KiiMobileFormatPipe
   ],
   providers:[KiiAdminUserService],
