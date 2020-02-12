@@ -7,6 +7,7 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 import { Router } from '@angular/router';
 import { KiiMainStatsService } from 'src/app/_features/main/services/kii-main-stats.service';
 import { StatAction } from 'src/app/_features/main/models/stat';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sidenav',
@@ -22,6 +23,7 @@ export class SidenavComponent extends KiiBaseAbstract implements OnInit {
     private kiiTrans: KiiTranslateService,
     private kiiAuth: KiiMainUserService, 
     private router: Router,
+    private location : Location,
     private stats: KiiMainStatsService,
   ) {super(); }
 
@@ -43,6 +45,10 @@ export class SidenavComponent extends KiiBaseAbstract implements OnInit {
   installApp() {
     //Need to really install the app with pwa service !
     this.stats.send(StatAction.APP_INSTALL,null);
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
