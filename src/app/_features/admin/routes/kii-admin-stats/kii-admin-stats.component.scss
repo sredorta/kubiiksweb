@@ -1,0 +1,121 @@
+.stats-wrapper {
+    padding:10px;
+    padding-top:60px;
+    min-height: 80vh;
+}
+
+.stats-settings {
+    max-width: 500px;
+    width:100%;
+}
+
+
+.stats-indicators-wrapper {
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: stretch;
+}
+.stats-indicators-bucket {
+    flex:1;
+    width:100%;
+    min-width: 300px;
+    min-height: 300px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    kii-stats-indicator {
+        flex:1;
+    }
+}
+.stats-content-wrapper {
+    transition: opacity 0.5s ease-in-out;
+}
+
+.stats-content-wrapper.loading {
+    opacity:0.2;
+}
+.stats-current {
+    font-style: italic;
+    opacity: 0.6;
+}
+
+
+
+.chart-title {
+    margin-bottom:3px;
+    font-size: 18px;
+}
+.chart-subtitle {
+    margin-top:2px;
+    font-size: 14px;
+    font-style: italic;
+    opacity: 0.6;
+    text-align: center;
+}
+
+google-chart {
+    width:100%;
+    height:400px;
+}
+
+.stats-two-columns {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-wrapper {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 300px;
+    width:100%;
+    height:100%;
+}
+.chart-title-with-input {
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    div {
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex:1;
+    }
+    div:last-child {
+        max-width: 100px;
+        padding-right: 20px;
+        padding-top:20px;
+    }
+}
+
+.chart-languages {
+    max-width: 300px;
+}
+
+@media only screen and (max-width: 900px) {
+    .stats-two-columns {
+        flex-direction: column;
+        .chart-wrapper {
+            width:100%;
+        }
+    }
+    .chart-languages {
+        max-width: 900px;
+    }
+
+}
+
+.stats-reset-button {
+    margin:10px;
+    i {
+        margin-right:10px;
+    }
+}

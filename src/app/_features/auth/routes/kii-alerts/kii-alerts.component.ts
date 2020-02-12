@@ -5,11 +5,11 @@ import { MatSort, MatPaginator } from '@angular/material';
 import { User } from 'src/app/_features/main/models/user';
 import { KiiTableAbstract } from 'src/app/abstracts/kii-table.abstract';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
-import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 import { Alert } from 'src/app/_features/main/models/alert';
 import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
 import { faTrash} from '@fortawesome/free-solid-svg-icons/faTrash';
-import { KiiApiAuthService } from '../../services/kii-api-auth.service';
+import { KiiAuthUserService } from '../../services/kii-auth-user.service';
 
 
 @Component({
@@ -53,8 +53,8 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
   }
   constructor(
     private kiiTrans: KiiTranslateService,
-    private kiiAuth: KiiAuthService,
-    private kiiApiAuth: KiiApiAuthService
+    private kiiAuth: KiiMainUserService,
+    private kiiApiAuth: KiiAuthUserService
     
     ) { 
     super();

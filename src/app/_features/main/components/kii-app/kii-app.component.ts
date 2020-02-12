@@ -1,19 +1,21 @@
-import { Component, OnInit, Inject, PLATFORM_ID, ComponentFactoryResolver, Renderer2 } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ComponentFactoryResolver, Renderer2, HostListener } from '@angular/core';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { MatBottomSheet } from '@angular/material';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, isPlatformBrowser, ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiBottomSheetCookiesComponent } from '../kii-bottom-sheet-cookies/kii-bottom-sheet-cookies.component';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { KiiViewTransferService } from '../../services/kii-view-transfer.service';
-import { KiiCookiesService } from '../../services/kii-cookies.service';
+import { KiiMainCookiesService } from '../../services/kii-main-cookies.service';
 import { KiiHttpErrorComponent } from '../kii-http-error/kii-http-error.component';
 import { UseExistingWebDriver } from 'protractor/built/driverProviders';
 import { User } from '../../models/user';
-import { KiiAuthService } from '../../services/kii-auth.service';
+import { KiiMainUserService } from '../../services/kii-main-user.service';
 import { ViewportScrollPosition } from '@angular/cdk/scrolling';
+import { KiiMainStatsService } from '../../services/kii-main-stats.service';
+import { StatAction } from '../../models/stat';
 
 @Component({
   selector: 'kii-app',
@@ -24,14 +26,13 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
   constructor(@Inject(PLATFORM_ID) private platform: any,
   private kiiTrans: KiiTranslateService,
-  private kiiAuth: KiiAuthService,
+  private kiiAuth: KiiMainUserService,
   private viewTrans : KiiViewTransferService,
   private bottomSheet: MatBottomSheet,
   private router : Router,
-  private cookies : KiiCookiesService,
-  private viewportScroller: ViewportScroller,
-  private r: Renderer2,
-  private location : Location) { super() }
+  private cookies : KiiMainCookiesService,
+  private stats : KiiMainStatsService
+  ) { super() }
 
   ngOnInit() {
     this.viewTrans.scroll();
@@ -77,6 +78,23 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
           })
         )
     }
+
+    //Handle pages stats
+    //this.stats.send(StatAction.NAVIGATION_START ,this.router.url);
+    this.addSubscriber(
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.stats.send(StatAction.NAVIGATION_START ,this.router.url);
+        }
+        //console.log(event);
+      })
+    )
+  }
+  //Detect when user closes the app so that we can save end-time of the session
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any) {
+      this.stats.send(StatAction.APP_END,this.router.url);
+      this.stats.clearSession();
   }
 
   openBottomSheetCookies(): void {
@@ -87,8 +105,10 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
         }) 
     let subs = this.bottomSheet._openedBottomSheetRef.afterDismissed().subscribe(res => {
         if (res) {
-          if (res.result == "accept") this.cookies.accept();
-          else this.cookies.refuse();
+          if (res.result == "accept") {
+             this.cookies.accept();
+             this.stats.send(StatAction.NAVIGATION_START ,this.router.url);
+          } else this.cookies.refuse();
           subs.unsubscribe();
         }
         //If our current route is /auth/cookies then navigate back

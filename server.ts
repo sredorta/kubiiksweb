@@ -47,12 +47,6 @@ app.get('*.*', express.static(DIST_FOLDER, {
   maxAge: '1y'
 }));
 
-//Make sure that server requests goes to server and not as route
-app.get('/server/**', (req, res) => {
-  console.log("WE AREA HERE AND WE GOT REQUEST WITH SERVER ",req.url)
-  res.sendFile(join(DIST_FOLDER, 'browser', 'index.html'));
-});
-
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
   console.log("RECIEVED REQUEST", req.url);

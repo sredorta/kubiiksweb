@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class KiiCookiesService {
+export class KiiMainCookiesService {
 
 
   /**Determines if cookies bottomsheet needs to be displayed */
@@ -21,7 +21,7 @@ export class KiiCookiesService {
   }
 
 
-  private areAccepted() {
+  public areAccepted() {
     if (isPlatformBrowser(this.platform))
       if (localStorage.getItem("cookies") == "accepted") {
           //Check validity of cookies

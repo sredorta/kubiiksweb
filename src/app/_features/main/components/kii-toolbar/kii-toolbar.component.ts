@@ -3,7 +3,7 @@ import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons/faSignInAlt';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { User } from '../../models/user';
-import { KiiAuthService } from '../../services/kii-auth.service';
+import { KiiMainUserService } from '../../services/kii-main-user.service';
 
 @Component({
   selector: 'kii-toolbar',
@@ -13,7 +13,7 @@ import { KiiAuthService } from '../../services/kii-auth.service';
 export class KiiToolbarComponent extends KiiBaseAbstract implements OnInit {
   loggedInUser: User = new User(null);
   icons = [];
-  constructor(private kiiAuth: KiiAuthService) { super() }
+  constructor(private kiiAuth: KiiMainUserService) { super() }
 
   ngOnInit() {
     this.icons['bell'] = faBell;

@@ -7,9 +7,9 @@ import { IRole } from 'src/app/_features/main/models/role';
 import { User, IUser } from 'src/app/_features/main/models/user';
 import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
-import { KiiAdminUserService } from '../../services/kii-api-user.service';
-import { KiiApiAuthService } from 'src/app/_features/auth/services/kii-api-auth.service';
-import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { KiiAdminUserService } from '../../services/kii-admin-user.service';
+import { KiiAuthUserService } from 'src/app/_features/auth/services/kii-auth-user.service';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import { faMobile } from '@fortawesome/free-solid-svg-icons/faMobile';
 import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone';
@@ -56,7 +56,7 @@ export class KiiAdminUsersComponent extends KiiTableAbstract implements OnInit {
               private dialog : MatDialog, 
               private device : DeviceDetectorService,
               //private kiiApiEmail: KiiApiEmailService,
-              private kiiAuth: KiiAuthService) { 
+              private kiiAuth: KiiMainUserService) { 
                 super() 
                 this.icons['email'] = faEnvelope;
                 this.icons['mobile'] = faMobile;

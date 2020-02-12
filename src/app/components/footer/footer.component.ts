@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 import { User } from 'src/app/_features/main/models/user';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 
@@ -11,7 +11,7 @@ import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 })
 export class FooterComponent extends KiiBaseAbstract implements OnInit {
   loggedInUser : User = new User(null);
-  constructor(@Inject(PLATFORM_ID) private platform: any, private kiiAuth: KiiAuthService) { super()}
+  constructor(@Inject(PLATFORM_ID) private platform: any, private kiiAuth: KiiMainUserService) { super()}
 
   ngOnInit() {
     this.addSubscriber(

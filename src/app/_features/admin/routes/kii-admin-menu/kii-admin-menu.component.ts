@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
-import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 import { User } from 'src/app/_features/main/models/user';
 import { faUserCog } from '@fortawesome/free-solid-svg-icons/faUserCog';
 import { faCogs } from '@fortawesome/free-solid-svg-icons/faCogs';
@@ -28,7 +28,7 @@ export class KiiAdminMenuComponent extends KiiBaseAbstract implements OnInit {
   constructor(
     private kiiTrans: KiiTranslateService, 
     private location : Location,
-    private kiiAuth: KiiAuthService
+    private kiiAuth: KiiMainUserService
     ) { 
       super();
       this.icons['settings'] = faCogs;

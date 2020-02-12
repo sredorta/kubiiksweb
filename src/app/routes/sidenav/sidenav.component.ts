@@ -1,7 +1,7 @@
 import { Component, OnInit,  Inject, PLATFORM_ID } from '@angular/core';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { User } from 'src/app/_features/main/models/user';
-import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class SidenavComponent extends KiiBaseAbstract implements OnInit {
 
   constructor(
     private kiiTrans: KiiTranslateService,
-    private kiiAuth: KiiAuthService, 
+    private kiiAuth: KiiMainUserService, 
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: any) {super(); }
 

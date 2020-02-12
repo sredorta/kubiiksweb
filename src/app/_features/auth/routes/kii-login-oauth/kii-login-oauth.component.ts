@@ -4,10 +4,10 @@ import { ActivatedRoute, NavigationStart } from '@angular/router';
 import { Router } from '@angular/router';
 import { MatCheckboxChange } from '@angular/material';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
-import { KiiApiAuthService } from '../../services/kii-api-auth.service';
+import { KiiAuthUserService } from '../../services/kii-auth-user.service';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { User } from 'src/app/_features/main/models/user';
-import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 
 @Component({
   selector: 'kii-login-oauth',
@@ -29,8 +29,8 @@ export class KiiLoginOauthComponent extends KiiBaseAbstract implements OnInit {
   constructor(private route: ActivatedRoute, 
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private kiiApiAuth : KiiApiAuthService,
-    private kiiAuth: KiiAuthService,
+    private kiiApiAuth : KiiAuthUserService,
+    private kiiAuth: KiiMainUserService,
     private kiiTrans : KiiTranslateService) {super() }
 
   ngOnInit() {

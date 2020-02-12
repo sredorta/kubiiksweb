@@ -9,15 +9,15 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 })
 export class KiiAdminStatsComponent implements OnInit {
 
-  constructor(private kiiTrans: KiiTranslateService, private location : Location) { }
+
+
+  constructor(
+
+    ) {  }
+
+
+
 
   ngOnInit() {
-    //We require main + legal here
-    this.kiiTrans.setRequiredContext(['main','auth','form','admin']);
-
-  }
-
-  goBack() {
-    this.location.back();
-  }
-}
+     }
+    }

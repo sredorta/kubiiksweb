@@ -12,7 +12,7 @@ export interface INewsletter {
 @Injectable({
   providedIn: 'root'
 })
-export class KiiApiNewsletterService {
+export class KiiMainNewsletterService {
 
   constructor(private http:HttpClient) { }
 

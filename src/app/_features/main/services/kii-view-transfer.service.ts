@@ -6,6 +6,7 @@ import { Router, Scroll, RouterEvent } from '@angular/router';
 import { ViewportScroller, isPlatformServer} from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { TransferState, StateKey, makeStateKey } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 
 @Injectable({
@@ -17,6 +18,8 @@ export class KiiViewTransferService {
   //viewportScroller : ViewportScroller;
   /**When is the first time that we transfer from server to browser */
   isTransfer: boolean = false;
+  subscr : Subscription;
+
   constructor(
             private router: Router, 
             private viewportScroller: ViewportScroller,
@@ -33,9 +36,8 @@ export class KiiViewTransferService {
       this.isTransfer = this.transferState.get(key, false);
       console.log("IS FIRST BROWSER",this.isTransfer);
     }
-    this.router.events.subscribe(e => {
+    this.subscr = this.router.events.subscribe(e => {
       if (e instanceof Scroll) {
-        console.log(e);
         if (e.position) {
           // backward navigation
           this.viewportScroller.scrollToPosition(e.position);
@@ -48,6 +50,9 @@ export class KiiViewTransferService {
         }
       }
     })
+  }
+  ngOnDestroy() {
+    if (this.subscr) this.subscr.unsubscribe();
   }
 
 }

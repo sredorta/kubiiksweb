@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { INewsletter, KiiApiNewsletterService } from '../../services/kii-api-newsletter.service';
+import { INewsletter, KiiMainNewsletterService } from '../../services/kii-main-newsletter.service';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 
 @Component({
@@ -11,7 +11,7 @@ export class KiiNewsletterComponent extends KiiBaseAbstract implements OnInit {
 
   loading : boolean = false;
 
-  constructor(private kiiApiNews : KiiApiNewsletterService) { super(); }
+  constructor(private kiiApiNews : KiiMainNewsletterService) { super(); }
 
   ngOnInit() {
   }

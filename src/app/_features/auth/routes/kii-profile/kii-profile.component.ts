@@ -4,9 +4,9 @@ import { Router, RouterEvent } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { User } from 'src/app/_features/main/models/user';
-import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
-import { KiiApiAuthService } from '../../services/kii-api-auth.service';
+import { KiiAuthUserService } from '../../services/kii-auth-user.service';
 import { KiiProfileFormComponent } from '../../components/kii-profile-form/kii-profile-form.component';
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons/faUserSlash';
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons/faSignOutAlt';
@@ -34,8 +34,8 @@ export class KiiProfileComponent extends KiiBaseAbstract implements OnInit {
   @ViewChild(KiiProfileFormComponent, {static:false}) profileForm : KiiProfileFormComponent;
   constructor(
               private kiiTrans: KiiTranslateService,
-              private kiiAuth: KiiAuthService,
-              private kiiApiAuth : KiiApiAuthService,
+              private kiiAuth: KiiMainUserService,
+              private kiiApiAuth : KiiAuthUserService,
               @Inject(PLATFORM_ID) private platformId: any,
               private router: Router,
               private dialog : MatDialog) { 

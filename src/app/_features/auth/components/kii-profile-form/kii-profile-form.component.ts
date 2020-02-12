@@ -4,7 +4,7 @@ import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract';
 import { User } from 'src/app/_features/main/models/user';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { KiiCustomValidators } from 'src/app/_features/form/utils/kii-custom-validators';
-import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import { faKey } from '@fortawesome/free-solid-svg-icons/faKey';
 import { faUserTag } from '@fortawesome/free-solid-svg-icons/faUserTag';
@@ -47,7 +47,7 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
 
   constructor(
             private trans: KiiTranslateService, 
-            private kiiAuth: KiiAuthService) {
+            private kiiAuth: KiiMainUserService) {
               super(); 
               this.icon['name'] = faUserTag;
               this.icon['email'] = faEnvelope;

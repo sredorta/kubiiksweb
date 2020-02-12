@@ -57,7 +57,7 @@ import { KiiTranslateModule } from '../translate/kii-translate.module';
 import { KiiAdminMenuComponent } from './routes/kii-admin-menu/kii-admin-menu.component';
 import { KiiAdminStatsComponent } from './routes/kii-admin-stats/kii-admin-stats.component';
 import { KiiAdminRoutingModule } from './kii-admin-routing.module';
-import { KiiAdminUserService } from './services/kii-api-user.service';
+import { KiiAdminUserService } from './services/kii-admin-user.service';
 import { KiiAdminUsersComponent } from './routes/kii-admin-users/kii-admin-users.component';
 import { KiiFormModule } from '../form/kii-form.module';
 import { KiiTableModule } from '../table/kii-table.module';

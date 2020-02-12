@@ -26,7 +26,7 @@ export interface IMessage {
 @Injectable({
   providedIn: 'root'
 })
-export class KiiAuthService {
+export class KiiMainUserService {
 
   /** Contains current loggedIn user */
   private _user = new BehaviorSubject<User>(new User(null)); //Stores the current user

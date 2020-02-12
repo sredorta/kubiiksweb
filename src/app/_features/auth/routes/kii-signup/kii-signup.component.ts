@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { isPlatformBrowser } from '@angular/common';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
-import { KiiApiAuthService } from '../../services/kii-api-auth.service';
+import { KiiAuthUserService } from '../../services/kii-auth-user.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +15,7 @@ export class KiiSignupComponent extends KiiBaseAbstract implements OnInit {
   isLoading:boolean = false;
   constructor(
     private kiiTrans: KiiTranslateService,
-    private kiiApiAuth: KiiApiAuthService,
+    private kiiApiAuth: KiiAuthUserService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: any
     ) { super()  }

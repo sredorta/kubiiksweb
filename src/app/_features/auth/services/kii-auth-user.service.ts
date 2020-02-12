@@ -45,7 +45,7 @@ export interface IMessage {
 @Injectable({
   providedIn: 'root'
 })
-export class KiiApiAuthService {
+export class KiiAuthUserService {
 
 
   constructor(private http: HttpClient, private kiiTrans: KiiTranslateService) { }

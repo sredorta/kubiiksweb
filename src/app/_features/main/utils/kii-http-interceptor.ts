@@ -8,7 +8,7 @@ import { KiiTranslateService } from '../../translate/services/kii-translate.serv
 import { isPlatformBrowser } from '@angular/common';
 import { KiiHttpErrorComponent } from '../components/kii-http-error/kii-http-error.component';
 import { User } from '../models/user';
-import { KiiAuthService } from '../services/kii-auth.service';
+import { KiiMainUserService } from '../services/kii-main-user.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -19,7 +19,7 @@ import { environment } from 'src/environments/environment';
 export class KiiHttpInterceptor implements HttpInterceptor {
     constructor(
         private kiiTrans: KiiTranslateService,
-        private kiiAuth: KiiAuthService,
+        private kiiAuth: KiiMainUserService,
         private router : Router,
         @Inject(PLATFORM_ID) private _platformId: any, 
         private bottomSheet: MatBottomSheet, 
@@ -48,7 +48,6 @@ export class KiiHttpInterceptor implements HttpInterceptor {
                 tmpHeaders['Authorization'] =  'Bearer ' + User.getToken();
             //We are in the browser and then we do the request directly from browser to server    
             request= request.clone({url: request.url.replace(environment.kiiserverURL,environment.kiiserverExtURL)});
-            console.log("REQUEST IS: ",request.url)
         }     
         let headers : HttpHeaders;
         headers = new HttpHeaders(tmpHeaders);     

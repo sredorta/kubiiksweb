@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { Router } from '@angular/router';
-import { KiiApiAuthService } from '../../services/kii-api-auth.service';
+import { KiiAuthUserService } from '../../services/kii-auth-user.service';
 import { User } from 'src/app/_features/main/models/user';
-import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 
 @Component({
   selector: 'app-kii-login',
@@ -18,8 +18,8 @@ export class KiiLoginComponent extends KiiBaseAbstract implements OnInit {
   constructor(
     private kiiTrans: KiiTranslateService,
     private router : Router,
-    private kiiAuth: KiiAuthService,
-    private kiiApiAuth: KiiApiAuthService
+    private kiiAuth: KiiMainUserService,
+    private kiiApiAuth: KiiAuthUserService
     ) {super();}
 
   ngOnInit() {

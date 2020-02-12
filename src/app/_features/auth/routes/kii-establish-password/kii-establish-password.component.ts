@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
-import { KiiApiAuthService } from '../../services/kii-api-auth.service';
+import { KiiAuthUserService } from '../../services/kii-auth-user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/_features/main/models/user';
-import { KiiAuthService } from 'src/app/_features/main/services/kii-auth.service';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 
 @Component({
   selector: 'kii-establish-password',
@@ -17,10 +17,10 @@ export class KiiEstablishPasswordComponent extends KiiBaseAbstract implements On
   key: string = "";
   constructor(
     private kiiTrans: KiiTranslateService, 
-    private kiiApiAuth: KiiApiAuthService,
+    private kiiApiAuth: KiiAuthUserService,
     private route : ActivatedRoute,
     private router: Router,
-    private kiiAuth: KiiAuthService
+    private kiiAuth: KiiMainUserService
     ) {super() }
 
   ngOnInit() {

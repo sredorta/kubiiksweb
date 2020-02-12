@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { KiiFormRestoreService } from '../../services/kii-form-restore.service';
-import { KiiApiNewsletterService, INewsletter } from '../../services/kii-api-newsletter.service';
+import { KiiMainNewsletterService, INewsletter } from '../../services/kii-main-newsletter.service';
 
 @Component({
   selector: 'kii-newsletter-form',

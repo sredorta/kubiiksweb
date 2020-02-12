@@ -47,9 +47,10 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { KiiHttpInterceptor } from './utils/kii-http-interceptor';
 import { KiiHttpErrorComponent } from './components/kii-http-error/kii-http-error.component';
-import { KiiAuthService } from './services/kii-auth.service';
+import { KiiMainUserService } from './services/kii-main-user.service';
 import { SidenavModule } from 'src/app/routes/sidenav/sidenav.module';
 import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.component';
+import { KiiMainStatsService } from './services/kii-main-stats.service';
 
 
 
@@ -120,7 +121,7 @@ export class KiiMainModule {
   return {
     ngModule: KiiMainModule,
     providers: [
-      KiiAuthService
+      KiiMainUserService, KiiMainStatsService
     ],
   }
 }
