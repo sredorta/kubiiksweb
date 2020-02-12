@@ -4,7 +4,6 @@ import { ServerModule, ServerTransferStateModule } from '@angular/platform-serve
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 import { KiiTranslateService } from './_features/translate/services/kii-translate.service';
 import { Router } from '@angular/router';
 import { KiiTranslateModule } from './_features/translate/kii-translate.module';
@@ -15,12 +14,11 @@ import { KiiMainModule } from './_features/main/kii-main.module';
   imports: [
     AppModule,
     ServerModule,
-    ModuleMapLoaderModule,
     NoopAnimationsModule,
     ServerTransferStateModule,
     KiiMainModule,
-    KiiTranslateModule.forRoot(),
-  ],
+    KiiTranslateModule.forRoot()
+],
   bootstrap: [AppComponent],
 })
 export class AppServerModule {}
