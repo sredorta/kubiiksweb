@@ -5,6 +5,8 @@ import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-use
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { Router } from '@angular/router';
+import { KiiMainStatsService } from 'src/app/_features/main/services/kii-main-stats.service';
+import { StatAction } from 'src/app/_features/main/models/stat';
 
 @Component({
   selector: 'app-sidenav',
@@ -20,7 +22,8 @@ export class SidenavComponent extends KiiBaseAbstract implements OnInit {
     private kiiTrans: KiiTranslateService,
     private kiiAuth: KiiMainUserService, 
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: any) {super(); }
+    private stats: KiiMainStatsService,
+  ) {super(); }
 
   ngOnInit() {
     this.kiiTrans.reload();
@@ -35,6 +38,11 @@ export class SidenavComponent extends KiiBaseAbstract implements OnInit {
   logout() {
     this.kiiAuth.logout();
     this.router.navigate(['']);
+  }
+
+  installApp() {
+    //Need to really install the app with pwa service !
+    this.stats.send(StatAction.APP_INSTALL,null);
   }
 
 }

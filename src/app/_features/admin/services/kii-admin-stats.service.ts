@@ -53,7 +53,7 @@ class StatResult {
 export class KiiAdminStatsService {
   //private offline$ = new BehaviorSubject<boolean>(false);
   //private offline : boolean = false;
-  constructor(@Inject(PLATFORM_ID) private platformId: any,private http: HttpClient) {
+  constructor(private http: HttpClient) {
 /*
     if (isPlatformBrowser(this.platformId)) {
           //Online/Offline detection

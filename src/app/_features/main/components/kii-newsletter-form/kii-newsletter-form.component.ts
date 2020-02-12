@@ -16,7 +16,7 @@ export class KiiNewsletterFormComponent implements OnInit {
   @ViewChild('email',{static:false}) email : ElementRef;
 
 
-  constructor( private kiiForm : KiiFormRestoreService, private r: Renderer2) { }
+  constructor( private r: Renderer2) { }
 
   ngOnInit() {
 

@@ -5,6 +5,8 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
 import { faLinkedinIn } from '@fortawesome/free-brands-svg-icons/faLinkedinIn';
 import { faGooglePlusG } from '@fortawesome/free-brands-svg-icons/faGooglePlusG';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons/faYoutube';
+import { KiiMainStatsService } from '../../services/kii-main-stats.service';
+import { StatAction } from '../../models/stat';
 
 
 @Component({
@@ -42,13 +44,14 @@ export class KiiFooterComponent implements OnInit {
       }
     ];
 
-  constructor() { }
+  constructor(private stats: KiiMainStatsService) { }
 
   ngOnInit() {
   }
 
   onClick(social:string) {
     //TODO: Add stats here !
+    this.stats.send(StatAction.SOCIAL_CLICK, social);
   }
 
 }

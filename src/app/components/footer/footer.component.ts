@@ -11,7 +11,7 @@ import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 })
 export class FooterComponent extends KiiBaseAbstract implements OnInit {
   loggedInUser : User = new User(null);
-  constructor(@Inject(PLATFORM_ID) private platform: any, private kiiAuth: KiiMainUserService) { super()}
+  constructor( private kiiAuth: KiiMainUserService) { super()}
 
   ngOnInit() {
     this.addSubscriber(

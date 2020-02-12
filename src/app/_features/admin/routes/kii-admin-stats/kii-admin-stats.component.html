@@ -1,5 +1,5 @@
 <kii-toolbar></kii-toolbar>
-<div class="admin-theme stats-wrapper">  
+<div *ngIf="loadedTrans" class="admin-theme stats-wrapper">  
         <p class="txt-xl txt-b">{{'admin.stats.title' | translate | async}}</p>
       
         <div class="stats-settings">

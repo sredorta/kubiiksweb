@@ -48,7 +48,7 @@ export interface IMessage {
 export class KiiAuthUserService {
 
 
-  constructor(private http: HttpClient, private kiiTrans: KiiTranslateService) { }
+  constructor(private http: HttpClient) { }
 
   /** Login user using local passport */
   public login(credentials:ILoginCredentials) {

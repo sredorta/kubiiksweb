@@ -21,7 +21,7 @@ export class KiiInputErrorDirective  implements OnDestroy{
       private _renderer: Renderer2,
       private _fg : ControlContainer,
       private _trans : KiiTranslateService,
-    @Inject(PLATFORM_ID) private _platformId) { }
+    ) { }
 
   /**Get current form where directive is applied */  
   get form(){ return this._fg.formDirective ? (this._fg.formDirective as FormGroupDirective).form : null; }

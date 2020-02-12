@@ -69,7 +69,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   @ViewChild('shadowCanvas', {static:false}) shadowCanvasElem : ElementRef; //Shadow canvas for manipulation
   @ViewChild('shadowImg', {static:false}) shadowImgElem : ElementRef; //Shadow image for manipulation
 
-  constructor(private kiiApiUpload: KiiApiUploadFileService ,private http: HttpClient,private sanitizer: DomSanitizer) { 
+  constructor(private kiiApiUpload: KiiApiUploadFileService,private sanitizer: DomSanitizer) { 
     super();
     this.icons['reset'] = faTrash;
     this.icons['rotate'] = faRedoAlt;

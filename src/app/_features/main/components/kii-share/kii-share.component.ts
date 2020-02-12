@@ -8,6 +8,8 @@ import { faTelegramPlane } from '@fortawesome/free-brands-svg-icons/faTelegramPl
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons/faWhatsapp';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import { ShareService } from '@ngx-share/core';
+import { KiiMainStatsService } from '../../services/kii-main-stats.service';
+import { StatAction } from '../../models/stat';
 
 
 @Component({
@@ -26,7 +28,7 @@ export class KiiShareComponent implements OnInit {
     telegram:faTelegramPlane,
     email:faEnvelope,
   };
-  constructor(private router: Router,public share: ShareService) { 
+  constructor(private router: Router,public share: ShareService, private stats : KiiMainStatsService) { 
   }
 
   ngOnInit() {
@@ -38,7 +40,8 @@ export class KiiShareComponent implements OnInit {
   }
 
   sendStats(social:string) {
-    //TODO Send stats here !
+    this.stats.send(StatAction.SOCIAL_CLICK, social);
+
   }
 
   myGet(event) {

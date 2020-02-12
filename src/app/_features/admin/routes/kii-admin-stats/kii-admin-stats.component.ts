@@ -119,6 +119,8 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
   social : string = "all";
   axisNames : any = {};
 
+  /**When translations are loaded */
+  loadedTrans : boolean = false;
 
   constructor(
     private dialog: MatDialog,
@@ -138,18 +140,21 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
   ngOnInit() {
     this.translate.setRequiredContext(['main','auth','form','admin']);
 
-    this.translate.getTranslation([
-      {key:"admin.stats.axis.visits"},
-      {key:"admin.stats.axis.day"},
-      {key:"admin.stats.axis.day_hours"},
-      {key:"admin.stats.axis.traffic"},
-      {key:"admin.stats.axis.page"},
-      {key:"admin.stats.axis.social"},
-      {key:"admin.stats.axis.app"}, 
-      {key:"admin.stats.axis.newsletter"}]).subscribe(res => {
-        console.log(res);
-      this.axisNames = res;
-    })
+    this.addSubscriber(
+      this.translate.getTranslation([
+        {key:"admin.stats.axis.visits"},
+        {key:"admin.stats.axis.day"},
+        {key:"admin.stats.axis.day_hours"},
+        {key:"admin.stats.axis.traffic"},
+        {key:"admin.stats.axis.page"},
+        {key:"admin.stats.axis.social"},
+        {key:"admin.stats.axis.app"}, 
+        {key:"admin.stats.axis.newsletter"}]).subscribe(res => {
+        //Tell that we have recieved translations so that we don't get issues
+        if (res['admin.stats.axis.visits']!="") this.loadedTrans = true;
+        this.axisNames = res;
+      })
+    )
 
     this.histoHoursVisitsOptions = deepmerge.all([this.defaultChartOptions,
       {
@@ -286,8 +291,8 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
 
   //When we change the period we recompute the stats
   onDaysSliderChange(event:MatSliderChange) {
-  /*  this.days = event.value;
-    this.generateStats();*/
+    this.days = event.value;
+    this.generateStats();
   }
 
   /**Generates the stats */

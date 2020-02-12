@@ -20,7 +20,7 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     private kiiTrans: KiiTranslateService,
     private kiiAuth: KiiMainUserService, 
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: any) {super(); }
+    ) {super(); }
 
   ngOnInit() {
     this.kiiTrans.setRequiredContext(['main','contact']);

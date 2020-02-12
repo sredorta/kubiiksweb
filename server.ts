@@ -19,6 +19,7 @@ import 'zone.js/dist/zone-node';
 
 import * as express from 'express';
 import {join} from 'path';
+import { registerLocaleData } from '@angular/common';
 
 // Express server
 const app = express();
@@ -46,6 +47,27 @@ app.set('views', DIST_FOLDER);
 app.get('*.*', express.static(DIST_FOLDER, {
   maxAge: '1y'
 }));
+
+//AVOID RENDERING AUTH AND ADMIN PAGES !
+//FOR AUTH WE NEED TO RENDER all pages that we get in like email validation, oauth...
+app.get('*/auth/login', (req, res) => {
+  console.log('Not rendering AUTH page');
+});
+app.get('*/auth/signup', (req, res) => {
+  console.log('Not rendering AUTH page');
+});
+app.get('*/auth/reset-password', (req, res) => {
+  console.log('Not rendering AUTH page');
+});
+app.get('*/auth/profile', (req, res) => {
+  console.log('Not rendering AUTH page');
+});
+app.get('*/auth/notifications', (req, res) => {
+  console.log('Not rendering AUTH page');
+});
+app.get('*/admin/**', (req, res) => {
+  console.log('Not rendering ADMIN page');
+});
 
 // All regular routes use the Universal engine
 app.get('*', (req, res) => {
