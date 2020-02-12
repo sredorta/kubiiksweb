@@ -43,6 +43,7 @@ import {MatAutocompleteModule,
   MatToolbarModule,
   MatTooltipModule,
   MatSlideToggleModule,
+  MatSliderModule,
   //MatTreeModule,
   //MatPaginatorIntl,
   //MatSnackBar,
@@ -63,6 +64,8 @@ import { KiiFormModule } from '../form/kii-form.module';
 import { KiiTableModule } from '../table/kii-table.module';
 import { KiiMobileFormatPipe } from './pipes/kii-mobile-format.pipe';
 import { KiiAdminPopupComponent } from './routes/kii-admin-popup/kii-admin-popup.component';
+import { KiiStatsIndicatorComponent } from './components/kii-stats-indicator/kii-stats-indicator.component';
+import { KiiThousandsSuffixPipe } from './pipes/kii-thousands-suffix.pipe';
 
 
 @NgModule({
@@ -75,15 +78,18 @@ import { KiiAdminPopupComponent } from './routes/kii-admin-popup/kii-admin-popup
     KiiTableModule,
     KiiAdminRoutingModule,
     [
-      MatSlideToggleModule
+      MatSlideToggleModule,
+      MatSliderModule
     ]
   ],
   declarations: [
     KiiAdminMenuComponent,
     KiiAdminStatsComponent,
+    KiiStatsIndicatorComponent,
     KiiAdminUsersComponent,
     KiiAdminPopupComponent,
-    KiiMobileFormatPipe
+    KiiMobileFormatPipe,
+    KiiThousandsSuffixPipe
   ],
   providers:[KiiAdminUserService],
   exports:[
