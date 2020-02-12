@@ -7,6 +7,9 @@ import { KiiAdminStatsService } from '../../services/kii-admin-stats.service';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import * as deepmerge from 'deepmerge';
 import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
+import { faCalendarDay } from '@fortawesome/free-solid-svg-icons/faCalendarDay';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+
 
 interface IStatWindow {
   current : number;
@@ -53,6 +56,8 @@ class StatResult {
 })
 export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
 
+  /**Contains icons */
+  icons = [];
 
   /**Days of the analysis */
   days : number = 7;
@@ -121,7 +126,11 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
     private stats: KiiAdminStatsService,
     private kiiAuth : KiiMainUserService,
     //@Inject(PLATFORM_ID) private platformId: any
-    ) { super()}
+    ) { 
+      super();
+      this.icons['calendar'] = faCalendarDay;
+      this.icons['delete'] = faTrash;
+    }
 
 
 

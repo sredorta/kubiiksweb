@@ -1,12 +1,12 @@
 <kii-toolbar></kii-toolbar>
 <div class="admin-theme stats-wrapper">  
-        <h1>{{'admin.stats.title' | translate | async}}</h1>
+        <p class="txt-xl txt-b">{{'admin.stats.title' | translate | async}}</p>
       
         <div class="stats-settings">
-          <p>{{'admin.stats.days' | translate | async}}</p>
-          <mat-slider style="width:100%" [(value)]="days" thumbLabel tickInterval="1" min="1" max="365" (change)="onDaysSliderChange($event)"></mat-slider>
+          <p class="txt-m">{{'admin.stats.days' | translate | async}}</p>
+          <mat-slider class="w100" [(value)]="days" thumbLabel tickInterval="1" min="1" max="365" (change)="onDaysSliderChange($event)"></mat-slider>
         </div>
-        <p class="stats-current"><i class="fas fa-calendar-day" [matBadge]="days" style="margin-right:20px"></i> {{'admin.stats.current' | translate | async}}</p>
+        <p class="txt-m"><mat-icon [matBadge]="days" style="margin-right:10px;"><fa-icon [icon]="icons['calendar']"></fa-icon></mat-icon> {{'admin.stats.current' | translate | async}}</p>
         <kii-spinner-overlay [show]="isDataLoading">
           <div class="stats-content-wrapper"  [ngClass]="{'loading' : isDataLoading == true}">
             <div class="stats-indicators-wrapper">
@@ -26,31 +26,30 @@
                 <kii-stats-indicator [value]="result.chat_message_count.current" [prev_value]="result.chat_message_count.previous"  [text]="'admin.stats.metric.chatmessages' | translate | async"></kii-stats-indicator>
               </div>
             </div>
-        <!--
             <div class="stats-two-columns">
               <div class="chart-wrapper">
-                <p class="chart-title">{{'kiilib.stats.visits_over_time.title' | translate}}</p>
-                <p class="chart-subtitle">{{'kiilib.stats.visits_over_time.subtitle' | translate}}</p>
+                <p class="chart-title">{{'admin.stats.visits_over_time.title' | translate | async}}</p>
+                <p class="chart-subtitle">{{'admin.stats.visits_over_time.subtitle' | translate | async}}</p>
                 <google-chart  [dynamicResize]="true" type="LineChart" [data]="result.visits_over_day"  [options]="visitsOverTimeOptions"></google-chart>
               </div>
               <div class="chart-wrapper">
                 <div class="chart-title-with-input">
                   <div>
-                  <p class="chart-title">{{'kiilib.stats.visits_hours.title' | translate}}</p>
-                  <p class="chart-subtitle">{{'kiilib.stats.visits_hours.subtitle' | translate}}</p>
+                  <p class="chart-title">{{'admin.stats.visits_hours.title' | translate | async}}</p>
+                  <p class="chart-subtitle">{{'admin.stats.visits_hours.subtitle' | translate | async}}</p>
                   </div>
                   <div>          
-                    <mat-form-field>
-                      <mat-label>{{'kiilib.day' | translate}}</mat-label>
+                    <mat-form-field style="width:80%;max-width:200px;align-self: flex-end">
+                      <mat-label>{{'admin.stats.day' | translate | async}}</mat-label>
                       <mat-select [(value)]="dayOfWeek">
-                        <mat-option [value]="7"><span style="font-weight:bold">{{'kiilib.all' | translate}}</span></mat-option>
-                        <mat-option [value]="1">{{'kiilib.monday' | translate}}</mat-option>
-                        <mat-option [value]="2">{{'kiilib.tuesday' | translate}}</mat-option>
-                        <mat-option [value]="3">{{'kiilib.wednesday' | translate}}</mat-option>
-                        <mat-option [value]="4">{{'kiilib.thursday' | translate}}</mat-option>
-                        <mat-option [value]="5">{{'kiilib.friday' | translate}}</mat-option>
-                        <mat-option [value]="6">{{'kiilib.saturday' | translate}}</mat-option>
-                        <mat-option [value]="0">{{'kiilib.sunday' | translate}}</mat-option>
+                        <mat-option [value]="7"><span style="font-weight:bold">{{'admin.stats.all' | translate | async}}</span></mat-option>
+                        <mat-option [value]="1">{{'admin.stats.monday' | translate | async}}</mat-option>
+                        <mat-option [value]="2">{{'admin.stats.tuesday' | translate | async}}</mat-option>
+                        <mat-option [value]="3">{{'admin.stats.wednesday' | translate | async}}</mat-option>
+                        <mat-option [value]="4">{{'admin.stats.thursday' | translate | async}}</mat-option>
+                        <mat-option [value]="5">{{'admin.stats.friday' | translate | async}}</mat-option>
+                        <mat-option [value]="6">{{'admin.stats.saturday' | translate | async}}</mat-option>
+                        <mat-option [value]="0">{{'admin.stats.sunday' | translate | async}}</mat-option>
                       </mat-select>
                     </mat-form-field></div>
                 </div>
@@ -59,8 +58,8 @@
             </div>
       
             <div class="chart-wrapper">
-                <p class="chart-title">{{'kiilib.stats.sources.title' | translate}}</p>
-                <p class="chart-subtitle">{{'kiilib.stats.sources.subtitle' | translate}}</p>
+                <p class="chart-title">{{'admin.stats.sources.title' | translate | async}}</p>
+                <p class="chart-subtitle">{{'admin.stats.sources.subtitle' | translate | async}}</p>
                 <google-chart  [dynamicResize]="true"  type="ColumnChart" [data]="result.referrals_histogram"  [options]="referralsOptions"></google-chart>
             </div>
       
@@ -68,12 +67,12 @@
               <div class="chart-wrapper">
                   <div class="chart-title-with-input">
                       <div>
-                      <p class="chart-title">{{'kiilib.stats.pages.title' | translate}}</p>
-                      <p class="chart-subtitle">{{'kiilib.stats.pages.subtitle' | translate}}</p>
+                      <p class="chart-title">{{'admin.stats.pages.title' | translate | async}}</p>
+                      <p class="chart-subtitle">{{'admin.stats.pages.subtitle' | translate | async}}</p>
                       </div>
                       <div>          
                           <mat-form-field style="width:80%;max-width:200px;align-self: flex-end">
-                              <mat-label>{{'kiilib.language' | translate}}</mat-label>
+                              <mat-label>{{'admin.stats.language' | translate | async}}</mat-label>
                               <mat-select [(value)]="language">
                                 <mat-option *ngFor="let lang of languagesAvailable" [value]="lang.iso">{{lang.name}}</mat-option>
                               </mat-select>
@@ -84,8 +83,8 @@
               </div>
       
               <div class="chart-wrapper chart-languages">
-                  <p class="chart-title">{{'kiilib.stats.language.title' | translate}}</p>
-                  <p class="chart-subtitle">{{'kiilib.stats.language.subtitle' | translate}}</p>
+                  <p class="chart-title">{{'admin.stats.language.title' | translate | async}}</p>
+                  <p class="chart-subtitle">{{'admin.stats.language.subtitle' | translate | async}}</p>
                   <google-chart  [dynamicResize]="true"  type="PieChart" [data]="result.languages"  [options]="languagesOptions"></google-chart>
               </div>
             </div>
@@ -94,14 +93,14 @@
                 <div class="chart-wrapper">
                     <div class="chart-title-with-input">
                         <div>
-                        <p class="chart-title">{{'kiilib.stats.social_over_time.title' | translate}}</p>
-                        <p class="chart-subtitle">{{'kiilib.stats.social_over_time.subtitle' | translate}}</p>
+                        <p class="chart-title">{{'admin.stats.social_over_time.title' | translate | async}}</p>
+                        <p class="chart-subtitle">{{'admin.stats.social_over_time.subtitle' | translate | async}}</p>
                         </div>
                         <div>          
                             <mat-form-field style="width:80%;max-width:200px;align-self: flex-end">
-                                <mat-label>{{'kiilib.network' | translate}}</mat-label>
+                                <mat-label>{{'admin.stats.social.network' | translate | async}}</mat-label>
                                 <mat-select [(value)]="social">
-                                  <mat-option  value="all">{{'kiilib.all' | translate}}</mat-option>
+                                  <mat-option  value="all">{{'admin.stats.all' | translate | async}}</mat-option>
                                   <ng-container *ngFor="let type of socialTypes">
                                     <mat-option *ngIf="type!='all'" [value]="type">{{type}}</mat-option>
                                   </ng-container>
@@ -113,28 +112,27 @@
                 </div>
           
                 <div class="chart-wrapper">
-                    <p class="chart-title">{{'kiilib.stats.social_histo.title' | translate}}</p>
-                    <p class="chart-subtitle">{{'kiilib.stats.social_histo.subtitle' | translate}}</p>
+                    <p class="chart-title">{{'admin.stats.social_histo.title' | translate | async}}</p>
+                    <p class="chart-subtitle">{{'admin.stats.social_histo.subtitle' | translate | async}}</p>
                     <google-chart  [dynamicResize]="true"  type="ColumnChart" [data]="result.social_histogram"  [options]="socialHistoOptions"></google-chart>
                 </div>
             </div>
       
             <div class="stats-two-columns">
                 <div class="chart-wrapper">
-                    <p class="chart-title">{{'kiilib.stats.apps_over_time.title' | translate}}</p>
-                    <p class="chart-subtitle">{{'kiilib.stats.apps_over_time.subtitle' | translate}}</p>
+                    <p class="chart-title">{{'admin.stats.apps_over_time.title' | translate | async}}</p>
+                    <p class="chart-subtitle">{{'admin.stats.apps_over_time.subtitle' | translate | async}}</p>
                     <google-chart  [dynamicResize]="true" type="LineChart" [data]="result.app_over_day"  [options]="appOverTimeOptions"></google-chart>
                   </div>
         
                   <div class="chart-wrapper">
-                      <p class="chart-title">{{'kiilib.stats.newsletter_over_time.title' | translate}}</p>
-                      <p class="chart-subtitle">{{'kiilib.stats.newsletter_over_time.subtitle' | translate}}</p>
+                      <p class="chart-title">{{'admin.stats.newsletter_over_time.title' | translate | async}}</p>
+                      <p class="chart-subtitle">{{'admin.stats.newsletter_over_time.subtitle' | translate | async}}</p>
                       <google-chart  [dynamicResize]="true" type="LineChart" [data]="result.newsletter_over_day"  [options]="newsletterOverTimeOptions"></google-chart>
                   </div>
             </div>
-                    -->
           </div>
         </kii-spinner-overlay>
-        <button mat-button color="primary" class="stats-reset-button" (click)="onDelete()"><i class="fas fa-trash"></i>{{'kiilib.stats.reset' | translate}}</button>
+        <button mat-button color="primary" class="stats-reset-button" (click)="onDelete()"><fa-icon [icon]="icons['delete']"></fa-icon>{{'admin.stats.reset' | translate | async}}</button>
       
       </div>

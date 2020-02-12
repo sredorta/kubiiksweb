@@ -50,6 +50,10 @@ import {MatAutocompleteModule,
   //MatDialogRef,
   //MatBottomSheetRef
 } from '@angular/material';
+
+//Google charts
+import { GoogleChartsModule } from 'angular-google-charts';
+
 import { RouterModule } from '@angular/router';
 import { TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
@@ -72,6 +76,7 @@ import { KiiThousandsSuffixPipe } from './pipes/kii-thousands-suffix.pipe';
   imports: [
     CommonModule,
     RouterModule,
+    GoogleChartsModule.forRoot(),
     KiiMainModule,
     KiiTranslateModule.forChild(),
     KiiFormModule,

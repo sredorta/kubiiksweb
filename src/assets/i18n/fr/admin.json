@@ -53,13 +53,24 @@
     "admin.stats.axis.page"            : "Nom de la page", 
     "admin.stats.axis.social"          : "Réseau social",
     "admin.stats.confirm.title"        : "Supprimer les statistiques ?",
-    "admin.stats.confirm.text"         : "Etes-vous sûr de vouloir effacer toutes les statistiques ? Cette opération est irréversible !",
+    "admin.stats.confirm.text"         : "Etes-vous sûr de vouloir effacer toutes les statistiques ?",
     "admin.stats.reset"                : "Supprimer les statistiques",
     "admin.stats.apps_over_time.title" : "Installations de la app",
     "admin.stats.apps_over_time.subtitle" : "Evolution des installations de la app",
     "admin.stats.newsletter_over_time.title" : "Bulletins d'information",
     "admin.stats.newsletter_over_time.subtitle" : "Evolution des inscrits aux bulletins d'information",
     "admin.stats.axis.app"             : "Installations",
-    "admin.stats.axis.newsletter"      : "Inscriptions"
+    "admin.stats.axis.newsletter"      : "Inscriptions",
+    "admin.stats.day"    : "Jour",
+    "admin.stats.all"    : "Tous",
+    "admin.stats.monday" : "Lundi",
+    "admin.stats.tuesday": "Mardi",
+    "admin.stats.wednesday": "Mercredi",
+    "admin.stats.thursday" : "Jeudi",
+    "admin.stats.friday" : "Vendredi",
+    "admin.stats.saturday": "Samedi",
+    "admin.stats.sunday" : "Dimanche",
+    "admin.stats.language" : "Langue",
+    "admin.stats.social.network" : "Réseau social"
 
 }
