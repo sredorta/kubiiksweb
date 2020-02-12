@@ -8,6 +8,11 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import { environment } from 'src/environments/environment';
+import { RESPONSE } from '@nguniversal/express-engine/tokens';
+
+var minify = require('html-minifier-terser').minify;
+
+
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
@@ -59,7 +64,52 @@ export function app() {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    let lang = "";
+    const url : string = <string>req.url;
+    const found = url.match(/\/[a-z][a-z]\//g);
+    if (found) {
+      if (found[0])
+        lang = found[0].replace(/\//gi, '');
+        if (environment.languages.indexOf(lang)<0) {
+          lang = environment.languages[0];
+        }
+    } else {
+        lang = (req.acceptsLanguages(environment.languages) || environment.languages[0]) as string;
+    }
+    res.set('Content-Language', lang);
+    res.render(indexHtml, { req, res, providers: [
+      { provide: APP_BASE_HREF, useValue: req.baseUrl },
+      {provide: RESPONSE,useValue: res}] },
+      (error,html) => {
+        html = html.replace(/< *html +lang="[a-z][a-z]" *>/, "<html lang=\"" + lang + "\">");
+        //TODO: REMOVE FOR PROD !!!
+        console.log("HTML =>>");
+        console.log(html.substr(0,200));
+        console.log("-----------METAS--------------------");
+        for (let line of html.split('\n')) {
+          if (line.includes('meta ')) {
+            for (let line2 of line.split('<meta')) {
+              if (!line2.includes('*/'))
+              console.log('<meta ' + line2);
+            }
+          }
+        }
+        console.log("-------------------------------");
+        if (error) {
+          res.statusCode = 404;
+        }
+        res.send(minify(html, {
+          removeAttributeQuotes: true,
+          minifyCSS:true,
+          minifyJS:true,
+          removeComments:true,
+          collapseWhitespace:true,
+          conservativeCollapse:true,
+          continueOnParseError:true
+        }));
+
+      }
+      );
   });
 
   return server;

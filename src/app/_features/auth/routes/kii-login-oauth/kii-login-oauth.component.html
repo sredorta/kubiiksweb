@@ -1,20 +1,18 @@
-<kii-spinner-overlay [show]="loading">
-  <div *ngIf="showTerms" class="oauth-wrp">
-      <div class="content">
-
-      <mat-card>
-          <mat-card-header>
-              <div mat-card-avatar class="logo"></div>
-              <mat-card-title>{{'a.legal.user-data.t' | translate | async}}</mat-card-title>
-              <mat-card-subtitle>{{'a.legal.user-data.s' | translate | async}}</mat-card-subtitle>
-          </mat-card-header>
-          <p>{{user.firstName}},</p>
-          <p>{{'a.legal.user-data.m' | translate | async}}</p>
-          <kii-oauth-form (kiiOnSubmit)="onSubmit($event)"></kii-oauth-form>
-      </mat-card>        
-
-  </div>  
-  <div *ngIf="!showTerms" class="oauth-wrp"></div>
-
+<div class="oauth-wrp">
+    <kii-spinner-overlay [show]="loading">
+    <div  class="content-wrp">
+        <div class="content" *ngIf="showTerms">
+            <mat-card>
+                <mat-card-header>
+                    <div mat-card-avatar class="logo"></div>
+                    <mat-card-title>{{'a.legal.user-data.t' | translate | async}}</mat-card-title>
+                    <mat-card-subtitle>{{'a.legal.user-data.s' | translate | async}}</mat-card-subtitle>
+                </mat-card-header>
+                <p>{{user.firstName}},</p>
+                <p>{{'a.legal.user-data.m' | translate | async}}</p>
+                <kii-oauth-form (kiiOnSubmit)="onSubmit($event)"></kii-oauth-form>
+            </mat-card>        
+        </div>  
+    </div>
+    </kii-spinner-overlay>
 </div>
-</kii-spinner-overlay>

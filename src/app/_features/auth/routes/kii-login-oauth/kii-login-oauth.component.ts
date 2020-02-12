@@ -61,7 +61,6 @@ export class KiiLoginOauthComponent extends KiiBaseAbstract implements OnInit {
         }
         console.log("WE SAVED THE TOKEN", this.token);
         //We got a temporary token... but we still need to check if all parameters are valid in the user
-        this.loading = true;
         this.addSubscriber(this.kiiApiAuth.oauth2Validate().subscribe(res => {
             console.log("RESULT",res);
             this.loading = false;
@@ -71,11 +70,10 @@ export class KiiLoginOauthComponent extends KiiBaseAbstract implements OnInit {
             } else {
               console.log("HERE", new User(res.user));
               this.kiiAuth.setLoggedInUser(new User(res.user));
-              this.loading = true;
-              //this.router.navigate([""]);
+              this.router.navigate([""]);
             }
           },(error) => {console.log("Auth2 validate error",error);}
-          , () => {}
+          , () => {this.loading=false;}
         ));
       }));
   }
