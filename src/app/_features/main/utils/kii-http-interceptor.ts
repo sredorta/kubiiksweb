@@ -70,8 +70,8 @@ export class KiiHttpInterceptor implements HttpInterceptor {
                     if (isPlatformBrowser(this._platformId)) {
                         User.removeToken();
                         this.kiiAuth.setLoggedInUser(new User(null));
-                        if (!error.error.message)
-                            error.error.message = this.kiiTrans.getTranslation('m.error.token');
+                        if (!error.error.message) 
+                            error.error.message = this.kiiTrans.translations[this.kiiTrans.getCurrent()]['m.error.token'];
                         this.router.navigate(['/'+this.kiiTrans.getCurrent()+'/auth/login']);
          
                     }

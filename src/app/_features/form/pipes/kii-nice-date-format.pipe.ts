@@ -26,8 +26,8 @@ export class KiiNiceDateFormatPipe implements PipeTransform {
     var dif = Math.floor( ( (Date.now() - _value) / 1000 ) / 86400 );
     if ( dif < 30 ){
       let result = convertToNiceDate(value).split(",");
-      this.subscr = this.translate.getTranslation(result[0], {count: result[1]}).subscribe(res => {
-          obs.next(res);
+      this.subscr = this.translate.getTranslation([{key:result[0], params:{count: result[1]}}]).subscribe(res => {
+          obs.next(res[0]);
       })
     } else{
         var datePipe = new DatePipe("en-US");

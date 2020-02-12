@@ -17,6 +17,12 @@ export interface IKiiLanguage  {
     iso:string;
     code:string;
 }
+
+export interface IKiiTranslation {
+  key:string;
+  params?:any;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -229,18 +235,29 @@ export  class KiiTranslateService  {
   }*/
 
   /**Gets current translated value */
-  getTranslation(key:string,params?:any) {
-    let result  = new BehaviorSubject("");
+  getTranslation(keys : IKiiTranslation[]) {
+    let initial :string[] =[];
+    for (let i=0; i<keys.length; i++) {
+        initial.push("");
+    }
+    let result  = new BehaviorSubject(initial);
     this.subscrGetTrans = this.onLoaded.subscribe(res=> {
-      if (this.translations[this.getCurrent()])
-        if (this.translations[this.getCurrent()][key]) {
-          let str  = this.translations[this.getCurrent()][key];
-          for (let [key, value] of Object.entries(params)) {
-            let regex = new RegExp("\{\{"+key +"\}\}");
-            str = str.replace(regex,String(value));
+      if (this.translations[this.getCurrent()]) {
+        let tmp : string[] = [];
+        for (let elem of keys) {
+          let str = "";
+          if (this.translations[this.getCurrent()][elem.key]) {
+            str  = this.translations[this.getCurrent()][elem.key];
+            if (elem.params)
+              for (let [key, value] of Object.entries(elem.params)) {
+                let regex = new RegExp("\{\{"+key +"\}\}");
+                str = str.replace(regex,String(value));
+              }
           }
-          result.next(str);
-        }  
+          tmp.push(str);
+        }
+          result.next(tmp);
+      }
     })
     return result;
   }
