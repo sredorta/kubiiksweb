@@ -5,6 +5,46 @@ import { MatDialog, MatSliderChange } from '@angular/material';
 import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 import { KiiAdminStatsService } from '../../services/kii-admin-stats.service';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
+import * as deepmerge from 'deepmerge';
+import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
+
+interface IStatWindow {
+  current : number;
+  previous:number;
+}
+
+class StatResult {
+  visits_count : IStatWindow = {current:0,previous:0};
+  visits_duration : IStatWindow = {current:0,previous:0};
+  pages_count : IStatWindow = {current:0,previous:0};
+  pages_per_visit : IStatWindow = {current:0,previous:0};
+  social_click_count : IStatWindow = {current:0,previous:0};
+  chat_click_count : IStatWindow = {current:0,previous:0};
+  chat_duration : IStatWindow = {current:0,previous:0};
+  chat_message_count : IStatWindow = {current:0,previous:0};
+  app_install_count : IStatWindow = {current:0,previous:0};
+
+
+  visits_hours_histogram : any[] = [[],[],[],[],[],[],[],[]];
+  visits_over_day : any[] = [];
+  app_over_day : any [] = [];
+  newsletter_over_day : any = [];
+  referrals_histogram : any[] = [];
+  social_over_day : any = {all:[]};
+  social_histogram : any[] = [];
+  pages_visited_histogram : any = {};
+  languages : any[] = [];
+
+  constructor(obj: any | null) {
+      if (obj) {
+          Object.keys(this).forEach(key => {
+              if (obj[key] != undefined) 
+                  this[key] = obj[key];
+          });
+      } 
+  }
+
+}
 
 @Component({
   selector: 'kii-admin-stats',
@@ -13,6 +53,66 @@ import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 })
 export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
 
+
+  /**Days of the analysis */
+  days : number = 7;
+
+  /**When we are loading new analyisis */
+  isDataLoading : boolean = false;
+
+  result : StatResult = new StatResult(null);
+
+  /**Default options for google charts */
+  defaultChartOptions : any = {
+    backgroundColor:'#212121',
+    colors:['#9ccc65','#ffee58','#ffa726','#8d6e63','#78909C'], 
+    vAxis:{
+      textStyle:{
+        color:'white',
+        fontSize:10
+      },
+      baselineColor:'white',
+      titleTextStyle: {
+        color:'white',
+      }
+    }, 
+    hAxis:{
+      textStyle:{
+        color:'white',
+        fontSize:10
+      },
+      baselineColor:'white',
+      titleTextStyle: {
+        color:'white',
+      }
+    },   
+    legend: {position:'none'},
+    chartArea: {left:50,right:20,top:10,bottom:70,width: '100%', 'height': '100%'},
+    titleTextStyle: {
+      color:'white',
+      fontSize:18,
+      bold:true
+    },
+  }
+
+  pagesVisitedHistogram : any[] = [];
+
+
+  visitsOverTimeOptions : any = {};
+  socialOverTimeOptions : any = {};
+  histoHoursVisitsOptions : any = {};
+  referralsOptions : any = {};
+  histoPagesOptions : any = {};
+  languagesOptions : any = {};
+  socialHistoOptions : any = {};
+  appOverTimeOptions : any = {};
+  newsletterOverTimeOptions : any = {};
+  dayOfWeek : number = 7;
+  language : string = this.translate.getCurrent();
+  languagesAvailable : any = this.translate.getSupportedLanguages();
+  socialTypes : any[] = [];
+  social : string = "all";
+  axisNames : any = {};
 
 
   constructor(
@@ -38,28 +138,10 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
       {key:"admin.stats.axis.social"},
       {key:"admin.stats.axis.app"}, 
       {key:"admin.stats.axis.newsletter"}]).subscribe(res => {
-      console.log(res);
+        console.log(res);
+      this.axisNames = res;
     })
-    /*
-    this.addSubscriber(
-      this.translate.getTranslations(["admin.stats.axis.visits","stats.axis.day"]).subscribe(res => {
-          console.log("GOT TRANSLATION :",res);
-    })
-    )*/
-/*    this.addSubscriber(
-      this.trans.get(["kiilib.stats.axis.visits", "kiilib.stats.axis.day", "kiilib.stats.axis.day_hours", "kiilib.stats.axis.traffic", "kiilib.stats.axis.page","kiilib.stats.axis.social","kiilib.stats.axis.app", "kiilib.stats.axis.newsletter"]).subscribe(res => {
-        this.axisNames = res;
-      })
-    );
-    this.addSubscriber(
-      this.kiiApiLang.onChange().subscribe(res => {
-        this.addSubscriber(
-          this.trans.get(["kiilib.stats.axis.visits", "kiilib.stats.axis.day", "kiilib.stats.axis.day_hours", "kiilib.stats.axis.traffic", "kiilib.stats.axis.page","kiilib.stats.axis.social","kiilib.stats.axis.app", "kiilib.stats.axis.newsletter"]).subscribe(res => {
-            this.axisNames = res;
-          })
-        )
-      })
-    )
+
     this.histoHoursVisitsOptions = deepmerge.all([this.defaultChartOptions,
       {
         bar: {
@@ -68,10 +150,10 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
         hAxis:{
           slantedText:true,
           slantedTextAngle:90,
-          title: this.axisNames['kiilib.stats.axis.day_hours']
+          title: this.axisNames['admin.stats.axis.day_hours']
         },
         vAxis: {
-          title: this.axisNames['kiilib.stats.axis.visits']
+          title: this.axisNames['admin.stats.axis.visits']
         }
       }
     ]);
@@ -83,10 +165,10 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
         hAxis:{
           slantedText:true,
           slantedTextAngle:90,
-          title: this.axisNames['kiilib.stats.axis.traffic']
+          title: this.axisNames['admin.stats.axis.traffic']
         },
         vAxis: {
-          title: this.axisNames['kiilib.stats.axis.visits']
+          title: this.axisNames['admin.stats.axis.visits']
         },
         chartArea: {left:50,right:20,top:10,bottom:200,width: '100%', 'height': '100%'},
       }
@@ -99,10 +181,10 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
         hAxis:{
           slantedText:true,
           slantedTextAngle:90,
-          title: this.axisNames['kiilib.stats.axis.page']
+          title: this.axisNames['admin.stats.axis.page']
         },
         vAxis: {
-          title: this.axisNames['kiilib.stats.axis.visits']
+          title: this.axisNames['admin.stats.axis.visits']
         },
         chartArea: {left:50,right:20,top:10,bottom:200,width: '100%', 'height': '100%'},
       }
@@ -125,7 +207,7 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
       {
         curveType: 'function',
         hAxis: {
-          title: this.axisNames['kiilib.stats.axis.day'],
+          title: this.axisNames['admin.stats.axis.day'],
           format:'d/M/yy',
           slantedText:true,
           slantedTextAngle:90
@@ -150,7 +232,7 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
           groupWidth: '90%'
         },
         hAxis:{
-          title: this.axisNames['kiilib.stats.axis.social'],
+          title: this.axisNames['admin.stats.axis.social'],
           slantedText:true,
           slantedTextAngle:90
         },
@@ -170,7 +252,7 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
           slantedTextAngle:90
         },
         vAxis: {
-          title: this.axisNames['kiilib.stats.axis.app']
+          title: this.axisNames['admin.stats.axis.app']
         }
       }
     ]);
@@ -185,12 +267,12 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
           slantedTextAngle:90
         },
         vAxis: {
-          title: this.axisNames['kiilib.stats.axis.newsletter']
+          title: this.axisNames['admin.stats.axis.newsletter']
         }
       }
     ]);
 
-    this.generateStats();*/
+    this.generateStats();
   }
 
   //When we change the period we recompute the stats
@@ -201,9 +283,9 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
 
   /**Generates the stats */
   private generateStats() {
-  /*  this.isDataLoading = true;
+    this.isDataLoading = true;
     this.addSubscriber(
-      this.kiiApiStats.analyze(this.days).subscribe(res => {
+      this.stats.analyze(this.days).subscribe(res => {
         console.log("STATS", res);
         //Convert dates into Date objects
         for (let elem of res.visits_over_day) {
@@ -227,28 +309,28 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
         this.isDataLoading = false;
       },
       () => this.isDataLoading = false)
-    )*/
+    )
   }
 
 
   /**When we delete all elements */
   onDelete() {
-  /*  let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
+    let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
       panelClass: "admin-theme",
-      data: {title: "kiilib.stats.confirm.title", text: "kiilib.stats.confirm.text"}
+      data: {text: "admin.stats.confirm.text"}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.isDataLoading = true;
 
         this.addSubscriber(
-          this.kiiApiStats.reset().subscribe(res => {
+          this.stats.reset().subscribe(res => {
             this.result = new StatResult(null);
             this.isDataLoading = false;
           }, () => this.isDataLoading = false)
         )
       }
-    });*/
+    });
   }
 
 }

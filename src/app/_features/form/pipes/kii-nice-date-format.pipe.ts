@@ -27,7 +27,7 @@ export class KiiNiceDateFormatPipe implements PipeTransform {
     if ( dif < 30 ){
       let result = convertToNiceDate(value).split(",");
       this.subscr = this.translate.getTranslation([{key:result[0], params:{count: result[1]}}]).subscribe(res => {
-          obs.next(res[0]);
+          obs.next(res[result[0]]);
       })
     } else{
         var datePipe = new DatePipe("en-US");

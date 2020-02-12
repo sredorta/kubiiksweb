@@ -236,14 +236,14 @@ export  class KiiTranslateService  {
 
   /**Gets current translated value */
   getTranslation(keys : IKiiTranslation[]) {
-    let initial :string[] =[];
-    for (let i=0; i<keys.length; i++) {
-        initial.push("");
+    let initial : any ={};
+    for (let elem of keys) {
+        initial[elem.key] = "";
     }
     let result  = new BehaviorSubject(initial);
     this.subscrGetTrans = this.onLoaded.subscribe(res=> {
       if (this.translations[this.getCurrent()]) {
-        let tmp : string[] = [];
+        let tmp : any = {};
         for (let elem of keys) {
           let str = "";
           if (this.translations[this.getCurrent()][elem.key]) {
@@ -254,9 +254,9 @@ export  class KiiTranslateService  {
                 str = str.replace(regex,String(value));
               }
           }
-          tmp.push(str);
+          tmp[elem.key] = str;
         }
-          result.next(tmp);
+        result.next(tmp);
       }
     })
     return result;
