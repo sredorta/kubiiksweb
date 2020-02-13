@@ -31,4 +31,14 @@ export class Setting {
         return this._isLoaded;
     }
 
+    /**Returns a setting filtered by key */
+    public static getByKey(key:string, settings:Setting[]) {
+            if (settings.length<=0) {
+              return new Setting(null);
+            }
+            let setting = settings.find(obj => obj.key == key);
+            if (!setting) return new Setting(null);
+            return setting;
+    }  
+
 }

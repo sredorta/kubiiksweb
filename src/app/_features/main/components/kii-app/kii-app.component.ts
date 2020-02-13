@@ -18,6 +18,7 @@ import { KiiMainStatsService } from '../../services/kii-main-stats.service';
 import { StatAction } from '../../models/stat';
 import { KiiMainDataService } from '../../services/kii-main-data.service';
 import { KiiMainSettingService } from '../../services/kii-main-setting.service';
+import { SEO } from '../../models/seo';
 
 @Component({
   selector: 'kii-app',
@@ -27,7 +28,8 @@ import { KiiMainSettingService } from '../../services/kii-main-setting.service';
 export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
   showPopup : boolean = false;
-
+  public schemaSite : any = {};
+  public schemaCorporation: any = {};
 
   constructor(@Inject(PLATFORM_ID) private platform: any,
   private kiiTrans: KiiTranslateService,
@@ -60,11 +62,16 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       )
 
     //When settings are available open popup if enabled
-    let popup =  this.kiiSettings.onChange.subscribe(res => {
-        if (this.kiiSettings.loaded)
+    let settingsSubs =  this.kiiSettings.onChange.subscribe(res => {
+        if (this.kiiSettings.loaded) {
           this.openPopupDialog();
+          this.schemaSite = SEO.schemaInit('site',this.kiiSettings.getValue());
+          this.schemaCorporation = SEO.schemaInit('corporation',this.kiiSettings.getValue());
+          console.log("SCHEMASITE:", this.schemaSite);
+          console.log("SCHEMACORP:", this.schemaCorporation);
+        }
     }, () => {
-        popup.unsubscribe();
+        settingsSubs.unsubscribe();
     })
 
 

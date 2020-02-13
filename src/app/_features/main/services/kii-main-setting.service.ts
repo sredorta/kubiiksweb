@@ -47,6 +47,11 @@ export class KiiMainSettingService extends KiiBaseAbstract {
       return this._settings;
     }
 
+    /**Returns current value of settings */
+    getValue() {
+      return this._settings.value;
+    }
+
 
     /**Returns a setting filtered by key */
     public getByKey(key:string) {

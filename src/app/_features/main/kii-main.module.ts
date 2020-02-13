@@ -45,7 +45,7 @@ import { KiiShareComponent } from './components/kii-share/kii-share.component';
 import { ShareModule } from '@ngx-share/core';
 import { KiiHeaderComponent } from './components/kii-header/kii-header.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientJsonpModule } from '@angular/common/http';
 import { KiiHttpInterceptor } from './utils/kii-http-interceptor';
 import { KiiHttpErrorComponent } from './components/kii-http-error/kii-http-error.component';
 import { KiiMainUserService } from './services/kii-main-user.service';
@@ -55,6 +55,7 @@ import { KiiMainStatsService } from './services/kii-main-stats.service';
 import { KiiMainDataService } from './services/kii-main-data.service';
 import { KiiMainSettingService } from './services/kii-main-setting.service';
 import { KiiPopupDialogComponent } from './components/kii-popup-dialog/kii-popup-dialog.component';
+import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 
 
 
@@ -63,6 +64,9 @@ import { KiiPopupDialogComponent } from './components/kii-popup-dialog/kii-popup
     CommonModule,
     FontAwesomeModule,
     ShareModule,
+    HttpClientJsonpModule,
+    //JSON-LD
+    NgxJsonLdModule,
     [ 
       MatDividerModule,
       MatBottomSheetModule,

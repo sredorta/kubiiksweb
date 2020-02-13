@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
 import { KiiTranslateModule } from './_features/translate/kii-translate.module';
 import { KiiTranslateService } from './_features/translate/services/kii-translate.service';
 import { Router, RouterModule } from '@angular/router';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClientJsonpModule } from '@angular/common/http';
 import { KiiMainModule } from './_features/main/kii-main.module';
 import { KiiMainRoutingModule } from './_features/main/kii-main-routing.module';
 import { KiiTranslatePipe } from './_features/translate/pipes/kii-translate.pipe';
@@ -20,6 +20,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BlogModule } from './routes/blog/blog.module';
 import { SidenavComponent } from './routes/sidenav/sidenav.component';
 import { SidenavModule } from './routes/sidenav/sidenav.module';
+
+//MICRODATA JSON-LD
+import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 
 @NgModule({
   declarations: [
