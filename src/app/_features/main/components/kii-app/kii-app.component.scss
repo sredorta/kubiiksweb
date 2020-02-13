@@ -3,3 +3,7 @@
     min-width: 320px;
     position: relative;
 }
+.kii-app-wrp.is-locked {
+    overflow: hidden;
+    max-height: 100vh;
+}

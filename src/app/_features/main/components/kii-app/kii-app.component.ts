@@ -26,9 +26,11 @@ import { KiiMainSettingService } from '../../services/kii-main-setting.service';
 })
 export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
+  showPopup : boolean = false;
+
+
   constructor(@Inject(PLATFORM_ID) private platform: any,
   private kiiTrans: KiiTranslateService,
-  private kiiAuth: KiiMainUserService,
   private viewTrans : KiiViewTransferService,
   private bottomSheet: MatBottomSheet,
   private router : Router,
@@ -130,6 +132,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       if (value != "disabled" && (!storage || !storage.includes(value))) {
         setTimeout(() => {
             console.log("WE ARE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! POPUP NOW!!")
+            this.showPopup = true;
             /*this.dialog.open(KiiPopupDialogComponent, {
               panelClass: '',
               data:  null,

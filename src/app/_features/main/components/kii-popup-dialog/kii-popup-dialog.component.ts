@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'kii-popup-dialog',
@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./kii-popup-dialog.component.scss']
 })
 export class KiiPopupDialogComponent implements OnInit {
+  @Output() onClose = new EventEmitter<boolean>();
+  @Input() show :boolean = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  close() {
+    this.onClose.emit(true);
+
+  }
 }

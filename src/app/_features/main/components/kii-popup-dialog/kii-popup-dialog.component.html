@@ -1,3 +1,6 @@
-<div class="popup-wrp">
-  <p>Hello I'm popup !</p>
+<div class="popup-wrp fcc" [ngClass]="{'show' : show}">
+  <div class="content">
+    <p>Hello I'm popup !</p>
+    <button mat-flat-button (click)="close()">Close me !</button>
+  </div>
 </div>
