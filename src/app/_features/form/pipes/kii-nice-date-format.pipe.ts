@@ -13,7 +13,6 @@ export class KiiNiceDateFormatPipe implements PipeTransform {
   }
 
   ngOnDestroy() {
-    console.log("DESTROYING PIPE")
     if (this.subscr) this.subscr.unsubscribe();
   }
 

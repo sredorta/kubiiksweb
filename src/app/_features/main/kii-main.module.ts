@@ -51,6 +51,8 @@ import { KiiMainUserService } from './services/kii-main-user.service';
 import { SidenavModule } from 'src/app/routes/sidenav/sidenav.module';
 import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.component';
 import { KiiMainStatsService } from './services/kii-main-stats.service';
+import { KiiMainDataService } from './services/kii-main-data.service';
+import { KiiMainSettingService } from './services/kii-main-setting.service';
 
 
 
@@ -121,7 +123,7 @@ export class KiiMainModule {
   return {
     ngModule: KiiMainModule,
     providers: [
-      KiiMainUserService, KiiMainStatsService
+      KiiMainUserService, KiiMainStatsService, KiiMainDataService, KiiMainSettingService
     ],
   }
 }

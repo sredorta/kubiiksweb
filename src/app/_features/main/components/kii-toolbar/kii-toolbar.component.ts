@@ -20,7 +20,6 @@ export class KiiToolbarComponent extends KiiBaseAbstract implements OnInit {
     this.icons['login'] = faSignInAlt;
     this.addSubscriber(
       this.kiiAuth.getLoggedInUser().subscribe(res => {
-        console.log("loggedInUser",res);
         this.loggedInUser = res;
       })
     )

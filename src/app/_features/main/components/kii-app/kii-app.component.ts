@@ -16,6 +16,7 @@ import { KiiMainUserService } from '../../services/kii-main-user.service';
 import { ViewportScrollPosition } from '@angular/cdk/scrolling';
 import { KiiMainStatsService } from '../../services/kii-main-stats.service';
 import { StatAction } from '../../models/stat';
+import { KiiMainDataService } from '../../services/kii-main-data.service';
 
 @Component({
   selector: 'kii-app',
@@ -31,7 +32,8 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private bottomSheet: MatBottomSheet,
   private router : Router,
   private cookies : KiiMainCookiesService,
-  private stats : KiiMainStatsService
+  private stats : KiiMainStatsService,
+  private data: KiiMainDataService
   ) { super() }
 
   ngOnInit() {
@@ -40,14 +42,18 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     //Sets language required context
     this.kiiTrans.setRequiredContext(['main']);
 
-    //If we change language we reload auth user as it translates alerts
+
+    //Load initial data
+    this.data.loadInitialData();
+    
+
+
+    //If we change language we reload all data with new translations
     if (isPlatformBrowser(this.platform))
       this.addSubscriber(
         this.kiiTrans.onChange.subscribe(res => {
-          if (User.hasToken())
-            this.kiiAuth.getAuthUser().subscribe(res => {
-              this.kiiAuth.setLoggedInUser(new User(res));
-            })
+          console.log("TRANSLATION CHANGED",res);
+          this.data.loadInitialData();
         })
       )
 
@@ -69,24 +75,12 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
         })
     );
 
-    //Get current user if any
-    if (isPlatformBrowser(this.platform)) {
-      if (User.hasToken()) 
-        this.addSubscriber(
-          this.kiiAuth.getAuthUser().subscribe(res => {
-            this.kiiAuth.setLoggedInUser(new User(res))
-          })
-        )
-    }
-
     //Handle pages stats
-    //this.stats.send(StatAction.NAVIGATION_START ,this.router.url);
     this.addSubscriber(
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.stats.send(StatAction.NAVIGATION_START ,this.router.url);
         }
-        //console.log(event);
       })
     )
   }

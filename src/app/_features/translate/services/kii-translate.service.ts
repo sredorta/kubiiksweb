@@ -83,7 +83,7 @@ export  class KiiTranslateService  {
           let lang = this.getFromUrl(res.url);
           if (lang != this.currentLang) {
             this.changeLanguage(lang);
-          }
+          } 
         })
     }
 
@@ -92,7 +92,6 @@ export  class KiiTranslateService  {
   public changeLanguage(lang:string) {
     this.currentLang = this.sanitize(lang);
     this.loadTranslation(this.requiredContext,true);
-    this.onChange.next(this.currentLang);
     this.router.navigate(['/'+this.getCurrent()+'/' +this.router.url.slice(4)]);
   }
 
@@ -181,7 +180,7 @@ export  class KiiTranslateService  {
             if (isLanguageChange) {
               this.onChange.next(this.currentLang);
             }
-            console.log("Loaded",this.translations);
+            //console.log("Loaded",this.translations);
         })
   }
 

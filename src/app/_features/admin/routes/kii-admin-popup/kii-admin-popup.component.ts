@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSlideToggle, MatSlideToggleChange } from '@angular/material';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
+import { KiiMainSettingService } from 'src/app/_features/main/services/kii-main-setting.service';
+import { Setting } from 'src/app/_features/main/models/setting';
 
 @Component({
   selector: 'app-kii-admin-popup',
@@ -10,21 +12,29 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 })
 export class KiiAdminPopupComponent extends KiiBaseAbstract implements OnInit {
 
-  enabled : boolean;
-  //setting : Setting;
+  enabled : boolean = false;
+  setting : Setting;
   isLoading:boolean = false;
   @ViewChild(MatSlideToggle, {static:false}) toggle : MatSlideToggle;
 
-  constructor(private kiiTrans: KiiTranslateService) { 
+  constructor(
+    private kiiTrans: KiiTranslateService,
+    private kiiSetting: KiiMainSettingService,
+    ) { 
     super();
-    /*this.setting = this.kiiApiSetting.getByKey("popup-show");
-      if (this.setting.value != "disabled") {
-        this.enabled = true;
-      }*/
   }
 
   ngOnInit() {
     this.kiiTrans.setRequiredContext(['main','auth','form','admin']);
+    this.addSubscriber(
+      this.kiiSetting.onChange.subscribe(res => {
+        this.setting = this.kiiSetting.getByKey("popup-show");
+        console.log(this.setting);
+        if (this.setting.value != "disabled") {
+          this.enabled = true;
+        }
+      })
+    )
   }
 
   onStatusChange(value: MatSlideToggleChange) {
