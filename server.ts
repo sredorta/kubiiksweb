@@ -98,7 +98,8 @@ export function app() {
         if (error) {
           res.statusCode = 404;
         }
-        res.send(minify(html, {
+        res.send(html);
+       /* res.send(minify(html, {
           removeAttributeQuotes: true,
           minifyCSS:true,
           minifyJS:true,
@@ -106,7 +107,7 @@ export function app() {
           collapseWhitespace:true,
           conservativeCollapse:true,
           continueOnParseError:true
-        }));
+        }));*/
 
       }
       );

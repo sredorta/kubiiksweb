@@ -70,6 +70,7 @@ import { KiiMobileFormatPipe } from './pipes/kii-mobile-format.pipe';
 import { KiiAdminPopupComponent } from './routes/kii-admin-popup/kii-admin-popup.component';
 import { KiiStatsIndicatorComponent } from './components/kii-stats-indicator/kii-stats-indicator.component';
 import { KiiThousandsSuffixPipe } from './pipes/kii-thousands-suffix.pipe';
+import { KiiAdminThemeComponent } from './components/kii-admin-theme/kii-admin-theme.component';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { KiiThousandsSuffixPipe } from './pipes/kii-thousands-suffix.pipe';
     ]
   ],
   declarations: [
+    KiiAdminThemeComponent,
     KiiAdminMenuComponent,
     KiiAdminStatsComponent,
     KiiStatsIndicatorComponent,
