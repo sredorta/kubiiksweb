@@ -4,6 +4,7 @@ import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { KiiMainSettingService } from 'src/app/_features/main/services/kii-main-setting.service';
 import { Setting } from 'src/app/_features/main/models/setting';
+import { KiiAdminSettingService } from '../../services/kii-admin-setting.service';
 
 @Component({
   selector: 'app-kii-admin-popup',
@@ -19,7 +20,8 @@ export class KiiAdminPopupComponent extends KiiBaseAbstract implements OnInit {
 
   constructor(
     private kiiTrans: KiiTranslateService,
-    private kiiSetting: KiiMainSettingService,
+    private kiiMainSetting: KiiMainSettingService,
+    private KiiAdminSetting: KiiAdminSettingService
     ) { 
     super();
   }
@@ -27,10 +29,9 @@ export class KiiAdminPopupComponent extends KiiBaseAbstract implements OnInit {
   ngOnInit() {
     this.kiiTrans.setRequiredContext(['main','auth','form','admin']);
     this.addSubscriber(
-      this.kiiSetting.onChange.subscribe(res => {
-        this.setting = this.kiiSetting.getByKey("popup-show");
-        console.log(this.setting);
-        if (this.setting.value != "disabled") {
+      this.kiiMainSetting.onChange.subscribe(res => {
+        this.setting = this.kiiMainSetting.getByKey("popup-show");
+        if (this.setting.exists() && this.setting.value != "disabled") {
           this.enabled = true;
         }
       })
@@ -38,7 +39,7 @@ export class KiiAdminPopupComponent extends KiiBaseAbstract implements OnInit {
   }
 
   onStatusChange(value: MatSlideToggleChange) {
-/*    if (value.checked == true) {
+    if (value.checked == true) {
       this.setting.value = Math.random().toString(36).replace(/[^a-z]+/g, '');
     } else {
       this.setting.value = "disabled";
@@ -46,7 +47,7 @@ export class KiiAdminPopupComponent extends KiiBaseAbstract implements OnInit {
 
     this.isLoading = true;
     this.addSubscriber(
-      this.kiiApiSetting.updateDialog(this.setting).subscribe(res => {
+      this.KiiAdminSetting.updateDialog(this.setting).subscribe(res => {
         this.isLoading = false;
       },
       error => {
@@ -54,7 +55,7 @@ export class KiiAdminPopupComponent extends KiiBaseAbstract implements OnInit {
         this.isLoading = false;
       },
        () => this.isLoading = false)
-    );*/
+    );
   }
 
 }

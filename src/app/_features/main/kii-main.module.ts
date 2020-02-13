@@ -23,6 +23,7 @@ import {
   MatBadgeModule,
   MatMenuItem,
   MatIconModule,
+  MatDialog,
 } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -53,6 +54,7 @@ import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.compon
 import { KiiMainStatsService } from './services/kii-main-stats.service';
 import { KiiMainDataService } from './services/kii-main-data.service';
 import { KiiMainSettingService } from './services/kii-main-setting.service';
+import { KiiPopupDialogComponent } from './components/kii-popup-dialog/kii-popup-dialog.component';
 
 
 
@@ -69,12 +71,13 @@ import { KiiMainSettingService } from './services/kii-main-setting.service';
       MatRippleModule,
       MatToolbarModule,
       MatBadgeModule,
-      MatIconModule
+      MatIconModule,
     ],
     KiiTranslateModule.forChild(),
     RouterModule,
   ],
   declarations: [
+    KiiPopupDialogComponent,
     KiiShareComponent,
     KiiSpinnerComponent,
     KiiSpinnerOverlayComponent,
@@ -115,7 +118,7 @@ import { KiiMainSettingService } from './services/kii-main-setting.service';
     MatRippleModule,
     MatToolbarModule,
     MatBadgeModule,
-    MatIconModule
+    MatIconModule,
   ]
 })
 export class KiiMainModule { 

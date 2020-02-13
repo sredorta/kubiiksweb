@@ -17,6 +17,7 @@ import { ViewportScrollPosition } from '@angular/cdk/scrolling';
 import { KiiMainStatsService } from '../../services/kii-main-stats.service';
 import { StatAction } from '../../models/stat';
 import { KiiMainDataService } from '../../services/kii-main-data.service';
+import { KiiMainSettingService } from '../../services/kii-main-setting.service';
 
 @Component({
   selector: 'kii-app',
@@ -33,10 +34,12 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private router : Router,
   private cookies : KiiMainCookiesService,
   private stats : KiiMainStatsService,
-  private data: KiiMainDataService
+  private data: KiiMainDataService,
+  private kiiSettings: KiiMainSettingService
   ) { super() }
 
   ngOnInit() {
+    console.log("KIIAPP ONINIT");
     this.viewTrans.scroll();
 
     //Sets language required context
@@ -45,9 +48,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
     //Load initial data
     this.data.loadInitialData();
-    
-
-
     //If we change language we reload all data with new translations
     if (isPlatformBrowser(this.platform))
       this.addSubscriber(
@@ -56,6 +56,15 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
           this.data.loadInitialData();
         })
       )
+
+    //When settings are available open popup if enabled
+    let popup =  this.kiiSettings.onChange.subscribe(res => {
+        if (this.kiiSettings.loaded)
+          this.openPopupDialog();
+    }, () => {
+        popup.unsubscribe();
+    })
+
 
 
     //Handle cookies
@@ -84,6 +93,8 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       })
     )
   }
+
+
   //Detect when user closes the app so that we can save end-time of the session
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -108,6 +119,28 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
         //If our current route is /auth/cookies then navigate back
         //if (this.router.url.includes('cookies')) this.location.back();
       })    
+  }
+
+  openPopupDialog() {
+    console.log("OPENING DIALOG");
+    if (isPlatformBrowser(this.platform)) {
+      //Get the popup setting from localstorage
+      let storage = localStorage.getItem("popup");
+      let value = this.kiiSettings.getByKey("popup-show").value;
+      if (value != "disabled" && (!storage || !storage.includes(value))) {
+        setTimeout(() => {
+            console.log("WE ARE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! POPUP NOW!!")
+            /*this.dialog.open(KiiPopupDialogComponent, {
+              panelClass: '',
+              data:  null,
+              maxHeight:'90vh',
+              minWidth:'320px'
+            });*/
+        },1000);
+        if (this.cookies.areAccepted())
+          localStorage.setItem("popup", value );
+      }
+    }
   }
 
 

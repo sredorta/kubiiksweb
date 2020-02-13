@@ -20,7 +20,12 @@ export class KiiMainSettingService extends KiiBaseAbstract {
 
   /**Contains current settings loaded */
   private _settings = new BehaviorSubject<Setting[]>([]);
+
+  /**Provides setting changements */
   public onChange = new BehaviorSubject<boolean>(true);
+
+  /**When settings are loaded */
+  public loaded : boolean = false;
 
 
   constructor(
@@ -31,7 +36,10 @@ export class KiiMainSettingService extends KiiBaseAbstract {
     /**Sets settings */
     setSettings(settings:Setting[]) {
       this._settings.next(settings);
-      this.onChange.next(!this.onChange.value);
+      if (settings.length>0) {
+        this.loaded = true;
+        this.onChange.next(!this.onChange.value);
+      }
     }
 
     /**Gets all settings */
@@ -49,6 +57,5 @@ export class KiiMainSettingService extends KiiBaseAbstract {
       if (!setting) return new Setting(null);
       return setting;
     }  
-
 
 }
