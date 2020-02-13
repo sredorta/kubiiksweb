@@ -1,6 +1,6 @@
 <div class="popup-wrp fcc" [ngClass]="{'show' : show}">
   <div class="content">
     <p>Hello I'm popup !</p>
-    <button mat-flat-button (click)="close()">Close me !</button>
+    <button mat-flat-button (click)="close()">{{'m.popup.close' | translate | async}}</button>
   </div>
 </div>

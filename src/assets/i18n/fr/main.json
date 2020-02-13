@@ -38,5 +38,7 @@
     "m.minutesago.more"    : "Il y a {{count}} minutes",
     "m.hoursago.more"      : "Il y a {{count}} heures",
     "m.daysago.more"       : "Il y a {{count}} jours",
-    "m.weeksago.more"      : "Il y a {{count}} semaines"
+    "m.weeksago.more"      : "Il y a {{count}} semaines",
+
+    "m.popup.close"         : "Acceder au site"
 }
