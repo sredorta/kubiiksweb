@@ -17,7 +17,7 @@ export class SEO {
             '@context': 'http://schema.org',
             '@type': 'Corporation',
             '@id':  Setting.getByKey('url',settings).value.replace('www','corporation'),
-            'description': Setting.getByKey('home',settings).value,
+            'description': Setting.getByKey('description',settings).value,
             'url': Setting.getByKey('url',settings).value,
             'address': {
                 '@type': "PostalAddress",

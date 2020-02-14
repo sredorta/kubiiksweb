@@ -67,7 +67,6 @@ export class KiiMainDataService extends KiiBaseAbstract {
       this.addSubscriber(
         this.http.get<_IInitialData>(environment.apiURL + '/initial').subscribe(res => {
           if (isPlatformServer(this._platformId)) {
-            console.log("SAVING INITIAL TO TRANSFER STATE !");
             this.transfer.set(key, res);
           }
           this._update(res);

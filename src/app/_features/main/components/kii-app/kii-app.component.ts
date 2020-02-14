@@ -67,8 +67,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
           this.openPopupDialog();
           this.schemaSite = SEO.schemaInit('site',this.kiiSettings.getValue());
           this.schemaCorporation = SEO.schemaInit('corporation',this.kiiSettings.getValue());
-          console.log("SCHEMASITE:", this.schemaSite);
-          console.log("SCHEMACORP:", this.schemaCorporation);
+          console.log("CORP",this.schemaCorporation);
         }
     }, () => {
         settingsSubs.unsubscribe();

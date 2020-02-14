@@ -5,6 +5,8 @@ import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-use
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { Router } from '@angular/router';
+import { KiiMainSettingService } from 'src/app/_features/main/services/kii-main-setting.service';
+import { SEO } from 'src/app/_features/main/models/seo';
 
 @Component({
   selector: 'kii-contact',
@@ -16,9 +18,13 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
   loggedInUser = new User(null);
   icons = [];
 
+  schemaOrganization : any = {};
+
+
   constructor(
     private kiiTrans: KiiTranslateService,
     private kiiAuth: KiiMainUserService, 
+    private kiiSettings: KiiMainSettingService,
     private router: Router,
     ) {super(); }
 
@@ -27,7 +33,12 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     this.icons['close'] = faTimes;
 
     this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => this.loggedInUser = res));
-
+    //Add contact schema
+    this.addSubscriber (
+      this.kiiSettings.onChange.subscribe(res => {
+          this.schemaOrganization = SEO.schemaInit("localBusiness", this.kiiSettings.getValue());
+      })
+    )
   }
 
   logout() {
