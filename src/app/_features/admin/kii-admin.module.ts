@@ -71,6 +71,8 @@ import { KiiAdminPopupComponent } from './routes/kii-admin-popup/kii-admin-popup
 import { KiiStatsIndicatorComponent } from './components/kii-stats-indicator/kii-stats-indicator.component';
 import { KiiThousandsSuffixPipe } from './pipes/kii-thousands-suffix.pipe';
 import { KiiAdminThemeComponent } from './components/kii-admin-theme/kii-admin-theme.component';
+import { KiiAdminSettingService } from './services/kii-admin-setting.service';
+import { KiiAdminSettingsComponent } from './routes/kii-admin-settings/kii-admin-settings.component';
 
 
 @NgModule({
@@ -91,6 +93,7 @@ import { KiiAdminThemeComponent } from './components/kii-admin-theme/kii-admin-t
   declarations: [
     KiiAdminThemeComponent,
     KiiAdminMenuComponent,
+    KiiAdminSettingsComponent,
     KiiAdminStatsComponent,
     KiiStatsIndicatorComponent,
     KiiAdminUsersComponent,
