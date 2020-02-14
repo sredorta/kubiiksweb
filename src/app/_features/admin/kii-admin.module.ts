@@ -73,6 +73,7 @@ import { KiiThousandsSuffixPipe } from './pipes/kii-thousands-suffix.pipe';
 import { KiiAdminThemeComponent } from './components/kii-admin-theme/kii-admin-theme.component';
 import { KiiAdminSettingService } from './services/kii-admin-setting.service';
 import { KiiAdminSettingsComponent } from './routes/kii-admin-settings/kii-admin-settings.component';
+import { KiiSettingItemComponent } from './components/kii-setting-item/kii-setting-item.component';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { KiiAdminSettingsComponent } from './routes/kii-admin-settings/kii-admin
     KiiAdminThemeComponent,
     KiiAdminMenuComponent,
     KiiAdminSettingsComponent,
+    KiiSettingItemComponent,
     KiiAdminStatsComponent,
     KiiStatsIndicatorComponent,
     KiiAdminUsersComponent,
