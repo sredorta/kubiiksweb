@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons/faFacebookF';
 import { faInstagram}  from '@fortawesome/free-brands-svg-icons/faInstagram';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter';
@@ -10,6 +10,16 @@ import { StatAction } from '../../models/stat';
 import { KiiMainSettingService } from '../../services/kii-main-setting.service';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { Setting } from '../../models/setting';
+
+
+export interface IFooterContact {
+    phone : string,
+    email: string,
+    addressStreet:string,
+    addressPostal:string,
+    addressLocality:string,
+    addressCountry:string
+}
 
 
 @Component({
@@ -50,6 +60,16 @@ export class KiiFooterComponent extends KiiBaseAbstract implements OnInit {
   /**Contains current settings */
   settings : Setting[] = [];  
 
+  /**Contains company details */
+  companyDetails: IFooterContact = {
+    phone:"",
+    email:"",
+    addressCountry:"",
+    addressLocality:"",
+    addressPostal:"",
+    addressStreet:""
+  };
+
   constructor(
     private stats: KiiMainStatsService, 
     private kiiSettings : KiiMainSettingService
@@ -61,6 +81,13 @@ export class KiiFooterComponent extends KiiBaseAbstract implements OnInit {
         for (let item of this.links) {
           item.link = this.getLink(item.name);
         }
+        this.companyDetails.phone = Setting.getByKey('telephone',this.kiiSettings.getValue()).value;
+        this.companyDetails.email = Setting.getByKey('email',this.kiiSettings.getValue()).value;
+        this.companyDetails.addressStreet = Setting.getByKey('addressStreet',this.kiiSettings.getValue()).value;
+        this.companyDetails.addressPostal = Setting.getByKey('addressPostal',this.kiiSettings.getValue()).value;
+        this.companyDetails.addressLocality = Setting.getByKey('addressLocality',this.kiiSettings.getValue()).value;
+        this.companyDetails.addressCountry = Setting.getByKey('addressCountry',this.kiiSettings.getValue()).value;
+        this.companyDetails = {...this.companyDetails};
       })
     )
   }

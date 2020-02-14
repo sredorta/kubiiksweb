@@ -1,10 +1,15 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, Input, SimpleChanges } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 import { User } from 'src/app/_features/main/models/user';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiMainSettingService } from 'src/app/_features/main/services/kii-main-setting.service';
-import { Setting } from 'src/app/_features/main/models/setting';
+import { IFooterContact } from 'src/app/_features/main/components/kii-footer/kii-footer.component';
+import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone';
+import { faAt } from '@fortawesome/free-solid-svg-icons/faAt';
+import { faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons/faMapMarkerAlt';
+
+
 
 @Component({
   selector: 'app-footer',
@@ -13,14 +18,18 @@ import { Setting } from 'src/app/_features/main/models/setting';
 })
 export class FooterComponent extends KiiBaseAbstract implements OnInit {
   loggedInUser : User = new User(null);
-  phone:string = "";
-  email:string = "";
-  addressStreet:string= "";
-  addressPostal:string= "";
-  addressLocality:string="";
-  addressCountry:string="";
 
-  constructor( private kiiAuth: KiiMainUserService, private kiiSettings: KiiMainSettingService) { super()}
+  @Input() details : IFooterContact = null;
+
+  icons = [];
+
+  constructor( private kiiAuth: KiiMainUserService, private kiiSettings: KiiMainSettingService) { 
+    super();
+    this.icons['phone'] = faPhone;
+    this.icons['email'] = faAt;
+    this.icons['address'] =faMapMarkerAlt;
+
+  }
 
   ngOnInit() {
     this.addSubscriber(
@@ -28,19 +37,11 @@ export class FooterComponent extends KiiBaseAbstract implements OnInit {
         this.loggedInUser = res;
       })
     )
-    this.addSubscriber(
-      this.kiiSettings.onChange.subscribe(res => {
-        this.phone = Setting.getByKey('telephone',this.kiiSettings.getValue()).value;
-        this.email = Setting.getByKey('email',this.kiiSettings.getValue()).value;
-        this.addressStreet = Setting.getByKey('addressStreet',this.kiiSettings.getValue()).value;
-        this.addressPostal = Setting.getByKey('addressPostal',this.kiiSettings.getValue()).value;
-        this.addressLocality = Setting.getByKey('addressLocality',this.kiiSettings.getValue()).value;
-        this.addressCountry = Setting.getByKey('addressCountry',this.kiiSettings.getValue()).value;
-        //TODO: MOVE THIS PART IN KII-FOOTER AND PASS AS ARGUMENT !
-        console.log("RECIEVED PHONE:",this.phone);
+  }
 
-      })
-    )
+  ngOnChanges(changes:SimpleChanges) {
+    if (changes.details)
+      this.details = changes.details.currentValue;
   }
 
   logout() {

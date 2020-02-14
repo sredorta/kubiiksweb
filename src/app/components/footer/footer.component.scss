@@ -17,5 +17,15 @@
             width:100%;
             text-align: left;
         }
+        .title {
+            font-size: 14px;
+            padding-left: 15px;
+            fa-icon {
+                margin-right: 10px;
+            }
+        }
+        .address {
+            padding-left:20px;
+        }
     }
 }

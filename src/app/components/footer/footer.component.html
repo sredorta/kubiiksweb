@@ -20,6 +20,16 @@
               </ng-container> 
             </div>
              <div class="column">
-               <p class="txt-b title">CONTACT</p>   
+               <p class="title"><fa-icon [icon]="icons['phone']"></fa-icon>{{details.phone}}</p>   
+               <p class="title"><fa-icon [icon]="icons['email']"></fa-icon>{{details.email}}</p>   
+               <div class="title">
+                 <fa-icon [icon]="icons['address']"></fa-icon>
+                 <span>{{details.addressStreet}}</span>
+                 <div class="address">
+                  <div>{{details.addressPostal}} - {{details.addressLocality}}</div>
+                  <div>{{details.addressCountry}}</div>
+                </div>
+              </div>   
+
              </div>
 </div>
