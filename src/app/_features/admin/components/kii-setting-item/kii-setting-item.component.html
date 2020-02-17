@@ -1,9 +1,7 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate class="fcc"> 
             <mat-form-field  appearance="standard" style="width:100%">
-                <mat-label>{{label}}</mat-label>
-                <input matInput formControlName="result" type="text" [placeholder]="placeholder" spellcheck="true" [kiiInputDefaultValue]="value">
+                <input matInput formControlName="result" type="text" placeholder="" spellcheck="true" [kiiInputDefaultValue]="setting.value">
                 <mat-hint>{{hint}}</mat-hint>
-                <mat-error kiiInputError="result"></mat-error>    
             </mat-form-field>
             <button mat-icon-button type="submit" color="primary"><fa-icon [icon]="icons['save']"></fa-icon></button>
 </form>

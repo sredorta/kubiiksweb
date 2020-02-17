@@ -2,8 +2,23 @@
 <kii-admin-theme></kii-admin-theme>
 <div class="admin-theme settings-wrp">  
    <h1>Settings</h1>
-  <kii-setting-item></kii-setting-item>
-  <kii-setting-item></kii-setting-item>
-  <kii-setting-item></kii-setting-item>
+
+   <h2>SEO</h2>
+   <kii-setting-item [setting]="settings['description']" hint="Site description"></kii-setting-item>
+   <kii-setting-item [setting]="settings['sitename']" hint="Site name"></kii-setting-item>
+   <kii-setting-item [setting]="settings['telephone']" hint="Company phone"></kii-setting-item>
+   <kii-setting-item [setting]="settings['email']" hint="Company email"></kii-setting-item>
+   <kii-setting-item [setting]="settings['addressStreet']" hint="Address street"></kii-setting-item>
+   <kii-setting-item [setting]="settings['addressPostal']" hint="Address postal code"></kii-setting-item>
+   <kii-setting-item [setting]="settings['addressLocality']" hint="Address locality"></kii-setting-item>
+   <kii-setting-item [setting]="settings['addressCountry']" hint="Address country"></kii-setting-item>
+
+  <h2>Social</h2>
+  <kii-setting-item [setting]="settings['facebook']" hint="Facebook link"></kii-setting-item>
+  <kii-setting-item [setting]="settings['google']" hint="Google link"></kii-setting-item>
+  <kii-setting-item [setting]="settings['linkedin']" hint="LinkedIn link"></kii-setting-item>
+  <kii-setting-item [setting]="settings['instagram']" hint="Instagram link"></kii-setting-item>
+  <kii-setting-item [setting]="settings['twitter']" hint="Twitter link"></kii-setting-item>
+  <kii-setting-item [setting]="settings['youtube']" hint="Youtube link"></kii-setting-item>
 
 </div>

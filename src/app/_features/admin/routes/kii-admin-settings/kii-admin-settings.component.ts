@@ -14,6 +14,7 @@ import { KiiAdminSettingService } from '../../services/kii-admin-setting.service
 export class KiiAdminSettingsComponent extends KiiBaseAbstract implements OnInit {
 
   isLoading:boolean = false;
+  settings = {};
   @ViewChild(MatSlideToggle, {static:false}) toggle : MatSlideToggle;
 
   constructor(
@@ -29,6 +30,10 @@ export class KiiAdminSettingsComponent extends KiiBaseAbstract implements OnInit
     this.addSubscriber(
       this.kiiMainSetting.onChange.subscribe(res => {
         console.log("SETTINGS !!!");
+        for (let setting of this.kiiMainSetting.getValue()) {
+          this.settings[setting.key] = setting;
+        }
+        console.log(this.settings);
       })
     )
   }
