@@ -1,14 +1,14 @@
 .wrp {
-    max-width: 1100px;
+    max-width: 1200px;
     margin:0 auto;
     padding-top:30px;
     display:flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: space-around;
     color:rgba(white,0.6);
     .column {
-        margin:0 auto;
-        min-width:250px;
+        min-width:320px;
         max-width: 320px;
         flex-direction: column;
         flex:1;

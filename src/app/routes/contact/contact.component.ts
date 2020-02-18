@@ -7,6 +7,8 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 import { Router } from '@angular/router';
 import { KiiMainSettingService } from 'src/app/_features/main/services/kii-main-setting.service';
 import { SEO } from 'src/app/_features/main/models/seo';
+import { KiiMainDataService } from 'src/app/_features/main/services/kii-main-data.service';
+import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
 
 @Component({
   selector: 'kii-contact',
@@ -25,6 +27,8 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     private kiiTrans: KiiTranslateService,
     private kiiAuth: KiiMainUserService, 
     private kiiSettings: KiiMainSettingService,
+    private kiiData: KiiMainDataService,
+    private pages: KiiMainPageService,
     private router: Router,
     ) {super(); }
 
@@ -37,6 +41,13 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     this.addSubscriber (
       this.kiiSettings.onChange.subscribe(res => {
           this.schemaOrganization = SEO.schemaInit("localBusiness", this.kiiSettings.getValue());
+      })
+    )
+    this.kiiData.loadInitialData('contact');
+    this.addSubscriber(
+      this.pages.onChange.subscribe(res => {
+        if (this.pages.hasPage('contact'))
+          this.kiiData.seo(this.pages.getByKey('contact'), this.router.url);
       })
     )
   }

@@ -4,12 +4,15 @@ import {environment} from '../../../../environments/environment';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Setting, ISetting } from '../models/setting';
 import { IUser, User } from '../models/user';
-import { StateKey, makeStateKey, TransferState } from '@angular/platform-browser';
+import { StateKey, makeStateKey, TransferState, Title, Meta } from '@angular/platform-browser';
 import { isPlatformServer, isPlatformBrowser } from '@angular/common';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { tap, map, filter } from 'rxjs/operators';
 import { KiiMainUserService } from './kii-main-user.service';
 import { KiiMainSettingService } from './kii-main-setting.service';
+import { KiiTranslateService } from '../../translate/services/kii-translate.service';
+import { Page, IPage } from '../models/page';
+import { KiiMainPageService } from './kii-main-page.service';
 
 
 //This service loads the initial page data from transfer state or from http
@@ -18,14 +21,10 @@ import { KiiMainSettingService } from './kii-main-setting.service';
 /**Internal interface */
 interface _IInitialData  {
   settings: ISetting[],
+  pages: IPage[],
   user: IUser
 }
 
-/**Initial Data  */
-interface IInitialData  {
-  settings: Setting[],
-  user: IUser
-}
 
 @Injectable({
   providedIn: 'root'
@@ -38,12 +37,15 @@ export class KiiMainDataService extends KiiBaseAbstract {
     private transfer : TransferState,
     private user: KiiMainUserService,
     private setting: KiiMainSettingService,
+    private pages: KiiMainPageService,
+    private translate: KiiTranslateService,
+    private title : Title,
+    private meta: Meta,
     @Inject(PLATFORM_ID) private _platformId: any
     ) { super() }
 
   /**Loads the initial data and handles state transfer to avoid double http calls */
-  public loadInitialData() : void {
-    console.log("LOAD INITIAL DATA !");
+  public loadInitialData(page_name:string) : void {
     const key: StateKey<_IInitialData> = makeStateKey<_IInitialData>('transfer-intial');
     //RESTORE FROM TRANSFER STATE
     //When restoring from state transfer the user is unknown so we need to load the user appart
@@ -62,10 +64,12 @@ export class KiiMainDataService extends KiiBaseAbstract {
             )
       } 
     }
+    console.log("myData",myData);
     //DO HTTP CALL IF NOT RESTORED
     if (!myData) {
       this.addSubscriber(
-        this.http.get<_IInitialData>(environment.apiURL + '/initial').subscribe(res => {
+        this.http.post<_IInitialData>(environment.apiURL + '/initial', {page:page_name}).subscribe(res => {
+          console.log("INITIAL DATA", res);
           if (isPlatformServer(this._platformId)) {
             this.transfer.set(key, res);
           }
@@ -76,16 +80,60 @@ export class KiiMainDataService extends KiiBaseAbstract {
   }
 
   private _update(data:_IInitialData) {
+    //Update settings
     let settings : Setting[] = [];
     for (let setting of data.settings) {
       settings.push(new Setting(setting));
     }
     this.setting.setSettings(settings);
+    //Update pages
+    let pages = this.pages.value();
+    for (let page of data.pages) {
+      if (!this.pages.hasPage(page.page))
+        pages.push(new Page(page));
+      else
+        this.pages.refresh(new Page(page),false);  
+    }
+    this.pages.set(pages);
+
     this.user.setLoggedInUser(new User(data.user));
   }
 
 
 
+  /**Updates meta tags for seo */
+  seo(page:Page,url:string) {
+    if (isPlatformBrowser(this._platformId)) {
+      document.documentElement.lang = this.translate.getCurrent()
+    }
+
+    if (page.exists()) {
+      this.title.setTitle( this.setting.getByKey('sitename').value + " - "+ page.title);
+      this.meta.updateTag({ name: 'description', content: page.description });
+      this.meta.updateTag({name:"robots", content:"index, follow"});
+      this.meta.updateTag({ property: 'og:title', content: this.setting.getByKey('sitename').value + " : " + page.title });
+      this.meta.updateTag({ property: 'og:description', content: page.description });
+      this.meta.updateTag({ property: 'og:url', content: this.setting.getByKey('url').value + url });
+      if (!page.image) 
+        this.meta.updateTag({ property: 'og:image', content: this.setting.getByKey('url_image').value });
+      else
+        this.meta.updateTag({ property: 'og:image', content: page.image });
+      this.meta.updateTag({ property: 'og:site_name', content: this.setting.getByKey('sitename').value });
+      this.meta.updateTag({ property: 'og:type', content: "website" });
+      this.meta.updateTag({ property: 'article:author', content: this.setting.getByKey('url').value });
+
+
+      this.meta.updateTag({ property: 'fb:app_id', content: this.setting.getByKey('fb_app_id').value });
+      this.meta.updateTag({ property: 'twitter:card', content: "summary" });
+      this.meta.updateTag({ property: 'twitter:title', content: this.setting.getByKey('sitename').value + " : " + page.title });
+      this.meta.updateTag({ property: 'twitter:description', content: page.description });
+      this.meta.updateTag({ property: 'twitter:site', content: this.setting.getByKey('sitename').value });
+      if (!page.image) 
+        this.meta.updateTag({ property: 'twitter:image', content: this.setting.getByKey('url_image').value });
+      else
+        this.meta.updateTag({ property: 'twitter:image', content: page.image });
+    }
+  }
 
 
 }

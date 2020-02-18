@@ -2,11 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormGroup,FormControl,Validators} from '@angular/forms';
 import { MatSelectChange } from '@angular/material';
 import { KiiImageUploadComponent, IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component';
-import { Page } from '../../models/page';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiAdminPageService } from '../../services/kii-admin-page.service';
 import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract';
 import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service';
+import { Page } from 'src/app/_features/main/models/page';
+import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
 
 @Component({
   selector: 'kii-seo-form',
@@ -28,7 +29,7 @@ export class KiiSeoFormComponent extends KiiFormAbstract implements OnInit {
     maxWidth: "150px"    //Max width of the image element
   }
 
-  constructor(private kiiApiPage : KiiAdminPageService) {super(); }
+  constructor(private kiiMainPage: KiiMainPageService,private kiiApiPage : KiiAdminPageService) {super(); }
 
   ngOnInit() {
     this.createForm();
@@ -54,14 +55,13 @@ export class KiiSeoFormComponent extends KiiFormAbstract implements OnInit {
       this.kiiApiPage.load().subscribe(res => {
         let result = [];
         for (let item of result) result.push(new Page(item));
-        this.kiiApiPage.set(res);
+        this.kiiMainPage.set(res);
       })
     )
 
     this.addSubscriber(
-      this.kiiApiPage.onChange.subscribe(res => {
-        let result = this.kiiApiPage.get();
-        console.log("ONCHANGE", result);
+      this.kiiMainPage.onChange.subscribe(res => {
+        let result = this.kiiMainPage.value();
         if (result.length>0) {
           this.pages = result;
           this.currentPage = this.pages[0]; //Set current page
@@ -74,8 +74,7 @@ export class KiiSeoFormComponent extends KiiFormAbstract implements OnInit {
 
   /**When we change page */
   onPageChange(event:MatSelectChange) {
-    this.currentPage = this.kiiApiPage.getByKey(event.value);
-    console.log("CHAGED PAGE", this.currentPage);
+    this.currentPage = this.kiiMainPage.getByKey(event.value);
     this.myForm.controls["image"].setValue(this.currentPage.image);
   }
 

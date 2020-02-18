@@ -10,7 +10,8 @@
 
    <h2>SEO</h2>
    <kii-seo-form (kiiOnSubmit)="saveSeo($event)"></kii-seo-form>
-   <kii-setting-item [setting]="settings['description']" hint="Site description"></kii-setting-item>
+   <!--<kii-setting-item [setting]="settings['description']" hint="Site description"></kii-setting-item>
+   <kii-image-upload [config]="configUrlImage" [image]="getImage('url_image')"></kii-image-upload>-->
    <kii-setting-item [setting]="settings['sitename']" hint="Site name"></kii-setting-item>
    <kii-setting-item [setting]="settings['telephone']" hint="Company phone"></kii-setting-item>
    <kii-setting-item [setting]="settings['email']" hint="Company email"></kii-setting-item>
@@ -18,6 +19,7 @@
    <kii-setting-item [setting]="settings['addressPostal']" hint="Address postal code"></kii-setting-item>
    <kii-setting-item [setting]="settings['addressLocality']" hint="Address locality"></kii-setting-item>
    <kii-setting-item [setting]="settings['addressCountry']" hint="Address country"></kii-setting-item>
+   <kii-setting-item [setting]="settings['fb_app_id']" hint="Facebook app id"></kii-setting-item>
 
   <h2>Social</h2>
   <kii-setting-item [setting]="settings['facebook']" hint="Facebook link"></kii-setting-item>
@@ -26,5 +28,10 @@
   <kii-setting-item [setting]="settings['instagram']" hint="Instagram link"></kii-setting-item>
   <kii-setting-item [setting]="settings['twitter']" hint="Twitter link"></kii-setting-item>
   <kii-setting-item [setting]="settings['youtube']" hint="Youtube link"></kii-setting-item>
+
+  <h2>Contact</h2>
+  <kii-setting-item [setting]="settings['zoom']" hint="Gmaps zoom"></kii-setting-item>
+  <kii-setting-item [setting]="settings['latitude']" hint="Latitude"></kii-setting-item>
+  <kii-setting-item [setting]="settings['longitude']" hint="Longitude"></kii-setting-item>
 
 </div>

@@ -67,9 +67,9 @@ export class KiiMainStatsService {
       myStat.ressource = ressource;
       myStat.action = action;
       if (myStat.action == StatAction.NAVIGATION_START && (myStat.ressource.includes('auth') || myStat.ressource.includes('admin'))) {
-        console.log("STATS: skipping ", myStat.ressource);
+        //console.log("STATS: skipping ", myStat.ressource);
       } else {
-      console.log("SENDING STATS:",myStat);
+      //console.log("SENDING STATS:",myStat);
       this.http.post(environment.apiURL + '/stats/save', {stat:myStat}).subscribe();
       }
     }

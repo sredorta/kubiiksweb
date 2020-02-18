@@ -8,8 +8,9 @@ import { KiiAdminSettingService } from '../../services/kii-admin-setting.service
 import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component';
 import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service';
 import { environment } from 'src/environments/environment';
-import { Page } from '../../models/page';
 import { KiiAdminPageService } from '../../services/kii-admin-page.service';
+import { Page } from 'src/app/_features/main/models/page';
+import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
 
 @Component({
   selector: 'kii-admin-settings',
@@ -59,8 +60,8 @@ export class KiiAdminSettingsComponent extends KiiBaseAbstract implements OnInit
   constructor(
     private kiiTrans: KiiTranslateService,
     private kiiMainSetting: KiiMainSettingService,
-    private KiiAdminSetting: KiiAdminSettingService,
-    private kiiPage: KiiAdminPageService
+    private kiiPage: KiiAdminPageService,
+    private kiiMainPage: KiiMainPageService
     ) { 
     super();
   }
@@ -72,7 +73,6 @@ export class KiiAdminSettingsComponent extends KiiBaseAbstract implements OnInit
         for (let setting of this.kiiMainSetting.getValue()) {
           this.settings[setting.key] = setting;
         }
-        console.log(this.settings);
       })
     )
   }
@@ -86,7 +86,7 @@ export class KiiAdminSettingsComponent extends KiiBaseAbstract implements OnInit
     saveSeo(result:any) {
       this.addSubscriber(
         this.kiiPage.update(new Page(result)).subscribe(res => {
-          this.kiiPage.refresh(res);
+          this.kiiMainPage.refresh(res);
         })
       )
     }

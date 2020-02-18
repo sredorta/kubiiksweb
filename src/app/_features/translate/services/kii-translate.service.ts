@@ -161,6 +161,7 @@ export  class KiiTranslateService  {
           if (this.isContextAvailable(ctx)) {
             //Notify pipes !
             this.onLoaded.next(!this._onLoaded);
+            wait.push(of(this.translations[this.currentLang]));
           } else {
             //Load context
             if (isPlatformBrowser(this.platform))  

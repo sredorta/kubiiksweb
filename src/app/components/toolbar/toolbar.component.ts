@@ -25,7 +25,7 @@ export class ToolbarComponent extends KiiBaseAbstract implements OnInit {
   /**Returns current page */
   setCurrentPage(url:string) {
     this.page = url.replace(/\/[a-z][a-z]\//,"");
-    console.log("PAGE :", this.page);
+    //console.log("PAGE :", this.page);
   }
 
 }

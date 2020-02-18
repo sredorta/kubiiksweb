@@ -5,6 +5,8 @@ import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-use
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { Router } from '@angular/router';
+import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
+import { KiiMainDataService } from 'src/app/_features/main/services/kii-main-data.service';
 
 @Component({
   selector: 'app-blog',
@@ -20,6 +22,8 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
     private kiiTrans: KiiTranslateService,
     private kiiAuth: KiiMainUserService, 
     private router: Router,
+    private pages: KiiMainPageService,
+    private kiiData: KiiMainDataService
     ) {super(); }
 
   ngOnInit() {
@@ -27,7 +31,13 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
     this.icons['close'] = faTimes;
 
     this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => this.loggedInUser = res));
-
+    this.kiiData.loadInitialData('blog');
+    this.addSubscriber(
+      this.pages.onChange.subscribe(res => {
+        if (this.pages.hasPage('blog'))
+          this.kiiData.seo(this.pages.getByKey('blog'), this.router.url);
+      })
+    )
   }
 
   logout() {
