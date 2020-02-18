@@ -75,12 +75,15 @@ import { KiiAdminSettingService } from './services/kii-admin-setting.service';
 import { KiiAdminSettingsComponent } from './routes/kii-admin-settings/kii-admin-settings.component';
 import { KiiSettingItemComponent } from './components/kii-setting-item/kii-setting-item.component';
 import { KiiSeoFormComponent } from './components/kii-seo-form/kii-seo-form.module';
+import { AngularEditorModule } from './components/angular_editor/angular-editor.module';
+import { KiiAdminContentComponent } from './routes/kii-admin-content/kii-admin-content.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    AngularEditorModule,
     GoogleChartsModule.forRoot(),
     KiiMainModule,
     KiiTranslateModule.forChild(),
@@ -99,6 +102,7 @@ import { KiiSeoFormComponent } from './components/kii-seo-form/kii-seo-form.modu
     KiiAdminSettingsComponent,
     KiiSettingItemComponent,
     KiiAdminStatsComponent,
+    KiiAdminContentComponent,
     KiiStatsIndicatorComponent,
     KiiAdminUsersComponent,
     KiiAdminPopupComponent,

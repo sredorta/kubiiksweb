@@ -64,7 +64,6 @@ export class KiiMainDataService extends KiiBaseAbstract {
             )
       } 
     }
-    console.log("myData",myData);
     //DO HTTP CALL IF NOT RESTORED
     if (!myData) {
       this.addSubscriber(
