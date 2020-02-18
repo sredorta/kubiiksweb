@@ -18,6 +18,7 @@ import {isDefined} from '../utils';
 export interface SelectOption {
   label: string;
   value: string;
+  class?:string;
 }
 
 @Component({
@@ -65,6 +66,7 @@ export class AeSelectComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit() {
     this.selectedOption = this.options[0];
+    console.log("OPTIONS",this.options)
     if (isDefined(this.isHidden) && this.isHidden) {
       this.hide();
     }

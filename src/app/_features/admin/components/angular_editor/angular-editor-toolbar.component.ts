@@ -4,6 +4,31 @@ import {HttpResponse} from '@angular/common/http';
 import {DOCUMENT} from '@angular/common';
 import {CustomClass} from './config';
 import {SelectOption} from './ae-select/ae-select.component';
+import { faUndo } from '@fortawesome/free-solid-svg-icons/faUndo';
+import { faRedo } from '@fortawesome/free-solid-svg-icons/faRedo';
+import { faBold } from '@fortawesome/free-solid-svg-icons/faBold';
+import { faItalic } from '@fortawesome/free-solid-svg-icons/faItalic';
+import { faUnderline } from '@fortawesome/free-solid-svg-icons/faUnderline';
+import { faStrikethrough } from '@fortawesome/free-solid-svg-icons/faStrikethrough';
+import { faSubscript } from '@fortawesome/free-solid-svg-icons/faSubscript';
+import { faSuperscript } from '@fortawesome/free-solid-svg-icons/faSuperscript';
+import { faAlignCenter } from '@fortawesome/free-solid-svg-icons/faAlignCenter';
+import { faAlignRight } from '@fortawesome/free-solid-svg-icons/faAlignRight';
+import { faAlignLeft } from '@fortawesome/free-solid-svg-icons/faAlignLeft';
+import { faAlignJustify } from '@fortawesome/free-solid-svg-icons/faAlignJustify';
+import { faIndent } from '@fortawesome/free-solid-svg-icons/faIndent';
+import { faOutdent } from '@fortawesome/free-solid-svg-icons/faOutdent';
+import { faListUl } from '@fortawesome/free-solid-svg-icons/faListUl';
+import { faListOl } from '@fortawesome/free-solid-svg-icons/faListOl';
+import { faFont } from '@fortawesome/free-solid-svg-icons/faFont';
+import { faLink } from '@fortawesome/free-solid-svg-icons/faLink';
+import { faUnlink } from '@fortawesome/free-solid-svg-icons/faUnlink';
+import { faImage } from '@fortawesome/free-solid-svg-icons/faImage';
+import { faVideo } from '@fortawesome/free-solid-svg-icons/faVideo';
+import { faMinus } from '@fortawesome/free-solid-svg-icons/faMinus';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { faCode } from '@fortawesome/free-solid-svg-icons/faCode';
+
 
 @Component({
   selector: 'angular-editor-toolbar',
@@ -12,6 +37,34 @@ import {SelectOption} from './ae-select/ae-select.component';
 })
 
 export class AngularEditorToolbarComponent {
+  icons :any = {
+     undo: faUndo,
+     redo: faRedo,
+     bold: faBold,
+     italic: faItalic,
+     underline: faUnderline,
+     strike: faStrikethrough,
+     subscript: faSubscript,
+     superscript: faSuperscript,
+     alignRight: faAlignRight,
+     alignLeft: faAlignLeft,
+     alignCenter: faAlignCenter,
+     alignJustify: faAlignJustify,
+     indent: faIndent,
+     outdent: faOutdent,
+     listUl: faListUl,
+     listOl: faListOl,
+     font:faFont,
+     link:faLink,
+     unlink:faUnlink,
+     image:faImage,
+     video:faVideo,
+     minus:faMinus,
+     remove: faTrash,
+     code:faCode
+  }
+
+
   htmlMode = false;
   linkSelected = false;
   block = 'default';

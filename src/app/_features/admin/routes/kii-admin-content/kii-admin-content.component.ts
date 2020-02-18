@@ -20,7 +20,6 @@ import { AngularEditorConfig } from '../../components/angular_editor/config';
 })
 export class KiiAdminContentComponent extends KiiBaseAbstract implements OnInit {
 
-
   editorConfig: AngularEditorConfig = {
     editable: true,
       spellcheck: true,
@@ -36,12 +35,6 @@ export class KiiAdminContentComponent extends KiiBaseAbstract implements OnInit 
       defaultParagraphSeparator: '',
       defaultFontName: '',
       defaultFontSize: '',
-      fonts: [
-        {class: 'arial', name: 'Arial'},
-        {class: 'times-new-roman', name: 'Times New Roman'},
-        {class: 'calibri', name: 'Calibri'},
-        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-      ],
       customClasses: [
       {
         name: 'quote',
