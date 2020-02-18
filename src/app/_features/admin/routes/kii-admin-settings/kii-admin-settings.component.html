@@ -3,7 +3,13 @@
 <div class="admin-theme settings-wrp">  
    <h1>Settings</h1>
 
+   <h2>App</h2>
+   <kii-image-upload [config]="configFavicon" [image]="getImage('favicon')"></kii-image-upload>
+   <kii-image-upload [config]="configIcon192" [image]="getImage('appicon192')"></kii-image-upload>
+   <kii-image-upload [config]="configIcon512" [image]="getImage('appicon512')"></kii-image-upload>
+
    <h2>SEO</h2>
+   <kii-seo-form (kiiOnSubmit)="saveSeo($event)"></kii-seo-form>
    <kii-setting-item [setting]="settings['description']" hint="Site description"></kii-setting-item>
    <kii-setting-item [setting]="settings['sitename']" hint="Site name"></kii-setting-item>
    <kii-setting-item [setting]="settings['telephone']" hint="Company phone"></kii-setting-item>

@@ -32,7 +32,7 @@ export abstract class KiiServiceAbstract<T extends Resource>  {
 
     /**Loads all elements from http call*/
     public load() {
-        return this._http.get<T[]>(environment.apiURL + '/' + this._prefix + '/all')
+        return this._http.get<any[]>(environment.apiURL + '/' + this._prefix + '/all');
     }   
 
     /**Deletes element in database*/

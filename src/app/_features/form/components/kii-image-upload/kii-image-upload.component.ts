@@ -18,6 +18,7 @@ export interface IConfigImageUpload {
   fileName?:string,    //When specified we do not regenerate a date name and keep this name
   storage?: DiskType,
   compression_rate?: number,
+  imageFormat?:string,
   maxWidth?: string    //Max width of the image element
 }
 
@@ -61,10 +62,6 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   /**Contains svg blob */
   svgBlob : Blob = new Blob();
 
-  /**Formats of images accepted */
-  imageFormat : string = "image/*";
-
-
   /**Shadow canvas for image manipulation */
   @ViewChild('shadowCanvas', {static:false}) shadowCanvasElem : ElementRef; //Shadow canvas for manipulation
   @ViewChild('shadowImg', {static:false}) shadowImgElem : ElementRef; //Shadow image for manipulation
@@ -86,10 +83,10 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
     if (!this.config.storage) this.config.storage = DiskType.CONTENT;
     if (!this.config.compression_rate)  this.config.compression_rate = 0.9;
     if (!this.config.maxWidth) this.config.maxWidth = "100%";
+    if (!this.config.imageFormat) this.config.imageFormat="image/*";
     if (!this.image) this.image = this.config.defaultImage;
     if (this.image == "none") this.image = this.config.defaultImage;
     this._fileName = this.image.replace(/.*\//,"");
-    console.log("Config:", this.config);
   }
 
   ngAfterViewInit() {

@@ -4,10 +4,10 @@
     <mat-hint *ngIf="config.hint" class="hint">{{config.hint | translate | async}}</mat-hint>
   </div>
   <div class="wrp-main" [ngClass]="getButtonsPosition()">
-    <div class="wrp-img">
-        <input class="shadow" type="file" #fileInput (change)="loadImage($event)" [accept]="imageFormat">  
+    <div class="wrp-img" [style.maxWidth]="config.maxWidth">
+        <input class="shadow" type="file" #fileInput (change)="loadImage($event)" [accept]="config.imageFormat">  
         <img  alt="picture" #shadowImg class="shadow" [src]="image" crossOrigin="anonymous">
-        <img  alt="picture" #realImg class="upload-view" [src]="base64" crossOrigin="anonymous" [style.maxWidth]="config.maxWidth">
+        <img  alt="picture" #realImg class="upload-view" [src]="base64" crossOrigin="anonymous" >
         <mat-progress-bar mode="determinate" [value]="progress" [ngClass]="{'is-visible' : isLoading}"></mat-progress-bar>
     </div>
     <div class="icons">

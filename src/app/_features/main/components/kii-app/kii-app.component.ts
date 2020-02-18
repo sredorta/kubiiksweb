@@ -67,7 +67,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
           this.openPopupDialog();
           this.schemaSite = SEO.schemaInit('site',this.kiiSettings.getValue());
           this.schemaCorporation = SEO.schemaInit('corporation',this.kiiSettings.getValue());
-          console.log("CORP",this.schemaCorporation);
         }
     }, () => {
         settingsSubs.unsubscribe();
@@ -130,7 +129,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   }
 
   openPopupDialog() {
-    console.log("OPENING DIALOG");
     if (isPlatformBrowser(this.platform)) {
       //Get the popup setting from localstorage
       let storage = localStorage.getItem("popup");

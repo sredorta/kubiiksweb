@@ -74,6 +74,7 @@ import { KiiAdminThemeComponent } from './components/kii-admin-theme/kii-admin-t
 import { KiiAdminSettingService } from './services/kii-admin-setting.service';
 import { KiiAdminSettingsComponent } from './routes/kii-admin-settings/kii-admin-settings.component';
 import { KiiSettingItemComponent } from './components/kii-setting-item/kii-setting-item.component';
+import { KiiSeoFormComponent } from './components/kii-seo-form/kii-seo-form.module';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { KiiSettingItemComponent } from './components/kii-setting-item/kii-setti
   declarations: [
     KiiAdminThemeComponent,
     KiiAdminMenuComponent,
+    KiiSeoFormComponent,
     KiiAdminSettingsComponent,
     KiiSettingItemComponent,
     KiiAdminStatsComponent,
