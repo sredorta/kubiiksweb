@@ -5,7 +5,7 @@
     <h1>{{'admin.popup.title' | translate | async}}</h1>
     <mat-slide-toggle color="primary" (change)="onStatusChange($event)" [checked]="enabled">{{'admin.popup.enable' | translate | async}}</mat-slide-toggle>   
     <div class="article-wrapper">
-      <!--<kii-article class="intial-dialog" key="dialog-initial"></kii-article>-->
+      <kii-admin-article [article]="articles.getByKey('dialog-initial')"></kii-admin-article>
     </div>
   </kii-spinner-overlay>  
 </div>

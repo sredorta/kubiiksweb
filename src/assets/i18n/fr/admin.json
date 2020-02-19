@@ -1,4 +1,6 @@
 {
+    "admin.save": "Enregistrer",
+    "admin.cancel": "Annuler",
     "admin.menu.settings": "Configuration",
     "admin.menu.users": "Utilizateurs",
     "admin.menu.content":"Contenu",

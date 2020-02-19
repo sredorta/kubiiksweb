@@ -66,7 +66,6 @@ export class AeSelectComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit() {
     this.selectedOption = this.options[0];
-    console.log("OPTIONS",this.options)
     if (isDefined(this.isHidden) && this.isHidden) {
       this.hide();
     }

@@ -60,6 +60,7 @@ import { KiiBottomSheetSoftwareUpdateComponent } from './components/kii-bottom-s
 import { KiiArticleComponent } from './components/kii-article/kii-article.component';
 import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
 import { KiiArticleSummaryComponent } from './components/kii-article-summary/kii-article-summary.component';
+import { KiiMainArticleService } from './services/kii-main-article.service';
 
 
 
@@ -141,7 +142,7 @@ export class KiiMainModule {
   return {
     ngModule: KiiMainModule,
     providers: [
-      KiiMainUserService, KiiMainStatsService, KiiMainDataService, KiiMainSettingService
+      KiiMainUserService, KiiMainStatsService, KiiMainDataService, KiiMainSettingService, KiiMainArticleService
     ],
   }
 }

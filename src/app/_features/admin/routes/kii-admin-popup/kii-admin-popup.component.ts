@@ -5,6 +5,8 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 import { KiiMainSettingService } from 'src/app/_features/main/services/kii-main-setting.service';
 import { Setting } from 'src/app/_features/main/models/setting';
 import { KiiAdminSettingService } from '../../services/kii-admin-setting.service';
+import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
+import { KiiEditor } from '../../utils/kii-editor';
 
 @Component({
   selector: 'app-kii-admin-popup',
@@ -16,12 +18,15 @@ export class KiiAdminPopupComponent extends KiiBaseAbstract implements OnInit {
   enabled : boolean = false;
   setting : Setting;
   isLoading:boolean = false;
+
+
   @ViewChild(MatSlideToggle, {static:false}) toggle : MatSlideToggle;
 
   constructor(
     private kiiTrans: KiiTranslateService,
     private kiiMainSetting: KiiMainSettingService,
-    private KiiAdminSetting: KiiAdminSettingService
+    private KiiAdminSetting: KiiAdminSettingService,
+    public articles: KiiMainArticleService
     ) { 
     super();
   }

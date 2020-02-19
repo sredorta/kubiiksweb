@@ -1,5 +1,8 @@
 <kii-toolbar></kii-toolbar>
 <kii-header [data]="{title:'b.header.t',subtitle:'b.header.s'}"></kii-header>
 <kii-article [article]="articles.getByKey('blog-header')"></kii-article>
+<ng-container *ngFor="let article of articles.getByCathegory('blog-item')">
+        <kii-article-summary [article]="article"></kii-article-summary>
+</ng-container>
 <kii-article [article]="articles.getByKey('blog-footer')"></kii-article>
 <kii-footer></kii-footer>
