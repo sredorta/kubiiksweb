@@ -31,6 +31,7 @@ interface _IInitialData  {
 })
 export class KiiMainDataService extends KiiBaseAbstract {
 
+  isFullLoaded:boolean = true;
 
   constructor(
     private http:HttpClient,
@@ -46,35 +47,46 @@ export class KiiMainDataService extends KiiBaseAbstract {
 
   /**Loads the initial data and handles state transfer to avoid double http calls */
   public loadInitialData(page_name:string) : void {
-    const key: StateKey<_IInitialData> = makeStateKey<_IInitialData>('transfer-intial');
-    //RESTORE FROM TRANSFER STATE
-    //When restoring from state transfer the user is unknown so we need to load the user appart
-    let myData = null;
-    if (isPlatformBrowser(this._platformId)) {
-      myData = this.transfer.get(key, null);
-      if (myData) {
-        this._update(myData);
-        console.log("RESTORED FROM TRANSFER STATE", myData);
-        if (User.hasToken()) 
-            this.addSubscriber(
-              this.user.getAuthUser().subscribe(res => {
-                  console.log("WE ASKED AUTH USER AGAIN !!!",res);
-                  this.user.setLoggedInUser(new User(res));
-              })
-            )
-      } 
-    }
-    //DO HTTP CALL IF NOT RESTORED
-    if (!myData) {
+    if (page_name== "all") { //LOAD ALL PAGES
+      console.log("Loading full data !");
       this.addSubscriber(
-        this.http.post<_IInitialData>(environment.apiURL + '/initial', {page:page_name}).subscribe(res => {
+        this.http.get<_IInitialData>(environment.apiURL + '/initial/full').subscribe(res => {
           console.log("INITIAL DATA", res);
-          if (isPlatformServer(this._platformId)) {
-            this.transfer.set(key, res);
-          }
           this._update(res);
         })
       )
+    } else { //LOAD ONLY CURRENT PAGE
+        const key: StateKey<_IInitialData> = makeStateKey<_IInitialData>('transfer-intial');
+        //RESTORE FROM TRANSFER STATE
+        //When restoring from state transfer the user is unknown so we need to load the user appart
+        let myData = null;
+        if (isPlatformBrowser(this._platformId)) {
+          myData = this.transfer.get(key, null);
+          if (myData) {
+            this._update(myData);
+            this.transfer.set(key,null);
+            console.log("RESTORED FROM TRANSFER STATE", myData);
+            if (User.hasToken()) 
+                this.addSubscriber(
+                  this.user.getAuthUser().subscribe(res => {
+                      console.log("WE ASKED AUTH USER AGAIN !!!",res);
+                      this.user.setLoggedInUser(new User(res));
+                  })
+                )
+          } 
+        }
+        //DO HTTP CALL IF NOT RESTORED
+        if (!myData) {
+          this.addSubscriber(
+            this.http.post<_IInitialData>(environment.apiURL + '/initial', {page:page_name}).subscribe(res => {
+              console.log("INITIAL DATA", res);
+              if (isPlatformServer(this._platformId)) {
+                this.transfer.set(key, res);
+              }
+              this._update(res);
+            })
+          )
+        }
     }
   }
 

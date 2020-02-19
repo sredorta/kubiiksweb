@@ -19,6 +19,7 @@ import { StatAction } from '../../models/stat';
 import { KiiMainDataService } from '../../services/kii-main-data.service';
 import { KiiMainSettingService } from '../../services/kii-main-setting.service';
 import { SEO } from '../../models/seo';
+import { KiiPwaService } from '../../services/kii-main-pwa.service';
 
 @Component({
   selector: 'kii-app',
@@ -39,7 +40,8 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private cookies : KiiMainCookiesService,
   private stats : KiiMainStatsService,
   private data: KiiMainDataService,
-  private kiiSettings: KiiMainSettingService
+  private kiiSettings: KiiMainSettingService,
+  private pwa: KiiPwaService
   ) { super() }
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
 
     //Load initial data
-    this.data.loadInitialData('home');
+    //this.data.loadInitialData('home');
     //If we change language we reload all data with new translations
     if (isPlatformBrowser(this.platform))
       this.addSubscriber(

@@ -3,6 +3,8 @@
     "m.decline" : "Decline",
     "m.register" : "Subscribe",
 
+    "m.header.t" : "kubiiks",
+    "m.header.s" : "Web experiences creator",
 
     "m.menu.home" : "Home",
     "m.menu.blog" : "Tecnology",

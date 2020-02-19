@@ -56,6 +56,7 @@ import { KiiMainDataService } from './services/kii-main-data.service';
 import { KiiMainSettingService } from './services/kii-main-setting.service';
 import { KiiPopupDialogComponent } from './components/kii-popup-dialog/kii-popup-dialog.component';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
+import { KiiBottomSheetSoftwareUpdateComponent } from './components/kii-bottom-sheet-software-update/kii-bottom-sheet-software-update.component';
 
 
 
@@ -96,11 +97,12 @@ import { NgxJsonLdModule } from '@ngx-lite/json-ld';
     HeaderComponent,
     KiiAppComponent,
     KiiBottomSheetCookiesComponent,
+    KiiBottomSheetSoftwareUpdateComponent,
     KiiHomeComponent,
     KiiHttpErrorComponent
   ],
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
-  entryComponents:[KiiBottomSheetCookiesComponent, KiiHttpErrorComponent],
+  entryComponents:[KiiBottomSheetCookiesComponent, KiiBottomSheetSoftwareUpdateComponent, KiiHttpErrorComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
   ],

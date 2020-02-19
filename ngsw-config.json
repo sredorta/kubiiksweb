@@ -67,7 +67,7 @@
     "name": "api-freshness",
     "urls": [
       "/server/public/**", 
-      "/server/api/initial",
+      "/server/api/initial/full",
       "/server/api/stats"
     ],
     "cacheConfig": {

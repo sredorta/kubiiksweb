@@ -40,5 +40,8 @@
     "m.daysago.more"       : "Il y a {{count}} jours",
     "m.weeksago.more"      : "Il y a {{count}} semaines",
 
-    "m.popup.close"         : "Acceder au site"
+    "m.popup.close"         : "Acceder au site",
+
+    "m.pwa.update.t" :"Une nouvelle version est disponible",
+    "m.pwa.update.b" : "Charger"
 }
