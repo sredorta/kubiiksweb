@@ -123,7 +123,7 @@ export class KiiMainDataService extends KiiBaseAbstract {
     //Update articles
     let articles = this.articles.value();
     for (let article of data.articles) {
-      if (!this.articles.getByKey(article.key).exists()) {
+      if (!this.articles.getById(article.id).exists()) {
         articles.push(new Article(article));
       } else
         this.articles.refresh(new Article(article),false);  

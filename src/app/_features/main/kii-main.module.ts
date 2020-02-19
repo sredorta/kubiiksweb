@@ -59,6 +59,7 @@ import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import { KiiBottomSheetSoftwareUpdateComponent } from './components/kii-bottom-sheet-software-update/kii-bottom-sheet-software-update.component';
 import { KiiArticleComponent } from './components/kii-article/kii-article.component';
 import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
+import { KiiArticleSummaryComponent } from './components/kii-article-summary/kii-article-summary.component';
 
 
 
@@ -86,6 +87,7 @@ import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
   declarations: [
     KiiNiceDateFormatPipe,
     KiiArticleComponent,
+    KiiArticleSummaryComponent,
     KiiPopupDialogComponent,
     KiiShareComponent,
     KiiSpinnerComponent,
@@ -112,6 +114,7 @@ import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
   ],
   exports:[
     KiiArticleComponent,
+    KiiArticleSummaryComponent,
     KiiNiceDateFormatPipe,
     KiiToolbarComponent,
     ToolbarComponent,

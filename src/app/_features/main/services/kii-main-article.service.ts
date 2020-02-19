@@ -64,6 +64,20 @@ export class KiiMainArticleService extends KiiBaseAbstract {
       return article;
     }  
 
+    public getById(id:number) {
+      let article = this._articles.value.find(obj => obj.id == id);
+      if (!article) return new Article(null);
+      return article;
+    }
+
+    /**Returns all articles from a cathegory */
+    public getByCathegory(cathegory:string) {
+      if (this._articles.value.length<=0) {
+        return [];
+      }
+      return this._articles.value.filter(obj => obj.cathegory == cathegory);
+    }
+
     /**Updates the element only in memory and triggers onChange */
     public refresh(element:Article, notify:boolean=true) {
       let myIndex = this._articles.value.findIndex(obj => obj.id == element.id);
