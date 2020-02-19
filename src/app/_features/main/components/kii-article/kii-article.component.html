@@ -1,0 +1,6 @@
+<div class="kii-editor-wrapper">
+    <div #myEditor class="angular-editor-textarea"></div>
+    <div *ngIf="article.exists() && showCreated" class="article-created">
+        <small class="dates">{{'m.created' | translate | async}} : {{{date:article.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}<fa-icon [icon]="icons['created']"></fa-icon></small>
+    </div> 
+</div>

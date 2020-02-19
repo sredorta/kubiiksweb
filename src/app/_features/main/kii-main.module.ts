@@ -57,6 +57,8 @@ import { KiiMainSettingService } from './services/kii-main-setting.service';
 import { KiiPopupDialogComponent } from './components/kii-popup-dialog/kii-popup-dialog.component';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import { KiiBottomSheetSoftwareUpdateComponent } from './components/kii-bottom-sheet-software-update/kii-bottom-sheet-software-update.component';
+import { KiiArticleComponent } from './components/kii-article/kii-article.component';
+import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
 
 
 
@@ -82,6 +84,8 @@ import { KiiBottomSheetSoftwareUpdateComponent } from './components/kii-bottom-s
     RouterModule,
   ],
   declarations: [
+    KiiNiceDateFormatPipe,
+    KiiArticleComponent,
     KiiPopupDialogComponent,
     KiiShareComponent,
     KiiSpinnerComponent,
@@ -107,6 +111,7 @@ import { KiiBottomSheetSoftwareUpdateComponent } from './components/kii-bottom-s
     { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
   ],
   exports:[
+    KiiNiceDateFormatPipe,
     KiiToolbarComponent,
     ToolbarComponent,
     KiiHeaderComponent,

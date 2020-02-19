@@ -45,7 +45,7 @@ export class KiiPwaService {
         navigator.serviceWorker.getRegistrations().then(registrations => {
           if (registrations.length == 0) {
             navigator.serviceWorker.register('/ngsw-worker.js').then(function(registration) {
-              console.log("SERVICE WORKER REGISTERED, WE SHOULD NOW LOAD ALL INITIAL DATA FULL !!!!!");
+              console.log("SERVICE WORKER REGISTERED!!");
               ///obj.data.loadInitialData("all");
 
             }).catch(function(error) {

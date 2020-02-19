@@ -1,0 +1,17 @@
+.article-created {
+    border-top:1px inset;
+    padding-top:10px;
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+    font-size: 14px;
+    font-style: italic;
+    opacity: 0.6;
+    fa-icon {
+        margin-left: 10px;
+    }
+}
+.angular-editor-textarea {
+    min-height: 30px;
+    padding: 0.5rem 0.8rem 1rem 0.8rem;
+}

@@ -13,6 +13,8 @@ import { KiiMainSettingService } from './kii-main-setting.service';
 import { KiiTranslateService } from '../../translate/services/kii-translate.service';
 import { Page, IPage } from '../models/page';
 import { KiiMainPageService } from './kii-main-page.service';
+import { KiiMainArticleService } from './kii-main-article.service';
+import { IArticle, Article } from '../models/article';
 
 
 //This service loads the initial page data from transfer state or from http
@@ -22,6 +24,7 @@ import { KiiMainPageService } from './kii-main-page.service';
 interface _IInitialData  {
   settings: ISetting[],
   pages: IPage[],
+  articles: IArticle[],
   user: IUser
 }
 
@@ -31,7 +34,7 @@ interface _IInitialData  {
 })
 export class KiiMainDataService extends KiiBaseAbstract {
 
-  isFullLoaded:boolean = true;
+  isFullLoaded:boolean = false;
 
   constructor(
     private http:HttpClient,
@@ -40,6 +43,7 @@ export class KiiMainDataService extends KiiBaseAbstract {
     private setting: KiiMainSettingService,
     private pages: KiiMainPageService,
     private translate: KiiTranslateService,
+    private articles: KiiMainArticleService,
     private title : Title,
     private meta: Meta,
     @Inject(PLATFORM_ID) private _platformId: any
@@ -47,15 +51,7 @@ export class KiiMainDataService extends KiiBaseAbstract {
 
   /**Loads the initial data and handles state transfer to avoid double http calls */
   public loadInitialData(page_name:string) : void {
-    if (page_name== "all") { //LOAD ALL PAGES
-      console.log("Loading full data !");
-      this.addSubscriber(
-        this.http.get<_IInitialData>(environment.apiURL + '/initial/full').subscribe(res => {
-          console.log("INITIAL DATA", res);
-          this._update(res);
-        })
-      )
-    } else { //LOAD ONLY CURRENT PAGE
+      if (!this.isFullLoaded) {
         const key: StateKey<_IInitialData> = makeStateKey<_IInitialData>('transfer-intial');
         //RESTORE FROM TRANSFER STATE
         //When restoring from state transfer the user is unknown so we need to load the user appart
@@ -87,8 +83,25 @@ export class KiiMainDataService extends KiiBaseAbstract {
             })
           )
         }
-    }
+      }
   }
+
+  /**Loads all settings and articles so that when we go offline we have them all, this is done only on browser */
+  loadFullData(delay:number) {
+        //Load all data
+        if (isPlatformBrowser(this._platformId))
+          setTimeout(()=> {
+              console.log("Loading full data !");
+              this.addSubscriber(
+                this.http.get<_IInitialData>(environment.apiURL + '/initial/full').subscribe(res => {
+                  console.log("FULL LOAD !", res);
+                  this._update(res);
+                  this.isFullLoaded = true;
+                })
+              )
+          },delay);
+  }
+
 
   private _update(data:_IInitialData) {
     //Update settings
@@ -106,6 +119,16 @@ export class KiiMainDataService extends KiiBaseAbstract {
         this.pages.refresh(new Page(page),false);  
     }
     this.pages.set(pages);
+
+    //Update articles
+    let articles = this.articles.value();
+    for (let article of data.articles) {
+      if (!this.articles.getByKey(article.key).exists()) {
+        articles.push(new Article(article));
+      } else
+        this.articles.refresh(new Article(article),false);  
+    }
+    this.articles.set(articles);
 
     this.user.setLoggedInUser(new User(data.user));
   }

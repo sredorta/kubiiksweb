@@ -9,6 +9,7 @@ import { KiiMainSettingService } from 'src/app/_features/main/services/kii-main-
 import { SEO } from 'src/app/_features/main/models/seo';
 import { KiiMainDataService } from 'src/app/_features/main/services/kii-main-data.service';
 import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'kii-contact',
@@ -27,9 +28,11 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     private kiiTrans: KiiTranslateService,
     private kiiAuth: KiiMainUserService, 
     private kiiSettings: KiiMainSettingService,
-    private kiiData: KiiMainDataService,
     private pages: KiiMainPageService,
     private router: Router,
+    private data: KiiMainDataService,
+    private translate: KiiTranslateService,
+    @Inject(PLATFORM_ID) private platform: any
     ) {super(); }
 
   ngOnInit() {
@@ -43,13 +46,23 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
           this.schemaOrganization = SEO.schemaInit("localBusiness", this.kiiSettings.getValue());
       })
     )
-    this.kiiData.loadInitialData('contact');
     this.addSubscriber(
       this.pages.onChange.subscribe(res => {
         if (this.pages.hasPage('contact'))
-          this.kiiData.seo(this.pages.getByKey('contact'), this.router.url);
+          this.data.seo(this.pages.getByKey('contact'), this.router.url);
       })
     )
+
+    this.data.loadInitialData('contact');
+    //If we change language we reload articles
+    if (isPlatformBrowser(this.platform))
+      this.addSubscriber(
+        this.translate.onChange.subscribe(res => {
+          console.log("TRANSLATION CHANGED",res);
+          this.data.isFullLoaded = false;
+          this.data.loadInitialData('contact');
+        })
+      )
   }
 
   logout() {

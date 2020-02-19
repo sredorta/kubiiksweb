@@ -28,7 +28,6 @@ import { HttpClient } from '@angular/common/http';
 import { KiiMainModule } from '../main/kii-main.module';
 import { KiiTranslateModule } from '../translate/kii-translate.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
 import { KiiInputErrorDirective } from './directives/kii-input-error.directive';
 import { KiiInputDefaultValueDirective } from './directives/kii-input-default-value.directive';
 import { KiiInputDigitOnlyDirective } from './directives/kii-input-digit-only.directive';
@@ -65,7 +64,6 @@ import { KiiApiUploadFileService } from './services/kii-api-upload-image.service
     KiiInputErrorDirective,
     KiiInputDefaultValueDirective,
     KiiInputDigitOnlyDirective,
-    KiiNiceDateFormatPipe,
     KiiConfirmDialogComponent,
     KiiImageUploadComponent
   ],
@@ -89,7 +87,6 @@ import { KiiApiUploadFileService } from './services/kii-api-upload-image.service
     KiiInputErrorDirective,
     KiiInputDefaultValueDirective,
     KiiInputDigitOnlyDirective,
-    KiiNiceDateFormatPipe,
     KiiConfirmDialogComponent,
     KiiImageUploadComponent
   ]

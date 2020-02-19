@@ -7,6 +7,7 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 import { Router } from '@angular/router';
 import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
 import { KiiMainDataService } from 'src/app/_features/main/services/kii-main-data.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-blog',
@@ -23,7 +24,9 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
     private kiiAuth: KiiMainUserService, 
     private router: Router,
     private pages: KiiMainPageService,
-    private kiiData: KiiMainDataService
+    private data: KiiMainDataService,
+    private translate: KiiTranslateService,
+    @Inject(PLATFORM_ID) private platform: any
     ) {super(); }
 
   ngOnInit() {
@@ -31,13 +34,22 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
     this.icons['close'] = faTimes;
 
     this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => this.loggedInUser = res));
-    this.kiiData.loadInitialData('blog');
     this.addSubscriber(
       this.pages.onChange.subscribe(res => {
         if (this.pages.hasPage('blog'))
-          this.kiiData.seo(this.pages.getByKey('blog'), this.router.url);
+          this.data.seo(this.pages.getByKey('blog'), this.router.url);
       })
     )
+    this.data.loadInitialData('blog');
+    //If we change language we reload articles
+    if (isPlatformBrowser(this.platform))
+      this.addSubscriber(
+        this.translate.onChange.subscribe(res => {
+          console.log("TRANSLATION CHANGED",res);
+          this.data.isFullLoaded = false;
+          this.data.loadInitialData('blog');
+        })
+      )
   }
 
   logout() {

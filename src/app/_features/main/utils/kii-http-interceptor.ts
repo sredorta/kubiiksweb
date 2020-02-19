@@ -66,16 +66,24 @@ export class KiiHttpInterceptor implements HttpInterceptor {
             }
             ),
             catchError((error: HttpErrorResponse) => {
-                if (error.status== 401)
-                    if (isPlatformBrowser(this._platformId)) {
-                        User.removeToken();
-                        this.kiiAuth.setLoggedInUser(new User(null));
-                        if (!error.error.message) 
-                            error.error.message = this.kiiTrans.translations[this.kiiTrans.getCurrent()]['m.error.token'];
-                        this.router.navigate(['/'+this.kiiTrans.getCurrent()+'/auth/login']);
-         
-                    }
-                this.openBottomSheet(error.error.message);
+                switch(error.status) {
+                    case 0: //No internet connection
+                        break;
+                    case 401: //Bad auth
+                        if (isPlatformBrowser(this._platformId)) {
+                            User.removeToken();
+                            this.kiiAuth.setLoggedInUser(new User(null));
+                            if (!error.error.message) 
+                                error.error.message = this.kiiTrans.translations[this.kiiTrans.getCurrent()]['m.error.token'];
+                            this.router.navigate(['/'+this.kiiTrans.getCurrent()+'/auth/login']);
+            
+                        }
+                        this.openBottomSheet(error.error.message);
+                        break;
+                    default: 
+                        this.openBottomSheet(error.error.message);
+                        break;    
+                }
                 return throwError(error);
             })
             );

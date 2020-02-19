@@ -52,14 +52,15 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     this.kiiTrans.setRequiredContext(['main']);
 
 
-    //Load initial data
-    //this.data.loadInitialData('home');
+    //Load full data
+    this.data.loadFullData(2000);
     //If we change language we reload all data with new translations
     if (isPlatformBrowser(this.platform))
       this.addSubscriber(
         this.kiiTrans.onChange.subscribe(res => {
           console.log("TRANSLATION CHANGED",res);
-          this.data.loadInitialData('home');
+          this.data.isFullLoaded = false;
+          this.data.loadFullData(2000);
         })
       )
 

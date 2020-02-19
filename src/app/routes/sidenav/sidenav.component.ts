@@ -37,9 +37,6 @@ export class SidenavComponent extends KiiBaseAbstract implements OnInit {
     this.icons['close'] = faTimes;
 
     this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => this.loggedInUser = res));
-    this.kiiTrans.onLoaded.subscribe(res => {
-      console.log("Translations loaded",this.kiiTrans.translations);
-    })
 
     this.addSubscriber(
       this.pwa.canInstallApp().subscribe(res => {
