@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
 import { KiiMainDataService } from 'src/app/_features/main/services/kii-main-data.service';
 import { isPlatformBrowser } from '@angular/common';
+import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
 
 @Component({
   selector: 'app-blog',
@@ -25,6 +26,7 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
     private router: Router,
     private pages: KiiMainPageService,
     private data: KiiMainDataService,
+    public articles: KiiMainArticleService,
     private translate: KiiTranslateService,
     @Inject(PLATFORM_ID) private platform: any
     ) {super(); }

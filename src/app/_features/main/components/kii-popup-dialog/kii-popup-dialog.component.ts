@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { KiiMainArticleService } from '../../services/kii-main-article.service';
 
 @Component({
   selector: 'kii-popup-dialog',
@@ -9,7 +10,7 @@ export class KiiPopupDialogComponent implements OnInit {
   @Output() onClose = new EventEmitter<boolean>();
   @Input() show :boolean = false;
 
-  constructor() { }
+  constructor(public articles: KiiMainArticleService) { }
 
   ngOnInit() {
   }

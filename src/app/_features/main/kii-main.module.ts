@@ -111,6 +111,7 @@ import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
     { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
   ],
   exports:[
+    KiiArticleComponent,
     KiiNiceDateFormatPipe,
     KiiToolbarComponent,
     ToolbarComponent,

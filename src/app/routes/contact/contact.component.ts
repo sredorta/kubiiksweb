@@ -10,6 +10,7 @@ import { SEO } from 'src/app/_features/main/models/seo';
 import { KiiMainDataService } from 'src/app/_features/main/services/kii-main-data.service';
 import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
 import { isPlatformBrowser } from '@angular/common';
+import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
 
 @Component({
   selector: 'kii-contact',
@@ -32,6 +33,7 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     private router: Router,
     private data: KiiMainDataService,
     private translate: KiiTranslateService,
+    public articles: KiiMainArticleService,
     @Inject(PLATFORM_ID) private platform: any
     ) {super(); }
 

@@ -47,7 +47,6 @@ export class KiiArticleComponent extends KiiBaseAbstract implements OnInit {
 
 
   ngOnChanges(changes:SimpleChanges) {
-    console.log("changes",changes)
     if (changes.article) {
       this.article = changes.article.currentValue;
       this.update();
