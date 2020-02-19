@@ -1,6 +1,6 @@
-<div *ngIf="!isEditing" class="preview default-theme">
+<div *ngIf="!isEditing" class="preview">
     <kii-article [article]="article"></kii-article>
-    <div class="admin-theme edit-btn">
+    <div class="edit-btn">
             <button  mat-icon-button color="primary" (click)="isEditing=true"><fa-icon [icon]="icons['edit']"></fa-icon></button>
     </div>
 </div>
