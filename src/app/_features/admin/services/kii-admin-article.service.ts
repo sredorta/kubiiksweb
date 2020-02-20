@@ -50,8 +50,41 @@ export class KiiAdminArticleService  {
         if (this.kiiMainArticle.value().length<=0) {
           return [];
         }
-        return this.kiiMainArticle.value().filter(obj => obj.cathegory == cathegory);
+        return this.kiiMainArticle.value().filter(obj => obj.cathegory == cathegory).sort((a,b)=>a.order-b.order);
   }
+
+  /**Refreshes element of the current values and notifies changes */
+  public refresh(element:Article) {
+    let index = this.kiiMainArticle.value().findIndex(obj => obj.id == element.id);
+    if (index>=0) {
+        this.kiiMainArticle.value().splice(index,1);
+        this.kiiMainArticle.value().push(element);
+        this.kiiMainArticle.set(this.kiiMainArticle.value());
+
+    }
+  }
+
+  /**Moves article up in the order */
+  public moveUp(article:Article) {
+    return this._http.post<Article[]>(environment.apiURL + '/article/order/up', {id:article.id}).pipe(map(res =>{
+        let result = [];
+        for (let tmp of res) {
+            result.push(new Article(tmp));
+        }
+        return result;
+    }));
+  }
+
+  /**Moves article down in the order */
+  public moveDown(article:Article) {
+    return this._http.post<Article[]>(environment.apiURL + '/article/order/down', {id:article.id}).pipe(map(res =>{
+        let result = [];
+        for (let tmp of res) {
+            result.push(new Article(tmp));
+        }
+        return result;
+    }));
+  }  
 
 
 

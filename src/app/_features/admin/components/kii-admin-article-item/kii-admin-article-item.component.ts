@@ -14,6 +14,9 @@ import { faHistory } from '@fortawesome/free-solid-svg-icons/faHistory';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { MatDialog } from '@angular/material';
 import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
+import { KiiTranslateModule } from 'src/app/_features/translate/kii-translate.module';
+import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
+import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
 
 @Component({
   selector: 'kii-admin-article-item',
@@ -36,6 +39,10 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
 
  /**When we are not editing */
  isEditing : boolean = false;
+
+ /**Contains currentLang */
+ currentLang :string = this.translate.getCurrent();
+
  icons :any = {
    edit: faEdit,
    public:faEye,
@@ -49,6 +56,8 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
 
   constructor(
     private kiiAdminArticle: KiiAdminArticleService,
+    private KiiMainArticle: KiiMainArticleService,
+    private translate: KiiTranslateService,
     private dialog: MatDialog
     ) { super() }
 
@@ -118,6 +127,34 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
             },() => this.isDataLoading = false))
           }
       })
+    )
+  }
+
+  onMoveUp() {
+    this.isDataLoading = true;
+    this.addSubscriber(
+      this.kiiAdminArticle.moveUp(this.article).subscribe(res => {
+        //Refresh the recieved articles
+        for (let article of res) {
+          this.kiiAdminArticle.refresh(article);
+        }
+        this.isDataLoading = false;
+      },()=>this.isDataLoading = false)
+    )
+  }
+
+  onMoveDown() {
+    console.log("Moving down !");
+    this.isDataLoading = true;
+    this.addSubscriber(
+      this.kiiAdminArticle.moveDown(this.article).subscribe(res => {
+        console.log(res);
+        //Refresh the recieved articles
+        for (let article of res) {
+          this.kiiAdminArticle.refresh(article);
+        }
+        this.isDataLoading = false;
+      },()=>this.isDataLoading = false)
     )
   }
 }

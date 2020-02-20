@@ -2,6 +2,7 @@ import {Role, IRole} from "./role";
 
 export interface IArticle {
     id: number;
+    order:number;
     key:string;
     page:string;
     cathegory:string;
@@ -17,6 +18,7 @@ export interface IArticle {
 
 export class Article {
     id: number = null;
+    order:number = 0;
     key:string = null;
     page:string=null;
     cathegory:string = null;

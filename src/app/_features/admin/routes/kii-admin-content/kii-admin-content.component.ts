@@ -127,6 +127,8 @@ export class KiiAdminContentComponent extends KiiBaseAbstract implements OnInit 
     console.log("OnCreate !");
     this.addSubscriber(
       this.articlesAdmin.create(this.selectedCathegory).subscribe(res => {
+        this.articlesMain.value().push(res);
+        this.articlesMain.set(this.articlesMain.value());
         console.log("Created new Article",res);
       })
     )
