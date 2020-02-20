@@ -1,9 +1,18 @@
-.settings-wrp {
-    padding:20px;
-    padding-top:60px;
-    min-height: 80vh;
+.content-wrp {
+    box-sizing: border-box;
+    padding:10px;
+    padding-top:80px;
+    height: 100vh;
+    overflow-y: scroll;
     h1 {
         border-bottom: 1px solid;
+    }
+}
+.add-article {
+    padding:10px;
+    fa-icon {
+        margin-right: 10px;
+        font-size: 20px;
     }
 }
 

@@ -1,7 +1,21 @@
 <kii-toolbar></kii-toolbar>
 <kii-admin-theme></kii-admin-theme>
-<div class="admin-theme settings-wrp">  
-   <h1>ADMIN CONTENT !</h1>
-   <angular-editor id="editor1" [config]="editorConfig"></angular-editor>
+<div class="admin-theme content-wrp">  
+  <h1>ADMIN CONTENT !</h1>
+  <kii-spinner-overlay [show]="isDataLoading">
+    <mat-form-field>
+        <mat-label>{{'admin.cathegory.label' | translate | async}}</mat-label>
+        <mat-select (selectionChange)="onCathegoryChange($event)">
+        <mat-option *ngFor="let cathegory of cathegories" [value]="cathegory.name">{{cathegory.name}}</mat-option>
+        </mat-select>
+        <mat-hint>{{'admin.cathegory.hint' | translate | async}}</mat-hint>
+      </mat-form-field>
+  </kii-spinner-overlay>    
 
+  <div class="article-preview-wrp" *ngFor="let article of selectedArticles">
+    <kii-admin-article-item [article]="article"></kii-admin-article-item>
+  </div>
+  <div *ngIf="selectedCathegory" class="add-article fcr">
+    <button mat-flat-button color="primary" (click)="onCreate()"><fa-icon [icon]="icons['add']"></fa-icon>{{"admin.create" | translate| async}}</button>
+  </div>
 </div>

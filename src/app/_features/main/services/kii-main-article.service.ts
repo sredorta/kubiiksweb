@@ -75,7 +75,7 @@ export class KiiMainArticleService extends KiiBaseAbstract {
       if (this._articles.value.length<=0) {
         return [];
       }
-      return this._articles.value.filter(obj => obj.cathegory == cathegory);
+      return this._articles.value.filter(obj => obj.cathegory == cathegory && obj.public ==true);
     }
 
     /**Updates the element only in memory and triggers onChange */

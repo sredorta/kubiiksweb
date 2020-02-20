@@ -1,4 +1,7 @@
 {
+    "admin.create": "Ajouter",
+    "admin.edit" : "Editer",
+    "admin.delete": "Suprimer",
     "admin.save": "Enregistrer",
     "admin.cancel": "Annuler",
     "admin.menu.settings": "Configuration",
@@ -73,6 +76,9 @@
     "admin.stats.saturday": "Samedi",
     "admin.stats.sunday" : "Dimanche",
     "admin.stats.language" : "Langue",
-    "admin.stats.social.network" : "Réseau social"
+    "admin.stats.social.network" : "Réseau social",
+    "admin.cathegory.label": "Cathegorie",
+    "admin.cathegory.hint" : "Sélectioner une chategorie",
+    "admin.article.delete.text": "Êtes vous sur de vouloir suprimer cet article ?"
 
 }
