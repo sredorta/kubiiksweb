@@ -6,7 +6,7 @@ import { KiiAuthUserService } from '../../services/kii-auth-user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-kii-signup',
+  selector: 'kii-signup',
   templateUrl: './kii-signup.component.html',
   styleUrls: ['./kii-signup.component.scss']
 })

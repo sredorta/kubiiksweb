@@ -1,0 +1,28 @@
+@import '~@angular/material/theming';
+
+// mixin name will be used in main style.scss
+@mixin auth-mixin($theme) {
+  
+  // retrieve variables from theme 
+  // (all possible variables, use only what you really need)
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background:map-get($theme,background);
+  $is-dark-theme: map-get($theme, is-dark);
+
+  @media only screen and (min-width: 700px) { 
+    kii-establish-password .reset-wrp, 
+    kii-login .login-wrp,
+    kii-login-oauth .oauth-wrp,
+    kii-profile .profile-wrp,
+    kii-reset-password .reset-wrp,
+    kii-signup .signup-wrp
+    {
+        background: url('/assets/kiilib/images/background.webp');
+        background-size: cover;
+    }
+  }
+
+}

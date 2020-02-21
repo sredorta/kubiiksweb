@@ -1,6 +1,6 @@
 @import './styles.scss';
-@import '~@angular/material/theming';
 @import './theme.scss';
+@include mat-core(); //It is included here so that we are sure only once is imported
 
 
 //@include angular-material-theme($main-theme);

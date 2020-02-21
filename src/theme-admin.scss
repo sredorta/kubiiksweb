@@ -145,15 +145,17 @@ $admin-theme: create-dark-theme($admin-primary, $admin-accent, $admin-warn, $mat
     @include design-mixin($admin-theme);
     background: map_get($mat-grey, 900);
     color: map_get($mat-dark-theme-foreground,text);
-/*    .angular-editor-textarea {
-        //Main app theme
-        $main-primary: mat-palette($mat-lime, 500);
-        $main-accent:  mat-palette($mat-cyan, A200);
-        $main-warn:    mat-palette($mat-red,500);
-        $main-theme: create-dark-theme($main-primary, $main-accent, $main-warn, $mat-dark-theme-foreground, $mat-dark-theme-background);
-          
-        @include angular-material-theme($main-theme);
-        background-color:black;
-
-    }*/
 }
+
+
+//Include all main theme here as we could not have it all if we do not go to auth...
+@import './theme.scss';
+@include angular-material-theme($main-theme);
+
+//Include also all element required in admin here
+@import './mixin/blog.scss';
+@mixin design-mixin($main-theme) {
+    @include blog-mixin($main-theme);
+}
+
+@include design-mixin($main-theme);

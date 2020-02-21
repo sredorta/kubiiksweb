@@ -65,10 +65,12 @@
       //Tablet and phones
       @media (pointer: coarse) {
         &.kii-appear {
-            .kii-element-container img {
-                filter:grayscale(0%);
-                transform: scale(1.2);
-
+            .kii-element-container {
+                border-bottom-color: mat-color($primary);
+                img {
+                    filter:grayscale(0%);
+                    transform: scale(1.2);
+                }
             }
         }  
       }

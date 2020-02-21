@@ -7,7 +7,7 @@ import { User } from 'src/app/_features/main/models/user';
 import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 
 @Component({
-  selector: 'app-kii-login',
+  selector: 'kii-login',
   templateUrl: './kii-login.component.html',
   styleUrls: ['./kii-login.component.scss']
 })
