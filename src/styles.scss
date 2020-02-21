@@ -114,7 +114,9 @@ input:-webkit-autofill,
     font-weight: normal;
 }
 
-
+.txt-xxs {
+    font-size: 10px;
+}
 .txt-xs {
     font-size: 12px;
 }
@@ -135,6 +137,9 @@ input:-webkit-autofill,
 }
 
 @media only screen and (min-width: 700px) { 
+    .txt-xxs {
+        font-size: 12px;
+    }
     .txt-xs {
         font-size: 14px;
     }

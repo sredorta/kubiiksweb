@@ -62,7 +62,8 @@ import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
 import { KiiArticleSummaryComponent } from './components/kii-article-summary/kii-article-summary.component';
 import { KiiMainArticleService } from './services/kii-main-article.service';
 import { KiiMainThemeComponent } from './components/kii-main-theme/kii-main-theme.component';
-
+import { KiiElementComponent } from './components/kii-element/kii-element.component';
+import { KiiAppearDirective } from './directives/kii-appear-directive';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { KiiMainThemeComponent } from './components/kii-main-theme/kii-main-them
     RouterModule,
   ],
   declarations: [
+    KiiElementComponent,
     KiiMainThemeComponent,
     KiiNiceDateFormatPipe,
     KiiArticleComponent,
@@ -108,7 +110,8 @@ import { KiiMainThemeComponent } from './components/kii-main-theme/kii-main-them
     KiiBottomSheetCookiesComponent,
     KiiBottomSheetSoftwareUpdateComponent,
     KiiHomeComponent,
-    KiiHttpErrorComponent
+    KiiHttpErrorComponent,
+    KiiAppearDirective,
   ],
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
   entryComponents:[KiiBottomSheetCookiesComponent, KiiBottomSheetSoftwareUpdateComponent, KiiHttpErrorComponent],
@@ -116,9 +119,11 @@ import { KiiMainThemeComponent } from './components/kii-main-theme/kii-main-them
     { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
   ],
   exports:[
+    KiiElementComponent,
     KiiArticleComponent,
     KiiArticleSummaryComponent,
     KiiNiceDateFormatPipe,
+    KiiAppearDirective,
     KiiToolbarComponent,
     ToolbarComponent,
     KiiHeaderComponent,

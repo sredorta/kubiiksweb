@@ -33,6 +33,7 @@ import { KiiTranslateModule } from 'src/app/_features/translate/kii-translate.mo
 import { KiiMainModule } from 'src/app/_features/main/kii-main.module';
 import { BlogRoutingModule } from './blog-routing.module';
 import { BlogComponent } from './blog.component';
+import { KiiBlogThemeComponent } from './kii-blog-theme/kii-blog-theme.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { BlogComponent } from './blog.component';
     BlogRoutingModule,
   ],
   declarations: [
+    KiiBlogThemeComponent,
     BlogComponent
   ],
   providers:[

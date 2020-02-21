@@ -1,0 +1,15 @@
+@import './styles.scss';
+@import '~@angular/material/theming';
+@import './theme.scss';
+
+
+
+//INCLUDE Aditional to main blog mixins
+@import './mixin/blog.scss';
+
+@mixin design-mixin($theme) {
+    @include blog-mixin($theme);
+}
+
+@include design-mixin($main-theme);
+

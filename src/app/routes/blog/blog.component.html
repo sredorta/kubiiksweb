@@ -1,8 +1,12 @@
+<kii-blog-theme></kii-blog-theme>
 <kii-toolbar></kii-toolbar>
 <kii-header [data]="{title:'b.header.t',subtitle:'b.header.s'}"></kii-header>
 <kii-article [article]="articles.getByKey('blog-header')"></kii-article>
-<ng-container *ngFor="let article of articles.getByCathegory('blog-item')">
+<div class="blog-container">
+    <kii-element *ngFor="let article of articles.getByCathegory('blog-item')" [ngClass]="article.cathegory" mat-ripple kiiAppear>
         <kii-article-summary [article]="article"></kii-article-summary>
-</ng-container>
+        <p class="created txt-xxs"><fa-icon [icon]="icons['created']"></fa-icon>{{'b.created' | translate | async}} : {{{date:article.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}</p>
+    </kii-element>
+</div>
 <kii-article [article]="articles.getByKey('blog-footer')"></kii-article>
 <kii-footer></kii-footer>

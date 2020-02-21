@@ -2,13 +2,14 @@ import { Component, OnInit,  Inject, PLATFORM_ID } from '@angular/core';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { User } from 'src/app/_features/main/models/user';
 import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
-import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { Router } from '@angular/router';
 import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
 import { KiiMainDataService } from 'src/app/_features/main/services/kii-main-data.service';
 import { isPlatformBrowser } from '@angular/common';
 import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { faFeatherAlt } from '@fortawesome/free-solid-svg-icons/faFeatherAlt';
 
 @Component({
   selector: 'app-blog',
@@ -19,6 +20,7 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
 
   loggedInUser = new User(null);
   icons = [];
+  currentLang=this.translate.getCurrent();
 
   constructor(
     private kiiTrans: KiiTranslateService,
@@ -34,6 +36,7 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
   ngOnInit() {
     this.kiiTrans.setRequiredContext(['main','blog']);
     this.icons['close'] = faTimes;
+    this.icons['created']=faFeatherAlt;
 
     this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => this.loggedInUser = res));
     this.addSubscriber(

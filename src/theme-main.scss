@@ -5,7 +5,7 @@
 
 //@include angular-material-theme($main-theme);
 //Reduced list of angular material theme to optimize size of bundle
-//@include mat-core-theme($main-theme);
+@include mat-core-theme($main-theme);
 @include mat-divider-theme($main-theme);
 @include mat-bottom-sheet-theme($main-theme);
 @include mat-button-theme($main-theme);
@@ -53,18 +53,19 @@
 
 
 
-//INCLIDE DESIGN THEME
+//INCLUDE MINIMAL DESIGN THEME TO SHOW HOME PAGE
 @import './mixin/general.scss';
 @import './mixin/scrollbar.scss';
 @import './mixin/footer.scss';
 @import './mixin/popup.scss';
+@import './mixin/home.scss';
 
 @mixin design-mixin($theme) {
     @include general-mixin($theme);
     @include footer-mixin($theme);
     @include scrollbar-mixin($theme);
     @include popup-mixin($theme);
-
+    @include home-mixin($theme);
 }
 
 @include design-mixin($main-theme);
