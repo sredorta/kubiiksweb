@@ -31,9 +31,6 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
  /**Contains saved article to cancel */
  savedArticle : Article = new Article(null);
 
- /**Editor configuration */
- editorConfig = KiiEditor.config();
-
  /**When we are saving the article */
  isDataLoading:boolean = false;
 
@@ -94,6 +91,16 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
         this.savedArticle = new Article({...this.article});
       }, ()=> this.isDataLoading = false)
     )
+  }
+
+  /**When we save edited changes */
+  onSaveEdited(value:any) {
+    console.log("SAVING FROM EDIT",value)
+    this.article.title = value.title;
+    this.article.description = value.description;
+    this.article.image = value.image;
+    this.article.content = value.content;
+    this.onSave();
   }
 
 

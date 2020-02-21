@@ -45,12 +45,12 @@
         margin-right: 10px;
     }
 }
-.action-btn {
-    display: flex;
-    justify-content: flex-end;
-    button {
-        margin:10px;
-    }
+
+
+//Editing part
+.editing {
+    margin:5px;
+    border:1px solid;
 }
 
 @media only screen and (min-width: 700px) {

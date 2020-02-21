@@ -1,0 +1,15 @@
+//Editing part
+form {
+    display:flex;
+    flex-direction: column;
+    mat-form-field {
+        margin-bottom:10px;
+    }
+}
+.action-btn {
+    display: flex;
+    justify-content: flex-end;
+    button {
+        margin:10px;
+    }
+}

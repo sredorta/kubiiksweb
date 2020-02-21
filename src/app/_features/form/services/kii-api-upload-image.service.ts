@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 export enum DiskType {
+  KUBIIKS = "kubiiks",
   CONTENT = "content",
   EMAIL = "email",
   BLOG = "blog",

@@ -81,6 +81,7 @@ import { AngularEditorToolbarComponent } from './components/angular_editor/angul
 import { AeSelectComponent } from './components/angular_editor/ae-select/ae-select.component';
 import { KiiAdminArticleComponent } from './components/kii-admin-article/kii-admin-article.component';
 import { KiiAdminArticleItemComponent } from './components/kii-admin-article-item/kii-admin-article-item.component';
+import { KiiArticleSummaryFormComponent } from './components/kii-article-summary-form/kii-article-summary-form.component';
 
 
 @NgModule({
@@ -99,6 +100,7 @@ import { KiiAdminArticleItemComponent } from './components/kii-admin-article-ite
     ]
   ],
   declarations: [
+    KiiArticleSummaryFormComponent,
     KiiAdminArticleItemComponent,
     KiiAdminArticleComponent,
     AngularEditorComponent,

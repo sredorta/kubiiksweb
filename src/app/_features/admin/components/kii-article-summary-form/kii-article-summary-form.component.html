@@ -1,0 +1,26 @@
+<kii-spinner-overlay [show]="isFormLoading">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate> 
+      <mat-form-field [appearance]="kiiInputAppearance">
+          <mat-label>{{'admin.title.l' | translate | async }}</mat-label>
+          <input matInput formControlName="title" placeholder="{{'admin.title.p' | translate | async}}" required type="text" [kiiInputDefaultValue]="article.title">
+          <mat-icon matPrefix class="icon"><i class="fas fa-heading"></i></mat-icon>
+          <mat-hint>{{'admin.title.h' | translate | async}}</mat-hint>
+          <mat-error kiiInputError="title"></mat-error>    
+      </mat-form-field>
+      <mat-form-field [appearance]="kiiInputAppearance">
+          <mat-label>{{'admin.description.l' | translate | async}}</mat-label>
+          <textarea matInput formControlName="description" placeholder="{{'kiilib.input.description.placeholder' | translate}}" required type="text" [kiiInputDefaultValue]="article.description"></textarea>
+          <mat-icon matPrefix class="icon"><i class="fas fa-paragraph"></i></mat-icon>
+          <mat-hint>{{'admin.description.h' | translate | async}}</mat-hint>
+          <mat-error kiiInputError="description"></mat-error>    
+      </mat-form-field>  
+      <kii-image-upload [config]="config" [image]="article.image" (onUpload)="onUpload($event)"></kii-image-upload>
+      <p>{{'admin.content.l' | translate | async}}</p>
+      <angular-editor id="editor1" [config]="editorConfig" formControlName="content" ></angular-editor>
+
+      <div class="action-btn">
+            <button  mat-stroked-button type="button" color="primary" (click)="onCancel()">{{'admin.cancel' | translate | async}}</button>
+            <button  mat-flat-button type="submit" color="primary">{{'admin.save' | translate | async}}</button>
+        </div>
+    </form>
+</kii-spinner-overlay>

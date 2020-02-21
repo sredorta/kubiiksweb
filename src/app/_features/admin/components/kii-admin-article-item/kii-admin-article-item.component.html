@@ -5,6 +5,7 @@
                 <img [src]="article.getImage()">
             </div>
             <div class="article-text">
+                <small *ngIf="article.key" class="txt-i">{{article.key}}</small>
                 <p class="txt-b">{{article.title}}</p>
                 <small>{{article.description}}</small>
                 <small class="dates first"><fa-icon [icon]="icons['created']"></fa-icon>{{{date:article.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}</small>
@@ -18,15 +19,16 @@
             </div>
         </div>
         <div class="edit-btn">
-                <button  mat-button  (click)="onDelete()"><fa-icon [icon]="icons['delete']"></fa-icon>{{'admin.delete' | translate | async}}</button>
+                <button  mat-button *ngIf="article.cathegory!='kubiiks'" (click)="onDelete()"><fa-icon [icon]="icons['delete']"></fa-icon>{{'admin.delete' | translate | async}}</button>
                 <button  mat-button color="primary" (click)="isEditing=true"><fa-icon [icon]="icons['edit']"></fa-icon>{{'admin.edit' | translate | async}}</button>
         </div>
     </div>
     <div *ngIf="isEditing" class="editing">
-        <angular-editor id="editor1" [config]="editorConfig" [(ngModel)]="article.content"></angular-editor>
-        <div class="action-btn">
+        <kii-article-summary-form [article]="article" (kiiOnSubmit)="onSaveEdited($event)" (kiiOnCancel)="isEditing=false"></kii-article-summary-form>
+        <!--<angular-editor id="editor1" [config]="editorConfig" [(ngModel)]="article.content"></angular-editor>-->
+        <!--<div class="action-btn">
                 <button  mat-stroked-button type="button" color="primary" (click)="onCancel()">{{'admin.cancel' | translate | async}}</button>
                 <button  mat-flat-button type="button" color="primary" (click)="onSave()">{{'admin.save' | translate | async}}</button>
-        </div>
+        </div>-->
     </div>
 </kii-spinner-overlay>

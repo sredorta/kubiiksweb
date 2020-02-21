@@ -6,6 +6,7 @@ export interface IArticle {
     key:string;
     page:string;
     cathegory:string;
+    disk:string;
     image:string;   //Contains principal image link
     backgroundImage:string;
     public:boolean;
@@ -22,6 +23,7 @@ export class Article {
     key:string = null;
     page:string=null;
     cathegory:string = null;
+    disk:string = null;
     image:string = null;   //Contains principal image link
     backgroundImage:string = null;
     public:boolean = null;
