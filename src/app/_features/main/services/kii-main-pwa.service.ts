@@ -8,6 +8,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { KiiBottomSheetSoftwareUpdateComponent } from '../components/kii-bottom-sheet-software-update/kii-bottom-sheet-software-update.component';
 import { KiiMainDataService } from './kii-main-data.service';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 
 //NOTE: This service is only running on the browser
@@ -62,6 +63,7 @@ export class KiiPwaService {
                   refreshing = true;
                   let myBottomSheet = myObj.bottomSheet.open(KiiBottomSheetSoftwareUpdateComponent, {
                     panelClass :"default-theme",
+                    scrollStrategy: new NoopScrollStrategy(),   //Avoid scrolling to top !
                   })
                   myBottomSheet.afterDismissed().subscribe(res => {
                     if (res==true) {
@@ -75,6 +77,7 @@ export class KiiPwaService {
         swUpdate.available.subscribe(event => {
           let myBottomSheet = this.bottomSheet.open(KiiBottomSheetSoftwareUpdateComponent, {
             panelClass :"default-theme",
+            scrollStrategy: new NoopScrollStrategy(),   //Avoid scrolling to top !
           })
           myBottomSheet.afterDismissed().subscribe(res => {
             if (res==true) {

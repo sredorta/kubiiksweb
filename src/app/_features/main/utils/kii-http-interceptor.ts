@@ -11,6 +11,7 @@ import { User } from '../models/user';
 import { KiiMainUserService } from '../services/kii-main-user.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 
 //We intercept all http requests and do some things here
@@ -31,6 +32,7 @@ export class KiiHttpInterceptor implements HttpInterceptor {
         if (isPlatformBrowser(this._platformId))
             this.bottomSheet.open(KiiHttpErrorComponent, {
                 panelClass :"default-theme",
+                scrollStrategy: new NoopScrollStrategy(),   //Avoid scrolling to top !
                 data: { 
                         message: message
                     }

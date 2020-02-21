@@ -129,22 +129,4 @@ $main-accent:  mat-palette($mat-cyan, A200);
 $main-warn:    mat-palette($mat-red,500);
 $main-theme: create-dark-theme($main-primary, $main-accent, $main-warn, $mat-dark-theme-foreground, $mat-dark-theme-background);
   
-@include angular-material-theme($main-theme);
-
-//INCLIDE DESIGN THEME
-@import './mixin/general.scss';
-@import './mixin/scrollbar.scss';
-@import './mixin/footer.scss';
-@import './mixin/popup.scss';
-
-@mixin design-mixin($theme) {
-    @include general-mixin($theme);
-    @include footer-mixin($theme);
-    @include scrollbar-mixin($theme);
-    @include popup-mixin($theme);
-
-}
-
-@include design-mixin($main-theme);
-
 

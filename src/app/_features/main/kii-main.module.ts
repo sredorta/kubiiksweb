@@ -61,6 +61,7 @@ import { KiiArticleComponent } from './components/kii-article/kii-article.compon
 import { KiiNiceDateFormatPipe } from './pipes/kii-nice-date-format.pipe';
 import { KiiArticleSummaryComponent } from './components/kii-article-summary/kii-article-summary.component';
 import { KiiMainArticleService } from './services/kii-main-article.service';
+import { KiiMainThemeComponent } from './components/kii-main-theme/kii-main-theme.component';
 
 
 
@@ -86,6 +87,7 @@ import { KiiMainArticleService } from './services/kii-main-article.service';
     RouterModule,
   ],
   declarations: [
+    KiiMainThemeComponent,
     KiiNiceDateFormatPipe,
     KiiArticleComponent,
     KiiArticleSummaryComponent,

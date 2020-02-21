@@ -68,6 +68,7 @@ export class KiiProfileComponent extends KiiBaseAbstract implements OnInit {
     let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
       disableClose:true,
       panelClass: "default-theme",
+      
       data: {text: "a.delete.confirm"}
     })
     this.addSubscriber(

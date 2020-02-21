@@ -72,7 +72,7 @@ export class KiiSignupFormComponent extends KiiFormAbstract implements OnInit {
 
   /**When form is submitted */
   onSubmit(value:any) {
-    //if (this.myForm.valid) 
+    if (this.myForm.valid) 
         this.kiiOnSubmit.emit(value);
   }
 }

@@ -74,6 +74,7 @@ import { KiiEstablishPasswordComponent } from './routes/kii-establish-password/k
 import { KiiEstablishPasswordFormComponent } from './components/kii-establish-password-form/kii-establish-password-form.component';
 import { KiiProfileFormComponent } from './components/kii-profile-form/kii-profile-form.component';
 import { KiiTableModule } from '../table/kii-table.module';
+import { KiiAuthThemeComponent } from './components/kii-auth-theme/kii-auth-theme.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { KiiTableModule } from '../table/kii-table.module';
     KiiAuthRoutingModule,
   ],
   declarations: [
+    KiiAuthThemeComponent,
     KiiPasswordStrengthDirective,
     KiiAlertsComponent,
     KiiProfileFormComponent,
