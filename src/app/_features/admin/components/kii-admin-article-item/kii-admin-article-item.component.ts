@@ -31,6 +31,9 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
  /**Contains saved article to cancel */
  savedArticle : Article = new Article(null);
 
+ /**Contains preview article to see how it looks like */
+ previewArticle : Article = new Article(null);
+
  /**When we are saving the article */
  isDataLoading:boolean = false;
 
@@ -73,6 +76,7 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
       if (this.article.exists() && !this.savedArticle.exists()){
         this.savedArticle = new Article({...this.article});
       }
+      this.previewArticle= new Article({...this.article});
     }
   } 
 
@@ -163,6 +167,16 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
         this.isDataLoading = false;
       },()=>this.isDataLoading = false)
     )
+  }
+
+  updateView(value:any) {
+    console.log("Updating view",value);
+    this.previewArticle = new Article(null);
+    this.previewArticle.title = value.title;
+    this.previewArticle.description = value.description;
+    this.previewArticle.image = value.image;
+    this.previewArticle.content = value.content;
+    this.previewArticle.public = true;
   }
 }
 

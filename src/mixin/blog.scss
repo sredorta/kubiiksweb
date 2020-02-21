@@ -13,6 +13,9 @@
   $is-dark-theme: map-get($theme, is-dark);
 
   kii-element.blog-item {
+      kii-article {
+          display:none;
+      }
       margin:20px;
       transition:all 1s ease-in-out;
       .kii-element-container {

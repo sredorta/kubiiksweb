@@ -122,7 +122,7 @@
   );
 
 //INCLIDE DESIGN THEME
-@import './mixin/general.scss';
+/*@import './mixin/general.scss';
 @import './mixin/scrollbar.scss';
 @import './mixin/footer.scss';
 
@@ -130,7 +130,7 @@
     @include general-mixin($theme);
     @include footer-mixin($theme);
     @include scrollbar-mixin($theme);
-}
+}*/
 
 //@include design-mixin($main-theme);
 
@@ -142,7 +142,7 @@ $admin-theme: create-dark-theme($admin-primary, $admin-accent, $admin-warn, $mat
 
 .admin-theme {
     @include angular-material-theme($admin-theme);
-    @include design-mixin($admin-theme);
+    //@include design-mixin($admin-theme);
     background: map_get($mat-grey, 900);
     color: map_get($mat-dark-theme-foreground,text);
 }

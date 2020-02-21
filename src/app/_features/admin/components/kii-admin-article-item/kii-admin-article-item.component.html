@@ -24,11 +24,10 @@
         </div>
     </div>
     <div *ngIf="isEditing" class="editing">
-        <kii-article-summary-form [article]="article" (kiiOnSubmit)="onSaveEdited($event)" (kiiOnCancel)="isEditing=false"></kii-article-summary-form>
-        <!--<angular-editor id="editor1" [config]="editorConfig" [(ngModel)]="article.content"></angular-editor>-->
-        <!--<div class="action-btn">
-                <button  mat-stroked-button type="button" color="primary" (click)="onCancel()">{{'admin.cancel' | translate | async}}</button>
-                <button  mat-flat-button type="button" color="primary" (click)="onSave()">{{'admin.save' | translate | async}}</button>
-        </div>-->
+        <kii-element  [ngClass]="article.cathegory" mat-ripple kiiAppear>
+            <kii-article-summary [article]="previewArticle"></kii-article-summary>
+            <kii-article [article]="previewArticle"></kii-article>
+        </kii-element>
+        <kii-article-summary-form [article]="article" (onChange)="updateView($event)" (kiiOnSubmit)="onSaveEdited($event)" (kiiOnCancel)="isEditing=false"></kii-article-summary-form>
     </div>
 </kii-spinner-overlay>

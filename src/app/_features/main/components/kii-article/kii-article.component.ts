@@ -41,39 +41,12 @@ export class KiiArticleComponent extends KiiBaseAbstract implements OnInit {
     )
   }
 
-  ngAfterViewInit() {
-    this.update();
-  }
-
 
   ngOnChanges(changes:SimpleChanges) {
     if (changes.article) {
       this.article = changes.article.currentValue;
-      this.update();
     }
   } 
 
-  update() {
-    if (this.textArea)
-      this.textArea.nativeElement.innerHTML = this.article.content;
-  }
-
-/*
-  ngAfterViewInit() {
-    setTimeout(()=> {
-      this.addSubscriber(
-        this.kiiApiArticle.onChange().subscribe(res => {
-            this.article = this.kiiApiArticle.getByIdOrKey(this.key);
-            this.backgroundImage = this.article.backgroundImage;
-            this.htmlInitial = this.article.content;
-            if (this.backgroundImage!= null) {
-              this.r.setStyle(this.textArea.nativeElement, 'backgroundImage', 'url(' + this.backgroundImage + ')',1);
-            }
-            //Fill with input html
-            this.textArea.nativeElement.innerHTML = this.htmlInitial;
-        })
-      )
-    });
-  }*/
 }
 

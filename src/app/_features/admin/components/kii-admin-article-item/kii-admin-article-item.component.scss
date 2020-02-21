@@ -1,3 +1,4 @@
+
 .preview {
     margin:5px;
     border:1px solid;
@@ -51,6 +52,9 @@
 .editing {
     margin:5px;
     border:1px solid;
+    ::ng-deep angular-editor .angular-editor-textarea {
+        min-height: 50px !important;
+    }
 }
 
 @media only screen and (min-width: 700px) {
