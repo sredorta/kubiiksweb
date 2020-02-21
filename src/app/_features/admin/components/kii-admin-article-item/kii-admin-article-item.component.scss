@@ -68,3 +68,10 @@
         }
     }
 }
+
+//Kubiiks elements only have article as they are declared for articles only
+kii-element.kubiiks {
+    kii-article-summary {
+        display:none;
+    }
+}

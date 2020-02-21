@@ -24,7 +24,7 @@
         </div>
     </div>
     <div *ngIf="isEditing" class="editing">
-        <kii-element  [ngClass]="article.cathegory" mat-ripple kiiAppear>
+        <kii-element  [ngClass]="article.cathegory">
             <kii-article-summary [article]="previewArticle"></kii-article-summary>
             <kii-article [article]="previewArticle"></kii-article>
         </kii-element>

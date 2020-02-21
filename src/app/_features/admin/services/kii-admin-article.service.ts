@@ -50,7 +50,7 @@ export class KiiAdminArticleService  {
         if (this.kiiMainArticle.value().length<=0) {
           return [];
         }
-        return this.kiiMainArticle.value().filter(obj => obj.cathegory == cathegory).sort((a,b)=>b.order-a.order);
+        return this.kiiMainArticle.value().filter(obj => obj.cathegory == cathegory).sort((a,b)=>a.order-b.order);
   }
 
   /**Refreshes element of the current values and notifies changes */
