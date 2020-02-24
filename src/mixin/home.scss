@@ -12,22 +12,56 @@
   $background:map-get($theme,background);
   $is-dark-theme: map-get($theme, is-dark);
 
-  kii-element.home-features {
-    kii-article-summary {
-        img {
-            width: 70px;
-            height:70px;
-        }
-        .title {
-            display:none;
-        }
-        .description {
-            font-size: 22px;
+    kii-element.home-features .kii-element-container {
+        padding-left:10px;
+        padding-right:10px;
+    }
+    kii-element.home-features:nth-child(odd) {
+        .kii-element-container {
+            padding-top:80px;
+            padding-bottom:40px;
+            background-image:url("/assets/images/home/top-element-background.svg");
+            background-position: left bottom;
+            background-size: auto 100%;
+            background-repeat: no-repeat;
         }
     }
-    kii-article {
-        
+
+    kii-element.home-features {
+        max-width: 650px;
+        min-width: 300px; 
+        kii-article-summary {
+            img {
+                width: 70px;
+                height:70px;
+            }
+            .title {
+                display:none;
+            }
+            .description {
+                font-size: 22px;
+                margin-bottom:0px;
+            }
+        }
     }
-  }
+    @media only screen and (min-width: 700px) { 
+        kii-element.home-features .kii-element-container {
+            max-width: 50vw;
+        }
+        kii-element.home-features:nth-child(odd) {
+            .kii-element-container {
+                padding-left:50vw;
+            }
+        }
+        kii-element.home-features kii-article-summary {
+            img {
+                width: 90px;
+                height:90px;
+            }
+            .description {
+                font-size: 26px;
+            }
+        }
+    }
   
 }

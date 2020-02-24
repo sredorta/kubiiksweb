@@ -1,4 +1,5 @@
-import { Directive, HostListener, ElementRef, Output, Renderer2 } from '@angular/core';
+import { Directive, HostListener, ElementRef, Output, Renderer2, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
   selector: '[kiiAppear]'
@@ -7,13 +8,15 @@ export class KiiAppearDirective {
 
     private _intersectionObserver? : IntersectionObserver;
 
-    constructor(private _el: ElementRef, private _r : Renderer2) { }
+    constructor(private _el: ElementRef, private _r : Renderer2,@Inject(PLATFORM_ID) private platform: any) { }
 
     public ngAfterViewInit () {
-        this._intersectionObserver = new IntersectionObserver(entries => {
-            this.checkForIntersection(entries);
-        }, {});
-        this._intersectionObserver.observe(<Element>(this._el.nativeElement));
+        if (isPlatformBrowser(this.platform)) {
+            this._intersectionObserver = new IntersectionObserver(entries => {
+                this.checkForIntersection(entries);
+            }, {});
+            this._intersectionObserver.observe(<Element>(this._el.nativeElement));
+        }
     }
 
     private checkForIntersection = (entries: Array<IntersectionObserverEntry>) => {

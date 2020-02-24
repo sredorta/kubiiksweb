@@ -69,7 +69,7 @@ export class Article {
 
     /**REturns article image */
     public getImage() {
-        if (this.image) {
+        if (this.image && this.image != "none") {
             return this.image;
         } else
             return './assets/kiilib/images/no-photo.svg';
