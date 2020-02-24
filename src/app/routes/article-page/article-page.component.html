@@ -1,3 +1,5 @@
 <kii-toolbar></kii-toolbar>
-<kii-header [data]="{title:'b.header.t',subtitle:'b.header.s'}"></kii-header>
-<kii-article [article]="article" [showCreated]="true"></kii-article>
+<kii-header [data]="{title:article.title,subtitle:'', isShort:true}"></kii-header>
+<div class="wrapper">
+    <kii-article [article]="article" [showCreated]="true"></kii-article>
+</div>

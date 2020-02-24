@@ -1,25 +1,12 @@
-
-.kii-article-detail-wrapper {
-    padding-top:20px;
-    padding-bottom:20px;
-    width:100%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    kii-article {
-        box-sizing: border-box;
-        padding:8px;
-        max-width:1200px;
-        width:90%;
-    }
+.wrapper {
+    padding:10px;
 }
 
 
 @media only screen and (min-width: 600px) {
-    .kii-article-detail-wrapper {
-        kii-article {
-            padding:30px;
-        }
+    .wrapper {
+        padding-left:10vw;
+        padding-right:10vw;
     }
 
 }

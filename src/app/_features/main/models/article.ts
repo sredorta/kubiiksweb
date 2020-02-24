@@ -13,6 +13,7 @@ export interface IArticle {
     title:string;
     description:string;
     content:string;
+    hasPage:boolean;
     createdAt:string;
     updatedAt:string;
 }
@@ -22,6 +23,7 @@ export class Article {
     order:number = 0;
     key:string = null;
     page:string=null;
+    hasPage:boolean = false;
     cathegory:string = null;
     disk:string = null;
     image:string = null;   //Contains principal image link
