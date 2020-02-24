@@ -1,0 +1,12 @@
+<kii-toolbar></kii-toolbar>
+<kii-header [data]="{title:'nf.title',subtitle:'nf.subtitle',isShort:true}"></kii-header>
+<div class=wrapper>
+        <div class="img-container">
+        <img src="./assets/kiilib/images/page-not-found.svg"/>  
+        </div>  
+        <div class="side-container">
+          <p class="txt-xl txt-b">{{'nf.title' | translate | async}}</p>
+          <p class="txt-l">{{'nf.subtitle' | translate | async}}</p>
+          <button mat-flat-button color="primary" (click)="goHome()">{{'nf.button' | translate | async}}</button>
+        </div>
+</div>

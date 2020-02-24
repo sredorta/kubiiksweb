@@ -18,8 +18,10 @@ export class KiiTranslateRoutingModule {
       for (let lang of environment.languages) {
           routes.push({path:lang, children: this.router.config});
       }
+      routes.push({path:'**', redirectTo:this.kiiTrans.getLangFromBrowser()+'/not-found'}); //Need here to redirect in case there is no language
       //Add dynamically the routes
       this.router.resetConfig(routes);
+      console.log(routes);
     }
   }
 }

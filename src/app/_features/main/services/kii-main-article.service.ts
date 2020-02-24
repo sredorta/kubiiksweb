@@ -8,7 +8,7 @@ import { isPlatformServer, isPlatformBrowser } from '@angular/common';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { tap, map, filter } from 'rxjs/operators';
 import { KiiMainUserService } from './kii-main-user.service';
-import { Article } from '../models/article';
+import { Article, IArticle } from '../models/article';
 
 
 //This service contains all general data required per page
@@ -53,6 +53,10 @@ export class KiiMainArticleService extends KiiBaseAbstract {
       return this._articles.value;
     }
 
+    /**Loads article by id */
+    loadById(id:number) {
+      return this.http.post(environment.apiURL + '/article/id', {id:id}).pipe(map(res => new Article(<IArticle>res)));
+    }
 
     /**Returns a setting filtered by key */
     public getByKey(key:string) {

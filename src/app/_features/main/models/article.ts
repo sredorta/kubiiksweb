@@ -45,7 +45,7 @@ export class Article {
         } 
     }
 
-    /**Returns if user has been initialized or not */
+    /**Returns if article has been initialized or not */
     exists() {
         return this._isLoaded;
     }

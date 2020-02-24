@@ -1,0 +1,33 @@
+
+.wrapper {
+    box-sizing: border-box;
+    padding:20px;
+    width:100%;
+    min-height:70vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+        margin:3px;
+    }
+    button {
+        margin-top:15px;
+    }
+}
+.img-container {
+    margin:40px;
+    flex:1;
+    width:100%;
+    max-width: 300px;
+}
+
+
+@media only screen and (min-width: 700px) {
+    .wrapper {
+        flex-direction: row;
+    }
+    .side-container {
+        justify-content: flex-start;
+    }
+}

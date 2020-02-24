@@ -60,7 +60,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
         this.kiiTrans.onChange.subscribe(res => {
           console.log("TRANSLATION CHANGED",res);
           this.data.isFullLoaded = false;
-          this.data.loadFullData(2000);
+          this.data.loadFullData(0);
         })
       )
 

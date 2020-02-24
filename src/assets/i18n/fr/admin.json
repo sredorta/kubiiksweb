@@ -87,6 +87,7 @@
     "admin.description.p": "Déscription",
     "admin.description.h": "Écrivez la déscription",
     "admin.summary.image.t": "Image principale",
-    "admin.summary.image.s": "Définisez l'image principale"
+    "admin.summary.image.s": "Définisez l'image principale",
+    "admin.content.l" : "Contenu"
 
 }

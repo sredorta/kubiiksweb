@@ -21,6 +21,10 @@ let routes: Routes = [
     loadChildren: () => import('./routes/blog/blog.module').then(m => m.BlogModule), 
   },
   { 
+    path: 'articles/:id', 
+    loadChildren: () => import('./routes/article-page/article-page.module').then(m => m.ArticlePageModule), 
+  },
+  { 
     path: 'contact', 
     loadChildren: () => import('./routes/contact/contact.module').then(m => m.ContactModule), 
   },
@@ -39,6 +43,13 @@ let routes: Routes = [
     path: 'admin',
     loadChildren : () => import('./_features/admin/kii-admin.module').then(m => m.KiiAdminModule), 
   },  
+
+  //Not found
+  {
+    path: 'not-found',
+    loadChildren : () => import('./routes/not-found-page/not-found-page.module').then(m => m.NotFoundPageModule), 
+  },
+
 ]
 
 @NgModule({
