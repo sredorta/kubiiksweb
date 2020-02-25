@@ -56,14 +56,17 @@ import { KiiBottomSheetRef } from '../utils/kii-bottom-sheet-ref';
       
         const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
         const child = document.body.appendChild(domElem);
-        console.log("child",child);
-        if (!Array.isArray(config.panelClass))
-          this.r.addClass(child,config.panelClass);
-        else
-          config.panelClass.forEach((item)=> {
-            this.r.addClass(child,item);
 
-          })
+        //Add panelClass classes
+        if(config && config.panelClass) {
+          if (!Array.isArray(config.panelClass))
+            this.r.addClass(child,config.panelClass);
+          else
+            config.panelClass.forEach((item)=> {
+              this.r.addClass(child,item);
+
+            })
+        }
       
         this.bottomSheetComponentRef = componentRef;
         this.bottomSheetComponentRef.instance.onClose.subscribe(() => {
@@ -84,6 +87,10 @@ import { KiiBottomSheetRef } from '../utils/kii-bottom-sheet-ref';
         this.bottomSheetComponentRef.instance.childComponentType = componentType;
         return bottomSheetRef;
       }
+    }
+
+    public close() {
+      this.bottomSheetComponentRef.destroy();
     }
 
   }

@@ -73,7 +73,7 @@
     }
 
     //KiiDialog
-    kii-dialog {
+    kii-dialog,kii-bottom-sheet {
         .overlay {
             background-color:rgba(black,0.5);
 
@@ -83,13 +83,4 @@
         }
     }
 
-    //Bottom sheet
-    kii-bottom-sheet {
-        .bottom-wrp {
-            background-color:rgba(black,0.5);
-        }
-        .content {
-            background: mat-color($background,card);
-        }
-    }
 }

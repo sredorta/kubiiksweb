@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, Input,Type, AfterViewChecked, OnDestroy, AfterViewInit, ViewChild, ComponentFactoryResolver, ComponentRef, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input,Type, AfterViewChecked, OnDestroy, AfterViewInit, ViewChild, ComponentFactoryResolver, ComponentRef, ChangeDetectorRef, Injector } from '@angular/core';
 import { Subject } from 'rxjs';
 import { KiiAnchorBottomSheetRefDirective } from '../../directives/kii-anchor-bottom-sheet-ref-directive';
+import { KiiBottomSheetConfig } from '../../utils/kii-bottom-sheet-config';
+import { KiiBottomSheetRef } from '../../utils/kii-bottom-sheet-ref';
 
 @Component({
   selector: 'kii-bottom-sheet',
@@ -16,7 +18,7 @@ export class KiiBottomSheetComponent implements AfterViewInit,OnDestroy {
 
   @ViewChild(KiiAnchorBottomSheetRefDirective, {static: true}) anchor: KiiAnchorBottomSheetRefDirective;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,private cd: ChangeDetectorRef) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,private cd: ChangeDetectorRef,private injector: Injector) { }
 
   /**Load child component */
   ngAfterViewInit() {
@@ -27,7 +29,13 @@ export class KiiBottomSheetComponent implements AfterViewInit,OnDestroy {
 
 
   onOverlayClicked(evt: MouseEvent) {
-    // close the bottom-sheet
+    const config = this.injector.get(KiiBottomSheetConfig, new KiiBottomSheetConfig());
+    const ref = this.injector.get(KiiBottomSheetRef);
+    if (!config) {
+        ref.close(false);
+    } else if(!config.disableClose) {
+      ref.close(false);
+    }
   }
 
   onBottomSheetClicked(evt: MouseEvent) {

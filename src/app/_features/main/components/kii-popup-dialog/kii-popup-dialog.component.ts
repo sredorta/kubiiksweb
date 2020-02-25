@@ -11,13 +11,13 @@ import { KiiDialogRef } from 'src/app/_features/dialog/utils/kii-dialog-ref';
 export class KiiPopupDialogComponent implements OnInit {
 
 
-  constructor(public articles: KiiMainArticleService, public dialog: KiiDialogRef, public config: KiiDialogConfig) { }
+  constructor(public articles: KiiMainArticleService, public dialog: KiiDialogRef) { }
 
   ngOnInit() {
-    console.log("Config is:",this.config)
   }
 
   close() {
+    console.log("Closing dialog !");
     this.dialog.close(true);
   }
 }

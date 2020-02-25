@@ -56,14 +56,15 @@ import { KiiDialogRef } from '../utils/kii-dialog-ref';
       
         const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
         const child = document.body.appendChild(domElem);
-        console.log("child",child);
-        if (!Array.isArray(config.panelClass))
-          this.r.addClass(child,config.panelClass);
-        else
-          config.panelClass.forEach((item)=> {
-            this.r.addClass(child,item);
-
-          })
+        //Add panelClass classes
+        if (config && config.panelClass) {
+          if (!Array.isArray(config.panelClass))
+            this.r.addClass(child,config.panelClass);
+          else
+            config.panelClass.forEach((item)=> {
+              this.r.addClass(child,item);
+            })
+        }
       
         this.dialogComponentRef = componentRef;
         this.dialogComponentRef.instance.onClose.subscribe(() => {
@@ -84,6 +85,10 @@ import { KiiDialogRef } from '../utils/kii-dialog-ref';
         this.dialogComponentRef.instance.childComponentType = componentType;
         return dialogRef;
       }
+    }
+
+    public close() {
+      this.dialogComponentRef.destroy();
     }
 
   }

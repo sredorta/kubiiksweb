@@ -23,6 +23,7 @@ import { KiiPwaService } from '../../services/kii-main-pwa.service';
 import { KiiDialog } from 'src/app/_features/dialog/services/kii-dialog.service';
 import { KiiPopupDialogComponent } from '../kii-popup-dialog/kii-popup-dialog.component';
 import { KiiBottomSheet } from 'src/app/_features/bottom-sheet/services/kii-bottom-sheet.service';
+import { KiiBottomSheetRef } from 'src/app/_features/bottom-sheet/utils/kii-bottom-sheet-ref';
 
 @Component({
   selector: 'kii-app',
@@ -33,6 +34,9 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
   public schemaSite : any = {};
   public schemaCorporation: any = {};
+
+  /**Indicates if popup has already been shown */
+  private hasShownPopup : boolean = false;
 
 
   constructor(@Inject(PLATFORM_ID) private platform: any,
@@ -50,20 +54,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   ) { super() }
 
 
-  ngAfterViewInit() {
 
-    const ref = this.kiiDialog.open(KiiPopupDialogComponent,{
-      panelClass:["admin-theme","test-theme"],
-      data:{test:"This is a test"}
-    });
-    ref.afterClosed.subscribe(result => {
-      console.log('Dialog closed', result)
-    })
-    this.kiiBottomSheet.open(KiiBottomSheetCookiesComponent, {
-      panelClass:["admin-theme","test-theme"],
-      data:{test:"This is a test"}
-    })
-  }
 
   ngOnInit() {
     console.log("KIIAPP ONINIT");
@@ -71,19 +62,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
     //Sets language required context
     this.kiiTrans.setRequiredContext(['main']);
-
-
-    //Add subscribers to bottom sheet and dialog
-    /*this.addSubscriber(
-      this.kiiEntry.getShowBottom().subscribe(res => {
-        this.showBottom = res;
-      })
-    )
-    this.addSubscriber(
-      this.kiiEntry.getShowDialog().subscribe(res => {
-        this.showPopup = res;
-      })
-    )*/
 
 
     //Load full data
@@ -100,10 +78,11 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
     //When settings are available open popup if enabled
     let settingsSubs =  this.kiiSettings.onChange.subscribe(res => {
-        if (this.kiiSettings.loaded) {
+        if (this.kiiSettings.loaded && !this.hasShownPopup) {
           this.openPopupDialog();
           this.schemaSite = SEO.schemaInit('site',this.kiiSettings.getValue());
           this.schemaCorporation = SEO.schemaInit('corporation',this.kiiSettings.getValue());
+          this.hasShownPopup = true;
         }
     }, () => {
         settingsSubs.unsubscribe();
@@ -115,12 +94,13 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     this.addSubscriber(
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe( (res : NavigationEnd) => {
           if (res.url.includes('cookies')) {
-            //this.bottomSheet.dismiss();
+            this.kiiBottomSheet.close();
           } else {
             if (isPlatformBrowser(this.platform)) {
               this.addSubscriber(
                 this.cookies.showCookies.subscribe(res => {
-                  if (res) this.openBottomSheetCookies();
+                  if (res)
+                     this.openBottomSheetCookies();
                 })
               )
             }
@@ -146,9 +126,9 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       this.stats.clearSession();
   }
 
-  openBottomSheetCookies(): void {
-    /*console.log("OPENING COOKIES !!!!")
-    let subs = this.kiiBottomSheet.open(KiiBottomSheetCookiesComponent).afterClosed.subscribe(res => {
+  openBottomSheetCookies() {
+    let ref = this.kiiBottomSheet.open(KiiBottomSheetCookiesComponent,{disableClose:true});
+    let subs = ref.afterClosed.subscribe(res => {
       if (res) {
         if (res.result == "accept") {
            this.cookies.accept();
@@ -156,7 +136,8 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
         } else this.cookies.refuse();
         subs.unsubscribe();
       }
-    });*/
+    });
+    return ref;
   }
 
   openPopupDialog() {
@@ -166,13 +147,8 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       let value = this.kiiSettings.getByKey("popup-show").value;
       if (value != "disabled" && (!storage || !storage.includes(value))) {
         setTimeout(() => {
-            console.log("WE ARE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! POPUP NOW!!")
-            /*this.dialog.open(KiiPopupDialogComponent, {
-              panelClass: '',
-              data:  null,
-              maxHeight:'90vh',
-              minWidth:'320px'
-            });*/
+            console.log("WE ARE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! POPUP NOW!!");
+            this.kiiDialog.open(KiiPopupDialogComponent);
         },1000);
         if (this.cookies.areAccepted())
           localStorage.setItem("popup", value );
