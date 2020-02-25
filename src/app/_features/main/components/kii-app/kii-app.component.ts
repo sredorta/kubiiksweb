@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, PLATFORM_ID, ComponentFactoryResolver, Renderer2, HostListener, NgZone, ViewChild } from '@angular/core';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet, MatDialog } from '@angular/material';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, isPlatformBrowser, ViewportScroller } from '@angular/common';
 import { filter } from 'rxjs/operators';
@@ -24,6 +24,7 @@ import { KiiDialog } from 'src/app/_features/dialog/services/kii-dialog.service'
 import { KiiPopupDialogComponent } from '../kii-popup-dialog/kii-popup-dialog.component';
 import { KiiBottomSheet } from 'src/app/_features/bottom-sheet/services/kii-bottom-sheet.service';
 import { KiiBottomSheetRef } from 'src/app/_features/bottom-sheet/utils/kii-bottom-sheet-ref';
+import { KiiBottomSheetComponent } from 'src/app/_features/bottom-sheet/components/kii-bottom-sheet/kii-bottom-sheet.component';
 
 @Component({
   selector: 'kii-app',
@@ -39,12 +40,12 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private hasShownPopup : boolean = false;
 
 
+
   constructor(@Inject(PLATFORM_ID) private platform: any,
-  private kiiDialog: KiiDialog,
-  private kiiBottomSheet: KiiBottomSheet,
+  private bottomSheet: MatBottomSheet,
+  private dialog: MatDialog,
   private kiiTrans: KiiTranslateService,
   private viewTrans : KiiViewTransferService,
-  //private bottomSheet: MatBottomSheet,
   private router : Router,
   private cookies : KiiMainCookiesService,
   private stats : KiiMainStatsService,
@@ -53,12 +54,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private pwa: KiiPwaService
   ) { super() }
 
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.kiiBottomSheet.open(KiiBottomSheetCookiesComponent,{disableClose:true});
-    },5000);
-  }
 
 
   ngOnInit() {
@@ -99,7 +94,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     this.addSubscriber(
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe( (res : NavigationEnd) => {
           if (res.url.includes('cookies')) {
-            this.kiiBottomSheet.close();
+            this.bottomSheet.dismiss();
           } else {
             if (isPlatformBrowser(this.platform)) {
               this.addSubscriber(
@@ -132,17 +127,24 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   }
 
   openBottomSheetCookies() {
-/*    let ref = this.kiiBottomSheet.open(KiiBottomSheetCookiesComponent,{disableClose:true});
-    let subs = ref.afterClosed.subscribe(res => {
-      if (res) {
-        if (res.result == "accept") {
-           this.cookies.accept();
-           this.stats.send(StatAction.NAVIGATION_START ,this.router.url);
-        } else this.cookies.refuse();
-        subs.unsubscribe();
-      }
-    });
-    return ref;*/
+    if (isPlatformBrowser(this.platform)) {
+      setTimeout(()=> {
+      let subs = this.bottomSheet.open(KiiBottomSheetCookiesComponent,
+        {
+          disableClose:true,
+          scrollStrategy: new NoopScrollStrategy()
+        }).afterDismissed().subscribe(res => {
+        console.log("Recieved result",res);
+        if (res) {
+          if (res.result == "accept") {
+            this.cookies.accept();
+            this.stats.send(StatAction.NAVIGATION_START ,this.router.url);
+          } else this.cookies.refuse();
+          subs.unsubscribe();
+        }
+      });
+      },2000);
+   }
   }
 
   openPopupDialog() {
@@ -151,10 +153,12 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       let storage = localStorage.getItem("popup");
       let value = this.kiiSettings.getByKey("popup-show").value;
       if (value != "disabled" && (!storage || !storage.includes(value))) {
-/*        setTimeout(() => {
+        setTimeout(() => {
             console.log("WE ARE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! POPUP NOW!!");
-            this.kiiDialog.open(KiiPopupDialogComponent);
-        },1000);*/
+            this.dialog.open(KiiPopupDialogComponent, {
+              scrollStrategy: new NoopScrollStrategy()
+            });
+        },8000);
         if (this.cookies.areAccepted())
           localStorage.setItem("popup", value );
       }

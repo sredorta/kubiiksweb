@@ -9,6 +9,7 @@ import * as deepmerge from 'deepmerge';
 import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons/faCalendarDay';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 
 interface IStatWindow {
@@ -330,6 +331,7 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
   /**When we delete all elements */
   onDelete() {
     let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
+      scrollStrategy: new NoopScrollStrategy(),
       panelClass: "admin-theme",
       data: {text: "admin.stats.confirm.text"}
     });

@@ -17,6 +17,7 @@ import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii
 import { KiiTranslateModule } from 'src/app/_features/translate/kii-translate.module';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'kii-admin-article-item',
@@ -123,6 +124,7 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
   onDelete() {
     console.log("WE are in onDelete")
     let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
+      scrollStrategy: new NoopScrollStrategy(),
       disableClose:true,
       panelClass: "admin-theme",
       data: {text: "admin.article.delete.text"}

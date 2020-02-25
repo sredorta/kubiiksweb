@@ -52,7 +52,6 @@ import { KiiApiUploadFileService } from './services/kii-api-upload-image.service
     [  MatAutocompleteModule, //MATERIAL DESIGN
       MatInputModule,
       MatTooltipModule,
-      MatDialogModule,
       MatSelectModule,
       MatOptionModule,
       MatChipsModule,
@@ -78,7 +77,6 @@ import { KiiApiUploadFileService } from './services/kii-api-upload-image.service
     MatIconModule,
     MatCheckboxModule,
     MatCardModule,
-    MatDialogModule,
     MatSelectModule,
     MatOptionModule,
     MatChipsModule,

@@ -70,36 +70,6 @@
         .c-warn {
             color:mat-color($warn);
         }
-    }
 
-    //KiiDialog
-    kii-dialog,kii-bottom-sheet {
-        .overlay {
-            background-color:rgba(black,0.5);
-
-        }
-        .content {
-            background: mat-color($background,card);
-            animation: bottomSheetIn 2s;
-        }
-    }
-
-}
-
-@keyframes bottomSheetIn {
-    from {
-      max-height : 0px;
-    }
-    to {
-      max-height : 80vh;
     }
 }
-
-@keyframes bottomSheetOut {
-    from {
-      max-height : 80vh;
-    }
-    to {
-      max-height : 0px;
-    }
-}  

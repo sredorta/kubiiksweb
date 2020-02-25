@@ -13,6 +13,8 @@
 @include mat-toolbar-theme($main-theme);
 @include mat-badge-theme($main-theme);
 @include mat-icon-theme($main-theme);
+@include mat-dialog-theme($main-theme);
+@include mat-bottom-sheet-theme($main-theme);
 
 
 /*  @include mat-core-theme($theme);

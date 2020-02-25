@@ -77,6 +77,7 @@ import { KiiBottomSheetModule } from '../bottom-sheet/kii-bottom-sheet.module';
     //JSON-LD
     NgxJsonLdModule,
     [ 
+      MatBottomSheetModule,
       MatDividerModule,
       MatBottomSheetModule,
       MatButtonModule,
@@ -85,10 +86,10 @@ import { KiiBottomSheetModule } from '../bottom-sheet/kii-bottom-sheet.module';
       MatToolbarModule,
       MatBadgeModule,
       MatIconModule,
+      MatDialogModule
     ],
     KiiTranslateModule.forChild(),
     KiiDialogModule,
-    KiiBottomSheetModule,
     RouterModule,
   ],
   declarations: [
@@ -138,6 +139,8 @@ import { KiiBottomSheetModule } from '../bottom-sheet/kii-bottom-sheet.module';
     KiiSpinnerComponent,
     KiiSpinnerOverlayComponent,
     FontAwesomeModule,
+    MatDialogModule,
+    MatBottomSheetModule,
     MatDividerModule,
     MatBottomSheetModule,
     MatButtonModule,

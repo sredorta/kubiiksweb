@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { KiiMainArticleService } from '../../services/kii-main-article.service';
-import { KiiDialogConfig } from 'src/app/_features/dialog/utils/kii-dialog-config';
-import { KiiDialogRef } from 'src/app/_features/dialog/utils/kii-dialog-ref';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'kii-popup-dialog',
@@ -11,13 +10,13 @@ import { KiiDialogRef } from 'src/app/_features/dialog/utils/kii-dialog-ref';
 export class KiiPopupDialogComponent implements OnInit {
 
 
-  constructor(public articles: KiiMainArticleService, public dialog: KiiDialogRef) { }
+  constructor(public articles: KiiMainArticleService, public dialogRef: MatDialogRef<KiiPopupDialogComponent>) { }
 
   ngOnInit() {
   }
 
   close() {
     console.log("Closing dialog !");
-    this.dialog.close(true);
+    this.dialogRef.close(true);
   }
 }

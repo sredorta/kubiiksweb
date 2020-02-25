@@ -12,7 +12,6 @@ import { KiiMainUserService } from '../services/kii-main-user.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { KiiBottomSheet } from '../../bottom-sheet/services/kii-bottom-sheet.service';
 
 
 //We intercept all http requests and do some things here
@@ -23,7 +22,7 @@ export class KiiHttpInterceptor implements HttpInterceptor {
         private kiiTrans: KiiTranslateService,
         private kiiAuth: KiiMainUserService,
         private router : Router,
-        private kiiBottomSheet: KiiBottomSheet,
+        private kiiBottomSheet: MatBottomSheet,
         //private bottomSheet: KiiBottomSheetComponent,
         @Inject(PLATFORM_ID) private _platformId: any, 
 
@@ -34,6 +33,7 @@ export class KiiHttpInterceptor implements HttpInterceptor {
         console.log("Open bottomsheet http interceptor !")
         if (isPlatformBrowser(this._platformId)) {
             this.kiiBottomSheet.open(KiiHttpErrorComponent,{
+                scrollStrategy: new NoopScrollStrategy(),
                 data:{message:message}
             });
         }

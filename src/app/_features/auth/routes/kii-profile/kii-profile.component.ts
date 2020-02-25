@@ -15,6 +15,7 @@ import { faHistory } from '@fortawesome/free-solid-svg-icons/faHistory';
 import { faUserLock } from '@fortawesome/free-solid-svg-icons/faUserLock';
 import { faIdCardAlt } from '@fortawesome/free-solid-svg-icons/faIdCardAlt';
 import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'kii-profile',
@@ -67,8 +68,9 @@ export class KiiProfileComponent extends KiiBaseAbstract implements OnInit {
   delete() {
     let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
       disableClose:true,
+      scrollStrategy: new NoopScrollStrategy(),
       panelClass: "default-theme",
-      
+
       data: {text: "a.delete.confirm"}
     })
     this.addSubscriber(

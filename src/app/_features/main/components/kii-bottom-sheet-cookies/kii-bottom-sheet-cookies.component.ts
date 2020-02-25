@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material';
 import { KiiBottomSheetRef } from 'src/app/_features/bottom-sheet/utils/kii-bottom-sheet-ref';
+import { KiiBottomSheet } from 'src/app/_features/bottom-sheet/services/kii-bottom-sheet.service';
 
 @Component({
   selector: 'app-kii-bottom-sheet-cookies',
@@ -9,17 +10,17 @@ import { KiiBottomSheetRef } from 'src/app/_features/bottom-sheet/utils/kii-bott
 })
 export class KiiBottomSheetCookiesComponent implements OnInit {
 
-  constructor(private ref: KiiBottomSheetRef) { 
+  constructor(private _bottom: MatBottomSheetRef<KiiBottomSheetCookiesComponent>) { 
   }
 
   ngOnInit() {
   }
 
   reject() {
-    this.ref.close({result:"reject"});
+    this._bottom.dismiss({result:"reject"});
   }
 
   accept() {
-    this.ref.close({result:"accept"});
+    this._bottom.dismiss({result:"accept"});
   }
 }

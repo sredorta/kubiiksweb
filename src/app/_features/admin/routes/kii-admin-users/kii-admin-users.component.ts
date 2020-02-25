@@ -15,6 +15,7 @@ import { faMobile } from '@fortawesome/free-solid-svg-icons/faMobile';
 import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone';
 import { faGlobeEurope } from '@fortawesome/free-solid-svg-icons/faGlobeEurope';
 import { faUserAltSlash } from '@fortawesome/free-solid-svg-icons/faUserAltSlash';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 
 @Component({
@@ -152,6 +153,7 @@ export class KiiAdminUsersComponent extends KiiTableAbstract implements OnInit {
   onDelete(user:IUser) {
     
     let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
+      scrollStrategy:new NoopScrollStrategy(),
       disableClose:true,
       panelClass: "admin-theme",
       data: { text: "admin.users.delete.text"}
