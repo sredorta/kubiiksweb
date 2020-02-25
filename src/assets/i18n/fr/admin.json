@@ -88,6 +88,21 @@
     "admin.description.h": "Écrivez la déscription",
     "admin.summary.image.t": "Image principale",
     "admin.summary.image.s": "Définisez l'image principale",
-    "admin.content.l" : "Contenu"
+    "admin.content.l" : "Contenu",
+
+    "admin.link.dialog.t": "Création d'un lien",
+    "admin.link.type.l" : "Type de lien",
+    "admin.link.type.h" : "Choisir un type de lien",
+    "admin.link.title.l" : "Titre du lien",
+    "admin.link.title.p" : "Lien vers google",
+    "admin.link.title.h" : "Titre qui aparait pour accesibilité",
+    "admin.link.url.l"   : "Adresse du lien",
+    "admin.link.url.p"   : "https://google.com",
+    "admin.link.url.h"   : "Écrivez l'adresse du lien",
+    "admin.link.default" : "Lien estandard",
+    "admin.link.button"  : "Bouton",
+    "admin.link.flat"    : "Boutton plat",
+    "admin.link.raised"  : "Bouton surelevé",
+    "admin.link.stroked" : "Bouton avec contour"
 
 }

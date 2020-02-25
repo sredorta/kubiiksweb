@@ -160,14 +160,16 @@ export class KiiAdminUsersComponent extends KiiTableAbstract implements OnInit {
     })
     this.addSubscriber(
       dialogRef.afterClosed().subscribe((result:boolean) => {
-        if (result) 
-        this.isDataLoading = true;
+        console.log("Recieved :",result)
+        if (result) {
+          this.isDataLoading = true;
           this.addSubscriber(
             this.kiiAdminUser.delete(new User(user)).subscribe(res => {
               this.deleteRow(user.id);
               this.isDataLoading = false;
 
             }, () => this.isDataLoading = false))
+        }
       })
     )
   }

@@ -39,13 +39,11 @@ export class AngularEditorService {
    * Create URL link
    * @param url string from UI prompt
    */
-  createLink(url: string) {
-    if (!url.includes('http')) {
-      this.doc.execCommand('createlink', false, url);
-    } else {
-      const newUrl = '<a href="' + url + '" target="_blank">' + this.selectedText + '</a>';
-      this.insertHtml(newUrl);
-    }
+  createLink(url: string, title:string, className:string) {
+    console.log("Creating link with: ",url,title,className);
+    let newUrl = '<a href="' + url + '" title="'+title+'" class="'+className+'">' + this.selectedText + '</a>';
+    console.log(newUrl);
+    this.insertHtml(newUrl);
   }
 
   /**

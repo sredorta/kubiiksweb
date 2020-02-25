@@ -28,6 +28,9 @@ import { faVideo } from '@fortawesome/free-solid-svg-icons/faVideo';
 import { faMinus } from '@fortawesome/free-solid-svg-icons/faMinus';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { faCode } from '@fortawesome/free-solid-svg-icons/faCode';
+import { KiiLinkDialogComponent } from '../kii-link-dialog/kii-link-dialog.component';
+import { MatDialog } from '@angular/material';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 
 @Component({
@@ -208,6 +211,7 @@ export class AngularEditorToolbarComponent {
   constructor(
     private r: Renderer2,
     private editorService: AngularEditorService,
+    private dialog: MatDialog,
     @Inject(DOCUMENT) private doc: any
   ) {
   }
@@ -306,10 +310,19 @@ export class AngularEditorToolbarComponent {
         url = parent.href;
       }
     }
-    url = prompt('Insert URL link', url);
-    if (url && url !== '' && url !== 'https://') {
-      this.editorService.createLink(url);
-    }
+    let dialogRef = this.dialog.open(KiiLinkDialogComponent, {
+      panelClass: 'admin-theme',
+      disableClose:true,
+      scrollStrategy: new NoopScrollStrategy(),
+      minWidth:'310px',
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      console.log("Insert link",res);
+      if (res) {
+        this.editorService.restoreSelection();
+        this.editorService.createLink(res.url, res.title, res.class);
+      }
+    });
   }
 
   /**

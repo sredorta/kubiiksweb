@@ -7,6 +7,7 @@
     "f.err.email"     : "Format de courriel incorrecte",
     "f.err.password"  : "Mot de passe trop simple, ajouter des chiffres et des simboles",
     "f.err.checkPasswordsMatch": "Les passwords ne sont pas identiques",
+    "f.err.pattern"   : "Format incorrecte",
     "f.cancel"        : "Annuler",
     "f.save"          : "Enregistrer",
     "f.yes"           : "Oui",
