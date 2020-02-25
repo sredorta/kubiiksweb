@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { KiiMainArticleService } from '../../services/kii-main-article.service';
+import { KiiDialogConfig } from 'src/app/_features/dialog/utils/kii-dialog-config';
+import { KiiDialogRef } from 'src/app/_features/dialog/utils/kii-dialog-ref';
 
 @Component({
   selector: 'kii-popup-dialog',
@@ -7,16 +9,15 @@ import { KiiMainArticleService } from '../../services/kii-main-article.service';
   styleUrls: ['./kii-popup-dialog.component.scss']
 })
 export class KiiPopupDialogComponent implements OnInit {
-  @Output() onClose = new EventEmitter<boolean>();
-  @Input() show :boolean = false;
 
-  constructor(public articles: KiiMainArticleService) { }
+
+  constructor(public articles: KiiMainArticleService, public dialog: KiiDialogRef, public config: KiiDialogConfig) { }
 
   ngOnInit() {
+    console.log("Config is:",this.config)
   }
 
   close() {
-    this.onClose.emit(true);
-
+    this.dialog.close(true);
   }
 }

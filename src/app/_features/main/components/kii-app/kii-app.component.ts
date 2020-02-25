@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, PLATFORM_ID, ComponentFactoryResolver, Renderer2, HostListener, NgZone } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, ComponentFactoryResolver, Renderer2, HostListener, NgZone, ViewChild } from '@angular/core';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { MatBottomSheet } from '@angular/material';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
@@ -20,6 +20,9 @@ import { KiiMainDataService } from '../../services/kii-main-data.service';
 import { KiiMainSettingService } from '../../services/kii-main-setting.service';
 import { SEO } from '../../models/seo';
 import { KiiPwaService } from '../../services/kii-main-pwa.service';
+import { KiiBottomSheetComponent } from '../kii-bottom-sheet/kii-bottom-sheet.component';
+import { KiiDialog } from 'src/app/_features/dialog/services/kii-dialog.service';
+import { KiiPopupDialogComponent } from '../kii-popup-dialog/kii-popup-dialog.component';
 
 @Component({
   selector: 'kii-app',
@@ -28,14 +31,16 @@ import { KiiPwaService } from '../../services/kii-main-pwa.service';
 })
 export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
-  showPopup : boolean = false;
   public schemaSite : any = {};
   public schemaCorporation: any = {};
+  @ViewChild(KiiBottomSheetComponent, {static: true}) bottomSheet: KiiBottomSheetComponent;
+
 
   constructor(@Inject(PLATFORM_ID) private platform: any,
+  private kiiDialog: KiiDialog,
   private kiiTrans: KiiTranslateService,
   private viewTrans : KiiViewTransferService,
-  private bottomSheet: MatBottomSheet,
+  //private bottomSheet: MatBottomSheet,
   private router : Router,
   private cookies : KiiMainCookiesService,
   private stats : KiiMainStatsService,
@@ -47,12 +52,37 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private pwa: KiiPwaService
   ) { super() }
 
+
+  ngAfterViewInit() {
+
+    const ref = this.kiiDialog.open(KiiPopupDialogComponent,{
+      panelClass:["admin-theme","test-theme"],
+      data:{test:"This is a test"}
+    });
+    ref.afterClosed.subscribe(result => {
+      console.log('Dialog closed', result)
+    })
+  }
+
   ngOnInit() {
     console.log("KIIAPP ONINIT");
     this.viewTrans.scroll();
 
     //Sets language required context
     this.kiiTrans.setRequiredContext(['main']);
+
+
+    //Add subscribers to bottom sheet and dialog
+    /*this.addSubscriber(
+      this.kiiEntry.getShowBottom().subscribe(res => {
+        this.showBottom = res;
+      })
+    )
+    this.addSubscriber(
+      this.kiiEntry.getShowDialog().subscribe(res => {
+        this.showPopup = res;
+      })
+    )*/
 
 
     //Load full data
@@ -116,22 +146,16 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   }
 
   openBottomSheetCookies(): void {
-/*    this.bottomSheet.open(KiiBottomSheetCookiesComponent, {
-        panelClass :"default-theme",
-        disableClose:true,
-        scrollStrategy: new NoopScrollStrategy()  //Avoid scrolling to top !
-        }) 
-    let subs = this.bottomSheet._openedBottomSheetRef.afterDismissed().subscribe(res => {
-        if (res) {
-          if (res.result == "accept") {
-             this.cookies.accept();
-             this.stats.send(StatAction.NAVIGATION_START ,this.router.url);
-          } else this.cookies.refuse();
-          subs.unsubscribe();
-        }
-        //If our current route is /auth/cookies then navigate back
-        //if (this.router.url.includes('cookies')) this.location.back();
-      })   */ 
+    console.log("OPENING COOKIES !!!!")
+    let subs = this.bottomSheet.open(KiiBottomSheetCookiesComponent).afterDismissed().subscribe(res => {
+      if (res) {
+        if (res.result == "accept") {
+           this.cookies.accept();
+           this.stats.send(StatAction.NAVIGATION_START ,this.router.url);
+        } else this.cookies.refuse();
+        subs.unsubscribe();
+      }
+    });
   }
 
   openPopupDialog() {
@@ -142,7 +166,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       if (value != "disabled" && (!storage || !storage.includes(value))) {
         setTimeout(() => {
             console.log("WE ARE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! POPUP NOW!!")
-            this.showPopup = true;
             /*this.dialog.open(KiiPopupDialogComponent, {
               panelClass: '',
               data:  null,

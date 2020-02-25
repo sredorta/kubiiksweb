@@ -2,8 +2,6 @@
 .kii-app-wrp {
     min-width: 320px;
     position: relative;
-}
-.kii-app-wrp.is-locked {
-    overflow: hidden;
-    max-height: 100vh;
+    height:100vh;
+    overflow-y:scroll;
 }

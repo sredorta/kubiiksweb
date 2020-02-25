@@ -70,6 +70,26 @@
         .c-warn {
             color:mat-color($warn);
         }
+    }
 
+    //KiiDialog
+    kii-dialog {
+        .overlay {
+            background-color:rgba(black,0.5);
+
+        }
+        .content {
+            background: mat-color($background,card);
+        }
+    }
+
+    //Bottom sheet
+    kii-bottom-sheet {
+        .bottom-wrp {
+            background-color:rgba(black,0.5);
+        }
+        .content {
+            background: mat-color($background,card);
+        }
     }
 }

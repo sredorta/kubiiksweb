@@ -1,6 +1,4 @@
-<div class="popup-wrp fcc" [ngClass]="{'show' : show}">
-  <div class="content">
+  <div class="wrp">
     <kii-article [article]="articles.getByKey('dialog-initial')"></kii-article>
     <button mat-flat-button (click)="close()">{{'m.popup.close' | translate | async}}</button>
   </div>
-</div>

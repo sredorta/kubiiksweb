@@ -64,6 +64,8 @@ import { KiiMainArticleService } from './services/kii-main-article.service';
 import { KiiMainThemeComponent } from './components/kii-main-theme/kii-main-theme.component';
 import { KiiElementComponent } from './components/kii-element/kii-element.component';
 import { KiiAppearDirective } from './directives/kii-appear-directive';
+import { KiiBottomSheetComponent } from './components/kii-bottom-sheet/kii-bottom-sheet.component';
+import { KiiDialogModule } from '../dialog/kii-dialog.module';
 
 
 @NgModule({
@@ -85,9 +87,11 @@ import { KiiAppearDirective } from './directives/kii-appear-directive';
       MatIconModule,
     ],
     KiiTranslateModule.forChild(),
+    KiiDialogModule,
     RouterModule,
   ],
   declarations: [
+    KiiBottomSheetComponent,
     KiiElementComponent,
     KiiMainThemeComponent,
     KiiNiceDateFormatPipe,

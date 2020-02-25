@@ -1,4 +1,4 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
 
 import { HttpRequest,  HttpHandler, HttpEvent, HttpInterceptor,HttpHeaders, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable,  Subscription, throwError } from 'rxjs';
@@ -12,6 +12,7 @@ import { KiiMainUserService } from '../services/kii-main-user.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { KiiBottomSheetComponent } from '../components/kii-bottom-sheet/kii-bottom-sheet.component';
 
 
 //We intercept all http requests and do some things here
@@ -22,21 +23,25 @@ export class KiiHttpInterceptor implements HttpInterceptor {
         private kiiTrans: KiiTranslateService,
         private kiiAuth: KiiMainUserService,
         private router : Router,
+        //private bottomSheet: KiiBottomSheetComponent,
         @Inject(PLATFORM_ID) private _platformId: any, 
-        private bottomSheet: MatBottomSheet, 
 
         ) {}
-    
+
     /** Opens bottomsheet with error or success message */
     openBottomSheet(message:string): void {
-        if (isPlatformBrowser(this._platformId))
-            this.bottomSheet.open(KiiHttpErrorComponent, {
+        console.log("Open bottomsheet http interceptor !")
+        if (isPlatformBrowser(this._platformId)) {
+            //console.log(this.kiiEntry.bottomRef);
+            //this.kiiEntry.bottomRef.open(KiiHttpErrorComponent,{message:message});
+        }
+            /*this.bottomSheet.open(KiiHttpErrorComponent, {
                 panelClass :"default-theme",
                 scrollStrategy: new NoopScrollStrategy(),   //Avoid scrolling to top !
                 data: { 
                         message: message
                     }
-            });
+            });*/
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

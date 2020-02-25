@@ -19,10 +19,11 @@ export class KiiNewsletterComponent extends KiiBaseAbstract implements OnInit {
   }
 
   register(value:INewsletter) {
+    console.log("Registering",value);
     this.loading = true;
     this.addSubscriber(
       this.kiiApiNews.subscribeNews(value).subscribe(res => {
-        console.log(res);
+        console.log("Result is",res);
         this.stats.send(StatAction.NEWSLETTER,null);
       }, error => {
         this.loading = false;
