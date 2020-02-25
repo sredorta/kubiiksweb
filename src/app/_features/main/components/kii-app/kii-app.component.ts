@@ -20,11 +20,7 @@ import { KiiMainDataService } from '../../services/kii-main-data.service';
 import { KiiMainSettingService } from '../../services/kii-main-setting.service';
 import { SEO } from '../../models/seo';
 import { KiiPwaService } from '../../services/kii-main-pwa.service';
-import { KiiDialog } from 'src/app/_features/dialog/services/kii-dialog.service';
 import { KiiPopupDialogComponent } from '../kii-popup-dialog/kii-popup-dialog.component';
-import { KiiBottomSheet } from 'src/app/_features/bottom-sheet/services/kii-bottom-sheet.service';
-import { KiiBottomSheetRef } from 'src/app/_features/bottom-sheet/utils/kii-bottom-sheet-ref';
-import { KiiBottomSheetComponent } from 'src/app/_features/bottom-sheet/components/kii-bottom-sheet/kii-bottom-sheet.component';
 
 @Component({
   selector: 'kii-app',

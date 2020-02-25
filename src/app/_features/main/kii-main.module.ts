@@ -64,8 +64,6 @@ import { KiiMainArticleService } from './services/kii-main-article.service';
 import { KiiMainThemeComponent } from './components/kii-main-theme/kii-main-theme.component';
 import { KiiElementComponent } from './components/kii-element/kii-element.component';
 import { KiiAppearDirective } from './directives/kii-appear-directive';
-import { KiiDialogModule } from '../dialog/kii-dialog.module';
-import { KiiBottomSheetModule } from '../bottom-sheet/kii-bottom-sheet.module';
 
 
 @NgModule({
@@ -89,7 +87,6 @@ import { KiiBottomSheetModule } from '../bottom-sheet/kii-bottom-sheet.module';
       MatDialogModule
     ],
     KiiTranslateModule.forChild(),
-    KiiDialogModule,
     RouterModule,
   ],
   declarations: [
