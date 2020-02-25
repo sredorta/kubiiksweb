@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatBottomSheetRef } from '@angular/material';
-import { KiiBottomSheetComponent } from '../kii-bottom-sheet/kii-bottom-sheet.component';
+import { KiiBottomSheetRef } from 'src/app/_features/bottom-sheet/utils/kii-bottom-sheet-ref';
 
 @Component({
   selector: 'kii-bottom-sheet-software-update',
@@ -9,13 +8,13 @@ import { KiiBottomSheetComponent } from '../kii-bottom-sheet/kii-bottom-sheet.co
 })
 export class KiiBottomSheetSoftwareUpdateComponent implements OnInit {
 
-  constructor(private ref: KiiBottomSheetComponent) { }
+  constructor(private ref: KiiBottomSheetRef) { }
 
   ngOnInit() {
   }
 
   onClick() {
-    this.ref.dismiss(true);
+    this.ref.close(true);
     
   }
 

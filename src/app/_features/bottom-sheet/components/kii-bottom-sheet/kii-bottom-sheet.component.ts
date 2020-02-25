@@ -1,20 +1,20 @@
 import { Component, OnInit, Output, EventEmitter, Input,Type, AfterViewChecked, OnDestroy, AfterViewInit, ViewChild, ComponentFactoryResolver, ComponentRef, ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
-import { KiiAnchorDialogRefDirective } from '../../directives/kii-anchor-dialog-ref-directive';
+import { KiiAnchorBottomSheetRefDirective } from '../../directives/kii-anchor-bottom-sheet-ref-directive';
 
 @Component({
-  selector: 'kii-dialog',
-  templateUrl: './kii-dialog.component.html',
-  styleUrls: ['./kii-dialog.component.scss']
+  selector: 'kii-bottom-sheet',
+  templateUrl: './kii-bottom-sheet.component.html',
+  styleUrls: ['./kii-bottom-sheet.component.scss']
 })
-export class KiiDialogComponent implements AfterViewInit,OnDestroy {
+export class KiiBottomSheetComponent implements AfterViewInit,OnDestroy {
   private readonly _onClose = new Subject<any>()
 
   public componentRef: ComponentRef<any>
   public childComponentType: Type<any>
   public onClose = this._onClose.asObservable()
 
-  @ViewChild(KiiAnchorDialogRefDirective, {static: true}) anchor: KiiAnchorDialogRefDirective;
+  @ViewChild(KiiAnchorBottomSheetRefDirective, {static: true}) anchor: KiiAnchorBottomSheetRefDirective;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,private cd: ChangeDetectorRef) { }
 
@@ -27,10 +27,10 @@ export class KiiDialogComponent implements AfterViewInit,OnDestroy {
 
 
   onOverlayClicked(evt: MouseEvent) {
-    // close the dialog
+    // close the bottom-sheet
   }
 
-  onDialogClicked(evt: MouseEvent) {
+  onBottomSheetClicked(evt: MouseEvent) {
     evt.stopPropagation()
   }
 

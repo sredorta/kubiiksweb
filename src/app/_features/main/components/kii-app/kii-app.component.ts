@@ -20,9 +20,9 @@ import { KiiMainDataService } from '../../services/kii-main-data.service';
 import { KiiMainSettingService } from '../../services/kii-main-setting.service';
 import { SEO } from '../../models/seo';
 import { KiiPwaService } from '../../services/kii-main-pwa.service';
-import { KiiBottomSheetComponent } from '../kii-bottom-sheet/kii-bottom-sheet.component';
 import { KiiDialog } from 'src/app/_features/dialog/services/kii-dialog.service';
 import { KiiPopupDialogComponent } from '../kii-popup-dialog/kii-popup-dialog.component';
+import { KiiBottomSheet } from 'src/app/_features/bottom-sheet/services/kii-bottom-sheet.service';
 
 @Component({
   selector: 'kii-app',
@@ -33,11 +33,11 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
   public schemaSite : any = {};
   public schemaCorporation: any = {};
-  @ViewChild(KiiBottomSheetComponent, {static: true}) bottomSheet: KiiBottomSheetComponent;
 
 
   constructor(@Inject(PLATFORM_ID) private platform: any,
   private kiiDialog: KiiDialog,
+  private kiiBottomSheet: KiiBottomSheet,
   private kiiTrans: KiiTranslateService,
   private viewTrans : KiiViewTransferService,
   //private bottomSheet: MatBottomSheet,
@@ -46,9 +46,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private stats : KiiMainStatsService,
   private data: KiiMainDataService,
   private kiiSettings: KiiMainSettingService,
-  private viewPort: ViewportRuler,
-  private scrollDisp: ScrollDispatcher,
-  private ngZone: NgZone,
   private pwa: KiiPwaService
   ) { super() }
 
@@ -61,6 +58,10 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     });
     ref.afterClosed.subscribe(result => {
       console.log('Dialog closed', result)
+    })
+    this.kiiBottomSheet.open(KiiBottomSheetCookiesComponent, {
+      panelClass:["admin-theme","test-theme"],
+      data:{test:"This is a test"}
     })
   }
 
@@ -114,7 +115,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     this.addSubscriber(
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe( (res : NavigationEnd) => {
           if (res.url.includes('cookies')) {
-            this.bottomSheet.dismiss();
+            //this.bottomSheet.dismiss();
           } else {
             if (isPlatformBrowser(this.platform)) {
               this.addSubscriber(
@@ -146,8 +147,8 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   }
 
   openBottomSheetCookies(): void {
-    console.log("OPENING COOKIES !!!!")
-    let subs = this.bottomSheet.open(KiiBottomSheetCookiesComponent).afterDismissed().subscribe(res => {
+    /*console.log("OPENING COOKIES !!!!")
+    let subs = this.kiiBottomSheet.open(KiiBottomSheetCookiesComponent).afterClosed.subscribe(res => {
       if (res) {
         if (res.result == "accept") {
            this.cookies.accept();
@@ -155,7 +156,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
         } else this.cookies.refuse();
         subs.unsubscribe();
       }
-    });
+    });*/
   }
 
   openPopupDialog() {

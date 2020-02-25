@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import {MatBottomSheetRef} from '@angular/material';
 import {MAT_BOTTOM_SHEET_DATA} from '@angular/material';
-import { KiiBottomSheetComponent } from '../kii-bottom-sheet/kii-bottom-sheet.component';
+import { KiiBottomSheetRef } from 'src/app/_features/bottom-sheet/utils/kii-bottom-sheet-ref';
 
 @Component({
   selector: 'kii-http-error',
@@ -12,15 +12,15 @@ export class KiiHttpErrorComponent implements OnInit {
 
   @Input() data : any = {message:""};
 
-  constructor(private ref: KiiBottomSheetComponent) { }
+  constructor(private ref: KiiBottomSheetRef) { }
 
   ngOnInit() {
     setTimeout(()=> {
-      this.ref.dismiss();
+      this.ref.close();
     },66000);
   }
 
   dismiss() {
-    this.ref.dismiss();
+    this.ref.close();
   }
 }

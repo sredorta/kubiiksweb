@@ -1,8 +1,8 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[kiiAnchorRef]',
+  selector: '[kiiAnchorBottomSheetRef]',
 })
-export class KiiAnchorRefDirective {
+export class KiiAnchorBottomSheetRefDirective {
   constructor(public viewContainerRef: ViewContainerRef) { }
 }

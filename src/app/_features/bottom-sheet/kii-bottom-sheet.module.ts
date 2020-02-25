@@ -4,9 +4,9 @@
 
 import { NgModule, PLATFORM_ID, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { KiiDialogComponent } from './components/kii-dialog/kii-dialog.component';
-import { KiiDialog } from './services/kii-dialog.service';
-import { KiiAnchorDialogRefDirective } from './directives/kii-anchor-dialog-ref-directive';
+import { KiiBottomSheetComponent } from './components/kii-bottom-sheet/kii-bottom-sheet.component';
+import { KiiBottomSheet } from './services/kii-bottom-sheet.service';
+import { KiiAnchorBottomSheetRefDirective } from './directives/kii-anchor-bottom-sheet-ref-directive';
 
 
 
@@ -18,13 +18,13 @@ import { KiiAnchorDialogRefDirective } from './directives/kii-anchor-dialog-ref-
     CommonModule,
   ],
   declarations: [
-    KiiDialogComponent,
-    KiiAnchorDialogRefDirective
+    KiiBottomSheetComponent,
+    KiiAnchorBottomSheetRefDirective
   ],
-  entryComponents: [KiiDialogComponent],
+  entryComponents: [KiiBottomSheetComponent],
   providers:[
   ],
   exports:[
   ]
 })
-export class KiiDialogModule { }
+export class KiiBottomSheetModule { }

@@ -12,7 +12,6 @@ import { KiiMainUserService } from '../services/kii-main-user.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { KiiBottomSheetComponent } from '../components/kii-bottom-sheet/kii-bottom-sheet.component';
 
 
 //We intercept all http requests and do some things here
