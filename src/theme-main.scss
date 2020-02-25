@@ -61,6 +61,7 @@
 @import './mixin/footer.scss';
 @import './mixin/popup.scss';
 @import './mixin/home.scss';
+@import './mixin/editor.scss';
 
 @mixin design-mixin($theme) {
     @include general-mixin($theme);
@@ -68,6 +69,8 @@
     @include scrollbar-mixin($theme);
     @include popup-mixin($theme);
     @include home-mixin($theme);
+    @include editor-mixin($theme);
+
 }
 
 @include design-mixin($main-theme);
