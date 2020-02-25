@@ -25,6 +25,7 @@ import { KiiAnchorBottomSheetRefDirective } from './directives/kii-anchor-bottom
   providers:[
   ],
   exports:[
+    KiiBottomSheetComponent
   ]
 })
 export class KiiBottomSheetModule { }

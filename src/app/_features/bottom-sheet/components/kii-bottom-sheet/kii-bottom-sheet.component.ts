@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input,Type, AfterViewChecked, OnDestroy, AfterViewInit, ViewChild, ComponentFactoryResolver, ComponentRef, ChangeDetectorRef, Injector } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input,Type, AfterViewChecked, OnDestroy, AfterViewInit, ViewChild, ComponentFactoryResolver, ComponentRef, ChangeDetectorRef, Injector, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { KiiAnchorBottomSheetRefDirective } from '../../directives/kii-anchor-bottom-sheet-ref-directive';
 import { KiiBottomSheetConfig } from '../../utils/kii-bottom-sheet-config';
@@ -18,7 +18,11 @@ export class KiiBottomSheetComponent implements AfterViewInit,OnDestroy {
 
   @ViewChild(KiiAnchorBottomSheetRefDirective, {static: true}) anchor: KiiAnchorBottomSheetRefDirective;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,private cd: ChangeDetectorRef,private injector: Injector) { }
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private cd: ChangeDetectorRef,
+    private injector: Injector,
+    ) { }
 
   /**Load child component */
   ngAfterViewInit() {

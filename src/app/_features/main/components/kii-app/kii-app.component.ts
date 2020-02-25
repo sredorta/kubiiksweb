@@ -54,6 +54,11 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   ) { super() }
 
 
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.kiiBottomSheet.open(KiiBottomSheetCookiesComponent,{disableClose:true});
+    },5000);
+  }
 
 
   ngOnInit() {
@@ -127,7 +132,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   }
 
   openBottomSheetCookies() {
-    let ref = this.kiiBottomSheet.open(KiiBottomSheetCookiesComponent,{disableClose:true});
+/*    let ref = this.kiiBottomSheet.open(KiiBottomSheetCookiesComponent,{disableClose:true});
     let subs = ref.afterClosed.subscribe(res => {
       if (res) {
         if (res.result == "accept") {
@@ -137,7 +142,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
         subs.unsubscribe();
       }
     });
-    return ref;
+    return ref;*/
   }
 
   openPopupDialog() {
@@ -146,10 +151,10 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       let storage = localStorage.getItem("popup");
       let value = this.kiiSettings.getByKey("popup-show").value;
       if (value != "disabled" && (!storage || !storage.includes(value))) {
-        setTimeout(() => {
+/*        setTimeout(() => {
             console.log("WE ARE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! POPUP NOW!!");
             this.kiiDialog.open(KiiPopupDialogComponent);
-        },1000);
+        },1000);*/
         if (this.cookies.areAccepted())
           localStorage.setItem("popup", value );
       }

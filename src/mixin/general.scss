@@ -80,7 +80,26 @@
         }
         .content {
             background: mat-color($background,card);
+            animation: bottomSheetIn 2s;
         }
     }
 
 }
+
+@keyframes bottomSheetIn {
+    from {
+      max-height : 0px;
+    }
+    to {
+      max-height : 80vh;
+    }
+}
+
+@keyframes bottomSheetOut {
+    from {
+      max-height : 80vh;
+    }
+    to {
+      max-height : 0px;
+    }
+}  

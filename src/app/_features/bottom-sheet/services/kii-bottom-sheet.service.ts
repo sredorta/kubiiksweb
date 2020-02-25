@@ -55,6 +55,8 @@ import { KiiBottomSheetRef } from '../utils/kii-bottom-sheet-ref';
         this.appRef.attachView(componentRef.hostView);
       
         const domElem = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+        console.log("DOM ELEM",document.querySelector('app-root'));
+        //const child = document.querySelector('kii-app').appendChild(domElem);
         const child = document.body.appendChild(domElem);
 
         //Add panelClass classes
