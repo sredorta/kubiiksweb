@@ -3,6 +3,7 @@ import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { Article } from '../../models/article';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { faFeatherAlt } from '@fortawesome/free-solid-svg-icons/faFeatherAlt';
+import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'kii-article',
@@ -24,6 +25,9 @@ export class KiiArticleComponent extends KiiBaseAbstract implements OnInit {
  /**Contains current language for created */
  currentLang = this.translate.getCurrent();
 
+ /**Trusted html */
+ trustedHtml : SafeHtml = "";
+
  /**Contains icons */
  icons :any = {
    created: faFeatherAlt
@@ -31,7 +35,7 @@ export class KiiArticleComponent extends KiiBaseAbstract implements OnInit {
 
  @ViewChild('myEditor', {static: false}) textArea: ElementRef;
 
-  constructor(private translate : KiiTranslateService) { super() }
+  constructor(private translate : KiiTranslateService,private sanitizer:DomSanitizer) { super() }
 
   ngOnInit() {
     this.addSubscriber(
@@ -39,12 +43,15 @@ export class KiiArticleComponent extends KiiBaseAbstract implements OnInit {
         this.currentLang = this.translate.getCurrent();
       })
     )
+    this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.article.content);
+
   }
 
 
   ngOnChanges(changes:SimpleChanges) {
     if (changes.article) {
       this.article = changes.article.currentValue;
+      this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.article.content);
     }
   } 
 

@@ -1,11 +1,11 @@
 <div *ngIf="!isEditing" class="preview">
     <kii-article [article]="article"></kii-article>
     <div class="edit-btn">
-            <button  mat-icon-button color="primary" (click)="isEditing=true"><fa-icon [icon]="icons['edit']"></fa-icon></button>
+            <button  mat-icon-button color="primary" (click)="setEditing()"><fa-icon [icon]="icons['edit']"></fa-icon></button>
     </div>
 </div>
 <div *ngIf="isEditing" class="editing">
-    <ckeditor #editor [editor]="Editor" [config]="editorConfig" [(ngModel)]="article.content"></ckeditor>
+    <ckeditor #editor [editor]="Editor" [config]="editorConfig" [(ngModel)]="trustedHtml" (change)="onChange($event)"></ckeditor>
     <div class="action-btn">
             <button  mat-stroked-button type="button" color="primary" (click)="onCancel()">{{'admin.cancel' | translate | async}}</button>
             <button  mat-flat-button type="button" color="primary" (click)="onSave()">{{'admin.save' | translate | async}}</button>

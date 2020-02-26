@@ -5,6 +5,8 @@ import { Article } from 'src/app/_features/main/models/article';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 import { KiiAdminArticleService } from '../../services/kii-admin-article.service';
 import * as Editor from '../../../../../../../ckeditor5-build-classic/build/ckeditor.js';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 
 @Component({
   selector: 'kii-admin-article',
@@ -15,6 +17,9 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
 
  /**Current article */
  @Input() article : Article = new Article(null);
+
+ /**Trusted html */
+ trustedHtml : SafeHtml = "";
 
  /**Contains saved article to cancel */
  savedArticle : Article = new Article(null);
@@ -31,6 +36,8 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
  /**ckeditor */
  public Editor = Editor;
 
+ @ViewChild(CKEditorComponent,{static:false}) myEditor : CKEditorComponent;
+
  /**Editor configuration */
  public editorConfig = {
    imagePromiseConfig: {
@@ -46,7 +53,7 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
    },
  };
 
-  constructor(private kiiAdminArticle: KiiAdminArticleService) { super() }
+  constructor(private kiiAdminArticle: KiiAdminArticleService, private sanitizer: DomSanitizer) { super() }
 
   ngOnInit() {
 
@@ -60,6 +67,7 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
   ngOnChanges(changes:SimpleChanges) {
     if (changes.article) {
       this.article = changes.article.currentValue;
+      this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.article.content);
       if (this.article.exists() && !this.savedArticle.exists()){
         this.savedArticle = new Article({...this.article});
       }
@@ -81,6 +89,15 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
         this.savedArticle = new Article({...this.article});
       }, ()=> this.isLoading = false)
     )
+  }
+
+  /**When the editor changes we keep sync article with current content of editor */
+  onChange(event:any) {
+    this.article.content = this.myEditor.editorInstance.getData();
+  }
+
+  setEditing() {
+    this.isEditing = true;
   }
 }
 

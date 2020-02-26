@@ -1,5 +1,5 @@
 <div class="kii-editor-wrapper" *ngIf="article.public">
-    <div #myEditor class="angular-editor-textarea" [innerHtml]="article.content"></div>
+    <div #myEditor class="ck-editor" [innerHtml]="trustedHtml"></div>
     <div *ngIf="article.exists() && showCreated" class="article-created">
         <small class="dates">{{'m.created' | translate | async}} : {{{date:article.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}<fa-icon [icon]="icons['created']"></fa-icon></small>
     </div> 

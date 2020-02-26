@@ -1,4 +1,5 @@
 import {Role, IRole} from "./role";
+import { SafeHtml } from '@angular/platform-browser';
 
 export interface IArticle {
     id: number;
@@ -90,7 +91,4 @@ export class Article {
         } else
             return 'none';
     }
-
-
-   
 }

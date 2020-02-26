@@ -13,14 +13,27 @@
   $is-dark-theme: map-get($theme, is-dark);
 
   //CKEDITOR
-  ckeditor .ck.ck-editor__main>.ck-editor__editable {
+  ckeditor ,kii-article .ck-editor {
+      .ck.ck-editor__main>.ck-editor__editable {
       color: mat-color($foreground,text);
       background: mat-color($background,background);
+      }
+      a {
+        text-decoration: none;
+        font-weight: bold;
+        color: mat-color($primary);
+        &:hover {
+            color: mat-color($primary,darker);
+        }
+        &:active {
+            color: mat-color($primary,lighter);
+        }
+      }
   }
 
 
   //EDITOR MIXIN !
-  kii-admin-article,kii-article {
+/*  kii-admin-article,kii-article {
       //Handle links
       a {
         text-decoration: none;
@@ -79,7 +92,7 @@
         //Handle videos
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
+            padding-bottom: 56.25%; 
             padding-top: 25px;
             height: 0;
         }
@@ -89,20 +102,5 @@
             left: 0;
             width: 100%;
             height: 100%;
-        }
-  }
-
-/*  @media only screen and (min-width: 700px) { 
-    kii-establish-password .reset-wrp, 
-    kii-login .login-wrp,
-    kii-login-oauth .oauth-wrp,
-    kii-profile .profile-wrp,
-    kii-reset-password .reset-wrp,
-    kii-signup .signup-wrp
-    {
-        background: url('/assets/kiilib/images/background.webp');
-        background-size: cover;
-    }
-  }*/
-
+        }*/
 }
