@@ -3,8 +3,8 @@ import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { Article } from 'src/app/_features/main/models/article';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
-import { KiiEditor } from '../../utils/kii-editor';
 import { KiiAdminArticleService } from '../../services/kii-admin-article.service';
+import * as Editor from '../../../../../../../ckeditor5-build-classic/build/ckeditor.js';
 
 @Component({
   selector: 'kii-admin-article',
@@ -19,9 +19,6 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
  /**Contains saved article to cancel */
  savedArticle : Article = new Article(null);
 
- /**Editor configuration */
- editorConfig = KiiEditor.config();
-
  /**When we are saving the article */
  isLoading:boolean = false;
 
@@ -30,6 +27,24 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
  icons :any = {
    edit: faEdit
  }
+
+ /**ckeditor */
+ public Editor = Editor;
+
+ /**Editor configuration */
+ public editorConfig = {
+   imagePromiseConfig: {
+     getPromise: () => {
+         return new Promise((resolve) => {
+             setTimeout(() => {
+                 resolve({
+                     src: 'https://lh5.ggpht.com/REQiWghvdKMWG1gyHoAfPoeV7_TM5ziu_a5glyeu3ku5obSXuyzZVPoiOM1aQwbAHDwgORh_trxoRybJUMar8KYSwXccAD5BFsVghJdNtg=s0'
+                 });
+             }, 3000)
+         });
+     }
+   },
+ };
 
   constructor(private kiiAdminArticle: KiiAdminArticleService) { super() }
 

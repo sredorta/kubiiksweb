@@ -76,15 +76,12 @@ import { KiiAdminSettingsComponent } from './routes/kii-admin-settings/kii-admin
 import { KiiSettingItemComponent } from './components/kii-setting-item/kii-setting-item.component';
 import { KiiSeoFormComponent } from './components/kii-seo-form/kii-seo-form.module';
 import { KiiAdminContentComponent } from './routes/kii-admin-content/kii-admin-content.component';
-import { AngularEditorComponent } from './components/angular_editor/angular-editor.component';
-import { AngularEditorToolbarComponent } from './components/angular_editor/angular-editor-toolbar.component';
-import { AeSelectComponent } from './components/angular_editor/ae-select/ae-select.component';
 import { KiiAdminArticleComponent } from './components/kii-admin-article/kii-admin-article.component';
 import { KiiAdminArticleItemComponent } from './components/kii-admin-article-item/kii-admin-article-item.component';
 import { KiiArticleSummaryFormComponent } from './components/kii-article-summary-form/kii-article-summary-form.component';
 import { KiiLinkDialogComponent } from './components/kii-link-dialog/kii-link-dialog.component';
 import { KiiVideoGalleryDialogComponent } from './components/kii-video-gallery-dialog/kii-video-gallery-dialog.component';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   imports: [
@@ -95,6 +92,7 @@ import { KiiVideoGalleryDialogComponent } from './components/kii-video-gallery-d
     KiiTranslateModule.forChild(),
     KiiFormModule,
     KiiTableModule,
+    CKEditorModule,
     KiiAdminRoutingModule,
     [
       MatSlideToggleModule,
@@ -107,9 +105,6 @@ import { KiiVideoGalleryDialogComponent } from './components/kii-video-gallery-d
     KiiArticleSummaryFormComponent,
     KiiAdminArticleItemComponent,
     KiiAdminArticleComponent,
-    AngularEditorComponent,
-    AngularEditorToolbarComponent,
-    AeSelectComponent,
     KiiAdminThemeComponent,
     KiiAdminMenuComponent,
     KiiSeoFormComponent,

@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 import { KiiAdminPageService } from '../../services/kii-admin-page.service';
 import { Page } from 'src/app/_features/main/models/page';
 import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
-import { AngularEditorConfig } from '../../components/angular_editor/config';
 import { KiiAdminCathegoryService } from '../../services/kii-admin-cathegory.service';
 import { Cathegory } from '../../models/cathegory';
 import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
@@ -28,44 +27,6 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
 })
 export class KiiAdminContentComponent extends KiiBaseAbstract implements OnInit {
 
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-      spellcheck: true,
-      height: 'auto',
-      minHeight: '0',
-      maxHeight: 'auto',
-      width: 'auto',
-      minWidth: '0',
-      translate: 'yes',
-      enableToolbar: true,
-      showToolbar: true,
-      placeholder: 'Enter text here...',
-      defaultParagraphSeparator: '',
-      defaultFontName: '',
-      defaultFontSize: '',
-      customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    uploadUrl: 'v1/image',
-    sanitize: true,
-    toolbarPosition: 'top',
-    toolbarHiddenButtons: [
-      ['bold', 'italic'],
-      ['fontSize']
-    ]
-};
 
   /**When we are loading data */
   isDataLoading:boolean =true;

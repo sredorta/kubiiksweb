@@ -4,7 +4,7 @@ import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract';
 import { Article } from 'src/app/_features/main/models/article';
 import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component';
 import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service';
-import { KiiEditor } from '../../utils/kii-editor';
+import * as Editor from '../../../../../../../ckeditor5-build-classic/build/ckeditor.js';
 
 @Component({
   selector: 'kii-article-summary-form',
@@ -18,9 +18,22 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
   @Output() onChange = new EventEmitter<any>();
   @Output() kiiOnCancel = new EventEmitter<boolean>();
 
-
-  /**Editor configuration */
-  editorConfig = KiiEditor.config();
+  /**ckeditor */
+  public Editor = Editor;
+ /**Editor configuration */
+ public editorConfig = {
+  imagePromiseConfig: {
+    getPromise: () => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({
+                    src: 'https://lh5.ggpht.com/REQiWghvdKMWG1gyHoAfPoeV7_TM5ziu_a5glyeu3ku5obSXuyzZVPoiOM1aQwbAHDwgORh_trxoRybJUMar8KYSwXccAD5BFsVghJdNtg=s0'
+                });
+            }, 3000)
+        });
+    }
+  },
+};
 
   config: IConfigImageUpload;
 

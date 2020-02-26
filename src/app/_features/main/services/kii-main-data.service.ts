@@ -91,10 +91,9 @@ export class KiiMainDataService extends KiiBaseAbstract {
         //Load all data
         if (isPlatformBrowser(this._platformId))
           setTimeout(()=> {
-              console.log("Loading full data !");
               this.addSubscriber(
                 this.http.get<_IInitialData>(environment.apiURL + '/initial/full').subscribe(res => {
-                  console.log("FULL LOAD !", res);
+                  //console.log("FULL LOAD !", res);
                   this._update(res);
                   this.isFullLoaded = true;
                 })

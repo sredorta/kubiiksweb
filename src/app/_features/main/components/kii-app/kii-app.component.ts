@@ -61,7 +61,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
 
     //Load full data
-    this.data.loadFullData(10000);
+    this.data.loadFullData(3000);
     //If we change language we reload all data with new translations
     if (isPlatformBrowser(this.platform))
       this.addSubscriber(

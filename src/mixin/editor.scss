@@ -12,6 +12,13 @@
   $background:map-get($theme,background);
   $is-dark-theme: map-get($theme, is-dark);
 
+  //CKEDITOR
+  ckeditor .ck.ck-editor__main>.ck-editor__editable {
+      color: mat-color($foreground,text);
+      background: mat-color($background,background);
+  }
+
+
   //EDITOR MIXIN !
   kii-admin-article,kii-article {
       //Handle links

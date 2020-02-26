@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, PLATFORM_ID, Inject, Renderer2, ViewChild, ElementRef, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { KiiEditor } from '../../utils/kii-editor';
 import { KiiAdminArticleService } from '../../services/kii-admin-article.service';
 import { Article } from 'src/app/_features/main/models/article';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';

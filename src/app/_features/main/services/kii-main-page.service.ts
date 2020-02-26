@@ -36,7 +36,7 @@ export class KiiMainPageService extends KiiBaseAbstract {
 
     /**Sets settings */
     set(pages:Page[]) {
-      console.log("SETTING PAGES TO:",pages);
+      //console.log("SETTING PAGES TO:",pages);
       this._pages.next(pages);
       if (pages.length>0) {
         this.loaded = true;

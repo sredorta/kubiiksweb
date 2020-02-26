@@ -12,6 +12,8 @@ import { faComments } from '@fortawesome/free-solid-svg-icons/faComments';
 import { faWindowRestore } from '@fortawesome/free-solid-svg-icons/faWindowRestore';
 import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
 import { faChartLine } from '@fortawesome/free-solid-svg-icons/faChartLine';
+import { KiiAdminArticleService } from '../../services/kii-admin-article.service.js';
+import { environment } from 'src/environments/environment.js';
 
 
 
@@ -21,6 +23,7 @@ import { faChartLine } from '@fortawesome/free-solid-svg-icons/faChartLine';
   styleUrls: ['./kii-admin-menu.component.scss']
 })
 export class KiiAdminMenuComponent extends KiiBaseAbstract implements OnInit {
+
 
   loggedInUser : User = new User(null);
   icons = [];
@@ -39,9 +42,9 @@ export class KiiAdminMenuComponent extends KiiBaseAbstract implements OnInit {
       this.icons['popup'] = faWindowRestore;
       this.icons['disk'] = faSave;
       this.icons['stats'] = faChartLine;
- 
-
     }
+
+
 
   ngOnInit() {
     this.kiiTrans.setRequiredContext(['admin']);

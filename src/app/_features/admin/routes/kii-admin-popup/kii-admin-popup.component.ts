@@ -6,7 +6,6 @@ import { KiiMainSettingService } from 'src/app/_features/main/services/kii-main-
 import { Setting } from 'src/app/_features/main/models/setting';
 import { KiiAdminSettingService } from '../../services/kii-admin-setting.service';
 import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
-import { KiiEditor } from '../../utils/kii-editor';
 
 @Component({
   selector: 'app-kii-admin-popup',
