@@ -1,0 +1,10 @@
+  <div class="link-dialog admin-dialog">
+      <p mat-dialog-title>{{'admin.gallery.dialog.t' | translate | async}}</p>
+            <div mat-dialog-content class="content">
+                <p>content</p>
+            </div>
+            <div mat-dialog-actions class="actions">
+                <button mat-button color="primary" type="none" (click)="onClose()">{{'admin.cancel' | translate | async}}</button>
+                <button mat-flat-button color="primary" (click)="onSubmit()">{{'admin.create' | translate | async}}</button>
+            </div>
+</div>

@@ -82,6 +82,8 @@ import { KiiArticleSummaryFormComponent } from './components/kii-article-summary
 import { KiiLinkDialogComponent } from './components/kii-link-dialog/kii-link-dialog.component';
 import { KiiVideoGalleryDialogComponent } from './components/kii-video-gallery-dialog/kii-video-gallery-dialog.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { KiiAdminEditorComponent } from './components/kii-admin-editor/kii-admin-editor.component';
+import { KiiImageGalleryDialogComponent } from './components/kii-image-gallery-dialog/kii-image-gallery-dialog.component';
 
 @NgModule({
   imports: [
@@ -102,6 +104,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
   declarations: [
     KiiVideoGalleryDialogComponent,
     KiiLinkDialogComponent,
+    KiiImageGalleryDialogComponent,
+    KiiAdminEditorComponent,
     KiiArticleSummaryFormComponent,
     KiiAdminArticleItemComponent,
     KiiAdminArticleComponent,

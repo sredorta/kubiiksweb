@@ -18,9 +18,6 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
  /**Current article */
  @Input() article : Article = new Article(null);
 
- /**Trusted html */
- trustedHtml : SafeHtml = "";
-
  /**Contains saved article to cancel */
  savedArticle : Article = new Article(null);
 
@@ -33,25 +30,7 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
    edit: faEdit
  }
 
- /**ckeditor */
- public Editor = Editor;
 
- @ViewChild(CKEditorComponent,{static:false}) myEditor : CKEditorComponent;
-
- /**Editor configuration */
- public editorConfig = {
-   imagePromiseConfig: {
-     getPromise: () => {
-         return new Promise((resolve) => {
-             setTimeout(() => {
-                 resolve({
-                     src: 'https://lh5.ggpht.com/REQiWghvdKMWG1gyHoAfPoeV7_TM5ziu_a5glyeu3ku5obSXuyzZVPoiOM1aQwbAHDwgORh_trxoRybJUMar8KYSwXccAD5BFsVghJdNtg=s0'
-                 });
-             }, 3000)
-         });
-     }
-   },
- };
 
   constructor(private kiiAdminArticle: KiiAdminArticleService, private sanitizer: DomSanitizer) { super() }
 
@@ -67,7 +46,7 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
   ngOnChanges(changes:SimpleChanges) {
     if (changes.article) {
       this.article = changes.article.currentValue;
-      this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.article.content);
+      //this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.article.content);
       if (this.article.exists() && !this.savedArticle.exists()){
         this.savedArticle = new Article({...this.article});
       }
@@ -92,10 +71,11 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
   }
 
   /**When the editor changes we keep sync article with current content of editor */
-  onChange(event:any) {
-    this.article.content = this.myEditor.editorInstance.getData();
+  onContentChange(data:string) {
+    this.article.content = data;
   }
 
+  /**Sets editing mode so that ckeditor is instantiated and filled with current data */
   setEditing() {
     this.isEditing = true;
   }
