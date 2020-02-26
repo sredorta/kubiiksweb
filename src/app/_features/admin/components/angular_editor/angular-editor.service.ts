@@ -3,6 +3,7 @@ import {HttpClient, HttpEvent} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
 import {CustomClass} from './config';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export interface UploadResponse {
   imageUrl: string;
@@ -18,6 +19,7 @@ export class AngularEditorService {
   uploadUrl: string;
 
   constructor(
+    private sanitizer: DomSanitizer,
     private http: HttpClient,
     @Inject(DOCUMENT) private doc: any
   ) { }
@@ -40,9 +42,7 @@ export class AngularEditorService {
    * @param url string from UI prompt
    */
   createLink(url: string, title:string, className:string) {
-    console.log("Creating link with: ",url,title,className);
     let newUrl = '<a href="' + url + '" title="'+title+'" class="'+className+'">' + this.selectedText + '</a>';
-    console.log(newUrl);
     this.insertHtml(newUrl);
   }
 
@@ -84,7 +84,7 @@ export class AngularEditorService {
    * @param html HTML string
    */
   insertHtml(html: string): void {
-
+    //let htmlSafe =this.sanitizer.bypassSecurityTrustHtml(html);
     const isHTMLInserted = this.doc.execCommand('insertHTML', false, html);
 
     if (!isHTMLInserted) {
@@ -186,7 +186,7 @@ export class AngularEditorService {
   }
 
   insertVideo(videoUrl: string) {
-    if (videoUrl.match('www.youtube.com')) {
+    if (videoUrl.match('youtube.com/') || videoUrl.match('youtu.be/')) {
       this.insertYouTubeVideoTag(videoUrl);
     }
     if (videoUrl.match('vimeo.com')) {
@@ -195,30 +195,27 @@ export class AngularEditorService {
   }
 
   private insertYouTubeVideoTag(videoUrl: string): void {
-    const id = videoUrl.split('v=')[1];
-    const imageUrl = `https://img.youtube.com/vi/${id}/0.jpg`;
+    this.restoreSelection();
+    const tmp = videoUrl.split('/');
+    const index = tmp.length-1;
+    const id = tmp[index]
     const thumbnail = `
-      <div style='position: relative'>
-        <img style='position: absolute; left:200px; top:140px'
-             src="https://img.icons8.com/color/96/000000/youtube-play.png"/>
-        <a href='${videoUrl}' target='_blank'>
-          <img src="${imageUrl}" alt="click to watch"/>
-        </a>
-      </div>`;
+        <iframe width="100%" height="480" src="https://www.youtube.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `;  
     this.insertHtml(thumbnail);
   }
 
   private insertVimeoVideoTag(videoUrl: string): void {
-    const sub = this.http.get<any>(`https://vimeo.com/api/oembed.json?url=${videoUrl}`).subscribe(data => {
-      const imageUrl = data.thumbnail_url_with_play_button;
-      const thumbnail = `<div>
-        <a href='${videoUrl}' target='_blank'>
-          <img src="${imageUrl}" alt="${data.title}"/>
-        </a>
-      </div>`;
-      this.insertHtml(thumbnail);
-      sub.unsubscribe();
-    });
+    this.restoreSelection();
+    const tmp = videoUrl.split('/');
+    const index = tmp.length-1;
+    const id = tmp[index];
+    const thumbnail = `
+    <div class="video-wrapper">
+    <iframe width="100%" height:"480" src="https://player.vimeo.com/video/${id}?color=ff4e00&title=0&byline=0&portrait=0&badge=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+    </div>
+    `;  
+    this.insertHtml(thumbnail);
   }
 
   nextNode(node) {

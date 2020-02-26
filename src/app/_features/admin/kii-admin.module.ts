@@ -83,6 +83,7 @@ import { KiiAdminArticleComponent } from './components/kii-admin-article/kii-adm
 import { KiiAdminArticleItemComponent } from './components/kii-admin-article-item/kii-admin-article-item.component';
 import { KiiArticleSummaryFormComponent } from './components/kii-article-summary-form/kii-article-summary-form.component';
 import { KiiLinkDialogComponent } from './components/kii-link-dialog/kii-link-dialog.component';
+import { KiiVideoGalleryDialogComponent } from './components/kii-video-gallery-dialog/kii-video-gallery-dialog.component';
 
 
 @NgModule({
@@ -101,6 +102,7 @@ import { KiiLinkDialogComponent } from './components/kii-link-dialog/kii-link-di
     ]
   ],
   declarations: [
+    KiiVideoGalleryDialogComponent,
     KiiLinkDialogComponent,
     KiiArticleSummaryFormComponent,
     KiiAdminArticleItemComponent,

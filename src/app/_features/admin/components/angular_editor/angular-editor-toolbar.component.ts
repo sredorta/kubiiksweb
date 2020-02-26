@@ -31,6 +31,7 @@ import { faCode } from '@fortawesome/free-solid-svg-icons/faCode';
 import { KiiLinkDialogComponent } from '../kii-link-dialog/kii-link-dialog.component';
 import { MatDialog } from '@angular/material';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { KiiVideoGalleryDialogComponent } from '../kii-video-gallery-dialog/kii-video-gallery-dialog.component';
 
 
 @Component({
@@ -330,10 +331,18 @@ export class AngularEditorToolbarComponent {
    */
   insertVideo() {
     this.execute.emit('');
-    const url = prompt('Insert Video link', `https://`);
-    if (url && url !== '' && url !== `https://`) {
-      this.editorService.insertVideo(url);
-    }
+    let dialogRef = this.dialog.open(KiiVideoGalleryDialogComponent, {
+      panelClass: 'admin-theme',
+      disableClose:true,
+      scrollStrategy: new NoopScrollStrategy(),
+      minWidth:'310px',
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      console.log("Insert video",res);
+      if (res) {
+        this.editorService.insertVideo(res);
+      }
+    });
   }
 
   /** insert color */
