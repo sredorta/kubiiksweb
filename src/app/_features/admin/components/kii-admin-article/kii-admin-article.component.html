@@ -5,7 +5,7 @@
     </div>
 </div>
 <div *ngIf="isEditing" class="editing">
-    <kii-admin-editor [content]="article.content" (onChange)="onContentChange($event)"></kii-admin-editor>
+    <kii-admin-editor [content]="article.content" [disk]="article.disk" (onChange)="onContentChange($event)"></kii-admin-editor>
     <div class="action-btn">
             <button  mat-stroked-button type="button" color="primary" (click)="onCancel()">{{'admin.cancel' | translate | async}}</button>
             <button  mat-flat-button type="button" color="primary" (click)="onSave()">{{'admin.save' | translate | async}}</button>

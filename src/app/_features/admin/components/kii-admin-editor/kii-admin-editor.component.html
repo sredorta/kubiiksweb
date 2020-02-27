@@ -1,2 +1,2 @@
-<ckeditor [editor]="Editor" [config]="editorConfig"  (change)="onChangeContent($event)"></ckeditor>
+<ckeditor [editor]="Editor" [config]="editorConfig" (ready)="onEditorReady($event)"  (change)="onChangeContent($event)"></ckeditor>
 

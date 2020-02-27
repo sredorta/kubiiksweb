@@ -16,7 +16,7 @@
       </mat-form-field>  
       <kii-image-upload [config]="config" [image]="article.image" (onUpload)="onUpload($event)"></kii-image-upload>
       <p>{{'admin.content.l' | translate | async}}</p>
-      <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="content" [kiiInputDefaultValue]="article.content"></ckeditor>
+      <kii-admin-editor formControlName="content" [kiiInputDefaultValue]="article.content" [disk]="article.disk" (onChange)="onContentChange($event)"></kii-admin-editor>
 
       <div class="action-btn">
             <button  mat-stroked-button type="button" color="primary" (click)="onCancel()">{{'admin.cancel' | translate | async}}</button>

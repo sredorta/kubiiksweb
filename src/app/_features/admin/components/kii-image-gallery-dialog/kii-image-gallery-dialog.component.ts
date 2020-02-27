@@ -13,14 +13,21 @@ import { faLink } from '@fortawesome/free-solid-svg-icons/faLink';
 })
 export class KiiImageGalleryDialogComponent implements OnInit {
 
-  type:string = "default";
   icons : any = {
     title: faHeading,
     url: faLink
   }
 
+  /**Disk to use */
+  disk : DiskType = DiskType.CONTENT
+
   constructor(private dialogRef:MatDialogRef<KiiImageGalleryDialogComponent>,@Inject(MAT_DIALOG_DATA) data:any) { 
+    console.log("RECIEVED DATA",data);
+    if (data && data.disk) 
+      this.disk = data.disk;
   }
+
+
 
   ngOnInit() {
     this.createForm();

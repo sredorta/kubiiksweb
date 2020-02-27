@@ -18,23 +18,6 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
   @Output() onChange = new EventEmitter<any>();
   @Output() kiiOnCancel = new EventEmitter<boolean>();
 
-  /**ckeditor */
-  public Editor = Editor;
- /**Editor configuration */
- public editorConfig = {
-  imagePromiseConfig: {
-    getPromise: () => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({
-                    src: 'https://lh5.ggpht.com/REQiWghvdKMWG1gyHoAfPoeV7_TM5ziu_a5glyeu3ku5obSXuyzZVPoiOM1aQwbAHDwgORh_trxoRybJUMar8KYSwXccAD5BFsVghJdNtg=s0'
-                });
-            }, 3000)
-        });
-    }
-  },
-};
-
   config: IConfigImageUpload;
 
   constructor() { 
@@ -95,5 +78,8 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
     this.kiiOnCancel.emit(true);
   }
 
+  onContentChange(value:any) {
+    console.log("OnContentChange",value);
+  }
 
 }

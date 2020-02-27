@@ -103,6 +103,7 @@
     "admin.link.button"  : "Bouton",
     "admin.link.flat"    : "Boutton plat",
     "admin.link.raised"  : "Bouton surelevé",
-    "admin.link.stroked" : "Bouton avec contour"
+    "admin.link.stroked" : "Bouton avec contour",
+    "admin.gallery.dialog.t" : "Gallerie d'images"
 
 }

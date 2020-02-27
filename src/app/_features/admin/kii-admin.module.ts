@@ -80,7 +80,6 @@ import { KiiAdminArticleComponent } from './components/kii-admin-article/kii-adm
 import { KiiAdminArticleItemComponent } from './components/kii-admin-article-item/kii-admin-article-item.component';
 import { KiiArticleSummaryFormComponent } from './components/kii-article-summary-form/kii-article-summary-form.component';
 import { KiiLinkDialogComponent } from './components/kii-link-dialog/kii-link-dialog.component';
-import { KiiVideoGalleryDialogComponent } from './components/kii-video-gallery-dialog/kii-video-gallery-dialog.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { KiiAdminEditorComponent } from './components/kii-admin-editor/kii-admin-editor.component';
 import { KiiImageGalleryDialogComponent } from './components/kii-image-gallery-dialog/kii-image-gallery-dialog.component';
@@ -102,7 +101,6 @@ import { KiiImageGalleryDialogComponent } from './components/kii-image-gallery-d
     ]
   ],
   declarations: [
-    KiiVideoGalleryDialogComponent,
     KiiLinkDialogComponent,
     KiiImageGalleryDialogComponent,
     KiiAdminEditorComponent,
