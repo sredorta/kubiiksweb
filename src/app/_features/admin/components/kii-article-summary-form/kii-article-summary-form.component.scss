@@ -5,6 +5,15 @@ form {
     mat-form-field {
         margin-bottom:10px;
     }
+    .summary {
+        padding-top:10px;
+        display:flex;
+        flex-direction: column;
+        .column.inputs {
+            display:flex;
+            flex-direction: column;
+        }
+    }
 }
 .action-btn {
     display: flex;
@@ -12,4 +21,17 @@ form {
     button {
         margin:10px;
     }
+}
+
+@media only screen and (min-width: 700px) {
+    form {
+        .summary {
+            flex-direction: row;
+            .column.inputs {
+                flex:1 1 auto;
+                padding:10px;
+            }
+        }
+    }
+
 }

@@ -30,7 +30,7 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
       hint:'admin.summary.image.s',
       buttonsPosition:'right',
       storage: <DiskType>this.article.disk,
-      maxWidth:'150px',
+      maxWidth:'120px',
       maxSize:400,
       defaultImage: './assets/kiilib/images/no-photo.svg'
     }
