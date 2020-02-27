@@ -68,6 +68,7 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
   ngOnInit() {
     this.createForm();
     this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => {
+        console.log("GOT USER",res);
         this.defaults = res;
     }))
   }
@@ -113,21 +114,11 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
         passwordConfirm: new FormControl('', Validators.compose([    //It needs to be called passwordConfirm so that validator works
           KiiCustomValidators.checkPasswordsMatch
         ])),
-                avatar: new FormControl('', Validators.compose([])),
+        avatar: new FormControl('', Validators.compose([])),
 
       });
-      this.myForm.controls["avatar"].patchValue(this.defaults.avatar);
   }
 
-
-
-  /**Patch the value of image once we recieve onUpload */
-  onUpload(url:string) {
-    this.myForm.controls["avatar"].setValue(url);
-    this.myForm.controls["avatar"].enable();
-    this.myForm.markAsDirty();
-
-  }
 
   /**Toggle password visibility */
   togglePassword() {
@@ -145,14 +136,13 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
 
   /**Send only the modified values */
   onSubmit(value:any) {
-    let result = {};
+/*    let result = {};
     Object.keys(this.myForm.controls).forEach(key => {
       if (value[key] != this.defaults[key])
-        result[key] = value[key];
-      if (result[key]== null)
-        delete result[key];  
-    })
-    this.kiiOnSubmit.emit(result);
+        result[key] = value[key];  
+    })*/
+    console.log("SENDING",value)
+    this.kiiOnSubmit.emit(value);
   }
 
 }

@@ -97,7 +97,9 @@ export class KiiAdminEditorComponent  implements OnInit, ControlValueAccessor {
   openDialog() {
     return this.dialog.open(KiiImageGalleryDialogComponent, {
       data: {disk:this.disk},
-      scrollStrategy: new NoopScrollStrategy()
+      scrollStrategy: new NoopScrollStrategy(),
+      minWidth:"320px",
+      panelClass:"admin-theme"
     });
   }
 

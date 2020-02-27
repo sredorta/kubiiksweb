@@ -69,7 +69,7 @@
         </div>
       </div>
       <div class="column">
-        <kii-image-upload [config]="config" [image]="defaults.avatar" (onUpload)="onUpload($event)"></kii-image-upload>
+        <kii-image-upload [config]="config" formControlName="avatar" [kiiInputDefaultValue]="defaults.avatar"></kii-image-upload>
       </div>
       <div class="controls" *ngIf="myForm.dirty">
             <button mat-stroked-button color="primary" type="reset" color="primary">{{'f.cancel' | translate | async}}</button>

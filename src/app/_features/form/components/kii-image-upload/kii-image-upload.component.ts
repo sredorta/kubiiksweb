@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, SimpleChanges, forwardRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { KiiApiUploadFileService, DiskType } from '../../services/kii-api-upload-image.service';
@@ -7,6 +7,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { faRedoAlt } from '@fortawesome/free-solid-svg-icons/faRedoAlt';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 export interface IConfigImageUpload {
   label?:string,
@@ -25,9 +26,16 @@ export interface IConfigImageUpload {
 @Component({
   selector: 'kii-image-upload',
   templateUrl: './kii-image-upload.component.html',
-  styleUrls: ['./kii-image-upload.component.scss']
+  styleUrls: ['./kii-image-upload.component.scss'],
+  providers: [
+    { 
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => KiiImageUploadComponent),
+      multi: true
+    }
+  ]
 })
-export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
+export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, ControlValueAccessor {
 
   /**Contains the icons */
   icons = [];
@@ -62,6 +70,9 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   /**Contains svg blob */
   svgBlob : Blob = new Blob();
 
+  /**Image link so that is send to form */
+  formImage :string = null;
+
   /**Shadow canvas for image manipulation */
   @ViewChild('shadowCanvas', {static:false}) shadowCanvasElem : ElementRef; //Shadow canvas for manipulation
   @ViewChild('shadowImg', {static:false}) shadowImgElem : ElementRef; //Shadow image for manipulation
@@ -75,6 +86,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   }
 
   ngOnInit() {
+    if (this.image) this.formImage = this.image;
     //Set default config
     if (!this.config.defaultImage) this.config.defaultImage = './assets/kiilib/images/no-photo.svg';
     if (!this.config.buttonsPosition) this.config.buttonsPosition = "bottom";
@@ -85,8 +97,8 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
     if (!this.config.maxWidth) this.config.maxWidth = "100%";
     if (!this.config.imageFormat) this.config.imageFormat="image/*";
     if (!this.image) this.image = this.config.defaultImage;
-    if (this.image == "none") this.image = this.config.defaultImage;
     this._fileName = this.image.replace(/.*\//,"");
+    console.log("USING CONFIG",this.config);
   }
 
   ngAfterViewInit() {
@@ -113,9 +125,9 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   ngOnChanges(changes:SimpleChanges) {
     if (changes.image) {
       if (changes.image.currentValue != null) {
+        this.formImage = this.image;
         this.image = changes.image.currentValue;
         this._fileName = this.image.replace(/.*\//,"");
-        this.setInitialImage();
       } 
     }
   }
@@ -124,6 +136,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
   setInitialImage() {
     //Fill the canvas with the input image so that it can be rotated...
     setTimeout(()=> {
+      if (!this.image) this.image = this.config.defaultImage;
       this.shadowImgElem.nativeElement.onload = () => {
           this.shadowImgtoCanvas();
       };
@@ -199,8 +212,9 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
     this._fileName = this.image.replace(/.*\//,"");
     this.setInitialImage();
     this.isUploadable = false;
-    this.onUpload.emit("none");
     this.isUploaded = false;
+    this.propagateChange(null);
+
   }
 
 
@@ -322,7 +336,9 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
     this.addSubscriber(
       this.kiiApiUpload.uploadImage(this.config.storage,formData).subscribe((res:any) => {
         if (res.status == "completed") {
+          this.formImage = res.message.imageUrl;
           this.onUpload.emit(res.message.imageUrl);
+          this.propagateChange(res.message.imageUrl);
           this.isUploaded = true;
           this.isUploadable = false;
           this.isLoading = false;
@@ -333,4 +349,18 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit {
       this.progress = res;
     }))
   }
+
+  ///////////////////////////////////////////////////////////////////////
+  //Provide formControlName access
+  ///////////////////////////////////////////////////////////////////////
+  propagateChange = (_: any) => {};
+
+  writeValue(obj: any) : void {
+    this.formImage = obj;
+    this.image = obj;
+  }
+  registerOnChange(fn: any) : void {
+    this.propagateChange = fn;
+  }
+  registerOnTouched(fn: any) : void {}
 }

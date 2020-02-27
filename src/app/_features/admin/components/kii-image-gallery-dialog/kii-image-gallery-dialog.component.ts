@@ -5,13 +5,16 @@ import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.s
 import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract';
 import { faHeading } from '@fortawesome/free-solid-svg-icons/faHeading';
 import { faLink } from '@fortawesome/free-solid-svg-icons/faLink';
+import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
+import { KiiAdminDiskService } from '../../services/kii-admin-disk.service';
+import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component';
 
 @Component({
   selector: 'kii-image-gallery-dialog',
   templateUrl: './kii-image-gallery-dialog.component.html',
   styleUrls: ['./kii-image-gallery-dialog.component.scss']
 })
-export class KiiImageGalleryDialogComponent implements OnInit {
+export class KiiImageGalleryDialogComponent extends KiiBaseAbstract implements OnInit {
 
   icons : any = {
     title: faHeading,
@@ -21,29 +24,67 @@ export class KiiImageGalleryDialogComponent implements OnInit {
   /**Disk to use */
   disk : DiskType = DiskType.CONTENT
 
-  constructor(private dialogRef:MatDialogRef<KiiImageGalleryDialogComponent>,@Inject(MAT_DIALOG_DATA) data:any) { 
+  /**Contains the images available in the disk */
+  images:string[] = [];
+
+  /**When we are loading */
+  isDataLoading:boolean =false;
+
+  /**Configuration for the upload */
+  configUpload : IConfigImageUpload = {
+    buttonsPosition:'right',
+    storage: this.disk,
+    maxWidth:'120px',
+    maxSize:400,
+  }
+
+
+  constructor(private dialogRef:MatDialogRef<KiiImageGalleryDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) data:any,
+    private kiiDisk: KiiAdminDiskService
+    ) { 
+    super();  
     console.log("RECIEVED DATA",data);
     if (data && data.disk) 
       this.disk = data.disk;
+    if (data && data.configUpload) {
+      this.configUpload = data.configUpload;  
+      this.configUpload.storage = this.disk;
+    }
+    console.log("USING UPLOAD CONFIG", this.configUpload);
+
   }
 
 
 
   ngOnInit() {
-    this.createForm();
+    this.getServerImages();
   }
 
-  createForm() {
-  }
-
-
-  onSubmit() {
-    console.log("Submitting !");
-    this.dialogRef.close("url_should_come_here")
-  }
 
   onClose() {
     this.dialogRef.close(null);
+  }
+
+  /**Gets the images from the server on the specified disk */
+  getServerImages() {
+    this.isDataLoading = true;
+    this.addSubscriber(
+      this.kiiDisk.getImages(this.disk).subscribe(res => {
+        this.images = res;
+        this.isDataLoading = false;
+      },() => this.isDataLoading = false)
+    )
+  }
+
+  /**When image is selected */
+  onImage(image:string) {
+    this.dialogRef.close(image);
+  }
+
+  /**When new image has been uploaded */
+  onUpload(image:string) {
+    this.images.push(image);
   }
 
 }

@@ -38,8 +38,6 @@ export class KiiMainUserService {
 
   /**Sets current loggedIn user */
   public setLoggedInUser(user:User) {
-    if (user.avatar == null) user.avatar ='./assets/kiilib/images/profile.svg';
-    if (user.avatar == "none") user.avatar = './assets/kiilib/images/profile.svg';
     this._user.next(user);
   }
 

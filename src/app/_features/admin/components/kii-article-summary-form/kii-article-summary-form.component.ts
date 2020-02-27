@@ -25,6 +25,7 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
   }
 
   ngOnInit() {
+    console.log("CURRENT IMAGE:",this.article.image);
     this.config = {
       label:'admin.summary.image.t', 
       hint:'admin.summary.image.s',
@@ -54,7 +55,6 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
       ])),
 
     });
-    this.myForm.controls["image"].patchValue(this.article.image);
     
     //Emit changes each time the form changes
     this.addSubscriber(
@@ -64,13 +64,9 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
     )
   }
 
-  /**Patch the value of image once we recieve onUpload */
-  onUpload(url:string) {
-    this.myForm.controls["image"].setValue(url);
-  }
-
   /**Emit that we are saving */
   onSubmit(value:any) {
+    console.log(value)
     this.kiiOnSubmit.emit(value);
   }
 
@@ -78,8 +74,6 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
     this.kiiOnCancel.emit(true);
   }
 
-  onContentChange(value:any) {
-    console.log("OnContentChange",value);
-  }
+
 
 }

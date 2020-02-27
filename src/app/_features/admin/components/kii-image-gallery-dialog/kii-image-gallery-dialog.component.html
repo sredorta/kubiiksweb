@@ -1,10 +1,17 @@
-  <div class="link-dialog admin-dialog">
+  <div class="gallery-dialog admin-dialog">
       <p mat-dialog-title>{{'admin.gallery.dialog.t' | translate | async}}</p>
             <div mat-dialog-content class="content">
-                <p>content</p>
+                <kii-spinner-overlay [show]="isDataLoading">
+                <div class="gallery">
+                        <div *ngFor="let image of images" mat-ripple class="image-wrapper" (click)="onImage(image)">
+                            <img  [src]="image">
+                        </div>
+                </div>
+                </kii-spinner-overlay>
+
             </div>
+            <kii-image-upload [config]="configUpload" (onUpload)="onUpload($event)"></kii-image-upload>
             <div mat-dialog-actions class="actions">
                 <button mat-button color="primary" type="none" (click)="onClose()">{{'admin.cancel' | translate | async}}</button>
-                <button mat-flat-button color="primary" (click)="onSubmit()">{{'admin.create' | translate | async}}</button>
             </div>
 </div>

@@ -124,21 +124,13 @@ export class User {
     }
 
     /**Returns avatar */
-/*    getAvatar() {
-        if (this.avatar == null || this.avatar == "none")
+    getAvatar() {
+        if (this.avatar == null)
             return "./assets/kiilib/images/profile.svg";
         else
             return this.avatar;    
 
-    }*/
-
-    /**Returns if has avatar */
-/*    hasAvatar() {
-        if (this.avatar == null || this.avatar == "none")
-            return false;
-        else
-            return true;    
-    }*/
+    }
 
     /**Returns initials */
     getNameInitials() {

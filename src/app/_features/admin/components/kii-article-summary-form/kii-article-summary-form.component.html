@@ -18,11 +18,11 @@
                 </mat-form-field>  
             </div>  
             <div class="column upload">
-                <kii-image-upload [config]="config" [image]="article.image" (onUpload)="onUpload($event)"></kii-image-upload>
+                <kii-image-upload [config]="config" formControlName="image" [kiiInputDefaultValue]="article.image"></kii-image-upload>
             </div>  
         </div>    
         <p>{{'admin.content.l' | translate | async}}</p>
-        <kii-admin-editor formControlName="content" [kiiInputDefaultValue]="article.content" [disk]="article.disk" (onChange)="onContentChange($event)"></kii-admin-editor>
+        <kii-admin-editor formControlName="content" [kiiInputDefaultValue]="article.content" [disk]="article.disk"></kii-admin-editor>
 
         <div class="action-btn">
                 <button  mat-stroked-button type="button" color="primary" (click)="onCancel()">{{'admin.cancel' | translate | async}}</button>
