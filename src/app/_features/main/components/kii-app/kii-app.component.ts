@@ -21,6 +21,7 @@ import { KiiMainSettingService } from '../../services/kii-main-setting.service';
 import { SEO } from '../../models/seo';
 import { KiiPwaService } from '../../services/kii-main-pwa.service';
 import { KiiPopupDialogComponent } from '../kii-popup-dialog/kii-popup-dialog.component';
+import { KiiAuthUserService } from 'src/app/_features/auth/services/kii-auth-user.service';
 
 @Component({
   selector: 'kii-app',

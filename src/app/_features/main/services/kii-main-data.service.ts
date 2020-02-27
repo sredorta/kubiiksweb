@@ -25,7 +25,6 @@ interface _IInitialData  {
   settings: ISetting[],
   pages: IPage[],
   articles: IArticle[],
-  user: IUser
 }
 
 
@@ -62,13 +61,6 @@ export class KiiMainDataService extends KiiBaseAbstract {
             this._update(myData);
             this.transfer.set(key,null);
             console.log("RESTORED FROM TRANSFER STATE", myData);
-            if (User.hasToken()) 
-                this.addSubscriber(
-                  this.user.getAuthUser().subscribe(res => {
-                      console.log("WE ASKED AUTH USER AGAIN !!!",res);
-                      this.user.setLoggedInUser(new User(res));
-                  })
-                )
           } 
         }
         //DO HTTP CALL IF NOT RESTORED
@@ -83,6 +75,15 @@ export class KiiMainDataService extends KiiBaseAbstract {
             })
           )
         }
+        //Get Auth user
+        if (isPlatformBrowser(this._platformId)) 
+          if (User.hasToken()) 
+            this.addSubscriber(
+              this.user.getAuthUser().subscribe(res => {
+                  console.log("WE ASKED AUTH USER AGAIN !!!",res);
+                  this.user.setLoggedInUser(new User(res));
+              })
+            )
       }
   }
 
@@ -128,8 +129,6 @@ export class KiiMainDataService extends KiiBaseAbstract {
         this.articles.refresh(new Article(article),false);  
     }
     this.articles.set(articles);
-
-    this.user.setLoggedInUser(new User(data.user));
   }
 
 
