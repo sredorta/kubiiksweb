@@ -8,5 +8,10 @@
         </kii-element>
 </div>
 <kii-article [article]="articles.getByKey('home-footer')"></kii-article>
-
+<kii-horizontal-scroller class="realisations-container">
+        <kii-element *ngFor="let article of articles.getByCathegory('realisations')" [ngClass]="article.cathegory" kiiAppear>
+            <kii-article-summary [article]="article"></kii-article-summary>
+            <kii-article [article]="article"></kii-article>
+        </kii-element>
+    </kii-horizontal-scroller>
 <kii-footer></kii-footer>

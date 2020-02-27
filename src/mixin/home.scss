@@ -63,5 +63,66 @@
             }
         }
     }
-  
+
+    ///////////////////////////////////////////////////////////////////////
+    //REALISATIONS PART
+    ///////////////////////////////////////////////////////////////////////
+    .realisations-container {
+        display:flex;
+        flex-direction: row;
+        justify-items: center;
+        align-items: stretch;
+        box-sizing: border-box;
+    }
+    kii-element.realisations {
+        .kii-element-container {
+            display:flex;
+            flex-direction: column;
+            height:100%;
+            background-color:mat-color($background,card);
+            box-sizing: border-box;
+            margin: 0 10px;
+            width:250px;
+            height:500px;
+            border:1px solid;
+        }
+        kii-article-summary {
+            flex:1 1 auto;
+        }
+        .kii-article-summary-container {
+            .img-wrp {
+                height:250px;
+                width:100%;
+                position: relative;
+                overflow: hidden;
+                img {
+                    position: absolute;
+                    width:100%;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%,-50%);
+                }
+            }
+            .text-wrp {
+                flex:1;
+                height:100%;
+                padding:0 10px;
+                .title {
+                    font-weight: bold;
+                    padding-bottom:10px;
+                    border-bottom:1px solid;
+                }
+                .description {
+                    font-size: 14px;
+                }
+            }
+        }
+        kii-article {
+            align-self: flex-start;
+            justify-self: flex-end;
+            .kii-editor-wrapper {
+                padding:0px 0px 10px 10px;
+            }
+        }
+    }
 }

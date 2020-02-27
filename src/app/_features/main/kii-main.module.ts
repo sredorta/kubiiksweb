@@ -64,6 +64,7 @@ import { KiiMainArticleService } from './services/kii-main-article.service';
 import { KiiMainThemeComponent } from './components/kii-main-theme/kii-main-theme.component';
 import { KiiElementComponent } from './components/kii-element/kii-element.component';
 import { KiiAppearDirective } from './directives/kii-appear-directive';
+import { KiiHorizontalScrollerComponent } from './components/kii-horizontal-scroller/kii-horizontal-scroller.component';
 
 
 @NgModule({
@@ -90,6 +91,7 @@ import { KiiAppearDirective } from './directives/kii-appear-directive';
     RouterModule,
   ],
   declarations: [
+    KiiHorizontalScrollerComponent,
     KiiElementComponent,
     KiiMainThemeComponent,
     KiiNiceDateFormatPipe,

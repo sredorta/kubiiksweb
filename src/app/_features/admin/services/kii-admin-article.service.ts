@@ -19,7 +19,6 @@ export class KiiAdminArticleService  {
   constructor(private _http: HttpClient, private kiiMainArticle : KiiMainArticleService) { }
 
 
-
   /**Update article*/
   public update(element:Article) {
       return this._http.post<Article>(environment.apiURL + '/article/update', {article: element}).pipe(map(res => new Article(res)));
