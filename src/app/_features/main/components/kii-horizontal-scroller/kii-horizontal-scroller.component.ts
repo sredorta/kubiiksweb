@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, HostListener, Inject, PLATFORM_ID, ContentChildren, QueryList, ComponentRef } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
+import { KiiElementComponent } from '../kii-element/kii-element.component';
+import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 
 
 
@@ -11,7 +13,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight
   templateUrl: './kii-horizontal-scroller.component.html',
   styleUrls: ['./kii-horizontal-scroller.component.scss']
 })
-export class KiiHorizontalScrollerComponent implements OnInit {
+export class KiiHorizontalScrollerComponent extends KiiBaseAbstract implements OnInit {
 
   /**Defines the scroll delta */
   @Input() scrollDelta : number =300;
@@ -20,7 +22,7 @@ export class KiiHorizontalScrollerComponent implements OnInit {
   private _scrollValue : number = 0;
 
   /**Max scroll position */
-  private _scrollMax : number = 10000;
+  public scrollMax : number = 0;
 
   icons : any = {
     left: faChevronLeft,
@@ -28,26 +30,35 @@ export class KiiHorizontalScrollerComponent implements OnInit {
   }
 
   @ViewChild('content', {static:false}) content : ElementRef;
+  @ContentChildren(KiiElementComponent) itemList:QueryList<KiiElementComponent>;
 
   @HostListener('window:resize', ['$event'])
   onresize(event?) {
     if (this.content) {
-      this._scrollMax = this.content.nativeElement.scrollWidth - window.innerWidth+40;
+      this.scrollMax = this.content.nativeElement.scrollWidth - window.innerWidth;
     }
   }
 
-  @HostListener('touchmove')
-  onmouseover(event?) {
-    console.log("MOVED !!!");
-  }
 
   constructor(@Inject(PLATFORM_ID) private platform: any) { 
+    super();
   }
 
   ngOnInit() {
   }
 
   ngAfterViewInit() {
+    //If there are changes in the items list then recalculate
+    if (this.itemList)
+      this.addSubscriber(
+          this.itemList.changes.subscribe(()=> {
+            if (isPlatformBrowser(this.platform))
+              setTimeout(()=> {
+                this.onresize();
+              });
+          })
+      );
+
   }
 
 
@@ -56,7 +67,7 @@ export class KiiHorizontalScrollerComponent implements OnInit {
       if (this.content) {
         this.onresize();
         this._scrollValue = this._scrollValue+this.scrollDelta;
-        if (this._scrollValue>this._scrollMax) this._scrollValue = this._scrollMax;
+        if (this._scrollValue>this.scrollMax) this._scrollValue = this.scrollMax;
         this.content.nativeElement.scrollLeft= this._scrollValue;
       }
   }
@@ -67,6 +78,7 @@ export class KiiHorizontalScrollerComponent implements OnInit {
         this.onresize();
         this._scrollValue = this._scrollValue-this.scrollDelta;
         if (this._scrollValue<0) this._scrollValue = 0;
+        console.log(this._scrollValue);
         this.content.nativeElement.scrollLeft= this._scrollValue;
       }
   }

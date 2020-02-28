@@ -56,21 +56,12 @@
 
 
 //INCLUDE MINIMAL DESIGN THEME TO SHOW HOME PAGE
-@import './mixin/general.scss';
-@import './mixin/scrollbar.scss';
-@import './mixin/footer.scss';
-@import './mixin/popup.scss';
 @import './mixin/home.scss';
-@import './mixin/editor.scss';
+@import './mixin/main.scss';
 
 @mixin design-mixin($theme) {
-    @include general-mixin($theme);
-    @include footer-mixin($theme);
-    @include scrollbar-mixin($theme);
-    @include popup-mixin($theme);
+    @include main-mixin($theme);
     @include home-mixin($theme);
-    @include editor-mixin($theme);
-
 }
 
 @include design-mixin($main-theme);

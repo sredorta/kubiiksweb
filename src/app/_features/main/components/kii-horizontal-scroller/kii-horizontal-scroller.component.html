@@ -1,11 +1,12 @@
 <div class="kii-horizontal-scroller-container">
-  <div class="left" (click)="scrollLeft()">
-      <fa-icon [icon]="icons['left']"></fa-icon>
-  </div>
-  <div #content class="content">
+  <div #content class="content" [ngClass]="{'is-scroll': scrollMax>0}">
     <ng-content></ng-content>
+    <div  class="left fcc" mat-ripple (click)="scrollLeft()" [ngClass]="{'is-scroll': scrollMax>0}">
+        <fa-icon [icon]="icons['left']"></fa-icon>
+    </div>
+    <div class="right fcc" mat-ripple (click)="scrollRight()" [ngClass]="{'is-scroll': scrollMax>0}">
+      <fa-icon [icon]="icons['right']"></fa-icon>
+    </div>
   </div>
-  <div class="right" mat-ripple (click)="scrollRight()">
-    <fa-icon [icon]="icons['right']"></fa-icon>
-  </div>
+
 </div>

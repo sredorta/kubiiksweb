@@ -1,0 +1,198 @@
+//MATERIAL THEME
+@import '~@angular/material/theming';
+
+
+// Defines themes for components that are always used (main context)
+@mixin main-mixin($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $foreground: map-get($theme, foreground);
+    $background:map-get($theme,background);
+
+
+    //Set global text color
+    body {
+        color:mat-color(map-get($theme, foreground),text);
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //Redefine mat-buttons
+    ///////////////////////////////////////////////////////////////////////
+    app-root,.cdk-overlay-container {
+        .mat-stroked-button,.mat-flat-button,.mat-raised-button {
+            border-radius: 50vh;
+        }
+        .mat-stroked-button {
+            border:1.5px solid;
+            border-color: mat-color(map-get($theme, foreground),text);
+            &.mat-primary {
+                border-color:mat-color($primary);
+            }
+            &.mat-accent {
+                border-color:mat-color($accent);
+            }
+            &.mat-warn {
+                border-color:mat-color($warn);
+            }
+        }
+        .mat-stroked-button:hover {
+            background:mat-color(map-get($theme, foreground),text);
+            color:mat-color(map-get($theme, background),background);
+            &.mat-primary {
+                background:mat-color($primary);
+            }
+            &.mat-accent {
+                background:mat-color($accent);
+            }
+            &.mat-warn {
+                background:mat-color($warn);
+            }                        
+        }
+        //WA for multiline checkbox
+        .mat-checkbox-layout { white-space: normal; }
+        form.ng-touched .mat-checkbox.ng-invalid .mat-checkbox-frame {
+            border-color: mat-color($warn);
+        }
+        form.ng-touched .mat-checkbox.ng-invalid .mat-checkbox-label {
+            color:mat-color($warn);
+        }
+
+        //Add default value
+        mat-form-field .kii-input-default {
+            opacity:0.5;
+        }
+
+        .c-primary {
+            color:mat-color($primary);
+        }
+        .c-accent {
+            color:mat-color($accent);
+        }
+        .c-warn {
+            color:mat-color($warn);
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //scrollbar definition
+    ///////////////////////////////////////////////////////////////////////
+    ::-webkit-scrollbar {
+        //opacity: 0.5;
+        background-color:rgba(mat-color(map-get($theme, background),background),1);
+        width:5px;
+        height:5px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+          border-radius: 50vh;
+          background-color: rgba(mat-color(map-get($theme, foreground),text),0.6);
+    }
+    body * {
+        scrollbar-color: rgba(mat-color(map-get($theme, foreground),text),0.6) rgba(mat-color(map-get($theme, background),background),1);
+        scrollbar-width: thin;
+        -ms-scrollbar-width:thin;
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //POPUP DIALOG
+    ///////////////////////////////////////////////////////////////////////    
+    kii-popup-dialog {
+        .popup-wrp {
+            background:rgba(black,0.4);
+        }
+        .content {
+            padding:20px;
+            background:red;
+        }
+  
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //EDITOR
+    ///////////////////////////////////////////////////////////////////////   
+    ckeditor ,kii-article .ck-content {
+        .ck.ck-editor__main>.ck-editor__editable {
+        color: mat-color($foreground,text);
+        background: mat-color($background,background);
+        }
+        a {
+          text-decoration: none;
+          font-weight: bold;
+          color: mat-color($primary);
+          &:hover {
+              color: mat-color($primary,darker);
+          }
+          &:active {
+              color: mat-color($primary,lighter);
+          }
+        }
+    }
+    kii-article {
+      .ck-content .table table td, .ck-content .table table th {
+        min-width: 2em;
+        padding: .4em;
+        border-color: #d9d9d9;
+      }
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    //FOOTER
+    ///////////////////////////////////////////////////////////////////////   
+    kii-footer {
+        kii-newsletter-form {
+            input {
+                border:1px solid;
+                border-radius: 5px;
+                color: mat-color(map-get($theme, foreground),text);
+            }
+            input:focus {
+                border-color: mat-color($primary);
+            }
+        }
+        kii-newsletter .wrp {
+            background-image: url("/assets/images/newsletter-background.svg");
+            background-repeat: no-repeat;
+            background-size: auto 100%;
+            background-position: left center;
+            padding-top:40px;
+            padding-bottom:50px;
+        }
+        .end {
+            padding-top:80px;
+            transition:padding-top 0.3s ease-in-out;
+            padding-bottom:10px;
+            background-image: url("/assets/images/footer.svg");
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-size: 100% auto;
+            background-color: mat-color(mat-palette($mat-grey,200));
+            color:mat-color(mat-palette($mat-grey, 700));
+            .link {
+                color:mat-color(mat-palette($mat-grey, 700));
+                font-weight: bold;
+            }
+        }
+        @media only screen and (min-width: 700px) { 
+            .end {
+                padding-top:150px;
+            }
+        }
+        @media only screen and (min-width: 1200px) { 
+            .end {
+                padding-top:200px;
+            }
+        }
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////
+    //Horizontal scroller
+    ///////////////////////////////////////////////////////////////////////
+    kii-horizontal-scroller .left,.right {
+        background-color: rgba(mat-color($foreground,text),0.5);
+        color: rgba(mat-color($background,background),0.5);
+    }
+
+
+}
