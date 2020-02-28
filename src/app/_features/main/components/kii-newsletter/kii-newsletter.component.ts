@@ -3,6 +3,7 @@ import { INewsletter, KiiMainNewsletterService } from '../../services/kii-main-n
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { StatAction } from '../../models/stat';
 import { KiiMainStatsService } from '../../services/kii-main-stats.service';
+import { KiiMainArticleService } from '../../services/kii-main-article.service';
 
 @Component({
   selector: 'kii-newsletter',
@@ -13,7 +14,10 @@ export class KiiNewsletterComponent extends KiiBaseAbstract implements OnInit {
 
   loading : boolean = false;
 
-  constructor(private kiiApiNews : KiiMainNewsletterService, private stats: KiiMainStatsService) { super(); }
+  constructor(
+    private kiiApiNews : KiiMainNewsletterService, 
+    private stats: KiiMainStatsService,
+    public articles: KiiMainArticleService) { super(); }
 
   ngOnInit() {
   }

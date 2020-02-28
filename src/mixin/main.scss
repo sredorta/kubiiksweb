@@ -185,11 +185,12 @@
         }
     }
 
-
     ///////////////////////////////////////////////////////////////////////
     //Horizontal scroller
     ///////////////////////////////////////////////////////////////////////
-    kii-horizontal-scroller .left,.right {
+    kii-horizontal-scroller .left,
+    kii-horizontal-scroller .right    
+     {
         background-color: rgba(mat-color($foreground,text),0.5);
         color: rgba(mat-color($background,background),0.5);
     }

@@ -50,14 +50,18 @@ export class KiiHorizontalScrollerComponent extends KiiBaseAbstract implements O
   ngAfterViewInit() {
     //If there are changes in the items list then recalculate
     if (this.itemList)
+    if (isPlatformBrowser(this.platform)) {
+      setTimeout(()=> {
+        this.onresize();
+      });
       this.addSubscriber(
           this.itemList.changes.subscribe(()=> {
-            if (isPlatformBrowser(this.platform))
               setTimeout(()=> {
                 this.onresize();
               });
           })
       );
+    }
 
   }
 
