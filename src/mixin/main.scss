@@ -129,12 +129,27 @@
         }
     }
     kii-article {
-      .ck-content .table table td, .ck-content .table table th {
-        min-width: 2em;
-        padding: .4em;
-        border-color: #d9d9d9;
-      }
+        .ck-content {
+            .table table td, .ck-content .table table th {
+                min-width: 2em;
+                padding: .4em;
+                border-color: #d9d9d9;
+            }
+            .text-huge {
+                font-size: 1.8em;
+            }
+            .text-big {
+                font-size: 1.4em;
+            }
+            .text-small {
+                font-size: 0.85em;
+            }
+            .text-tiny {
+                font-size: 0.7em;
+            }
+        }
     }
+
 
     ///////////////////////////////////////////////////////////////////////
     //FOOTER

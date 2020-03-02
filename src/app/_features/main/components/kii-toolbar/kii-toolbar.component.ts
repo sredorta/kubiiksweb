@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons/faSignInAlt';
+import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
+
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { User } from '../../models/user';
 import { KiiMainUserService } from '../../services/kii-main-user.service';
@@ -12,12 +14,14 @@ import { KiiMainUserService } from '../../services/kii-main-user.service';
 })
 export class KiiToolbarComponent extends KiiBaseAbstract implements OnInit {
   loggedInUser: User = new User(null);
-  icons = [];
+  icons :any = {
+    bell: faBell,
+    login: faSignInAlt,
+    admin:faCog
+  };
   constructor(private kiiAuth: KiiMainUserService) { super() }
 
   ngOnInit() {
-    this.icons['bell'] = faBell;
-    this.icons['login'] = faSignInAlt;
     this.addSubscriber(
       this.kiiAuth.getLoggedInUser().subscribe(res => {
         this.loggedInUser = res;

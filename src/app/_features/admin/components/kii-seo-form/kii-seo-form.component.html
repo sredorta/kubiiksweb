@@ -22,7 +22,7 @@
                     <mat-hint>Page description</mat-hint>
                     <mat-error kiiInputError="description"></mat-error>    
             </mat-form-field>  
-            <kii-image-upload [config]="config" [image]="currentPage.getImage()" (onUpload)="onUpload($event)"></kii-image-upload>
+            <kii-image-upload [config]="config" formControlName="image" [kiiInputDefaultValue]="currentPage.getImage()"></kii-image-upload>
         
             <div class="control-wrapper">
                     <button mat-flat-button type="submit" color="primary">Save</button>

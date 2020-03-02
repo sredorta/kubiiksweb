@@ -2,22 +2,33 @@
     max-width: 1200px;
     margin:0 auto;
     padding-top:30px;
-    display:flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-    color:rgba(white,0.6);
-    .column {
-        min-width:320px;
-        max-width: 320px;
-        flex-direction: column;
-        flex:1;
-        .item {
-            display: block;
+    .menu {
+        display:flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        color:rgba(white,0.6);
+        .column {
             width:100%;
-            text-align: left;
+            min-width: 320px;
+            flex-direction: column;
+            flex:1;
+            .item {
+                display: block;
+                width:100%;
+                text-align: left;
+            }
         }
+    }
+    .details {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: column;
+        padding:30px 20px 0px 20px;
         .title {
+            opacity: 0.6;
+            margin-top:0px;
             font-size: 14px;
             padding-left: 15px;
             fa-icon {
@@ -27,5 +38,10 @@
         .address {
             padding-left:20px;
         }
+    }
+}
+@media only screen and (min-width: 600px) {
+    .wrp .details {
+        flex-direction: row;
     }
 }

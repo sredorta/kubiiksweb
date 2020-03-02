@@ -75,15 +75,8 @@ export class KiiSeoFormComponent extends KiiFormAbstract implements OnInit {
   /**When we change page */
   onPageChange(event:MatSelectChange) {
     this.currentPage = this.kiiMainPage.getByKey(event.value);
-    this.myForm.controls["image"].setValue(this.currentPage.image);
   }
 
-
-  /**Patch the value of image once we recieve onUpload */
-  onUpload(url:string) {
-    this.myForm.controls["image"].setValue(url);
-    this.myForm.markAsDirty();
-  }
 
 
 }
