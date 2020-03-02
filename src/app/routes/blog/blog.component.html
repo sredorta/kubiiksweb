@@ -3,10 +3,12 @@
 <kii-header [data]="{title:'b.header.t',subtitle:'b.header.s'}"></kii-header>
 <kii-article [article]="articles.getByKey('blog-header')"></kii-article>
 <div class="blog-container">
-    <kii-element *ngFor="let article of articles.getByCathegory('blog-item')" [ngClass]="article.cathegory" mat-ripple [routerLink]="'/articles/'+article.id | translateRoute | async">
-        <kii-article-summary [article]="article"></kii-article-summary>
-        <p class="created txt-xxs"><fa-icon [icon]="icons['created']"></fa-icon>{{'b.created' | translate | async}} : {{{date:article.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}</p>
-    </kii-element>
+    <kii-paginator [data]="articles.getByCathegory('blog-item')" (result)="onPaginatorChanges($event)">
+        <kii-element *ngFor="let article of displayedArticles" [ngClass]="article.cathegory" mat-ripple [routerLink]="'/articles/'+article.id | translateRoute | async">
+            <kii-article-summary [article]="article"></kii-article-summary>
+            <p class="created txt-xxs"><fa-icon [icon]="icons['created']"></fa-icon>{{'b.created' | translate | async}} : {{{date:article.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}</p>
+        </kii-element>
+    </kii-paginator>
 </div>
 <kii-article [article]="articles.getByKey('blog-footer')"></kii-article>
 <kii-footer></kii-footer>

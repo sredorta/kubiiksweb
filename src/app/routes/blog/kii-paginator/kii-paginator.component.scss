@@ -1,0 +1,17 @@
+
+    .content {
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+    }
+    .pages {
+        width:100%;
+        display:flex;
+        justify-content: space-between;
+    }
+ 
+
+    fa-icon {
+        font-size: 26px;
+    }

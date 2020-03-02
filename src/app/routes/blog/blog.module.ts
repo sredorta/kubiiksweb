@@ -19,6 +19,8 @@ import {MatAutocompleteModule,
   MatDialogModule,
   MatButtonModule,
   MatRippleModule,
+  MatTableDataSource,
+  MatTableModule,
   //MatTreeModule,
   //MatPaginatorIntl,
   //MatSnackBar,
@@ -28,12 +30,14 @@ import {MatAutocompleteModule,
 import { RouterModule } from '@angular/router';
 import { TransferState } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KiiTranslateModule } from 'src/app/_features/translate/kii-translate.module';
 import { KiiMainModule } from 'src/app/_features/main/kii-main.module';
 import { BlogRoutingModule } from './blog-routing.module';
 import { BlogComponent } from './blog.component';
 import { KiiBlogThemeComponent } from './kii-blog-theme/kii-blog-theme.component';
+import { KiiFormModule } from 'src/app/_features/form/kii-form.module';
+import { KiiPaginatorComponent } from './kii-paginator/kii-paginator.component';
+import { KiiTableModule } from 'src/app/_features/table/kii-table.module';
 
 
 @NgModule({
@@ -42,10 +46,13 @@ import { KiiBlogThemeComponent } from './kii-blog-theme/kii-blog-theme.component
     RouterModule,
     KiiTranslateModule.forChild(),
     KiiMainModule,
+    KiiFormModule,
+    MatTableModule,
     BlogRoutingModule,
   ],
   declarations: [
     KiiBlogThemeComponent,
+    KiiPaginatorComponent,
     BlogComponent
   ],
   providers:[

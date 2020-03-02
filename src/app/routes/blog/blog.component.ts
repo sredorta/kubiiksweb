@@ -10,6 +10,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { faFeatherAlt } from '@fortawesome/free-solid-svg-icons/faFeatherAlt';
+import { Article } from 'src/app/_features/main/models/article';
 
 @Component({
   selector: 'app-blog',
@@ -21,6 +22,8 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
   loggedInUser = new User(null);
   icons = [];
   currentLang=this.translate.getCurrent();
+
+  displayedArticles : Article[] = [];
 
   constructor(
     private kiiTrans: KiiTranslateService,
@@ -60,6 +63,11 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
   logout() {
     this.kiiAuth.logout();
     this.router.navigate(['']);
+  }
+
+  /**When paginator provides results */
+  onPaginatorChanges(displayedArticles:Article[]) {
+    this.displayedArticles = displayedArticles;
   }
 
 }

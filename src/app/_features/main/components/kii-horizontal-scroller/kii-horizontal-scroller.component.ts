@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef, Input, HostListener, Inject, 
 import { isPlatformBrowser } from '@angular/common';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
-import { KiiElementComponent } from '../kii-element/kii-element.component';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
+import { KiiElementComponent } from '../kii-element/kii-element.component';
 
 
 

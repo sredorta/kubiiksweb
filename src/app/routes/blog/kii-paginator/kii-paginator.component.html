@@ -1,0 +1,16 @@
+<div class="kii-paginator">
+  <div class="search-wrapper">
+      <mat-form-field appearance="outline" style="min-width:250px" class="scale">
+          <mat-label >{{'blog.search' | translate | async}}</mat-label>
+          <input matInput [(ngModel)]="valueSearch" (keyup)="keyUp.next($event.target.value)" placeholder="{{'blog.search' | translate | async}}" autocomplete="off">
+          <button mat-icon-button matSuffix (click)="resetSearch()" style="padding-bottom:10px" attr.aria-label="{{'blog.reset' | translate |async}}" ><fa-icon [icon]="icons['delete']"></fa-icon></button>
+      </mat-form-field>
+  </div>
+  <div #content class="content">
+    <ng-content></ng-content>
+  </div>
+  <div class="pages">
+      <button mat-icon-button color="accent" [disabled]="currentPage<=1" (click)="previousPage()"><fa-icon [icon]="icons['left']"></fa-icon></button>
+      <button mat-icon-button color="accent"  [disabled]="currentPage>=lastPage" (click)="nextPage()"><fa-icon [icon]="icons['right']"></fa-icon></button>
+  </div>
+</div>
