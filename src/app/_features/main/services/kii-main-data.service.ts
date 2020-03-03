@@ -32,6 +32,7 @@ interface _IInitialData  {
   providedIn: 'root'
 })
 export class KiiMainDataService extends KiiBaseAbstract {
+  isInitialLoaded :BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   isFullLoaded:boolean = false;
 
@@ -49,7 +50,7 @@ export class KiiMainDataService extends KiiBaseAbstract {
     ) { super() }
 
   /**Loads the initial data and handles state transfer to avoid double http calls */
-  public loadInitialData(page_name:string) : void {
+  public loadInitialData(page_name:string, articleId:number=0) : void {
       if (!this.isFullLoaded) {
         const key: StateKey<_IInitialData> = makeStateKey<_IInitialData>('transfer-intial');
         //RESTORE FROM TRANSFER STATE
@@ -61,17 +62,19 @@ export class KiiMainDataService extends KiiBaseAbstract {
             this._update(myData);
             this.transfer.set(key,null);
             console.log("RESTORED FROM TRANSFER STATE", myData);
+            this.isInitialLoaded.next(true);
           } 
         }
         //DO HTTP CALL IF NOT RESTORED
         if (!myData) {
           this.addSubscriber(
-            this.http.post<_IInitialData>(environment.apiURL + '/initial', {page:page_name}).subscribe(res => {
+            this.http.post<_IInitialData>(environment.apiURL + '/initial', {page:page_name,articleId:articleId}).subscribe(res => {
               console.log("INITIAL DATA", res);
               if (isPlatformServer(this._platformId)) {
                 this.transfer.set(key, res);
               }
               this._update(res);
+              this.isInitialLoaded.next(true);
             })
           )
         }

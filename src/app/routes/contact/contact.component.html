@@ -1,7 +1,12 @@
 <kii-toolbar></kii-toolbar>
 <ngx-json-ld [json]="schemaOrganization"></ngx-json-ld>
-
 <kii-header [data]="{title:'c.header.t',subtitle:'c.header.s'}"></kii-header>
-<kii-article [article]="articles.getByKey('contact-header')"></kii-article>
-<kii-article [article]="articles.getByKey('contact-footer')"></kii-article>
-<kii-footer></kii-footer>
+<div *ngIf="isLoading" class="fcc" style="min-height: 140px">
+        <kii-spinner ></kii-spinner>
+</div>
+<ng-container *ngIf="!isLoading">
+    <kii-article [article]="articles.getByKey('contact-header')"></kii-article>
+    <kii-article [article]="articles.getByKey('contact-footer')"></kii-article>
+    <kii-footer></kii-footer>
+</ng-container>
+

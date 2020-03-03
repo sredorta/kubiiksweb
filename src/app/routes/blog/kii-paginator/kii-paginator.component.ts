@@ -27,7 +27,7 @@ export class KiiPaginatorComponent extends KiiBaseAbstract implements OnInit {
   valueSearch : string = "";
 
   /**Items per page */
-  @Input() itemsPage : number = 3;
+  @Input() itemsPage : number = 10;
 
   /**Full items list */
   @Input() data : any[] = [];

@@ -5,6 +5,8 @@ import { Article } from 'src/app/_features/main/models/article';
 import { KiiMainDataService } from 'src/app/_features/main/services/kii-main-data.service';
 import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
+import { Page } from 'src/app/_features/main/models/page';
+import { KiiMainPageService } from 'src/app/_features/main/services/kii-main-page.service';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class ArticlePageComponent extends KiiBaseAbstract implements OnInit {
   article : Article = new Article(null);
   currentLang : string = null;
   showCreated : boolean = false;
+  isLoading:boolean = true;
 
   constructor(
       private route: ActivatedRoute, 
@@ -27,10 +30,14 @@ export class ArticlePageComponent extends KiiBaseAbstract implements OnInit {
       private articles: KiiMainArticleService,
       private trans: KiiTranslateService,
       private router : Router
-              
             ) { super()}
 
   ngOnInit() {
+    this.addSubscriber(
+      this.data.isInitialLoaded.subscribe(res => {
+        this.isLoading = !res;
+      })
+    )
     this.addSubscriber(
       this.route.params.subscribe(params => {
           this.id = +params['id']; // (+) converts string 'id' to a number
@@ -40,7 +47,7 @@ export class ArticlePageComponent extends KiiBaseAbstract implements OnInit {
           if (index>0) {
             this.article = this.articles.value()[index];
           } else {
-            this.articles.loadById(this.id);
+            this.data.loadInitialData('blog-item-page', this.id);
           }
       })
     )
@@ -58,6 +65,14 @@ export class ArticlePageComponent extends KiiBaseAbstract implements OnInit {
           this.navigateNotFound();
         if (index>=0) {
           this.article = this.articles.value()[index];
+          //Here we need to update seo by using a virtual page as we use article title and description
+          let myPage = new Page({    
+            id: 1000,
+            page: "blog-item-page",
+            title: this.article.title,
+            description:this.article.description,   
+            image:this.article.image});
+          this.data.seo(myPage, this.router.url);
         }
       })
     )
@@ -68,6 +83,4 @@ export class ArticlePageComponent extends KiiBaseAbstract implements OnInit {
     this.router.navigate([this.trans.getCurrent()+'/not-found']);
   }
 }
-
-
 

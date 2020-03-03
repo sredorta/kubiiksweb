@@ -91,6 +91,14 @@
             }
       }
   }
+  kii-paginator .kii-paginator {
+    .search-wrapper.has-focus {
+        border: 1px solid mat-color($primary);
+    }
+    input {
+        color:mat-color($foreground,text);
+    }
+  }
 
   
 }

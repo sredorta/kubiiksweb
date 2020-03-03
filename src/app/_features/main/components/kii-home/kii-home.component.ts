@@ -16,15 +16,21 @@ import { KiiMainArticleService } from '../../services/kii-main-article.service';
 })
 export class KiiHomeComponent extends KiiBaseAbstract implements OnInit {
 
+  isLoading:boolean = true;
+
   constructor(private data: KiiMainDataService, 
               private pages: KiiMainPageService,
-              private settings: KiiMainSettingService,
               public articles: KiiMainArticleService,
               private router : Router,
               private translate: KiiTranslateService,
               @Inject(PLATFORM_ID) private platform: any) { super()}
 
   ngOnInit() {
+    this.addSubscriber(
+      this.data.isInitialLoaded.subscribe(res => {
+        this.isLoading = !res;
+      })
+    )
     this.addSubscriber(
       this.pages.onChange.subscribe(res => {
         if (this.pages.hasPage('home'))
@@ -36,17 +42,10 @@ export class KiiHomeComponent extends KiiBaseAbstract implements OnInit {
     if (isPlatformBrowser(this.platform))
       this.addSubscriber(
         this.translate.onChange.subscribe(res => {
-          console.log("TRANSLATION CHANGED",res);
           this.data.isFullLoaded = false;
           this.data.loadInitialData('home');
         })
       )
-
-    this.addSubscriber(
-      this.articles.onChange.subscribe(res => {
-        console.log("ARTICLES",this.articles.value());
-      })
-    )  
   }
 
 }

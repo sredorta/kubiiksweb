@@ -54,41 +54,6 @@ export class KiiMainArticleService extends KiiBaseAbstract {
       return this._articles.value;
     }
 
-    /**Loads article by id handling transfer state*/
-    loadById(id:number) :void {
-      const key: StateKey<IArticle> = makeStateKey<IArticle>('transfer-page-article');
-      let myData = null;
-      if (isPlatformBrowser(this._platformId)) {
-        myData = this.transfer.get(key, null);
-        if (myData) {
-          myData = this.transfer.get(key, null);
-          console.log("RESTORED FROM TRANSFER:", new Article(myData));
-          let index = this._articles.value.findIndex(obj=> obj.id == myData.id);
-          if (index<0) {
-            this._articles.value.push(new Article(myData));
-            this._articles.next( this._articles.value );
-            this.onChange.next(!this.onChange.value);
-          } 
-        }
-      } 
-      console.log("ASKING SERVER FOR ARTICLE !");
-      this.addSubscriber(
-            this.http.post<IArticle>(environment.apiURL + '/article/id', {id:id}).subscribe(res => {
-              if (isPlatformServer(this._platformId)) {
-                console.log("SAVING TO TRANSFER",res);
-                this.transfer.set(key, res);
-              }
-              let index = this._articles.value.findIndex(obj=> obj.id == res.id);
-              console.log("WE ARE HERE", index, new Article(res));
-              if (index<0) {
-                this._articles.value.push(new Article(res));
-                this._articles.next( this._articles.value );
-                this.onChange.next(!this.onChange.value);
-                console.log("UPDATED ARTICLE",this._articles.value);
-              } 
-            })
-      )
-    }
 
     /**Returns a setting filtered by key */
     public getByKey(key:string) {

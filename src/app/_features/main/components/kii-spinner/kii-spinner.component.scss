@@ -6,9 +6,10 @@
 
 .loader {
     position:absolute;
-    height: 160px;
-    width: 160px;
+    height: 120px;
+    width: 120px;
     background-image: url('/assets/kiilib/images/loading.svg');
+    background-size: 100% 100%;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);

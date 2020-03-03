@@ -19,11 +19,11 @@ import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-
 })
 export class ContactComponent extends KiiBaseAbstract implements OnInit {
 
-  loggedInUser = new User(null);
   icons = [];
 
   schemaOrganization : any = {};
 
+  isLoading:boolean = true;
 
   constructor(
     private kiiTrans: KiiTranslateService,
@@ -32,7 +32,6 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     private pages: KiiMainPageService,
     private router: Router,
     private data: KiiMainDataService,
-    private translate: KiiTranslateService,
     public articles: KiiMainArticleService,
     @Inject(PLATFORM_ID) private platform: any
     ) {super(); }
@@ -41,7 +40,6 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     this.kiiTrans.setRequiredContext(['main','contact']);
     this.icons['close'] = faTimes;
 
-    this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => this.loggedInUser = res));
     //Add contact schema
     this.addSubscriber (
       this.kiiSettings.onChange.subscribe(res => {
@@ -54,17 +52,14 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
           this.data.seo(this.pages.getByKey('contact'), this.router.url);
       })
     )
+    this.addSubscriber(
+      this.data.isInitialLoaded.subscribe(res => {
+        this.isLoading = !res;
+      })
+    )
 
     this.data.loadInitialData('contact');
-    //If we change language we reload articles
-    if (isPlatformBrowser(this.platform))
-      this.addSubscriber(
-        this.translate.onChange.subscribe(res => {
-          console.log("TRANSLATION CHANGED",res);
-          this.data.isFullLoaded = false;
-          this.data.loadInitialData('contact');
-        })
-      )
+
   }
 
   logout() {

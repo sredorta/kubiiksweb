@@ -26,7 +26,9 @@
     }
     .search-wrapper {
         font-size: 20px;
-        border:1px solid;
+        &:not(.has-focus) {
+            border:1px solid;
+        }
         border-radius: 5px;
         padding:5px;
         display: inline-block;
@@ -37,14 +39,10 @@
             font-size: 16px;
         }
     }
-    .search-wrapper.has-focus {
-        border: 1px solid red;
-    }
     input {
         max-width: 200px;
         margin-left: 10px;
         font-size: 20px;
-        color:white;
         border:none;
     }
 }

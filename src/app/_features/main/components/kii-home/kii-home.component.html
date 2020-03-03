@@ -1,5 +1,9 @@
 <kii-toolbar></kii-toolbar>
 <kii-header [data]="{title:'m.header.t',subtitle:'m.header.s'}"></kii-header>
+<div *ngIf="isLoading" class="fcc" style="min-height: 140px">
+    <kii-spinner ></kii-spinner>
+</div>
+<ng-container *ngIf="!isLoading">
 <kii-article [article]="articles.getByKey('home-header')"></kii-article>
 <div class="features-container">
         <kii-element *ngFor="let article of articles.getByCathegory('home-features')" [ngClass]="article.cathegory">
@@ -15,3 +19,4 @@
         </kii-element>
     </kii-horizontal-scroller>
 <kii-footer></kii-footer>
+</ng-container>
