@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { Subject, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, mergeMap, delay } from 'rxjs/operators';
-import { faWhatsapp } from '@fortawesome/free-brands-svg-icons/faWhatsapp';
+import { faSearchengin } from '@fortawesome/free-brands-svg-icons/faSearchengin';
 
 
 
@@ -26,9 +26,6 @@ export class KiiPaginatorComponent extends KiiBaseAbstract implements OnInit {
   /**Search value */
   valueSearch : string = "";
 
-  /**Contains the current search */
-  currentSearch : string = "";
-
   /**Items per page */
   @Input() itemsPage : number = 3;
 
@@ -44,13 +41,22 @@ export class KiiPaginatorComponent extends KiiBaseAbstract implements OnInit {
   /**Number of lastPage */
   lastPage:number=1;
 
-  _dataSource;
+  /**Current data to work on */
+  dataSource;
 
+  /**Contains element displayed count */
+  resultLength : number =0;
+
+  @ViewChild('myInput', {static: true}) myInput: ElementRef;
+
+  /**When input has focus */
+  focus : boolean = false;
 
   icons : any = {
     left: faChevronLeft,
     right: faChevronRight,
-    delete: faTimes
+    delete: faTimes,
+    search: faSearchengin
   }
 
   constructor(@Inject(PLATFORM_ID) private platform: any) { 
@@ -58,10 +64,8 @@ export class KiiPaginatorComponent extends KiiBaseAbstract implements OnInit {
   }
 
   ngOnInit() {
-    console.log("data is:",this.data);
-    this._dataSource = new MatTableDataSource(this.data);
+    this.dataSource = new MatTableDataSource(this.data);
     this.setFilter();
-    this.resetSearch();
     this.addSubscriber(
       this.keyUp.pipe(
         debounceTime(500),
@@ -71,50 +75,52 @@ export class KiiPaginatorComponent extends KiiBaseAbstract implements OnInit {
         )),
       ).subscribe(res => {
         this.currentPage = 1;
-        console.log("Applying filter :",res);
+        this.valueSearch=res;
         this.applyFilter(res);
-        this.currentSearch = res;
       })
     )
   }
   ngOnChanges(changes:SimpleChanges) {
     if (changes.data) { 
-      this.data = changes.data.currentValue;
-      this._dataSource = new MatTableDataSource(this.data);
+      this.dataSource = new MatTableDataSource(this.data);
       this.setFilter();
-      this.result.emit(this.getPagedElements(this._dataSource.data));
+      this.applyFilter(this.valueSearch);
+      this.result.emit(this.getPagedElements(this.dataSource.filteredData));
     }
   }
 
-  ngAfterViewInit() {
 
-  }
 
   /**Remove any search */
   resetSearch() {
-    this.valueSearch = "";
-    this.currentSearch = "";
+    if (this.myInput) this.myInput.nativeElement.value = "";
+    this.valueSearch="";
     this.currentPage = 1;
-    this.result.emit(this.getPagedElements(this._dataSource.data));
+    this.setFilter();
+    this.applyFilter(this.valueSearch);
+    this.result.emit(this.getPagedElements(this.dataSource.filteredData));
   }
 
-
-   /**Applies the search filter */
-   applyFilter(filterValue:string) {
-    if(filterValue!== null) {
-      this._dataSource.filter = filterValue.trim().toLowerCase();
-      this._dataSource.filteredData.sort((a, b) => b.fweight - a.fweight); //Sort by matching criteria
-      this.result.emit(this.getPagedElements(this._dataSource.filteredData));
-   } 
+  /**Applies the search filter */
+  applyFilter(filterValue:string) {
+    if(filterValue!== "") {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+      this.dataSource.filteredData.sort((a, b) => b.fweight - a.fweight); //Sort by matching criteria
+      this.result.emit(this.getPagedElements(this.dataSource.filteredData));
+    } else {
+      this.dataSource.filteredData = this.dataSource.data;
+      this.result.emit(this.getPagedElements(this.dataSource.filteredData));
+    }
   }
 
   /**Sets filtering criteria */
   setFilter() {
     let obj = this;
-    this._dataSource.filterPredicate = function(data, filter: string): boolean {
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
       //Do not process when two short filter
       if (filter.length<=1) {
         data.fweight = 0;
+        obj.dataSource.filteredData = obj.dataSource.data;
         return true;
       }
       let weight = 0;
@@ -127,7 +133,6 @@ export class KiiPaginatorComponent extends KiiBaseAbstract implements OnInit {
         }
       }
       data.fweight = weight;  //Add weight of search in data
-      console.log("weight",data.fweight)
       if (weight>0)
        return true;
       else
@@ -142,35 +147,43 @@ export class KiiPaginatorComponent extends KiiBaseAbstract implements OnInit {
 
 
   getPagedElements(elements:any[]) {
-    //Calculate lastPage
-    this.lastPage = Math.floor(elements.length/this.itemsPage);
-    if (elements.length/this.itemsPage > this.lastPage) {
-      this.lastPage = this.lastPage + 1;
-    }
+      //Calculate lastPage
+      this.lastPage = Math.floor(elements.length/this.itemsPage);
+      if (elements.length/this.itemsPage > this.lastPage) {
+        this.lastPage = this.lastPage + 1;
+      }
 
-    let indexRight = (this.currentPage * this.itemsPage);
-    let indexLeft = indexRight - this.itemsPage;
-    indexRight = indexRight - 1;
-    //When page is full
-    let result = [];
-    if (elements.length-1>= indexRight) {
-      result = elements.slice(indexLeft,indexRight+1);
-    } else {
-      result = elements.slice(indexLeft,elements.length)
-    }
-    console.log("Emitting :",result);
+      let indexRight = (this.currentPage * this.itemsPage);
+      let indexLeft = indexRight - this.itemsPage;
+      indexRight = indexRight - 1;
+      //When page is full
+      let result = [];
+      if (elements.length-1>= indexRight) {
+        result = elements.slice(indexLeft,indexRight+1);
+      } else {
+        result = elements.slice(indexLeft,elements.length)
+      }
+      this.resultLength = result.length;
     return result;
   }
 
   nextPage() {
     this.currentPage = this.currentPage+1;
-    this.applyFilter(this.currentSearch);
+    this.applyFilter(this.valueSearch);
   }
 
   previousPage() {
     this.currentPage = this.currentPage-1;
     if (this.currentPage<1) this.currentPage = 1;
-    this.applyFilter(this.currentSearch);
+    this.applyFilter(this.valueSearch);
   }  
 
+  /**Scroll to top of container */
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+
+  onFocus() {
+    console.log("focus",event);
+  }
 }

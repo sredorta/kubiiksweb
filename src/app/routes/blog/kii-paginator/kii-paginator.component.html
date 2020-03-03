@@ -1,16 +1,31 @@
-<div class="kii-paginator">
-  <div class="search-wrapper">
-      <mat-form-field appearance="outline" style="min-width:250px" class="scale">
-          <mat-label >{{'blog.search' | translate | async}}</mat-label>
-          <input matInput [(ngModel)]="valueSearch" (keyup)="keyUp.next($event.target.value)" placeholder="{{'blog.search' | translate | async}}" autocomplete="off">
-          <button mat-icon-button matSuffix (click)="resetSearch()" style="padding-bottom:10px" attr.aria-label="{{'blog.reset' | translate |async}}" ><fa-icon [icon]="icons['delete']"></fa-icon></button>
-      </mat-form-field>
+<div #paginator class="kii-paginator">
+  <div class="fcr">
+    <div class="search-wrapper" [ngClass]="{'has-focus': focus}">
+            <fa-icon [icon]="icons['search']" class="pre"></fa-icon>
+            <input #myInput (keyup)="keyUp.next($event.target.value)" placeholder="{{'b.search.p' | translate | async}}" autocomplete="off" (focus)="focus=true" (blur)="focus=false">
+            <button mat-icon-button matSuffix (click)="resetSearch()" style="padding-bottom:10px" attr.aria-label="{{'blog.reset' | translate |async}}" ><fa-icon [icon]="icons['delete']" class="post"></fa-icon></button>
+    </div>
+  </div>
+  <div class="text txt-m">
+    <div *ngIf="dataSource && dataSource.filteredData.length==0 && valueSearch.length>1">
+          <p>{{'b.search.notfound' | translate | async}}</p>
+    </div>
+    <div *ngIf="dataSource && dataSource.filteredData.length>0 && valueSearch.length>1">
+          <p><span class="txt-b">{{'b.search.found'| translate | async}} {{dataSource.filteredData.length}}</span> {{'b.search.outof' | translate | async}} <span class="total-count">{{dataSource.data.length}}</span></p>
+    </div>
+    <div *ngIf="dataSource && dataSource.filteredData.length>0 && (valueSearch.length==1 || valueSearch.length==0)">
+        <p><span class="txt-b">{{'b.search.display'| translate | async}} {{resultLength}}</span> {{'b.search.outof' | translate | async}} <span class="total-count">{{dataSource.data.length}}</span></p>
+    </div>
+  </div>
+  <div class="counter txt-xs fcr">
+      <span class="txt-b">{{'b.search.page' | translate | async}} {{currentPage}}</span>
+      <span class="last-page"> - {{lastPage}} </span>
   </div>
   <div #content class="content">
     <ng-content></ng-content>
   </div>
   <div class="pages">
-      <button mat-icon-button color="accent" [disabled]="currentPage<=1" (click)="previousPage()"><fa-icon [icon]="icons['left']"></fa-icon></button>
-      <button mat-icon-button color="accent"  [disabled]="currentPage>=lastPage" (click)="nextPage()"><fa-icon [icon]="icons['right']"></fa-icon></button>
+      <button mat-icon-button color="accent" [disabled]="currentPage<=1" (click)="previousPage();scroll(paginator)"><fa-icon [icon]="icons['left']"></fa-icon></button>
+      <button mat-icon-button color="accent"  [disabled]="currentPage>=lastPage" (click)="nextPage();scroll(paginator)"><fa-icon [icon]="icons['right']"></fa-icon></button>
   </div>
 </div>

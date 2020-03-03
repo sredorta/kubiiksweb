@@ -1,4 +1,5 @@
-
+.kii-paginator {
+    padding:10px;
     .content {
             display:flex;
             flex-wrap: wrap;
@@ -10,8 +11,40 @@
         display:flex;
         justify-content: space-between;
     }
- 
+    .text {
+        text-align: center;
+        min-height: 60px;
+        padding:10px;
+        background-image:url("/assets/kiilib/images/search-background.svg");
+        background-position: bottom center;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+    }
 
     fa-icon {
-        font-size: 26px;
+        font-size: 24px;
     }
+    .search-wrapper {
+        font-size: 20px;
+        border:1px solid;
+        border-radius: 5px;
+        padding:5px;
+        display: inline-block;
+        fa-icon.pre {
+            font-size: 26px;
+        }
+        fa-icon.post {
+            font-size: 16px;
+        }
+    }
+    .search-wrapper.has-focus {
+        border: 1px solid red;
+    }
+    input {
+        max-width: 200px;
+        margin-left: 10px;
+        font-size: 20px;
+        color:white;
+        border:none;
+    }
+}

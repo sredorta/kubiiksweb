@@ -2,5 +2,11 @@
     "b.created" : "Publié",
     "b.readmore": "Lire plus",
     "b.header.t" : "Technologie",
-    "b.header.s" : "Notre technologie à votre service"
+    "b.header.s" : "Notre technologie à votre service",
+    "b.search.p" : "Chercher",
+    "b.search.notfound": "La recherche n'a donné aucun résultat",
+    "b.search.found": "Trouvées",
+    "b.search.display": "Affichées",
+    "b.search.outof": "élements sur un total de",
+    "b.search.page" : "Page"
 }

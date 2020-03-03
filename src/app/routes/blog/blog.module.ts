@@ -46,8 +46,6 @@ import { KiiTableModule } from 'src/app/_features/table/kii-table.module';
     RouterModule,
     KiiTranslateModule.forChild(),
     KiiMainModule,
-    KiiFormModule,
-    MatTableModule,
     BlogRoutingModule,
   ],
   declarations: [
