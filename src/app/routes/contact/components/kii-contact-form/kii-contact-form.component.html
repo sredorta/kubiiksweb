@@ -1,0 +1,31 @@
+<div class="kii-contact-form">
+<kii-spinner-overlay [show]="isFormLoading">
+    <form #form="ngForm" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate> 
+     <mat-form-field [appearance]="kiiInputAppearance" style="width:100%">
+         <mat-label>{{'c.email.l' | translate |async}}</mat-label>
+         <input matInput formControlName="email" placeholder="{{'c.email.p' | translate | async}}" required type="email">
+         <mat-icon matPrefix class="icon"><fa-icon [icon]="icons['email']"></fa-icon></mat-icon>
+         <mat-hint>{{'c.email.h' | translate | async}}</mat-hint>
+         <mat-error kiiInputError="email"></mat-error>    
+     </mat-form-field>
+     
+     <mat-form-field [appearance]="kiiInputAppearance" style="width:100%">
+       <mat-label>{{'c.subject.l' | translate | async}}</mat-label>
+       <input matInput formControlName="subject" placeholder="{{'c.subject.p' | translate  | async}}" required type="text">
+       <mat-hint>{{'c.subject.h' | translate | async}}</mat-hint>
+       <mat-error kiiInputError="subject"></mat-error>            
+    </mat-form-field>
+
+     <mat-form-field [appearance]="kiiInputAppearance" style="width:100%">
+         <mat-label>{{'c.message.l' | translate | async}}</mat-label>
+         <textarea matInput formControlName="message" placeholder="{{'c.message.p' | translate | async}}" required type="text" rows="5"></textarea>
+         <mat-hint>{{'c.message.h' | translate | async}}</mat-hint>
+         <mat-error kiiInputError="message"></mat-error>
+     </mat-form-field>
+    
+     <div class="control-wrapper">
+         <button mat-flat-button type="submit" color="primary"><fa-icon [icon]="icons['send']"></fa-icon> {{'c.send' | translate | async}}</button>
+     </div>
+   </form>
+</kii-spinner-overlay>
+</div>

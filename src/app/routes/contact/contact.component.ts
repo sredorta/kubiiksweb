@@ -37,7 +37,7 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     ) {super(); }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['main','contact']);
+    this.kiiTrans.setRequiredContext(['main','contact','form']);
     this.icons['close'] = faTimes;
 
     //Add contact schema
@@ -66,5 +66,6 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     this.kiiAuth.logout();
     this.router.navigate(['']);
   }
+
 
 }

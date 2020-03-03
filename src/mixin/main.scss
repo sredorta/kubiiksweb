@@ -147,6 +147,11 @@
             .text-tiny {
                 font-size: 0.7em;
             }
+            code {
+                background-color: hsla(0,0%,78%,.3);
+                padding: .15em;
+                border-radius: 2px;
+            }
         }
     }
 

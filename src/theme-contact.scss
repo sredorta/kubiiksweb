@@ -1,0 +1,21 @@
+@import './styles.scss';
+@import './theme.scss';
+
+//Add extra required themes
+@include mat-core-theme($main-theme);
+@include mat-card-theme($main-theme);
+@include mat-autocomplete-theme($main-theme);
+@include mat-checkbox-theme($main-theme);
+@include mat-chips-theme($main-theme);
+@include mat-form-field-theme($main-theme);
+@include mat-list-theme($main-theme);
+@include mat-select-theme($main-theme);
+
+//INCLUDE Aditional to main blog mixins
+@import './mixin/contact.scss';
+
+@mixin design-mixin($theme) {
+    @include contact-mixin($theme);
+}
+
+@include design-mixin($main-theme);

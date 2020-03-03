@@ -1,12 +1,22 @@
-<kii-toolbar></kii-toolbar>
+<kii-contact-theme></kii-contact-theme>
 <ngx-json-ld [json]="schemaOrganization"></ngx-json-ld>
+
+<kii-toolbar></kii-toolbar>
 <kii-header [data]="{title:'c.header.t',subtitle:'c.header.s'}"></kii-header>
 <div *ngIf="isLoading" class="fcc" style="min-height: 140px">
         <kii-spinner ></kii-spinner>
 </div>
-<ng-container *ngIf="!isLoading">
+<div class="content" *ngIf="!isLoading">
     <kii-article [article]="articles.getByKey('contact-header')"></kii-article>
+    <div class="contact-form">
+        <kii-article [article]="articles.getByKey('contact-form')"></kii-article>
+        <kii-contact-form></kii-contact-form>
+    </div>
+    <div class="contact-address">
+            <kii-article [article]="articles.getByKey('contact-address')"></kii-article>
+            <kii-osm></kii-osm>
+    </div>
     <kii-article [article]="articles.getByKey('contact-footer')"></kii-article>
     <kii-footer></kii-footer>
-</ng-container>
+</div>
 

@@ -1,0 +1,18 @@
+
+fa-icon {
+    margin-right: 10px;
+    font-size: 16px;
+}
+mat-form-field {
+    fa-icon {
+        opacity:0.6;
+    }
+    margin-bottom:15px;
+}
+.control-wrapper {
+    box-sizing: border-box;
+    padding:10px;
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+}

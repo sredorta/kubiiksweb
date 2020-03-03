@@ -1,4 +1,16 @@
 {
     "c.header.t" : "Contact",
-    "c.header.s" : "Une équipe à votre service"
+    "c.header.s" : "Une équipe à votre service",
+    "c.email.l": "Courriel eléctronique",
+    "c.email.p": "john@doe.com",
+    "c.email.h": "Écrivez votre addresse de courriel",
+    "c.subject.l": "Sujet",
+    "c.subject.p": "Demande de contact",
+    "c.subject.h": "Écrivez la raison de votre message",
+    "c.message.l": "Message",
+    "c.message.p": "Écrivez votre message ici...",
+    "c.message.h": "Votre message",
+    "c.send": "Envoyer"
+
+
 }

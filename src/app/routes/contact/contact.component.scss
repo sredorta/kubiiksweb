@@ -1,13 +1,37 @@
-.logo {
-    width:50px;
-    height:50px;
-    margin:0 auto;
-    background-image: url('/server/public/images/defaults/icon-192x192.png');
-    background-size: cover;
+.content {
+    padding:20px;
+    box-sizing: border-box;
 }
-.menu {
-    border:1px solid red;
-    button {
-        width:100%;
+.contact-form,.contact-address {
+    display:flex;
+    flex-direction: column;
+    padding:10
+}
+
+@media only screen and (min-width: 700px) {
+    .contact-form {
+        flex-direction: row;
+        justify-content: space-between;
+        kii-contact-form {
+            flex:1;
+            max-width:45%;
+        }
+        kii-article {
+            flex:1;
+            max-width:45%;
+        }
+    }
+    .contact-address {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+
+        kii-article{
+            flex:1;
+            max-width:45%;
+        }
+        kii-osm {
+            flex:1;
+            max-width:45%;
+        }
     }
 }

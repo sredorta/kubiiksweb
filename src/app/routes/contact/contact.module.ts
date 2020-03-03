@@ -6,34 +6,17 @@ import { NgModule, PLATFORM_ID, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
-
-//TODO Reduce list to the strict minimum used in common feature components
-import {MatAutocompleteModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatTooltipModule,
-  MatIconModule,
-  MatCheckboxModule,
-  MatCardModule,
-  MatDialogModule,
-  MatButtonModule,
-  MatRippleModule,
-  //MatTreeModule,
-  //MatPaginatorIntl,
-  //MatSnackBar,
-  //MatDialogRef,
-  //MatBottomSheetRef
-} from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { TransferState } from '@angular/platform-browser';
-import { HttpClient, HttpClientJsonpModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientJsonpModule } from '@angular/common/http';
 import { KiiTranslateModule } from 'src/app/_features/translate/kii-translate.module';
 import { KiiMainModule } from 'src/app/_features/main/kii-main.module';
 import { ContactRoutingModule } from './contact-routing.module';
 import { ContactComponent } from './contact.component';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
+import { KiiFormModule } from 'src/app/_features/form/kii-form.module';
+import { KiiContactFormComponent } from './components/kii-contact-form/kii-contact-form.component';
+import { KiiContactThemeComponent } from './components/kii-contact-theme/kii-contact-theme.component';
+import { KiiOsmComponent } from './components/kii-osm/kii-osm.component';
 
 
 @NgModule({
@@ -45,9 +28,13 @@ import { NgxJsonLdModule } from '@ngx-lite/json-ld';
     NgxJsonLdModule,
     KiiTranslateModule.forChild(),
     KiiMainModule,
+    KiiFormModule,
     ContactRoutingModule,
   ],
   declarations: [
+    KiiOsmComponent,
+    KiiContactFormComponent,
+    KiiContactThemeComponent,
     ContactComponent
   ],
   providers:[
