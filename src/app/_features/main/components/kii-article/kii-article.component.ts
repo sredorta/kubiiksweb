@@ -19,8 +19,6 @@ export class KiiArticleComponent extends KiiBaseAbstract implements OnInit {
  /**shows created bottom line info */
  @Input() showCreated :boolean = false;
 
- /**Contains current background image */
- backgroundImage : string = null;  
 
  /**Contains current language for created */
  currentLang = this.translate.getCurrent();

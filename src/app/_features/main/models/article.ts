@@ -9,7 +9,6 @@ export interface IArticle {
     cathegory:string;
     disk:string;
     image:string;   //Contains principal image link
-    backgroundImage:string;
     public:boolean;
     title:string;
     description:string;
@@ -28,7 +27,6 @@ export class Article {
     cathegory:string = null;
     disk:string = null;
     image:string = null;   //Contains principal image link
-    backgroundImage:string = null;
     public:boolean = null;
     title:string = null;
     description:string = null;
@@ -79,16 +77,8 @@ export class Article {
     }
 
     /**Returns article image url*/
-    public getImageUrl() {
+/*    public getImageUrl() {
         return 'url(' + this.getImage() + ')';
-    }
+    }*/
 
-    /**Returns article background image */
-    public getBackgroundImageUrl() {
-        if (this.backgroundImage) {
-            if (this.backgroundImage == "none") return 'none';
-            return 'url(' + this.backgroundImage + ')';
-        } else
-            return 'none';
-    }
 }
