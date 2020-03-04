@@ -17,6 +17,8 @@
     "m.menu.user-data" : "Utilisation des données personnelles",
     "m.menu.admin"  : "Area administrateur",
     "m.menu.install" : "Installer l'application",
+    "m.menu.demo" : "Demo",
+
 
     "m.error.token" : "Votre session a expiré, connectez-vous à nouveau",
 

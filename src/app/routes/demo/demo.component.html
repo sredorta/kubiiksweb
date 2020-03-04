@@ -1,0 +1,17 @@
+<kii-demo-theme></kii-demo-theme>
+<kii-toolbar></kii-toolbar>
+<kii-header [data]="{title:'d.header.t',subtitle:'d.header.s'}"></kii-header>
+<div *ngIf="isLoading" class="fcc" style="min-height: 140px">
+        <kii-spinner ></kii-spinner>
+</div>
+<ng-container *ngIf="!isLoading">
+<kii-article [article]="articles.getByKey('demo-header')"></kii-article>
+<div class="demo-container">
+            <kii-element *ngFor="let article of articles.getByCathegory('demo-features')" [ngClass]="article.cathegory">
+                <kii-article-summary [article]="article"></kii-article-summary>
+                <kii-article [article]="article"></kii-article>
+            </kii-element>
+</div>
+<kii-article [article]="articles.getByKey('demo-footer')"></kii-article>
+<kii-footer></kii-footer>
+</ng-container>

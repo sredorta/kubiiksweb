@@ -2,6 +2,10 @@
     <small>{{'m.menu.home' | translate | async}}</small>
     <div class="under"></div>
 </a>
+<a mat-button class="item" [ngClass]="{'is-active' : page=='demo'}" title="{{'m.menu.demo' | translate | async}}" [routerLink]="'demo' | translateRoute | async">
+        <small>{{'m.menu.demo' | translate | async}}</small>
+        <div class="under"></div>
+</a>
 <a mat-button class="item" [ngClass]="{'is-active' : page=='blog'}" title="{{'m.menu.blog' | translate | async}}" [routerLink]="'blog' | translateRoute | async">
     <small>{{'m.menu.blog' | translate | async}}</small>
     <div class="under"></div>

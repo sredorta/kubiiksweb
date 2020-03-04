@@ -17,6 +17,10 @@ let routes: Routes = [
     loadChildren: () => import('./routes/sidenav/sidenav.module').then(m => m.SidenavModule), 
   },
   { 
+    path: 'demo', 
+    loadChildren: () => import('./routes/demo/demo.module').then(m => m.DemoModule), 
+  },
+  { 
     path: 'blog', 
     loadChildren: () => import('./routes/blog/blog.module').then(m => m.BlogModule), 
   },

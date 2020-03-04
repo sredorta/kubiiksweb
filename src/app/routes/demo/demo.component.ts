@@ -13,14 +13,12 @@ import { faFeatherAlt } from '@fortawesome/free-solid-svg-icons/faFeatherAlt';
 import { Article } from 'src/app/_features/main/models/article';
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+  selector: 'app-demo',
+  templateUrl: './demo.component.html',
+  styleUrls: ['./demo.component.scss']
 })
-export class BlogComponent extends KiiBaseAbstract implements OnInit {
+export class DemoComponent extends KiiBaseAbstract implements OnInit {
 
-  //loggedInUser = new User(null);
-  icons = [];
   currentLang=this.translate.getCurrent();
 
   displayedArticles : Article[] = [];
@@ -39,15 +37,13 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
     ) {super(); }
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['main','blog']);
-    this.icons['close'] = faTimes;
-    this.icons['created']=faFeatherAlt;
+    this.kiiTrans.setRequiredContext(['main','demo']);
 
-    //this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => this.loggedInUser = res));
+
     this.addSubscriber(
       this.pages.onChange.subscribe(res => {
-        if (this.pages.hasPage('blog'))
-          this.data.seo(this.pages.getByKey('blog'), this.router.url);
+        if (this.pages.hasPage('demo'))
+          this.data.seo(this.pages.getByKey('demo'), this.router.url);
       })
     )
     this.addSubscriber(
@@ -55,14 +51,14 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
         this.isLoading = !res;
       })
     )
-    this.data.loadInitialData('blog');
+    this.data.loadInitialData('demo');
     //If we change language we reload articles
     if (isPlatformBrowser(this.platform))
       this.addSubscriber(
         this.translate.onChange.subscribe(res => {
           console.log("TRANSLATION CHANGED",res);
           this.data.isFullLoaded = false;
-          this.data.loadInitialData('blog');
+          this.data.loadInitialData('demo');
         })
       )
   }
