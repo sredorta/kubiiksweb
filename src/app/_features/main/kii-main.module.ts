@@ -123,6 +123,7 @@ import { KiiHorizontalScrollerComponent } from './components/kii-horizontal-scro
     { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
   ],
   exports:[
+    KiiHorizontalScrollerComponent,
     KiiElementComponent,
     KiiArticleComponent,
     KiiArticleSummaryComponent,

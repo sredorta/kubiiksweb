@@ -17,6 +17,12 @@
             <kii-osm></kii-osm>
     </div>
     <kii-article [article]="articles.getByKey('contact-footer')"></kii-article>
-    <kii-footer></kii-footer>
 </div>
+<kii-horizontal-scroller class="testimonials-container">
+        <kii-element *ngFor="let article of articles.getByCathegory('testimonials')" [ngClass]="article.cathegory">
+            <kii-article-summary [article]="article"></kii-article-summary>
+            <kii-article [article]="article"></kii-article>
+        </kii-element>
+</kii-horizontal-scroller>
+<kii-footer></kii-footer>
 
