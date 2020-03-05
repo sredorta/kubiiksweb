@@ -4,6 +4,7 @@
     "admin.delete": "Suprimer",
     "admin.save": "Enregistrer",
     "admin.cancel": "Annuler",
+
     "admin.menu.settings": "Configuration",
     "admin.menu.users": "Utilizateurs",
     "admin.menu.content":"Contenu",
@@ -12,6 +13,8 @@
     "admin.menu.popup" : "Message initial",
     "admin.menu.disk" : "Espace disque",
     "admin.menu.stats" : "Audience",
+
+    "admin.users.title" : "Géstion des utilizateurs",
     "admin.users.search" : "Chercher",
     "admin.users.lastName" : "Nom",
     "admin.users.firstName" : "Prénom",
@@ -22,8 +25,15 @@
     "admin.users.isvalidated": "Compte de courriel validé",
     "admin.users.delete" : "Supprimer l'utilizateur",
     "admin.users.delete.text": "Êtes vous sur de vouloir effacer cet utilizateur ?",
+
+    "admin.content.l" : "Contenu",
+    "admin.content.title": "Géstion du contenu",
+
+    "admin.emails.title": "Géstion des courriels",
+
     "admin.popup.title": "Message initial",
     "admin.popup.enable" : "Activer ou désactiver le message",
+
     "admin.stats.title"                : "Statistiques du site web",
     "admin.stats.days"                 : "Sélectionner la quantité de jours à analyser",
     "admin.stats.current"              : "Période de l'analyse actuel (en jours)",
@@ -88,8 +98,7 @@
     "admin.description.h": "Écrivez la déscription",
     "admin.summary.image.t": "Image principale",
     "admin.summary.image.s": "Définisez l'image principale",
-    "admin.content.l" : "Contenu",
-    "admin.content.title": "Géstion du contenu",
+
 
     "admin.link.dialog.t": "Création d'un lien",
     "admin.link.type.l" : "Type de lien",

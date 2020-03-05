@@ -1,7 +1,7 @@
 .table-wrapper {
-    min-height: 80vh;
-    padding:10px;
-    padding-top:60px;
+    min-height: 100vh;
+    padding:60px 10px 10px 10px;
+    box-sizing: border-box;
 }
 .table {
     width:100%;
@@ -76,4 +76,7 @@ tr.element-row:not(.expanded-row):hover {
 }
 mat-slide-toggle {
     margin:5px;
+}
+h1 {
+    border-bottom: 1px solid;
 }

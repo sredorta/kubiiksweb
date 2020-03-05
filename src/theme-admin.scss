@@ -154,8 +154,15 @@ $admin-theme: create-dark-theme($admin-primary, $admin-accent, $admin-warn, $mat
 
 //Include also all element required in admin here
 @import './mixin/blog.scss';
+@import './mixin/contact.scss';
+@import './mixin/demo.scss';
+
+
 @mixin design-mixin($main-theme) {
     @include blog-mixin($main-theme);
+    @include contact-mixin($main-theme);
+    @include demo-mixin($main-theme);
+
 }
 
 @include design-mixin($main-theme);

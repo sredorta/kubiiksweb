@@ -16,7 +16,7 @@ import { KiiElementComponent } from '../kii-element/kii-element.component';
 export class KiiHorizontalScrollerComponent extends KiiBaseAbstract implements OnInit {
 
   /**Defines the scroll delta */
-  @Input() scrollDelta : number =300;
+  @Input() scrollDelta : number =200;
 
   /**Scroll position */
   private _scrollValue : number = 0;

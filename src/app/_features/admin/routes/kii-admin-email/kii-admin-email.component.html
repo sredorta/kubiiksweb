@@ -1,0 +1,8 @@
+<kii-toolbar></kii-toolbar>
+<kii-admin-theme></kii-admin-theme>
+<div class="admin-theme email-wrapper">  
+  <kii-spinner-overlay [show]="isLoading">  
+    <h1>{{'admin.emails.title' | translate | async}}</h1>
+    <button mat-flat-button color="primary" (click)="testEmail()">Test email</button>
+  </kii-spinner-overlay>  
+</div>

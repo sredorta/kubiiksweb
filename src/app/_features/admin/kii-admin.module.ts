@@ -83,6 +83,7 @@ import { KiiLinkDialogComponent } from './components/kii-link-dialog/kii-link-di
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { KiiAdminEditorComponent } from './components/kii-admin-editor/kii-admin-editor.component';
 import { KiiImageGalleryDialogComponent } from './components/kii-image-gallery-dialog/kii-image-gallery-dialog.component';
+import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email.component';
 
 @NgModule({
   imports: [
@@ -101,6 +102,7 @@ import { KiiImageGalleryDialogComponent } from './components/kii-image-gallery-d
     ]
   ],
   declarations: [
+    KiiAdminEmailComponent,
     KiiLinkDialogComponent,
     KiiImageGalleryDialogComponent,
     KiiAdminEditorComponent,

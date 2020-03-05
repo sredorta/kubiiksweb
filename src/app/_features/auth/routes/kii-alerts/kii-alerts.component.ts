@@ -66,7 +66,10 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
     this.kiiTrans.setRequiredContext(['main','auth', 'form']);
     this.currentLang = this.kiiTrans.getCurrent();
     this.addSubscriber(
-      this.kiiAuth.getLoggedInUser().subscribe(res => {this.loggedInUser = res})
+      this.kiiAuth.getLoggedInUser().subscribe(res => {
+        this.loggedInUser = res;
+        console.log("LoggedIn user:",this.loggedInUser)
+      })
     )
    this.addSubscriber(
       this.kiiAuth.getLoggedInUser().subscribe(res => {

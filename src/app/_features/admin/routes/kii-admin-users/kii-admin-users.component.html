@@ -3,6 +3,7 @@
 <div class="admin-theme">  
     <kii-spinner-overlay [show]="isDataLoading">
       <div class="table-wrapper">
+        <h1>{{'admin.users.title' | translate | async}}</h1>
         <mat-form-field appearance="standard" style="padding-top:10px;min-width:250px;max-width:350px">
             <mat-label>{{'admin.users.search' | translate | async}}</mat-label>
             <input matInput  (keyup)="keyUp.next($event.target.value)" autocomplete="off">

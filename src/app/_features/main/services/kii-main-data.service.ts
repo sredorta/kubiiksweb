@@ -25,6 +25,7 @@ interface _IInitialData  {
   settings: ISetting[],
   pages: IPage[],
   articles: IArticle[],
+  user?:IUser
 }
 
 
@@ -97,7 +98,7 @@ export class KiiMainDataService extends KiiBaseAbstract {
           setTimeout(()=> {
               this.addSubscriber(
                 this.http.get<_IInitialData>(environment.apiURL + '/initial/full').subscribe(res => {
-                  //console.log("FULL LOAD !", res);
+                  console.log("FULL LOAD !", res);
                   this._update(res);
                   this.isFullLoaded = true;
                 })
@@ -131,6 +132,8 @@ export class KiiMainDataService extends KiiBaseAbstract {
       } else
         this.articles.refresh(new Article(article),false);  
     }
+    //Update user
+    if (data.user) this.user.setLoggedInUser(new User(data.user));
     this.articles.set(articles);
   }
 
