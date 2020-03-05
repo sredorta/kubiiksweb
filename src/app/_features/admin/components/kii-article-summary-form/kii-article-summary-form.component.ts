@@ -18,7 +18,11 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
   @Output() onChange = new EventEmitter<any>();
   @Output() kiiOnCancel = new EventEmitter<boolean>();
 
-  config: IConfigImageUpload;
+  /**Configuration for summary upload */
+  config: IConfigImageUpload = {};
+
+  /**Configuration for article upload */
+  uploadConfig: IConfigImageUpload = {};
 
   constructor() { 
     super(); 
@@ -35,7 +39,16 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
       maxSize:400,
       defaultImage: './assets/kiilib/images/no-photo.svg'
     }
-    console.log(this.config);
+    this.uploadConfig = {
+      label:'admin.summary.image.t', 
+      hint:'admin.summary.image.s',
+      buttonsPosition:'right',
+      storage: <DiskType>this.article.disk,
+      maxWidth:'120px',
+      maxSize:900,
+      crop:false,
+      defaultImage: './assets/kiilib/images/no-photo.svg'
+    }
     this.createForm();
   }
 

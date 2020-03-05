@@ -22,7 +22,7 @@ export class KiiImageGalleryDialogComponent extends KiiBaseAbstract implements O
   }
 
   /**Disk to use */
-  disk : DiskType = DiskType.CONTENT
+  configUpload : IConfigImageUpload = {}
 
   /**Contains the images available in the disk */
   images:string[] = [];
@@ -30,13 +30,6 @@ export class KiiImageGalleryDialogComponent extends KiiBaseAbstract implements O
   /**When we are loading */
   isDataLoading:boolean =false;
 
-  /**Configuration for the upload */
-  configUpload : IConfigImageUpload = {
-    buttonsPosition:'right',
-    storage: this.disk,
-    maxWidth:'120px',
-    maxSize:400,
-  }
 
 
   constructor(private dialogRef:MatDialogRef<KiiImageGalleryDialogComponent>,
@@ -44,15 +37,9 @@ export class KiiImageGalleryDialogComponent extends KiiBaseAbstract implements O
     private kiiDisk: KiiAdminDiskService
     ) { 
     super();  
-    console.log("RECIEVED DATA",data);
-    if (data && data.disk) 
-      this.disk = data.disk;
     if (data && data.configUpload) {
       this.configUpload = data.configUpload;  
-      this.configUpload.storage = this.disk;
     }
-    console.log("USING UPLOAD CONFIG", this.configUpload);
-
   }
 
 
@@ -70,7 +57,7 @@ export class KiiImageGalleryDialogComponent extends KiiBaseAbstract implements O
   getServerImages() {
     this.isDataLoading = true;
     this.addSubscriber(
-      this.kiiDisk.getImages(this.disk).subscribe(res => {
+      this.kiiDisk.getImages(this.configUpload.storage).subscribe(res => {
         this.images = res;
         this.isDataLoading = false;
       },() => this.isDataLoading = false)

@@ -22,7 +22,7 @@
             </div>  
         </div>    
         <p>{{'admin.content.l' | translate | async}}</p>
-        <kii-admin-editor formControlName="content" [kiiInputDefaultValue]="article.content" [disk]="article.disk"></kii-admin-editor>
+        <kii-admin-editor formControlName="content" [kiiInputDefaultValue]="article.content" [uploadConfig]="uploadConfig"></kii-admin-editor>
 
         <div class="action-btn">
                 <button  mat-stroked-button type="button" color="primary" (click)="onCancel()">{{'admin.cancel' | translate | async}}</button>

@@ -17,6 +17,8 @@ export class KiiAdminEmailComponent extends KiiBaseAbstract implements OnInit {
   setting : Setting;
   isLoading:boolean = false;
 
+  previewHtml:string = "";
+
   constructor(
     private kiiTrans: KiiTranslateService,
     private kiiMainSetting: KiiMainSettingService,
@@ -38,6 +40,12 @@ export class KiiAdminEmailComponent extends KiiBaseAbstract implements OnInit {
   //REMOVE ME !!!!!!!!!!!!!!!!
   testEmail() {
     console.log("Sending email test !");
+  }
+
+  /**Updates preview when changes on email editor */
+  updatePreview(html:string) {
+    console.log("Updating preview",html);
+    this.previewHtml=html;
   }
 
 }

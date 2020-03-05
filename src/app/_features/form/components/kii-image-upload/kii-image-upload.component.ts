@@ -12,14 +12,23 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 export interface IConfigImageUpload {
   label?:string,
   hint?:string,
+  /**Default image to use */
   defaultImage?:string,
+  /**Buttons placement on the component */
   buttonsPosition?: 'bottom' | 'right',
+  /**Do croping or not default is true */
   crop?:boolean,
+  /**Maximum image size vertical or horizontal */
   maxSize?:number,
+  /**When specified we do not regenerate a date and keep name */
   fileName?:string,    //When specified we do not regenerate a date name and keep this name
+  /**Disk where to store images */
   storage?: DiskType,
+  /**Compression rate for images, default is 0.9 */
   compression_rate?: number,
+  /**Filter any image format default is all images */
   imageFormat?:string,
+  /**Maximum width size of the preview */
   maxWidth?: string    //Max width of the image element
 }
 
@@ -90,7 +99,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
     //Set default config
     if (!this.config.defaultImage) this.config.defaultImage = './assets/kiilib/images/no-photo.svg';
     if (!this.config.buttonsPosition) this.config.buttonsPosition = "bottom";
-    if (!this.config.crop) this.config.crop = true;
+    if (this.config.crop == undefined) this.config.crop = true;
     if (!this.config.maxSize) this.config.maxSize = 100;
     if (!this.config.storage) this.config.storage = DiskType.CONTENT;
     if (!this.config.compression_rate)  this.config.compression_rate = 0.9;
@@ -132,15 +141,19 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
     }
   }
 
+  getImage() {
+    let result = this.config.defaultImage;
+    if (this.image) result = this.image;
+    else this.base64 = this.config.defaultImage;
+    return result;
+  }
+
   /**Sets the initial image */
   setInitialImage() {
     //Fill the canvas with the input image so that it can be rotated...
-    setTimeout(()=> {
-      if (!this.image) this.image = this.config.defaultImage;
       this.shadowImgElem.nativeElement.onload = () => {
-          this.shadowImgtoCanvas();
-      };
-    });
+            this.shadowImgtoCanvas();
+        };
   }
 
   /**Creates a copy of the shadow image into the canvas*/

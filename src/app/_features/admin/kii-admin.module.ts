@@ -84,6 +84,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { KiiAdminEditorComponent } from './components/kii-admin-editor/kii-admin-editor.component';
 import { KiiImageGalleryDialogComponent } from './components/kii-image-gallery-dialog/kii-image-gallery-dialog.component';
 import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email.component';
+import { KiiEmailEditorComponent } from './components/kii-email-editor/kii-email-editor.component';
+import { KiiEmailPreviewComponent } from './components/kii-email-preview/kii-email-preview.component';
 
 @NgModule({
   imports: [
@@ -102,6 +104,8 @@ import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email
     ]
   ],
   declarations: [
+    KiiEmailPreviewComponent,
+    KiiEmailEditorComponent,
     KiiAdminEmailComponent,
     KiiLinkDialogComponent,
     KiiImageGalleryDialogComponent,
@@ -122,6 +126,7 @@ import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email
     KiiMobileFormatPipe,
     KiiThousandsSuffixPipe
   ],
+  entryComponents:[KiiImageGalleryDialogComponent],
   providers:[KiiAdminUserService],
   exports:[
   ]

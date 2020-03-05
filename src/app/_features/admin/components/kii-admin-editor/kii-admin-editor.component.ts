@@ -13,6 +13,7 @@ import { KiiImageGalleryDialogComponent } from '../kii-image-gallery-dialog/kii-
 import { reject } from 'q';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component';
 
 @Component({
   selector: 'kii-admin-editor',
@@ -35,7 +36,7 @@ export class KiiAdminEditorComponent  implements OnInit, ControlValueAccessor {
  @Output() onChange :EventEmitter<string> = new EventEmitter<string>();
 
  /**Disk to use for storage */
- @Input() disk : DiskType = DiskType.CONTENT;
+ @Input() uploadConfig : IConfigImageUpload = {};
 
  /**ckeditor */
  public Editor = Editor;
@@ -96,7 +97,7 @@ export class KiiAdminEditorComponent  implements OnInit, ControlValueAccessor {
 
   openDialog() {
     return this.dialog.open(KiiImageGalleryDialogComponent, {
-      data: {disk:this.disk},
+      data: {configUpload:this.uploadConfig},
       scrollStrategy: new NoopScrollStrategy(),
       minWidth:"320px",
       panelClass:"admin-theme"

@@ -6,7 +6,7 @@
   <div class="wrp-main" [ngClass]="getButtonsPosition()">
     <div class="wrp-img" [style.maxWidth]="config.maxWidth">
         <input class="shadow" type="file" #fileInput (change)="loadImage($event)" [accept]="config.imageFormat">  
-        <img  alt="picture" #shadowImg class="shadow" [src]="image" crossOrigin="anonymous">
+        <img  alt="picture" #shadowImg class="shadow" [src]="getImage()" crossOrigin="anonymous">
         <img  alt="picture" #realImg class="upload-view" [src]="base64" crossOrigin="anonymous" >
         <mat-progress-bar mode="determinate" [value]="progress" [ngClass]="{'is-visible' : isLoading}"></mat-progress-bar>
     </div>

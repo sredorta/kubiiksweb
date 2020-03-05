@@ -7,6 +7,8 @@ import { KiiAdminArticleService } from '../../services/kii-admin-article.service
 import * as Editor from '../../../../../../../ckeditor5-build-classic/build/ckeditor.js';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component';
+import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service';
 
 @Component({
   selector: 'kii-admin-article',
@@ -30,12 +32,23 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
    edit: faEdit
  }
 
+ /**Upload images configuration */
+ uploadConfig: IConfigImageUpload;
 
 
   constructor(private kiiAdminArticle: KiiAdminArticleService, private sanitizer: DomSanitizer) { super() }
 
   ngOnInit() {
-
+    this.uploadConfig = {
+      label:'admin.summary.image.t', 
+      hint:'admin.summary.image.s',
+      buttonsPosition:'right',
+      storage: <DiskType>this.article.disk,
+      maxWidth:'120px',
+      maxSize:900,
+      crop:false,
+      defaultImage: './assets/kiilib/images/no-photo.svg'
+    }
   }
 
   ngAfterViewInit() {
