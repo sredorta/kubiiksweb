@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, SimpleChange } from '@angular/core';
 import { faThLarge } from '@fortawesome/free-solid-svg-icons/faThLarge';
-import { KiiEmailBuilderService, EmailBlock, EBlockTypes } from '../../services/kii-email-builder.service';
+import { KiiEmailBuilderService, EmailBlock, EBlockTypes, EContextTypes } from '../../services/kii-email-builder.service';
 import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
 
 
@@ -19,6 +19,7 @@ export class KiiEmailToolbarComponent  implements OnInit {
 
   blockTypes : EBlockTypes[] = EmailBlock.getAllBlockTypes();
 
+  context = EContextTypes.BODY;
 
   /**Event generated each time email changes */
   @Output() onChange :EventEmitter<string> = new EventEmitter<string>();
@@ -39,12 +40,6 @@ export class KiiEmailToolbarComponent  implements OnInit {
     console.log("Creating block", type);
     this.service.createBlock(type);
   }
-
-  /**Change background color */
-  onBgColor() {
-    
-  }
-
 
 
 }

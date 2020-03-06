@@ -1,0 +1,11 @@
+.wrp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    fa-icon {
+        font-size: 20px;
+    }
+    input {
+        display:none;
+    }
+}

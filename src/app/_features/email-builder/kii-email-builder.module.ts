@@ -64,6 +64,7 @@ import { KiiEmailBlockComponent } from './components/kii-email-block/kii-email-b
 import { KiiEmailBuilderService } from './services/kii-email-builder.service';
 import { KiiEmailItemComponent } from './components/kii-email-item/kii-email-item.component';
 import { KiiEmailCellComponent } from './components/kii-email-cell/kii-email-cell.component';
+import { KiiEmailCommonToolbarComponent } from './components/kii-email-common-toolbar/kii-email-common-toolbar.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { KiiEmailCellComponent } from './components/kii-email-cell/kii-email-cel
   declarations: [
     KiiEmailCellComponent,
     KiiEmailItemComponent,
+    KiiEmailCommonToolbarComponent,
     KiiEmailToolbarComponent,
     KiiEmailBlockComponent,
     KiiEmailEditorComponent,

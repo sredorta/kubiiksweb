@@ -17,7 +17,7 @@ import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract.js';
 import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component.js';
 import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service.js';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { KiiEmailBuilderService } from '../../services/kii-email-builder.service';
+import { KiiEmailBuilderService, EmailStructure } from '../../services/kii-email-builder.service';
 import { KiiEmailBlockComponent } from '../kii-email-block/kii-email-block.component';
 
 
@@ -30,6 +30,9 @@ import { KiiEmailBlockComponent } from '../kii-email-block/kii-email-block.compo
 export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
   icons = [];
 
+  /**Contains the updated data */
+  data : EmailStructure = new EmailStructure();
+
   /**Event generated each time email changes */
   @Output() onChange :EventEmitter<string> = new EventEmitter<string>();
 
@@ -41,63 +44,22 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
     private service: KiiEmailBuilderService,
     ) { 
       super();
+
+      console.log("DATA", this.data.txtColor);
     }
 
 
 
   ngOnInit() {
-
     this.service.onChange.subscribe(res => {
+      this.data = res;
       console.log("Structure changed",res);
     })
 
   }
 
-
-
-
-  onSubmit(value:any) {
-    console.log("Submitting value:",value);
-    console.log(this.createStructure("Header",value.content,"Footer"))
-  }
-
-  /**Retruns email complete structure */
-  createStructure(header:string,content:string,footer:string) {
-    return `
-    <table border="1" cellpadding="0" cellspacing="0" width="100%">
-     <tr>
-      <td>
-        <table align="center" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;max-width:600px;width:100%">
-          <tr>
-            <td>
-            ${header}
-            </td>
-          </tr>
-          <tr>
-            <td>
-            ${content}
-            </td>
-          </tr>
-          <tr>
-            <td>
-            ${footer}
-            </td>
-          </tr>          
-        </table>
-      </td>
-     </tr>
-    </table>
-    `;
-  }
-  /**Adds final structure with body... */
-  wrapStructure() {
-    //TODO
-  }
-
-
-  onContentChange(content:string) {
-    console.log("Content:",content);
-    this.onChange.emit(this.createStructure("Header",content,"Footer"))
+  outputData() {
+    console.log(this.data);
   }
 
 }

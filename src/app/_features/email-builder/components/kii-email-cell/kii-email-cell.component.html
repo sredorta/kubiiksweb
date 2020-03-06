@@ -1,14 +1,11 @@
 <div class="wrp">
-
-
-<div class="content" (click)="onClick(cell.index)" [ngClass]="{'is-active': cell.isActive==true}">
+<div class="content" (click)="onClick($event)" [ngClass]="{'is-active': cell.isActive==true}" [ngStyle]="{'background':background, 'color':color}">
         <div class="container" *ngFor="let item of cell.items">
                 <kii-email-item [item]="item" [isCellActive]="cell.isActive"></kii-email-item>
         </div>
 </div>
+
 <div class="cell-toolbar" [ngClass]="{'is-active': cell.isActive==true}">
-    <ng-container *ngFor="let itemType of itemTypes">
-            <button mat-icon-button [ngClass]="itemType" (click)="onCreateItem(itemType)"><fa-icon [icon]="getIcon(itemType)"></fa-icon></button>
-    </ng-container>
+        <kii-email-common-toolbar [context]="context"></kii-email-common-toolbar>
 </div>
 </div>

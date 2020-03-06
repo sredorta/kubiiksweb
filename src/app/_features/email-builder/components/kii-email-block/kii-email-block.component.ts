@@ -17,7 +17,8 @@ import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract.js';
 import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component.js';
 import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service.js';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { EmailBlock, KiiEmailBuilderService } from '../../services/kii-email-builder.service';
+import { EmailBlock, KiiEmailBuilderService, EContextTypes, EmailStructure } from '../../services/kii-email-builder.service';
+import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
 
 
 
@@ -30,10 +31,18 @@ export class KiiEmailBlockComponent extends KiiFormAbstract implements OnInit {
 
   @Input() block : EmailBlock;
 
+  color = this.service.getTxtColor(this.block);
+  background = this.service.getBackgroundColor(this.block);
 
-  icons = [];
 
+  icons :any = {
+    color: faPalette
+  };
 
+  context = EContextTypes.BLOCK;
+
+  /**Contains the updated data */
+  data : EmailStructure = new EmailStructure();
 
   constructor(
     private service : KiiEmailBuilderService
@@ -45,11 +54,11 @@ export class KiiEmailBlockComponent extends KiiFormAbstract implements OnInit {
 
   ngOnInit() {
     console.log("Found cells:",this.block.cells)
+    this.service.onChange.subscribe(res => {
+      this.data = res;
+    })
   }
 
-  ngOnChanges(changes:SimpleChanges) {
-    console.log(changes);
-  }
 
   /**Gets the classes of the block */
   getClasses() {
@@ -60,12 +69,21 @@ export class KiiEmailBlockComponent extends KiiFormAbstract implements OnInit {
   }
 
   /**Sets this block as active */
-  onClick(index:number) {
-    this.service.setActiveBlock(index);
+  onClick(event) {
+    //If there is no other block active then set this block as active
+      event.stopPropagation();
+      this.service.setActiveElement(this.block.id);
+
+    //this.service.setActiveBlock(index);
   }
 
-
-
+  /**Show block toolbar when block is active but no cells are active in the block */
+  showToolbar() {
+    if (!this.block.isActive) return false;
+    let cell = this.block.cells.find(obj => obj.isActive == true);
+    if (cell) return false;
+    return true;
+  }
 
 
 

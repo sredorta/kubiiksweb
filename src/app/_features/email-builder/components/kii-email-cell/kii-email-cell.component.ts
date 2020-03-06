@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
-import { EmailBlock, KiiEmailBuilderService, EmailItem, EmailCell, EItemTypes } from '../../services/kii-email-builder.service';
+import { EmailBlock, KiiEmailBuilderService, EmailItem, EmailCell, EItemTypes, EContextTypes, EmailStructure } from '../../services/kii-email-builder.service';
 import { FaLayersTextBaseComponent } from '@fortawesome/angular-fontawesome/layers/layers-text-base.component';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
 
@@ -19,8 +19,10 @@ export class KiiEmailCellComponent implements OnInit {
 
   itemTypes : EItemTypes[] = EmailItem.getAllItemTypes();
 
+  context = EContextTypes.CELL;
 
-
+  color = this.service.getTxtColor(this.cell);
+  background = this.service.getBackgroundColor(this.cell);
 
   constructor(
     private service : KiiEmailBuilderService
@@ -30,7 +32,6 @@ export class KiiEmailCellComponent implements OnInit {
 
 
   ngOnInit() {
- 
   }
 
   /*ngOnChanges(changes:SimpleChanges) {
@@ -47,10 +48,11 @@ export class KiiEmailCellComponent implements OnInit {
   }
 
   /**Sets this cell as active if block is selected */
-  onClick(index:number) {
-    console.log(this.cell, this.isBlockActive);
-    if (this.isBlockActive)
-    this.service.setActiveCell(index);
+  onClick(event) {
+    if (this.cell.parent.isActive || this.cell.hasSblingActive()) {
+      event.stopPropagation();
+      this.service.setActiveElement(this.cell.id);
+    }
   }
 
   /**Creates new item */
@@ -63,8 +65,6 @@ export class KiiEmailCellComponent implements OnInit {
   getIcon(type:EItemTypes) {
     return EmailItem.getIcon(type);
   }
-
-
 
 
 

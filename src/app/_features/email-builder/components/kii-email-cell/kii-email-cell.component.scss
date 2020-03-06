@@ -6,6 +6,9 @@
 }
 .wrp {
     position:relative;
+    input {
+        display: none;
+    }
     .content {
         box-sizing: border-box;
         width:100%;

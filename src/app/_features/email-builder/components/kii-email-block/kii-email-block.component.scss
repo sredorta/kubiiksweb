@@ -1,25 +1,51 @@
-.wrp {
-    box-sizing: border-box;
+:host {
     width:100%;
-    display:flex;
-    border:1px solid transparent;
-    &>kii-email-cell {
-        min-width: 10px;
+    box-sizing: border-box;
+    min-height: 50px;
+
+}
+.wrp {
+    position:relative;
+    input {
+        display:none;
+    }
+    .content {
+        box-sizing: border-box;
+        width:100%;
         min-height: 50px;
-        flex:1;
-    }
-    
-    &.double_left {
-        kii-email-cell:nth-child(2) {
-            flex:2;
+        display:flex;
+        border:1px solid transparent;
+        &>kii-email-cell {
+            min-width: 10px;
+            min-height: 50px;
+            flex:1;
+        }
+        
+        &.double_left {
+            kii-email-cell:nth-child(2) {
+                flex:2;
+            }
+        }
+        &.double_right {
+            kii-email-cell:nth-child(1) {
+                flex:2;
+            }
         }
     }
-    &.double_right {
-        kii-email-cell:nth-child(1) {
-            flex:2;
-        }
+
+    .block-toolbar {
+        position: absolute;
+        left:0;
+        top:-40px;
+        transition: opacity 0.8s ease-in-out;
+        display:none;
+        flex-direction: row;
+    }
+    .block-toolbar.is-active {
+        display:flex;
     }
 }
+
 
 
 

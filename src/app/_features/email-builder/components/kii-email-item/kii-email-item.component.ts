@@ -17,7 +17,7 @@ import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract.js';
 import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component.js';
 import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service.js';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { EmailBlock, KiiEmailBuilderService, EmailItem } from '../../services/kii-email-builder.service';
+import { EmailBlock, KiiEmailBuilderService, EmailItem, EmailStructure } from '../../services/kii-email-builder.service';
 
 
 
@@ -34,6 +34,8 @@ export class KiiEmailItemComponent extends KiiFormAbstract implements OnInit {
 
   icons = [];
 
+  color = this.service.getTxtColor(this.item);
+  background = this.service.getBackgroundColor(this.item);
 
 
   constructor(
@@ -45,11 +47,11 @@ export class KiiEmailItemComponent extends KiiFormAbstract implements OnInit {
 
 
   ngOnInit() {
- 
   }
 
   ngOnChanges(changes:SimpleChanges) {
     console.log(changes);
+
   }
 
   /**Gets the classes of the block */
@@ -61,8 +63,13 @@ export class KiiEmailItemComponent extends KiiFormAbstract implements OnInit {
   }
 
   /**Sets this block as active */
-  onClick(index:number) {
-    //this.service.setActiveItem(index);
+  onClick(event) {
+    console.log("CLICKED ON ITEM",this.item);
+    //Check if parent has also an active child
+    if (this.item.parent.isActive || this.item.hasSblingActive()) {
+      event.stopPropagation();
+      this.service.setActiveElement(this.item.id);
+    }
   }
 
 

@@ -1,3 +1,4 @@
-<div class="wrp">
+<div class="wrp" (click)="onClick($event)" [ngClass]="{'is-active': item.isActive==true}" [ngStyle]="{'background':background, 'color':color}">
+    <p>Item here: {{item.type}}</p>
 </div>
 

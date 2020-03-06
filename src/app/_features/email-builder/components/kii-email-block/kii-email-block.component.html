@@ -1,7 +1,12 @@
-<div class="wrp" (click)="onClick(block.index)" [ngClass]="getClasses()">
-    <ng-container *ngFor="let cell of block.cells">
-            <kii-email-cell [cell]="cell" [isBlockActive]="block.isActive"></kii-email-cell>
-    </ng-container>
+
+<div class="wrp">
+        <div class="content" (click)="onClick($event)" [ngClass]="getClasses()" [ngStyle]="{'background':background,'color':color}">
+                <ng-container *ngFor="let cell of block.cells">
+                        <kii-email-cell [cell]="cell" [isBlockActive]="block.isActive"></kii-email-cell>
+                </ng-container>
+            </div>
+        <div class="block-toolbar" [ngClass]="{'is-active': showToolbar()}">
+                <kii-email-common-toolbar [context]="context"></kii-email-common-toolbar>
+        </div>
 
 </div>
-

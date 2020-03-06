@@ -38,17 +38,26 @@
   kii-email-cell {
       .wrp {
         .content {
-            border:1px solid rgba(mat-color($primary),0.2);
+            border:1px solid rgba(mat-color($primary),0.5);
         }  
         .content.is-active {
-            border:1px solid mat-color($primary);
+            border:2px solid mat-color($primary);
 
         }
         .cell-toolbar {
-            background:rgba(mat-color($primary),0.5);
+            background:rgba(mat-color($primary),0.8);
         }
       }
+  }
 
+  kii-email-block {
+    .block-toolbar {
+        background:rgba(mat-color($primary),0.8);
+    }
+  }
+
+  kii-email-common-toolbar {
+      color: mat-color($foreground,text);
   }
 
 
