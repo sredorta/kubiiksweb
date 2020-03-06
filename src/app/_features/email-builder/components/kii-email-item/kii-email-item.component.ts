@@ -28,7 +28,8 @@ import { EmailBlock, KiiEmailBuilderService, EmailItem } from '../../services/ki
 })
 export class KiiEmailItemComponent extends KiiFormAbstract implements OnInit {
 
-  @Input() item : EmailItem = new EmailItem();
+  @Input() item : EmailItem;
+  @Input() isCellActive : boolean = false;
 
 
   icons = [];
@@ -61,7 +62,7 @@ export class KiiEmailItemComponent extends KiiFormAbstract implements OnInit {
 
   /**Sets this block as active */
   onClick(index:number) {
-    this.service.setActiveBlock(index);
+    //this.service.setActiveItem(index);
   }
 
 

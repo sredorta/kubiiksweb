@@ -12,30 +12,45 @@
   $background:map-get($theme,background);
   $is-dark-theme: map-get($theme, is-dark);
 
-  kii-email-preview {
-      .ck-content-email > * {
-          box-sizing: border-box;
+  kii-email-editor {
+      .kii-email-editor-wrp {
+          border:1px solid mat-color($primary);
       }
-      .ck-content-email {
-        figure.image {
-            box-sizing: border-box;
-            max-width: 600px;
-            border:1px solid red;
-            margin-block-start: 1em;
-            margin-block-end: 0em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;     
-            &.image-style-align-right {
-                float: right;
-            }   
-            &.image-style-align-left {
-                float: left;
-            }  
-            img {
-                width:100%;
-            }
+  }
+
+  kii-email-toolbar {
+      .wrp {
+        background:mat-color($primary);   
+      }
+      .menu-block-type {
+          .first,.second,.third {
+            background:rgba(white,0.4);
+
+          }
+      }
+  }
+
+  kii-email-block {
+    .wrp.is-active {
+        border:1px dashed mat-color($primary);
+    }
+  }
+  kii-email-cell {
+      .wrp {
+        .content {
+            border:1px solid rgba(mat-color($primary),0.2);
+        }  
+        .content.is-active {
+            border:1px solid mat-color($primary);
+
+        }
+        .cell-toolbar {
+            background:rgba(mat-color($primary),0.5);
         }
       }
 
   }
+
+
+
 }

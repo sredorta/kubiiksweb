@@ -1,6 +1,6 @@
 <div class="wrp" (click)="onClick(block.index)" [ngClass]="getClasses()">
     <ng-container *ngFor="let cell of block.cells">
-            <kii-email-cell [cell]="cell"></kii-email-cell>
+            <kii-email-cell [cell]="cell" [isBlockActive]="block.isActive"></kii-email-cell>
     </ng-container>
 
 </div>

@@ -163,7 +163,7 @@ $admin-theme: create-dark-theme($admin-primary, $admin-accent, $admin-warn, $mat
     @include blog-mixin($main-theme);
     @include contact-mixin($main-theme);
     @include demo-mixin($main-theme);
-    @include email-mixin($main-theme);
+    @include email-mixin($admin-theme); //Email editting is only admin
 
 }
 

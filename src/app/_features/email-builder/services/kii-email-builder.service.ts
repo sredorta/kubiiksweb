@@ -6,6 +6,8 @@ import { tap, map, filter } from 'rxjs/operators';
 import { KiiTranslateService } from '../../translate/services/kii-translate.service';
 import { IUser, User } from '../../main/models/user';
 import { Alert } from '../../main/models/alert';
+import { faImage } from '@fortawesome/free-solid-svg-icons/faImage';
+import { faParagraph } from '@fortawesome/free-solid-svg-icons/faParagraph';
 
 
 
@@ -23,11 +25,23 @@ export interface IEmailItem {
 export class EmailItem {
   type: EItemTypes = EItemTypes.TEXT;
   index:number;
-  constructor() {}
+  constructor(type:EItemTypes) {
+    this.type = type;
+  }
   /**Returns list of BlockTypes */
   public static getAllItemTypes() {
       return [EItemTypes.TEXT,EItemTypes.IMAGE];
   }
+
+  public static getIcon(type:EItemTypes) {
+    switch(type) {
+      case EItemTypes.IMAGE:
+        return faImage;
+      case EItemTypes.TEXT:
+        return faParagraph
+    }
+  }
+
 }
 
 //Define cells
@@ -37,6 +51,10 @@ export interface IEmailCell {
 export class EmailCell {
   index:number;
   isActive:boolean = false;
+
+  /**Contains all items of a cell */
+  items: EmailItem[] = [];
+
   constructor(index:number) {
     this.index = index;
   }
@@ -108,6 +126,31 @@ export class EmailStructure {
       this.blocks.push(myBlock)
     }
 
+    /**Adds item to selected cell */
+    addItem(type:EItemTypes) {
+        let cell = this.getSelectedCell();
+        if (cell) {
+          cell.items.push(new EmailItem(type));
+        }
+    }
+
+    /**Returns the selected block */
+    public getSelectedBlock() {
+      let block = this.blocks.find(obj=>obj.isActive==true);
+      if (block)
+        return block;
+      return null;  
+    }
+
+    /**Returns the selected cell */
+    public getSelectedCell() {
+      let block = this.getSelectedBlock();
+      if (block) {
+        let cell = block.cells.find(obj=>obj.isActive == true);
+        if (cell) return cell;
+      }
+      return null;
+    }
 
 }
 
@@ -133,6 +176,12 @@ export class KiiEmailBuilderService {
     this.onChange.next(this.data);
   }
 
+  /**Creates a new item on a selected cell */
+  createItem(type: EItemTypes) {
+    this.data.addItem(type);
+    this.onChange.next(this.data);
+  }
+
   /**Sets block as active */
   setActiveBlock(index: number) {
     console.log("Setting active block",index);
@@ -141,7 +190,36 @@ export class KiiEmailBuilderService {
       if (block.index == index) block.isActive = true;
     }
     this.onChange.next(this.data);
+  }
 
+  /**Sets active cell of a block */
+  setActiveCell(index:number) {
+    console.log("Setting active cell",index);
+    //Set all cells to inactive
+    this.removeActiveCell();
+    //Set active cell
+    let block = this.data.getSelectedBlock();
+    if (block) {
+      let cell = block.cells.find(obj=>obj.index == index);
+      if (cell) cell.isActive = true;
+    }
+    this.onChange.next(this.data);
+  }
+
+  /**Removes any active block cell */
+  removeActiveCell() {
+    for (let block of this.data.blocks) {
+      for (let cell of block.cells) {
+        cell.isActive = false;
+      }
+    }
+  }
+  /**Removes any active block and cell*/
+  removeActiveBlock() {
+    for (let block of this.data.blocks) {
+      block.isActive = false;
+    }
+    this.removeActiveCell();
   }
 
 }

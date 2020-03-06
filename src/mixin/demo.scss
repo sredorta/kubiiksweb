@@ -33,22 +33,25 @@
     .img-wrp {
         display: none;
     }
-
+  }
     //Desktops
     @media (pointer: fine)  { 
-        &:hover {
-            .title {
-                color: mat-color($primary);
+        kii-element.demo-features .kii-element-container {
+            &:hover {
+                .title {
+                    color: mat-color($primary);
+                }
             }
         }
     }
     //Tablet and phones
     @media (pointer: coarse) {
-        &.kii-appear {
-            .title {
-                color: mat-color($primary);
+        kii-element.demo-features .kii-element-container {
+            &.kii-appear {
+                .title {
+                    color: mat-color($primary);
+                }
             }
         }
     }
-  }
 }

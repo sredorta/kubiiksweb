@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
-import { EmailBlock, KiiEmailBuilderService, EmailItem, EmailCell } from '../../services/kii-email-builder.service';
+import { EmailBlock, KiiEmailBuilderService, EmailItem, EmailCell, EItemTypes } from '../../services/kii-email-builder.service';
+import { FaLayersTextBaseComponent } from '@fortawesome/angular-fontawesome/layers/layers-text-base.component';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
 
 
 
@@ -10,9 +12,13 @@ import { EmailBlock, KiiEmailBuilderService, EmailItem, EmailCell } from '../../
 })
 export class KiiEmailCellComponent implements OnInit {
   @Input() cell : EmailCell;
+  @Input() isBlockActive : boolean = false;
+  icons = {
+    "add": faPlusSquare
+  };
 
+  itemTypes : EItemTypes[] = EmailItem.getAllItemTypes();
 
-  icons = [];
 
 
 
@@ -27,9 +33,10 @@ export class KiiEmailCellComponent implements OnInit {
  
   }
 
-  ngOnChanges(changes:SimpleChanges) {
+  /*ngOnChanges(changes:SimpleChanges) {
     console.log(changes);
-  }
+    console.log(this.isBlockActive);
+  }*/
 
   /**Gets the classes of the block */
   getClasses() {
@@ -39,11 +46,23 @@ export class KiiEmailCellComponent implements OnInit {
     return result;
   }
 
-  /**Sets this block as active */
+  /**Sets this cell as active if block is selected */
   onClick(index:number) {
-    this.service.setActiveBlock(index);
+    console.log(this.cell, this.isBlockActive);
+    if (this.isBlockActive)
+    this.service.setActiveCell(index);
   }
 
+  /**Creates new item */
+  onCreateItem(type:EItemTypes) {
+    console.log("Need to create item",type);
+    this.service.createItem(type);
+  }
+
+  /**Gets icon of specified type */
+  getIcon(type:EItemTypes) {
+    return EmailItem.getIcon(type);
+  }
 
 
 
