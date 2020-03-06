@@ -8,6 +8,42 @@ import { IUser, User } from '../../main/models/user';
 import { Alert } from '../../main/models/alert';
 
 
+
+
+//Define items
+export enum EItemTypes {
+  IMAGE = "image",
+  TEXT = "text"
+}
+export interface IEmailItem {
+  type: EItemTypes;
+  index:number;
+}
+
+export class EmailItem {
+  type: EItemTypes = EItemTypes.TEXT;
+  index:number;
+  constructor() {}
+  /**Returns list of BlockTypes */
+  public static getAllItemTypes() {
+      return [EItemTypes.TEXT,EItemTypes.IMAGE];
+  }
+}
+
+//Define cells
+export interface IEmailCell {
+  index:number;
+}
+export class EmailCell {
+  index:number;
+  isActive:boolean = false;
+  constructor(index:number) {
+    this.index = index;
+  }
+
+}
+
+//Define blocks
 export enum EBlockTypes {
   SIMPLE = "simple",
   DOUBLE = "double",
@@ -15,10 +51,10 @@ export enum EBlockTypes {
   DOUBLE_RIGHT = "double_right",
   TRIPLE = "triple"
 }
-
 export interface IEmailBlock {
   isLocked:boolean;
   type: EBlockTypes;
+  index:number;
 }
 export class EmailBlock {
     /**If this Block can be edited */
@@ -32,7 +68,25 @@ export class EmailBlock {
     /**Contains if the block is selected */
     isActive:boolean = false;
 
-    constructor() {}
+    cells: EmailCell[] = [];
+
+    constructor(type:EBlockTypes) {
+      this.type = type;
+      switch (type) {
+        case EBlockTypes.SIMPLE: {
+          this.cells.push(new EmailCell(0));
+          break;
+        }
+        case EBlockTypes.TRIPLE:
+          this.cells.push(new EmailCell(0));
+          this.cells.push(new EmailCell(1));
+          this.cells.push(new EmailCell(2));
+          break;
+        default:
+          this.cells.push(new EmailCell(0));
+          this.cells.push(new EmailCell(1));
+      }
+    }
 
     /**Returns list of BlockTypes */
     public static getAllBlockTypes() {
@@ -47,9 +101,11 @@ export class EmailStructure {
     constructor() {}
 
     /**Adds a block to the bottom */
-    addBlock(block:EmailBlock) {
-      block.index = this.blocks.length;
-      this.blocks.push(block)
+    addBlock(type:EBlockTypes) {
+      let index = this.blocks.length;
+      let myBlock = new EmailBlock(type);
+      myBlock.index =index;
+      this.blocks.push(myBlock)
     }
 
 
@@ -72,8 +128,8 @@ export class KiiEmailBuilderService {
   }
 
   /**Creates a new block */
-  createBlock(block: EmailBlock) {
-    this.data.addBlock(block);
+  createBlock(type: EBlockTypes) {
+    this.data.addBlock(type);
     this.onChange.next(this.data);
   }
 

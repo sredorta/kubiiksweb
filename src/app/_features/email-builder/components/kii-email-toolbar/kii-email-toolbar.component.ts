@@ -34,10 +34,7 @@ export class KiiEmailToolbarComponent  implements OnInit {
 
   onCreateBlock(type: EBlockTypes) {
     console.log("Creating block", type);
-    let myBlock = new EmailBlock();
-    myBlock.type = type;
-
-    this.service.createBlock(myBlock);
+    this.service.createBlock(type);
   }
 
 

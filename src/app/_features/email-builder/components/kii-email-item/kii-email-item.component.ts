@@ -17,18 +17,18 @@ import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract.js';
 import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component.js';
 import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service.js';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { EmailBlock, KiiEmailBuilderService } from '../../services/kii-email-builder.service';
+import { EmailBlock, KiiEmailBuilderService, EmailItem } from '../../services/kii-email-builder.service';
 
 
 
 @Component({
-  selector: 'kii-email-block',
-  templateUrl: './kii-email-block.component.html',
-  styleUrls: ['./kii-email-block.component.scss']
+  selector: 'kii-email-item',
+  templateUrl: './kii-email-item.component.html',
+  styleUrls: ['./kii-email-item.component.scss']
 })
-export class KiiEmailBlockComponent extends KiiFormAbstract implements OnInit {
+export class KiiEmailItemComponent extends KiiFormAbstract implements OnInit {
 
-  @Input() block : EmailBlock;
+  @Input() item : EmailItem = new EmailItem();
 
 
   icons = [];
@@ -44,7 +44,7 @@ export class KiiEmailBlockComponent extends KiiFormAbstract implements OnInit {
 
 
   ngOnInit() {
-    console.log("Found cells:",this.block.cells)
+ 
   }
 
   ngOnChanges(changes:SimpleChanges) {
@@ -54,8 +54,8 @@ export class KiiEmailBlockComponent extends KiiFormAbstract implements OnInit {
   /**Gets the classes of the block */
   getClasses() {
     let result = {};
-    result[this.block.type] = true;
-    result['is-active'] = this.block.isActive;
+ //   result[this.block.type] = true;
+ //   result['is-active'] = this.block.isActive;
     return result;
   }
 

@@ -1,6 +1,7 @@
 <div class="wrp" (click)="onClick(block.index)" [ngClass]="getClasses()">
-    <div class="first"></div>
-    <div class="second"></div>
-    <div class="third"></div>
+    <ng-container *ngFor="let cell of block.cells">
+            <kii-email-cell [cell]="cell"></kii-email-cell>
+    </ng-container>
+
 </div>
 
