@@ -1,9 +1,0 @@
-<div class="wrp">
-  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate> 
-      <kii-admin-editor formControlName="content" kiiInputDefaultValue="" [uploadConfig]="config" (onChange)="onContentChange($event)"></kii-admin-editor>
-      <div class="control-wrapper">
-          <button mat-flat-button type="submit" color="primary">Save</button>
-    </div>
-  </form>
-</div>
-

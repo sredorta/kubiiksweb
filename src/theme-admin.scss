@@ -156,12 +156,14 @@ $admin-theme: create-dark-theme($admin-primary, $admin-accent, $admin-warn, $mat
 @import './mixin/blog.scss';
 @import './mixin/contact.scss';
 @import './mixin/demo.scss';
+@import './mixin/email.scss';
 
 
 @mixin design-mixin($main-theme) {
     @include blog-mixin($main-theme);
     @include contact-mixin($main-theme);
     @include demo-mixin($main-theme);
+    @include email-mixin($main-theme);
 
 }
 

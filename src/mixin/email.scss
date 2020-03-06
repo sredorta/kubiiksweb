@@ -1,0 +1,41 @@
+@import '~@angular/material/theming';
+
+// mixin name will be used in main style.scss
+@mixin email-mixin($theme) {
+  
+  // retrieve variables from theme 
+  // (all possible variables, use only what you really need)
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background:map-get($theme,background);
+  $is-dark-theme: map-get($theme, is-dark);
+
+  kii-email-preview {
+      .ck-content-email > * {
+          box-sizing: border-box;
+      }
+      .ck-content-email {
+        figure.image {
+            box-sizing: border-box;
+            max-width: 600px;
+            border:1px solid red;
+            margin-block-start: 1em;
+            margin-block-end: 0em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;     
+            &.image-style-align-right {
+                float: right;
+            }   
+            &.image-style-align-left {
+                float: left;
+            }  
+            img {
+                width:100%;
+            }
+        }
+      }
+
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { Location } from '@angular/common';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
@@ -12,37 +12,31 @@ import { faComments } from '@fortawesome/free-solid-svg-icons/faComments';
 import { faWindowRestore } from '@fortawesome/free-solid-svg-icons/faWindowRestore';
 import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
 import { faChartLine } from '@fortawesome/free-solid-svg-icons/faChartLine';
-import { KiiAdminArticleService } from '../../services/kii-admin-article.service.js';
 import { environment } from 'src/environments/environment.js';
 import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract.js';
 import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component.js';
 import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service.js';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { EmailBlock, KiiEmailBuilderService } from '../../services/kii-email-builder.service';
 
 
 
 @Component({
-  selector: 'kii-email-editor',
-  templateUrl: './kii-email-editor.component.html',
-  styleUrls: ['./kii-email-editor.component.scss']
+  selector: 'kii-email-block',
+  templateUrl: './kii-email-block.component.html',
+  styleUrls: ['./kii-email-block.component.scss']
 })
-export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
+export class KiiEmailBlockComponent extends KiiFormAbstract implements OnInit {
+
+  @Input() block : EmailBlock = new EmailBlock();
+
 
   icons = [];
 
-  /**Upload configuration */
-  config: IConfigImageUpload ={
-    storage:DiskType.EMAIL,
-    crop:false,
-    maxSize:600
-  };
 
-  /**Event generated each time email changes */
-  @Output() onChange :EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
-    private kiiTrans: KiiTranslateService, 
-    private kiiAuth: KiiMainUserService
+    private service : KiiEmailBuilderService
     ) { 
       super();
     }
@@ -50,39 +44,43 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
 
 
   ngOnInit() {
-    this.kiiTrans.setRequiredContext(['admin']);
-    this.config = {
-      label:'admin.summary.image.t', 
-      hint:'admin.summary.image.s',
-      buttonsPosition:'right',
-      storage: DiskType.EMAIL,
-      maxWidth:'120px',
-      maxSize:600,
-      crop:false,
-      defaultImage: './assets/kiilib/images/no-photo.svg'
-    }
-    console.log(this.config);
-    this.createForm();
-  }
-  createForm() {
-    this.myForm =  new FormGroup({
-      content: new FormControl('', Validators.compose([
-      ])),
-    });
+ 
   }
 
-  onSubmit(value:any) {
-    console.log("Submitting value:",value);
-    console.log(this.createStructure("Header",value.content,"Footer"))
+  ngOnChanges(changes:SimpleChanges) {
+    console.log(changes);
   }
+
+  /**Gets the classes of the block */
+  getClasses() {
+    let result = {};
+    result[this.block.type] = true;
+    result['is-active'] = this.block.isActive;
+    return result;
+  }
+
+  /**Sets this block as active */
+  onClick(index:number) {
+    this.service.setActiveBlock(index);
+  }
+
+
+
+
+
+
+
+
+
+
 
   /**Retruns email complete structure */
-  createStructure(header:string,content:string,footer:string) {
+  /*createStructure(header:string,content:string,footer:string) {
     return `
     <table border="1" cellpadding="0" cellspacing="0" width="100%">
      <tr>
       <td>
-        <table align="center" border="1" cellpadding="0" cellspacing="0" width="100%" max-width="600" style="border-collapse: collapse;">
+        <table align="center" border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse;max-width:600px;width:100%">
           <tr>
             <td>
             ${header}
@@ -103,16 +101,7 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
      </tr>
     </table>
     `;
-  }
-  /**Adds final structure with body... */
-  wrapStructure() {
-    //TODO
-  }
-
-
-  onContentChange(content:string) {
-    console.log("Content:",content);
-    this.onChange.emit(this.createStructure("Header",content,"Footer"))
-  }
+  }*/
+  
 
 }

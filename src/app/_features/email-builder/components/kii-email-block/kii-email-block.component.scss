@@ -1,0 +1,36 @@
+.wrp {
+    box-sizing: border-box;
+    width:100%;
+    display:flex;
+    &>div {
+        border:1px solid blue;
+        min-width: 10px;
+        min-height: 50px;
+        flex:1;
+    }
+    &.simple {
+        .second,.third {display:none}
+    }
+    &.double {
+        .third {display:none};
+    }
+    &.double_left {
+        .third {display:none};
+        .second {flex:2};
+    }
+    &.double_right {
+        .third {display:none};
+        .first {flex:2};
+    }
+}
+
+.wrp.is-active {
+    border:1px solid red;
+
+}
+
+
+
+@media only screen and (max-width: 700px) {
+
+}

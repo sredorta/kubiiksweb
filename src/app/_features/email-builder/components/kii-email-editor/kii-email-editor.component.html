@@ -1,0 +1,9 @@
+<div class="wrp">
+   <kii-email-toolbar></kii-email-toolbar>
+   <div class="kii-email">
+      <ng-container *ngFor="let block of structure.blocks">
+         <kii-email-block [block]="block"></kii-email-block>
+      </ng-container>
+   </div>
+</div>
+

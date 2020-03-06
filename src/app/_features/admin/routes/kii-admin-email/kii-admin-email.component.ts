@@ -6,6 +6,7 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
 import { KiiMainSettingService } from 'src/app/_features/main/services/kii-main-setting.service';
 import { KiiMainArticleService } from 'src/app/_features/main/services/kii-main-article.service';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
+import { EmailEditorComponent } from 'angular-email-editor';
 
 @Component({
   selector: 'kii-admin-email',
@@ -18,6 +19,7 @@ export class KiiAdminEmailComponent extends KiiBaseAbstract implements OnInit {
   isLoading:boolean = false;
 
   previewHtml:string = "";
+  @ViewChild(EmailEditorComponent) private emailEditor: EmailEditorComponent;
 
   constructor(
     private kiiTrans: KiiTranslateService,
@@ -46,6 +48,11 @@ export class KiiAdminEmailComponent extends KiiBaseAbstract implements OnInit {
   updatePreview(html:string) {
     console.log("Updating preview",html);
     this.previewHtml=html;
+  }
+
+ 
+  exportHtml() {
+    this.emailEditor.exportHtml((data) => console.log('exportHtml', data));
   }
 
 }
