@@ -3,7 +3,7 @@
 <div class="admin-theme email-wrapper">  
   <kii-spinner-overlay [show]="isLoading">  
     <h1>{{'admin.emails.title' | translate | async}}</h1>
-    <kii-email-editor (onChange)="updatePreview($event)"></kii-email-editor>
+    <kii-email-editor></kii-email-editor>
     <!--<kii-email-preview [html]="previewHtml"></kii-email-preview>-->
     <button mat-flat-button color="primary" (click)="testEmail()">Test email</button>
     <!--<email-editor (load)="editorLoaded($event)"></email-editor>-->

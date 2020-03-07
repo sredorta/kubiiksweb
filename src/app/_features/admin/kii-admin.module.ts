@@ -85,7 +85,7 @@ import { KiiAdminEditorComponent } from './components/kii-admin-editor/kii-admin
 import { KiiImageGalleryDialogComponent } from './components/kii-image-gallery-dialog/kii-image-gallery-dialog.component';
 import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email.component';
 import { EmailEditorModule } from 'angular-email-editor';
-import { KiiEmailBuilderModule } from '../email-builder/kii-email-builder.module';
+import { KiiEmailTemplateModule } from '../email-template/kii-email-template.module';
 
 @NgModule({
   imports: [
@@ -97,7 +97,7 @@ import { KiiEmailBuilderModule } from '../email-builder/kii-email-builder.module
     KiiFormModule,
     KiiTableModule,
     CKEditorModule,
-    KiiEmailBuilderModule,
+    KiiEmailTemplateModule,
     EmailEditorModule,
     KiiAdminRoutingModule,
     [
