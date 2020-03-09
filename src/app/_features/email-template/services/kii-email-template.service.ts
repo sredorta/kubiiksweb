@@ -59,9 +59,9 @@ export enum EWidgetType {
 }
 
 export enum EFontType {
-  NORMAL = "normal",
   BOLD = "bold",
-  ITALIC = "italic"
+  ITALIC = "italic",
+  UNDERLINE="underline"
 }
 
 export enum EBlockType {
@@ -95,8 +95,14 @@ export interface IEmailItem {
   /**Font size to use for the element */
   fontSize?:string;
 
-  /**Font type to use for the element: bold, italyc... */
-  fontStyle?: EFontType | string;
+  /**Bold font*/
+  fontBold?: boolean;
+
+  /**Italic font */
+  fontItalic?:boolean;
+
+  /**Underline font */
+  fontUnderline?: boolean;
 
   /**Children elements */
   childs?: IEmailItem[];
@@ -115,7 +121,9 @@ export class EmailItem {
     txtColor:null,
     font:null,
     fontSize:null,
-    fontStyle:null,
+    fontBold:null,
+    fontItalic:null,
+    fontUnderline:null,
     childs:[],
     widget: null
   };
@@ -138,7 +146,9 @@ export class EmailItem {
       if (obj.txtColor) this._data.txtColor = obj.txtColor;
       if (obj.font)     this._data.font = obj.font;
       if (obj.fontSize) this._data.fontSize = obj.fontSize;
-      if (obj.fontStyle)this._data.fontStyle = obj.fontStyle;
+      if (obj.fontBold) this._data.fontBold = obj.fontBold;
+      if (obj.fontItalic) this._data.fontItalic = obj.fontItalic;
+      if (obj.fontUnderline) this._data.fontUnderline = obj.fontUnderline;
       if (obj.childs) { 
          this._data.childs = obj.childs;
          for (let child of obj.childs) {
@@ -160,6 +170,9 @@ export class EmailItem {
       this._data.txtColor = "black";
       this._data.font = "Verdana";
       this._data.fontSize="16px";
+      this._data.fontBold=false;
+      this._data.fontItalic = false;
+      this._data.fontUnderline = false;
     }
     console.log("Resulting element",this._data);
   }
@@ -265,6 +278,21 @@ export class EmailItem {
     this._data.font = family;
   }
 
+  /**Sets the font bold */
+  setFontBold(value:boolean) {
+      this._data.fontBold = value;
+  }
+
+  /**Sets the font underline */
+  setFontUnderline(value:boolean) {
+    this._data.fontUnderline = value;
+  }  
+
+  /**Sets the font italic */
+  setFontItalic(value:boolean) {
+    this._data.fontItalic = value;
+  }
+
   /**Gets the json data*/
   getJson() {
     let container = this.getContainer();
@@ -319,6 +347,43 @@ export class EmailItem {
     }    
     return _getFont(this);
   }
+
+  /**Returns the text if bold or parse up hierarchy */
+  getFontBold() {
+    function _getFontBold(item:EmailItem) {
+        if (item._data.fontBold !=undefined && item._data.fontBold!=null){
+          return item._data.fontBold;
+        } 
+        if (item.parent)
+          return _getFontBold(item.parent)
+    }    
+    return _getFontBold(this);
+  }  
+
+  /**Returns the text if underline or parse up hierarchy */
+  getFontUnderline() {
+    function _getFontUnderline(item:EmailItem) {
+        if (item._data.fontUnderline !=undefined && item._data.fontUnderline!=null){
+          return item._data.fontUnderline;
+        } 
+        if (item.parent)
+          return _getFontUnderline(item.parent)
+    }    
+    return _getFontUnderline(this);
+  }  
+
+  /**Returns the text if italic or parse up hierarchy */
+  getFontItalic() {
+    function _getFontItalic(item:EmailItem) {
+        if (item._data.fontItalic !=undefined && item._data.fontItalic!=null){
+          return item._data.fontItalic;
+        } 
+        if (item.parent)
+          return _getFontItalic(item.parent)
+    }    
+    return _getFontItalic(this);
+  }  
+
 
 
   /**Removes any active element by recurivelly going down on children */

@@ -154,6 +154,9 @@
         <mat-menu #menuFont="matMenu">
                     <button *ngFor="let font of item.getAllFonts()" mat-menu-item  class="item" (click)="onSetFont(item,font)"><div [ngStyle]="{'font-family':font}">{{font}}</div></button>
         </mat-menu>  
+        <button mat-icon-button (click)="setFontStyle('bold')"><fa-icon [icon]="icons['bold']"  [ngClass]="{'is-font-active':item.getFontBold()}"></fa-icon></button>
+        <button mat-icon-button (click)="setFontStyle('italic')"><fa-icon [icon]="icons['italic']" [ngClass]="{'is-font-active':item.getFontItalic()}"></fa-icon></button>
+        <button mat-icon-button (click)="setFontStyle('underline')"><fa-icon [icon]="icons['underline']" [ngClass]="{'is-font-active':item.getFontUnderline()}" ></fa-icon></button>
 
         <input #bgColor type="color" (change)="onBgColor($event)">
         <input #color type="color" (change)="onColor($event)">

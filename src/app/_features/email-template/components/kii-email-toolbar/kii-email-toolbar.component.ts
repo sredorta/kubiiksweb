@@ -1,10 +1,13 @@
 import { Component, OnInit, Output, EventEmitter, SimpleChange, Input } from '@angular/core';
 import { faThLarge } from '@fortawesome/free-solid-svg-icons/faThLarge';
 import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
-import { EmailItem, KiiEmailTemplateService, EBlockType, EWidgetType } from '../../services/kii-email-template.service';
+import { EmailItem, KiiEmailTemplateService, EBlockType, EWidgetType, EFontType } from '../../services/kii-email-template.service';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
 import { faTint } from '@fortawesome/free-solid-svg-icons/faTint';
 import { faFont } from '@fortawesome/free-solid-svg-icons/faFont';
+import { faBold } from '@fortawesome/free-solid-svg-icons/faBold';
+import { faItalic } from '@fortawesome/free-solid-svg-icons/faItalic';
+import { faUnderline } from '@fortawesome/free-solid-svg-icons/faUnderline';
 
 
 
@@ -21,7 +24,10 @@ export class KiiEmailToolbarComponent  implements OnInit {
     add: faPlusSquare,
     color: faPalette,
     bgColor: faTint,
-    font:faFont
+    font:faFont,
+    bold: faBold,
+    italic:faItalic,
+    underline:faUnderline
   };
 
  
@@ -67,6 +73,24 @@ export class KiiEmailToolbarComponent  implements OnInit {
   onSetFont(parent:EmailItem,font:string) {
     console.log("Setting font:",font);
     this.item.setFont(font);
+  }
+  /**Sets font style: bold,italic,underline */
+  setFontStyle(style:string) {
+      console.log("Setting style for:",style);
+    switch (style) {
+      case EFontType.BOLD: {
+        this.item.setFontBold(!this.item.getFontBold());
+        break;
+      }
+      case EFontType.ITALIC: {
+        this.item.setFontItalic(!this.item.getFontItalic());
+        break;
+      }
+      case EFontType.UNDERLINE: {
+        this.item.setFontUnderline(!this.item.getFontUnderline());
+        break;
+      }
+    }
   }
 
 }

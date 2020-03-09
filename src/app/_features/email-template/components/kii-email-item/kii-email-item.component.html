@@ -1,4 +1,11 @@
-<div class="wrp" (click)="onClick($event)" [ngClass]="getClasses(item)" [ngStyle]="{'background':item.getBgColor(), 'color':item.getColor(), 'font-size':item.getFontSize(), 'font-family':item.getFont()}">
+<div class="wrp" (click)="onClick($event)" [ngClass]="getClasses(item)" 
+            [ngStyle]="{'background':item.getBgColor(), 
+                        'color':item.getColor(), 
+                        'font-size':item.getFontSize(), 
+                        'font-family':item.getFont(), 
+                        'font-weight':item.getFontBold()?'bold':'normal', 
+                        'font-style':item.getFontItalic()?'italic':'normal', 
+                        'text-decoration':item.getFontUnderline()?'underline':'none'}">
     <div class="toolbar" [ngClass]="getClasses(item)">
         <kii-email-toolbar [item]="item"></kii-email-toolbar>
     </div>
