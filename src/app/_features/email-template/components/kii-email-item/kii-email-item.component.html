@@ -1,4 +1,4 @@
-<div class="wrp" (click)="onClick($event)" [ngClass]="getClasses(item)" [ngStyle]="{'background':item.getBgColor(), 'color':item.getColor()}">
+<div class="wrp" (click)="onClick($event)" [ngClass]="getClasses(item)" [ngStyle]="{'background':item.getBgColor(), 'color':item.getColor(), 'font-size':item.getFontSize(), 'font-family':item.getFont()}">
     <div class="toolbar" [ngClass]="getClasses(item)">
         <kii-email-toolbar [item]="item"></kii-email-toolbar>
     </div>

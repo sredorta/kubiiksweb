@@ -3,8 +3,122 @@
         <button mat-icon-button [matMenuTriggerFor]="menuAddBlock"><fa-icon [icon]="icons['add']"></fa-icon></button>
         <mat-menu #menuAddBlock="matMenu">
             <button *ngFor="let type of item.getAllBlockTypes()" mat-menu-item  class="item" (click)="onAddBlock(item,type)">
-                    <!--<fa-icon [icon]="getIcon(type)"></fa-icon>-->
-                    <p>{{type}}</p>
+                    <svg *ngIf="type=='simple'" width="80" height="25" version="1.1" viewBox="0 0 21.167 6.6146" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                        <g
+                        id="layer1"
+                        transform="translate(0,-290.38542)">
+                       <rect
+                          y="290.98648"
+                          x="0.5345391"
+                          height="5.5124335"
+                          width="19.811354"
+                          id="rect1396"
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
+                        </g>
+                        </svg>
+                    <svg *ngIf="type=='double'" width="80" height="25" version="1.1" viewBox="0 0 21.167 6.6146" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+                        <g
+                        inkscape:label="Layer 1"
+                        inkscape:groupmode="layer"
+                        id="layer1"
+                        transform="translate(0,-290.38542)">
+                        <rect
+                          y="290.98648"
+                          x="0.5345391"
+                          height="5.5124335"
+                          width="19.811354"
+                          id="rect1396"
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
+                        <rect
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.18877739;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
+                          id="rect1400"
+                          width="9.9520464"
+                          height="5.586247"
+                          x="10.430753"
+                          y="290.94958" />
+                        </g>
+                    </svg>
+                    <svg *ngIf="type=='double_left'" width="80" height="25" version="1.1" viewBox="0 0 21.167 6.6146" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                        <g
+                        inkscape:label="Layer 1"
+                        inkscape:groupmode="layer"
+                        id="layer1"
+                        transform="translate(0,-290.38542)">
+                       <rect
+                          y="290.98648"
+                          x="0.5345391"
+                          height="5.5124335"
+                          width="19.811354"
+                          id="rect1396"
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
+                       <rect
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.22667849;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
+                          id="rect1400"
+                          width="14.349379"
+                          height="5.586247"
+                          x="6.0334206"
+                          y="290.94958" />
+                        </g>
+                    </svg>
+                    <svg *ngIf="type=='double_right'" width="80" height="25" version="1.1" viewBox="0 0 21.167 6.6146" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                        <g
+                        inkscape:label="Layer 1"
+                        inkscape:groupmode="layer"
+                        id="layer1"
+                        transform="translate(0,-290.38542)">
+                       <rect
+                          y="290.98648"
+                          x="0.5345391"
+                          height="5.5124335"
+                          width="19.811354"
+                          id="rect1396"
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
+                       <rect
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.13846128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
+                          id="rect1400"
+                          width="5.3538857"
+                          height="5.586247"
+                          x="15.028913"
+                          y="290.94958" />
+                        </g>
+                    </svg>
+                    <svg *ngIf="type=='triple'" width="80" height="25" version="1.1" viewBox="0 0 21.167 6.6146" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                        <g
+                        inkscape:label="Layer 1"
+                        inkscape:groupmode="layer"
+                        id="layer1"
+                        transform="translate(0,-290.38542)">
+                       <rect
+                          y="290.98648"
+                          x="0.5345391"
+                          height="5.5124335"
+                          width="19.811354"
+                          id="rect1396"
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
+                       <rect
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.15272029;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
+                          id="rect1400"
+                          width="6.5133729"
+                          height="5.586247"
+                          x="13.869425"
+                          y="290.94958" />
+                       <rect
+                          y="290.95035"
+                          x="7.2231779"
+                          height="5.5847268"
+                          width="6.6454878"
+                          id="rect1408"
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.15424038;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
+                       <rect
+                          style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.154618;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
+                          id="rect1410"
+                          width="6.6785188"
+                          height="5.5843492"
+                          x="0.53548795"
+                          y="290.98743" />
+                        </g>
+                    </svg>
             </button>
         </mat-menu>
     </ng-container>
@@ -19,6 +133,27 @@
     </ng-container>
         <button mat-icon-button><fa-icon [icon]="icons['bgColor']" (click)="bgColor.click()"></fa-icon></button>
         <button mat-icon-button><fa-icon [icon]="icons['color']" (click)="color.click()"></fa-icon></button>
+        <button mat-icon-button [matMenuTriggerFor]="menuFontSize">
+                <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                    <g transform="translate(0 -283.77)" stroke-width="0">
+                    <rect x="2.7929" y="291.53" width="1.2027" height="3.4664" opacity=".609" style="paint-order:stroke markers fill"/>
+                    <rect transform="rotate(269.73)" x="-291.55" y=".21978" width="1.2027" height="3.6081" opacity=".609" style="paint-order:stroke markers fill"/>
+                    <g transform="matrix(2 0 0 2 -7.1976 -296.89)">
+                    <rect x="7.116" y="292.38" width="1.2027" height="3.6081" style="paint-order:stroke markers fill"/>
+                    <rect transform="rotate(269.73)" x="-292.56" y="4.5382" width="1.2027" height="3.6081" style="paint-order:stroke markers fill"/>
+                    </g>
+                    </g>
+                </svg>
+        </button>
+        <mat-menu #menuFontSize="matMenu">
+                <button *ngFor="let size of item.getAllFontSizes()" mat-menu-item  class="item" (click)="onSetFontSize(item,size)"><span [ngStyle]="{'font-size':size}">{{size}}</span></button>
+        </mat-menu>        
+        <button mat-icon-button [matMenuTriggerFor]="menuFont">
+            <fa-icon [icon]="icons['font']"></fa-icon>
+        </button>
+        <mat-menu #menuFont="matMenu">
+                    <button *ngFor="let font of item.getAllFonts()" mat-menu-item  class="item" (click)="onSetFont(item,font)"><div [ngStyle]="{'font-family':font}">{{font}}</div></button>
+        </mat-menu>  
 
         <input #bgColor type="color" (change)="onBgColor($event)">
         <input #color type="color" (change)="onColor($event)">

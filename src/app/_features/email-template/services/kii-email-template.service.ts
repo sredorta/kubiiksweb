@@ -142,7 +142,9 @@ export class EmailItem {
       if (obj.childs) { 
          this._data.childs = obj.childs;
          for (let child of obj.childs) {
-           this.children.push(new EmailItem(child));
+           let myChild = new EmailItem(child)
+           this.children.push(myChild);
+           myChild.parent = this;
          }
       } else {
         this._data.childs = [];
@@ -156,12 +158,32 @@ export class EmailItem {
       //Set defaults for container
       this._data.bgColor = "white";
       this._data.txtColor = "black";
+      this._data.font = "Verdana";
+      this._data.fontSize="16px";
     }
     console.log("Resulting element",this._data);
   }
 
 
-  /**Returns list of ETemTypes */
+  /**Returns available font sizes */
+  getAllFontSizes() {
+    return ["12px","14px","16px","18px","24px","28px"];
+  }
+
+  /**Returns array of fonts */
+  getAllFonts() {
+    return [
+      "Arial",
+      "Arial black",
+      "Arial Narrow",
+      "Courier New",
+      "Georgia",
+      "Verdana",
+      "Times New Roman",
+    ]
+  }
+
+  /**Returns list of EItemTypes */
   getAllItemTypes() {
       return Object.values(EItemType);
   }
@@ -233,15 +255,25 @@ export class EmailItem {
     this._data.bgColor = color;
   }
 
+  /**Sets the fontSize of the item */
+  setFontSize(size:string) {
+    this._data.fontSize = size;
+  }
+
+  /**Sets the font familyt for the item */
+  setFont(family:string) {
+    this._data.font = family;
+  }
+
   /**Gets the json data*/
   getJson() {
     let container = this.getContainer();
+    console.log("CONTAINER DATA",container);
     return JSON.stringify(container._data);
   }
 
   /**Returns the color of the item by going up in the hiearchy if not defined */
   getColor() {
-    //TODO if null get recursivelly on parent until not null
     function _getColor(item:EmailItem) {
       if (item._data.txtColor){
         return item._data.txtColor;
@@ -252,8 +284,8 @@ export class EmailItem {
     return _getColor(this);
   }
 
+  /**Returns the background color of the item by going up in the hierarchy if not defined */
   getBgColor() {
-        //TODO if null get recursivelly on parent until not null
     function _getBgColor(item:EmailItem) {
           if (item._data.bgColor){
             return item._data.bgColor;
@@ -263,6 +295,31 @@ export class EmailItem {
     }    
     return _getBgColor(this);
   }
+
+  /**Returns the text fontSize of the item by going up in the hierarchy if not defined */
+  getFontSize() {
+    function _getFontSize(item:EmailItem) {
+        if (item._data.fontSize){
+          return item._data.fontSize;
+        } 
+        if (item.parent)
+          return _getFontSize(item.parent)
+    }    
+    return _getFontSize(this);
+  }
+
+  /**Returns the text font family of the item by going up in the hierarchy if not defined */
+  getFont() {
+    function _getFont(item:EmailItem) {
+        if (item._data.font){
+          return item._data.font;
+        } 
+        if (item.parent)
+          return _getFont(item.parent)
+    }    
+    return _getFont(this);
+  }
+
 
   /**Removes any active element by recurivelly going down on children */
   resetActive() {

@@ -44,6 +44,7 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
       this.item = new EmailItem(
         {"type":"container","position":0,"width":"100%","bgColor":"white","txtColor":"black","font":null,"fontSize":null,"fontStyle":null,"childs":[{"type":"block","position":0,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontStyle":null,"childs":[{"type":"cell","position":0,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontStyle":null,"childs":[{"type":"item","position":0,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontStyle":null,"childs":[],"widget":{"type":"heading"}}],"widget":null}],"widget":null},{"type":"block","position":0,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontStyle":null,"childs":[{"type":"cell","position":0,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontStyle":null,"childs":[],"widget":null}],"widget":null},{"type":"block","position":0,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontStyle":null,"childs":[{"type":"cell","position":0,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontStyle":null,"childs":[],"widget":null}],"widget":null}],"widget":null}
         );
+      this.item.isActive = true;
 
 
     }
