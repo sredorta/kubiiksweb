@@ -50,7 +50,7 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
   }
 
   outputData() {
-    console.log(this.item);
+    console.log(this.item.getJson());
   }
 
 }

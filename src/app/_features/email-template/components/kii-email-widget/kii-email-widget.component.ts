@@ -26,8 +26,10 @@ export class KiiEmailWidgetComponent implements OnInit {
 
   ngOnInit() {
     console.log("GENERATED ITEM:",this.widget);
+  }
 
-
+  openGallery() {
+    console.log("Openning gallery !");
   }
 
 

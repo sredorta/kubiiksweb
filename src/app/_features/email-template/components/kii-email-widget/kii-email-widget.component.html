@@ -1,5 +1,6 @@
 <div class="kii-email-widget-wrp">
    <ng-container *ngIf="widget.isImage()">
+      <button mat-flat-button *ngIf="content == null" (click)="openGallery()">Insert image</button>
       <p>Image</p>
    </ng-container>
    <ng-container *ngIf="widget.isText()">

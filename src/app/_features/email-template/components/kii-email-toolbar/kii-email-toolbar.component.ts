@@ -48,15 +48,13 @@ export class KiiEmailToolbarComponent  implements OnInit {
   /**Change background color */
   onBgColor(event:any) {
       if (event && event.target && event.target.value) {
-        console.log("BG CHANGE",event.target.value);
-        //this.service.setBackgroundColor(this.context,event.target.value);
+        this.item.setBgColor(event.target.value)
       }
   }
   /**Change text color */
   onColor(event:any) {
       if (event && event.target && event.target.value) {
-        console.log("BG CHANGE",event.target.value);
-        //this.service.setColor(this.context,event.target.value);
+        this.item.setColor(event.target.value)
       }
   }
 

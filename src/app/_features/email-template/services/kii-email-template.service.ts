@@ -35,6 +35,11 @@ export class EmailWidget {
     return this._data.type == EWidgetType.HEADING;
   }
 
+  /**Returns data of the widget */
+  getData() {
+    return this._data;
+  }
+
 }
 
 
@@ -145,6 +150,11 @@ export class EmailItem {
          this._data.widget = obj.widget;
          this.widget = new EmailWidget({type:obj.widget.type});
       }
+
+    } else {
+      //Set defaults for container
+      this._data.bgColor = "white";
+      this._data.txtColor = "black";
     }
     console.log("Resulting element",this._data);
   }
@@ -212,7 +222,22 @@ export class EmailItem {
     return this._data.width;
   }
 
-  /**Returns the color of the item */
+  /**Sets text color of item */
+  setColor(color:string) {
+    this._data.txtColor = color;
+  }
+
+  /**Sets background color of item */
+  setBgColor(color:string) {
+    this._data.bgColor = color;
+  }
+
+  /**Gets the json data*/
+  getJson() {
+    return "Nothing for now";
+  }
+
+  /**Returns the color of the item by going up in the hiearchy if not defined */
   getColor() {
     //TODO if null get recursivelly on parent until not null
     return "black";
@@ -220,7 +245,14 @@ export class EmailItem {
 
   getBgColor() {
         //TODO if null get recursivelly on parent until not null
-    return "white";
+    function _getBgColor(item:EmailItem) {
+          if (item._data.bgColor){
+            return item._data.bgColor;
+          } 
+          if (item.parent)
+            return _getBgColor(item.parent)
+    }    
+    return _getBgColor(this);
   }
 
   /**Removes any active element by recurivelly going down on children */
@@ -341,9 +373,73 @@ export class EmailItem {
 })
 export class KiiEmailTemplateService {
 
-  //private data: EmailStructure = new EmailStructure();
+  private container : EmailItem = new EmailItem();
 
   constructor() { }
+
+  getContainer() {
+    return this.container;
+  }
+
+  /**Adds child to element by keeping parents... correct */
+  addChild(child:IEmailItem,parent?:EmailItem) {
+    if (!parent) parent = this.getContainer();
+    parent._data.childs.push(child);
+    let myChild = new EmailItem(child);
+    parent.children.push(myChild)
+    myChild.parent = parent;
+    return myChild;
+  }
+
+  /**Add a block to element */
+  addBlock(type: EBlockType) {
+    let cell : IEmailItem = {
+      width: "100%",
+      type: EItemType.CELL,
+    }
+    let block : IEmailItem = {
+      type: EItemType.BLOCK,
+    }
+
+    switch (type) {
+      case EBlockType.SIMPLE: {
+         let myBlock = this.addChild(block);
+         this.addChild(cell,myBlock);
+         break;
+      }
+      case EBlockType.DOUBLE: {
+        let myBlock = this.addChild(block);
+        cell.width = "50%";
+        this.addChild(cell,myBlock);
+        this.addChild(cell,myBlock);
+        break;
+      }
+      case EBlockType.DOUBLE_LEFT: {
+        let myBlock = this.addChild(block);
+        cell.width = "33%";
+        this.addChild(cell,myBlock);
+        cell.width = "66%";
+        this.addChild(cell,myBlock);
+        break;
+      }
+      case EBlockType.DOUBLE_RIGHT: {
+        let myBlock = this.addChild(block);
+        cell.width = "66%";
+        this.addChild(cell,myBlock);
+        cell.width = "33%";
+        this.addChild(cell,myBlock);
+        break;
+      }
+      case EBlockType.TRIPLE: {
+        let myBlock = this.addChild(block);
+        cell.width = "33%";
+        this.addChild(cell,myBlock);
+        this.addChild(cell,myBlock);
+        this.addChild(cell,myBlock);
+        break;
+      }                  
+    }
+  }  
 
 
 
