@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { isNgTemplate } from '@angular/compiler';
 
 
 //ITEM ELEMENT HAS ONE WIDGET
 export interface IEmailWidget {
-    type: EWidgetType;
+    type: EWidgetType | string;
     content?:string;
 }
 export class EmailWidget {
@@ -77,7 +78,7 @@ export interface IEmailItem {
   position?:number;
 
   /**Email item type : container,block,cell... */
-  type: EItemType;
+  type: EItemType | string;
 
   /**Width property */
   width?:string;
@@ -95,13 +96,13 @@ export interface IEmailItem {
   fontSize?:string;
 
   /**Font type to use for the element: bold, italyc... */
-  fontStyle?: EFontType;
+  fontStyle?: EFontType | string;
 
   /**Children elements */
   childs?: IEmailItem[];
 
   /**Child widget if element is of type ITEM */
-  widget?: IEmailWidget;
+  widget?: IEmailWidget | any;
 }
 
 
@@ -234,13 +235,21 @@ export class EmailItem {
 
   /**Gets the json data*/
   getJson() {
-    return "Nothing for now";
+    let container = this.getContainer();
+    return JSON.stringify(container._data);
   }
 
   /**Returns the color of the item by going up in the hiearchy if not defined */
   getColor() {
     //TODO if null get recursivelly on parent until not null
-    return "black";
+    function _getColor(item:EmailItem) {
+      if (item._data.txtColor){
+        return item._data.txtColor;
+      } 
+      if (item.parent)
+        return _getColor(item.parent)
+    }  
+    return _getColor(this);
   }
 
   getBgColor() {
@@ -285,8 +294,8 @@ export class EmailItem {
   /**Adds child to element by keeping parents... correct */
   addChild(child:IEmailItem,parent?:EmailItem) {
     if (!parent) parent = this;
-    parent._data.childs.push(child);
     let myChild = new EmailItem(child);
+    parent._data.childs.push(myChild._data);
     parent.children.push(myChild)
     myChild.parent = parent;
     return myChild;
@@ -377,22 +386,22 @@ export class KiiEmailTemplateService {
 
   constructor() { }
 
-  getContainer() {
+/*  getContainer() {
     return this.container;
-  }
+  }*/
 
   /**Adds child to element by keeping parents... correct */
-  addChild(child:IEmailItem,parent?:EmailItem) {
-    if (!parent) parent = this.getContainer();
+  /*addChild(child:IEmailItem,parent?:EmailItem) {
+    if (!parent) parent = this;
     parent._data.childs.push(child);
     let myChild = new EmailItem(child);
     parent.children.push(myChild)
     myChild.parent = parent;
     return myChild;
-  }
+  }*/
 
   /**Add a block to element */
-  addBlock(type: EBlockType) {
+  /*addBlock(type: EBlockType) {
     let cell : IEmailItem = {
       width: "100%",
       type: EItemType.CELL,
@@ -439,7 +448,7 @@ export class KiiEmailTemplateService {
         break;
       }                  
     }
-  }  
+  }  */
 
 
 
