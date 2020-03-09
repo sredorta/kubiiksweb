@@ -1,7 +1,14 @@
-<div class="wrp" (click)="onClick($event)" [ngClass]="{'is-active': item.isActive==true}" [ngStyle]="{'background':background, 'color':color}">
-    <div class="toolbar" [ngClass]="getClasses()">
+<div class="wrp" (click)="onClick($event)" [ngClass]="getClasses(item)" [ngStyle]="{'background':item.getBgColor(), 'color':item.getColor()}">
+    <div class="toolbar" [ngClass]="getClasses(item)">
         <kii-email-toolbar [item]="item"></kii-email-toolbar>
     </div>
-    <p>Item here: {{item.type}}</p>
+    <div class="content" [ngClass]="getClasses(item)">
+        <ng-container *ngFor="let myItem of item.getChildren()">
+                <kii-email-item [item]="myItem" [ngClass]="getClasses(myItem)"></kii-email-item>
+        </ng-container>
+        <ng-container *ngIf="item.isWidget()">
+            <kii-email-widget [widget]="item.widget"></kii-email-widget>
+        </ng-container>
+    </div>
 </div>
 

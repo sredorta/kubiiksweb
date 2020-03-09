@@ -1,10 +1,33 @@
+:host {
+    width:100%;
+}
 .wrp {
     box-sizing: border-box;
     width:100%;
-    min-height: 40px;
-}
-.wrp.is-active {
+    min-height: 30px;
+    .toolbar {
+        display:none;
+    }
+    .toolbar.is-active,
+    .toolbar.container
+    {
+        display:block;
+    }
 
+    .content.block{
+        display:flex;
+        kii-email-item.flex-1 {
+            flex:1;
+        }
+        kii-email-item.flex-2 {
+            flex:2;
+        }
+    }
+}
+
+.content {
+    min-height: 60px;
+    height:100%;
 }
 
 @media only screen and (max-width: 700px) {

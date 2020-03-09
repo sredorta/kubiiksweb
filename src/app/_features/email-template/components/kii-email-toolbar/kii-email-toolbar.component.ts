@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, SimpleChange, Input } from '@angular/core';
 import { faThLarge } from '@fortawesome/free-solid-svg-icons/faThLarge';
 import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
-import { EmailItem, KiiEmailTemplateService } from '../../services/kii-email-template.service';
+import { EmailItem, KiiEmailTemplateService, EBlockType, EWidgetType } from '../../services/kii-email-template.service';
 import { isNgTemplate } from '@angular/compiler';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
 import { faTint } from '@fortawesome/free-solid-svg-icons/faTint';
@@ -30,13 +30,19 @@ export class KiiEmailToolbarComponent  implements OnInit {
     }
 
   ngOnInit() { 
-    console.log("MY ITEM", this.item)
+    //console.log("MY ITEM", this.item)
   }
 
 
   /**Create a new block if required */
-  onAddItem(parent:EmailItem) {
+  onAddBlock(parent:EmailItem, type:EBlockType) {
+    parent.addBlock(type);
+    console.log("Adding child to :",parent,type);
+  }
+
+  onAddWidget(parent:EmailItem, type:EWidgetType) {
     console.log("Adding child to :",parent);
+    this.item.addWidget(type);
   }
 
   /**Change background color */

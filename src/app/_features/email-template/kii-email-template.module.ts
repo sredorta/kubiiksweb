@@ -13,6 +13,7 @@ import { KiiEmailTemplateService } from './services/kii-email-template.service';
 import { KiiEmailToolbarComponent } from './components/kii-email-toolbar/kii-email-toolbar.component';
 import { MatButtonModule, MatMenuModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { KiiEmailWidgetComponent } from './components/kii-email-widget/kii-email-widget.component';
 
 
 
@@ -26,6 +27,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     KiiEmailTemplateRoutingModule,
   ],
   declarations: [
+    KiiEmailWidgetComponent,
     KiiEmailToolbarComponent,
     KiiEmailItemComponent,
     KiiEmailEditorComponent,

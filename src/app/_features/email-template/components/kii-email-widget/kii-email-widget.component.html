@@ -1,0 +1,12 @@
+<div class="kii-email-widget-wrp">
+   <ng-container *ngIf="widget.isImage()">
+      <p>Image</p>
+   </ng-container>
+   <ng-container *ngIf="widget.isText()">
+      <p>Text</p>
+   </ng-container>
+   <ng-container *ngIf="widget.isHeading()">
+      <h1>Heading</h1>
+   </ng-container>
+</div>
+

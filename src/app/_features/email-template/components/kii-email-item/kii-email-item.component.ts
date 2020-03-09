@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
-import { KiiEmailTemplateService } from '../../services/kii-email-template.service';
-import { EmailItem } from 'src/app/_features/email-builder/services/kii-email-builder.service';
+import { KiiEmailTemplateService, EItemType } from '../../services/kii-email-template.service';
+import { EmailItem } from 'src/app/_features/email-template/services/kii-email-template.service';
+import { isNgTemplate } from '@angular/compiler';
 
 
 
@@ -31,10 +32,16 @@ export class KiiEmailItemComponent  implements OnInit {
   }
 
   /**Gets the classes of the block */
-  getClasses() {
+  getClasses(item:EmailItem) {
     let result = {};
-    result[this.item.type] = true;
-    result['is-active'] = this.item.isActive;
+    result[item.getType()] = true;
+    result['is-active'] = item.isActive;
+    if (item.getWidth()) {
+      if (item.getWidth() == "100%" || item.getWidth() == "50%" || item.getWidth() == "33%") 
+        result['flex-1'] = true;
+      if (item.getWidth() == "66%")
+        result['flex-2'] = true;
+    }
     return result;
   }
 
@@ -42,10 +49,17 @@ export class KiiEmailItemComponent  implements OnInit {
   onClick(event) {
     console.log("CLICKED ON ITEM");
     //Check if parent has also an active child
-/*    if (this.item.parent.isActive || this.item.hasSblingActive()) {
-      event.stopPropagation();
-      this.service.setActiveElement(this.item.id);
-    }*/
+    let isParentActive = false;
+    if (this.item.parent==null) isParentActive = true;
+    if (this.item.parent && this.item.parent.isActive) isParentActive = true;
+
+    if (isParentActive || this.item.hasSblingActive()) {
+        //Reset is active of all elements of the level
+        this.item.resetActive();
+        event.stopPropagation();
+        this.item.isActive = true;
+    }
+
   }
 
 

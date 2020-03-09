@@ -1,18 +1,27 @@
 <div class="wrp">
-   <ng-container *ngIf="item.isContainer()">
+    <ng-container *ngIf="item.isContainer()">
         <button mat-icon-button [matMenuTriggerFor]="menuAddBlock"><fa-icon [icon]="icons['add']"></fa-icon></button>
         <mat-menu #menuAddBlock="matMenu">
-            <button *ngFor="let type of item.getAllBlockTypes()" mat-menu-item  class="item" (click)="onAddItem(item)">
+            <button *ngFor="let type of item.getAllBlockTypes()" mat-menu-item  class="item" (click)="onAddBlock(item,type)">
                     <!--<fa-icon [icon]="getIcon(type)"></fa-icon>-->
                     <p>{{type}}</p>
             </button>
         </mat-menu>
+    </ng-container>
+    <ng-container *ngIf="item.isCell()">
+            <button mat-icon-button [matMenuTriggerFor]="menuAddItem"><fa-icon [icon]="icons['add']"></fa-icon></button>
+            <mat-menu #menuAddItem="matMenu">
+                <button *ngFor="let type of item.getAllWidgetTypes()" mat-menu-item  class="item" (click)="onAddWidget(item,type)">
+                        <!--<fa-icon [icon]="getIcon(type)"></fa-icon>-->
+                        <p>{{type}}</p>
+                </button>
+            </mat-menu>
+    </ng-container>
         <button mat-icon-button><fa-icon [icon]="icons['bgColor']" (click)="bgColor.click()"></fa-icon></button>
         <button mat-icon-button><fa-icon [icon]="icons['color']" (click)="color.click()"></fa-icon></button>
 
         <input #bgColor type="color" (change)="onBgColor($event)">
         <input #color type="color" (change)="onColor($event)">
 
-   </ng-container>
 </div>
 

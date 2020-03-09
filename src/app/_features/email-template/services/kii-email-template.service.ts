@@ -1,15 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Subject, BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs';
-import { tap, map, filter } from 'rxjs/operators';
-import { KiiTranslateService } from '../../translate/services/kii-translate.service';
-import { IUser, User } from '../../main/models/user';
-import { Alert } from '../../main/models/alert';
-import { faImage } from '@fortawesome/free-solid-svg-icons/faImage';
-import { faParagraph } from '@fortawesome/free-solid-svg-icons/faParagraph';
-import { BlockScrollStrategy } from '@angular/cdk/overlay';
-import { faHeading } from '@fortawesome/free-solid-svg-icons/faHeading';
+
+
+//ITEM ELEMENT HAS ONE WIDGET
+export interface IEmailWidget {
+    type: EWidgetType;
+    content?:string;
+}
+export class EmailWidget {
+  private _data : IEmailWidget = {
+    type : EWidgetType.TEXT,
+    content:null
+  }
+  constructor(obj: IEmailWidget) {
+    this._data.type = obj.type;
+    this._data.content = obj.content;
+  }
+
+  getType() {
+    return this._data.type;
+  }
+
+  /**Returns if widget is image */
+  isImage() {
+    return this._data.type == EWidgetType.IMAGE;
+  }
+
+  /**Returns if widget is text */
+  isText() {
+    return this._data.type == EWidgetType.TEXT;
+  }
+
+  /**Returns if widget is heading */
+  isHeading() {
+    return this._data.type == EWidgetType.HEADING;
+  }
+
+}
 
 
 //Enumerators
@@ -17,7 +43,13 @@ export enum EItemType {
   CONTAINER = "container",
   BLOCK = "block",
   CELL = "cell",
-  ITEM = "item",
+  ITEM = "item"
+}
+
+export enum EWidgetType {
+  HEADING ="heading",
+  TEXT = "text",
+  IMAGE = "image"
 }
 
 export enum EFontType {
@@ -35,91 +67,270 @@ export enum EBlockType {
 }
 
 export interface IEmailItem {
-  /**Unique identifier of the element */
-  id:number;
-
-  /**Parent identifier */
-  parentId:number;
 
   /**Position of the element */
-  position:number;
+  position?:number;
 
   /**Email item type : container,block,cell... */
   type: EItemType;
 
   /**Width property */
-  width:string;
+  width?:string;
 
   /**Background color */
-  bgColor:string;
+  bgColor?:string;
 
   /**Text color */
-  txtColor:string;
+  txtColor?:string;
 
   /**Font to use for the element */
-  font:string;
+  font?:string;
 
   /**Font size to use for the element */
-  fontSize:string;
+  fontSize?:string;
 
   /**Font type to use for the element: bold, italyc... */
-  fontStyle: EFontType;
+  fontStyle?: EFontType;
 
   /**Children elements */
-  childs : EmailItem[];
+  childs?: IEmailItem[];
+
+  /**Child widget if element is of type ITEM */
+  widget?: IEmailWidget;
 }
 
-export class EmailItem {
-  private _data: IEmailItem;
-  isActive : boolean = false;
 
+export class EmailItem {
+  private _data: IEmailItem = {
+    type : EItemType.CONTAINER,
+    position:0,
+    width:"100%",
+    bgColor:null,
+    txtColor:null,
+    font:null,
+    fontSize:null,
+    fontStyle:null,
+    childs:[],
+    widget: null
+  };
+  isActive : boolean = false;
+  parent: EmailItem = null;
+  children : EmailItem[] = [];
+  widget: EmailWidget = null;
 
   constructor(obj?:IEmailItem) {
-    if (obj)
-      this._data=obj;
-    else 
-      this._initEmptyTemplate();  
+    console.log("Constructing element with ",obj);
+    if (obj) {
+      if (obj.position) {
+        this._data.position = obj.position
+      } else {
+        //TODO find latest position and assign
+      }
+      this._data.type = obj.type;
+      if (obj.width)    this._data.width = obj.width;
+      if (obj.bgColor)  this._data.bgColor = obj.bgColor;
+      if (obj.txtColor) this._data.txtColor = obj.txtColor;
+      if (obj.font)     this._data.font = obj.font;
+      if (obj.fontSize) this._data.fontSize = obj.fontSize;
+      if (obj.fontStyle)this._data.fontStyle = obj.fontStyle;
+      if (obj.childs) { 
+         this._data.childs = obj.childs;
+         for (let child of obj.childs) {
+           this.children.push(new EmailItem(child));
+         }
+      } else {
+        this._data.childs = [];
+      }
+      if (obj.widget){
+         this._data.widget = obj.widget;
+         this.widget = new EmailWidget({type:obj.widget.type});
+      }
+    }
+    console.log("Resulting element",this._data);
   }
 
-
-  /**Creates new template empty */
-  private _initEmptyTemplate() {
-    this._data = {
-      id:0,
-      parentId:0,
-      font:"Test font",
-      fontSize:"14px",
-      fontStyle: EFontType.NORMAL,
-      bgColor:"white",
-      txtColor:"black",
-      position:1,
-      width:"600px",
-      type: EItemType.CONTAINER,
-      childs: []
-    };
-  }
 
   /**Returns list of ETemTypes */
-  public getAllItemTypes() {
+  getAllItemTypes() {
       return Object.values(EItemType);
   }
 
   /**Returns list of Block types */
-  public getAllBlockTypes() {
+  getAllBlockTypes() {
     return Object.values(EBlockType);
   } 
 
+  /**Returns list of widgets */
+  getAllWidgetTypes() {
+    return Object.values(EWidgetType);
+  } 
+
   /**Returns if the item is container */
-  public isContainer() {
+  isContainer() {
     return this._data.type == EItemType.CONTAINER;
   }
 
-
-  /**Returns the childs of the element */
-  public getChilds() {
-    return this._data.childs;
+  /**Returns if the item is a block row */
+  isBlock() {
+    return this._data.type == EItemType.BLOCK;
   }
 
+  /**Returns if the item is cell */
+  isCell() {
+    return this._data.type == EItemType.CELL;
+  }
+
+  /**REturns if the item is a item type */
+  isItem() {
+    return this._data.type == EItemType.ITEM;
+  }
+
+  /**Returns if the item is a widget */
+  isWidget() {
+    if (this.widget) return true;
+    return false;
+  }
+  
+  /**Gets the data of the item */
+  getData() {
+    return this._data;
+  }
+
+  /**Returns the children of the element */
+  getChildren() {
+    return this.children;
+  }
+
+
+  /**Returns the type of the item */
+  getType() {
+    return this._data.type;
+  }
+
+  /**Returns the width of the item */
+  getWidth() {
+    return this._data.width;
+  }
+
+  /**Returns the color of the item */
+  getColor() {
+    //TODO if null get recursivelly on parent until not null
+    return "black";
+  }
+
+  getBgColor() {
+        //TODO if null get recursivelly on parent until not null
+    return "white";
+  }
+
+  /**Removes any active element by recurivelly going down on children */
+  resetActive() {
+    let container = this.getContainer();
+    _removeActive(container);
+    
+    function _removeActive(item:EmailItem) {
+        if (item.children.length) {
+            for (let elem of item.children) {
+              elem.isActive = false;
+              _removeActive(elem)
+            }
+        }
+    }
+  }
+
+  /**Gets the root element by recursivelly going parents up */
+  getContainer() {
+    function _getParent(item:EmailItem) {
+      if (item.parent)
+        return _getParent(item.parent)
+      else
+        return item;
+    }
+    return _getParent(this);
+  }
+
+
+  /**Adds child to element by keeping parents... correct */
+  addChild(child:IEmailItem,parent?:EmailItem) {
+    if (!parent) parent = this;
+    parent._data.childs.push(child);
+    let myChild = new EmailItem(child);
+    parent.children.push(myChild)
+    myChild.parent = parent;
+    return myChild;
+  }
+
+  /**Add a block to element */
+  addBlock(type: EBlockType) {
+    let cell : IEmailItem = {
+      width: "100%",
+      type: EItemType.CELL,
+    }
+    let block : IEmailItem = {
+      type: EItemType.BLOCK,
+    }
+
+    switch (type) {
+      case EBlockType.SIMPLE: {
+         let myBlock = this.addChild(block);
+         this.addChild(cell,myBlock);
+         break;
+      }
+      case EBlockType.DOUBLE: {
+        let myBlock = this.addChild(block);
+        cell.width = "50%";
+        this.addChild(cell,myBlock);
+        this.addChild(cell,myBlock);
+        break;
+      }
+      case EBlockType.DOUBLE_LEFT: {
+        let myBlock = this.addChild(block);
+        cell.width = "33%";
+        this.addChild(cell,myBlock);
+        cell.width = "66%";
+        this.addChild(cell,myBlock);
+        break;
+      }
+      case EBlockType.DOUBLE_RIGHT: {
+        let myBlock = this.addChild(block);
+        cell.width = "66%";
+        this.addChild(cell,myBlock);
+        cell.width = "33%";
+        this.addChild(cell,myBlock);
+        break;
+      }
+      case EBlockType.TRIPLE: {
+        let myBlock = this.addChild(block);
+        cell.width = "33%";
+        this.addChild(cell,myBlock);
+        this.addChild(cell,myBlock);
+        this.addChild(cell,myBlock);
+        break;
+      }                  
+    }
+  }
+
+  /**Adds a widget to the current cell by creating an item with a widget inside */
+  addWidget(type:EWidgetType) {
+      console.log("WE WILL ADD WIDGET",type);
+      let item : IEmailItem = {
+        type: EItemType.ITEM
+      }
+      let myItem = this.addChild(item);
+      myItem._data.widget = <IEmailWidget>{type:type};
+      myItem.widget = new EmailWidget(myItem._data.widget);
+  }
+
+
+
+
+  /**Returns if there is a sibling active element */
+  hasSblingActive() {
+    if (!this.parent) return false;
+    let active = this.parent.getChildren().find(obj=>obj.isActive == true);
+    if (active) return true;
+    return false;
+  }
 
 }
 
