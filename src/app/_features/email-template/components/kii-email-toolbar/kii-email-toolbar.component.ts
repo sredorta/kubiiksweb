@@ -8,6 +8,9 @@ import { faFont } from '@fortawesome/free-solid-svg-icons/faFont';
 import { faBold } from '@fortawesome/free-solid-svg-icons/faBold';
 import { faItalic } from '@fortawesome/free-solid-svg-icons/faItalic';
 import { faUnderline } from '@fortawesome/free-solid-svg-icons/faUnderline';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
 
 
 
@@ -27,7 +30,10 @@ export class KiiEmailToolbarComponent  implements OnInit {
     font:faFont,
     bold: faBold,
     italic:faItalic,
-    underline:faUnderline
+    underline:faUnderline,
+    trash: faTrash,
+    up: faChevronUp,
+    down: faChevronDown
   };
 
  
@@ -91,6 +97,21 @@ export class KiiEmailToolbarComponent  implements OnInit {
         break;
       }
     }
+  }
+
+  onRemoveItem(item:EmailItem) {
+    console.log("Removing id",item.getData().id);
+    item.removeItem(item);
+  }
+
+  onMoveUpItem(item:EmailItem) {
+    console.log("Moving item up", item.getData().position);
+    item.moveUp(item);
+  }
+
+  onMoveDownItem(item:EmailItem) {
+    console.log("Moving item down", item.getData().position);
+    item.moveDown(item);
   }
 
 }

@@ -245,9 +245,9 @@ export class EmailItem {
     return this._data;
   }
 
-  /**Returns the children of the element */
+  /**Returns the children of the element ordered by position */
   getChildren() {
-    return this.children;
+    return this.children.sort((a,b)=> a._data.position>b._data.position?1:-1);
   }
 
 
@@ -446,6 +446,45 @@ export class EmailItem {
         return item;
     }
     return _getParent(this);
+  }
+
+  /**Removes item from array */
+  removeItem(item:EmailItem) {
+    if (item && item.parent) {
+        item.parent.children = item.parent.children.filter(obj=> obj._data.id != item._data.id);
+    }
+  }
+
+  /**Moves item up in the position */
+  moveUp(item:EmailItem) {
+    if (item.parent) {
+      let myIndex = item.parent.children.findIndex(obj=> obj._data.id == item._data.id);
+      if (myIndex>0) {
+        let myElem = item.parent.children[myIndex];
+        let myPrevElem = item.parent.children[myIndex-1];
+        if (myElem && myPrevElem) {
+          let tmp = myElem._data.position;
+          myElem._data.position = myPrevElem._data.position;
+          myPrevElem._data.position = tmp;
+        }
+      } 
+    }
+  }
+
+  /**Moves item down in the position */
+  moveDown(item:EmailItem) {
+    if (item.parent) {
+      let myIndex = item.parent.children.findIndex(obj=> obj._data.id == item._data.id);
+      if (myIndex < item.parent.children.length) {
+        let myElem = item.parent.children[myIndex];
+        let myNextElem = item.parent.children[myIndex+1];
+        if (myElem && myNextElem) {
+          let tmp = myElem._data.position;
+          myElem._data.position = myNextElem._data.position;
+          myNextElem._data.position = tmp;
+        }
+      } 
+    }
   }
 
 
