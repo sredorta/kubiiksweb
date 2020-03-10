@@ -162,7 +162,7 @@
                 <mat-menu #menuFont="matMenu">
                                 <button *ngFor="let font of item.getAllFonts()" mat-menu-item  class="item" (click)="onSetFont(item,font)"><div [ngStyle]="{'font-family':font}">{{font}}</div></button>
                 </mat-menu>
-                <ng-container *ngIf="item.isBlock() || item.isCell() || item.isWidget()">
+                <ng-container *ngIf="item.isCell()">
                     <div style="border-bottom:1px dashed"><small>Alignment horizontal</small></div>
                     <button mat-icon-button class="icon" [ngClass]="{'is-icon-active':item.getAlignHorizontal() == 'left'}" (click)="onHorizontalAlign('left')">
                         <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -231,6 +231,8 @@
                                 </g>
                                 </svg>
                     </button>
+                </ng-container>
+                <ng-container *ngIf="item.isBlock() || item.isCell() || item.isWidget()">
                     <div style="border-bottom:1px dashed"><small>Padding</small></div>
                     <div class="padding-item icon left">
                         <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">

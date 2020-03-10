@@ -42,6 +42,16 @@ export class KiiEmailItemComponent  implements OnInit {
       if (item.getWidth() == "66%")
         result['flex-2'] = true;
     }
+    switch (item.getAlignHorizontal()) {
+      case "left": result['h-start'] = true; break;
+      case "center": result['h-center'] = true; break;
+      case "right": result['h-end'] = true; break;
+    }
+    switch (item.getAlignVertical()) {
+      case "top": result['v-start'] = true; break;
+      case "center": result['v-center'] = true; break;
+      case "bottom": result['v-end'] = true; break;
+    }
     return result;
   }
 

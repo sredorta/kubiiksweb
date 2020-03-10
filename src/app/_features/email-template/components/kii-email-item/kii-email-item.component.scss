@@ -1,10 +1,10 @@
-:host {
-    width:100%;
-}
+
 .wrp {
     box-sizing: border-box;
     width:100%;
-    min-height: 30px;
+    height:100%;
+    display:flex;
+    flex-direction: column;
     .toolbar {
         display:none;
     }
@@ -14,21 +14,49 @@
         display:block;
     }
 
-    .content.block{
+    .content {
         display:flex;
-        kii-email-item.flex-1 {
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 10px;
+        height:100%;
+        kii-email-item:not(.item) {
             flex:1;
         }
-        kii-email-item.flex-2 {
-            flex:2;
+        &.block:not(.item) {
+            flex-direction: row;
+            &>kii-email-item.flex-1 {
+                flex:1;
+            }
+            &>kii-email-item.flex-2 {
+                flex:2;
+            }
+        }
+        &.cell {
+            &.h-start {
+                align-items: flex-start;
+            }
+            &.h-center {
+                align-items: center;
+            }
+            &.h-end {
+                align-items: flex-end;
+            }
+            &.v-start {
+                justify-content: flex-start !important;
+            }
+            &.v-center {
+                justify-content: center !important;
+            }
+            &.v-end {
+                justify-content: flex-end !important;
+            }
         }
     }
 }
 
-.content {
-    min-height: 60px;
-    height:100%;
-}
+
+
 
 @media only screen and (max-width: 700px) {
 

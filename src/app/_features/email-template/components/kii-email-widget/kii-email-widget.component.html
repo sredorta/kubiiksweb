@@ -1,10 +1,13 @@
-<div class="kii-email-widget-wrp">
+<div class="kii-email-widget-wrp"
+                  [ngStyle]="{
+
+                  }">
    <ng-container *ngIf="widget.isImage()">
       <button mat-flat-button *ngIf="widget.getContent() == null" (click)="openGallery()">Insert image</button>
       <p>Image</p>
    </ng-container>
    <ng-container *ngIf="widget.isText()">
-      <p>Text a bit more long to see font style</p>
+      Text a bit more long to see font style
    </ng-container>
    <ng-container *ngIf="widget.isHeading()">
       <h1>Heading</h1>

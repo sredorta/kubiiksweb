@@ -330,10 +330,10 @@ export class EmailItem {
   setAlignHorizontal(type:string) {
     this._data.hAlign = type;
   }
-  
+
   /**Sets the vertical alignment: top,bottom,center */
   setAlignVertical(type:string) {
-    this._data.hAlign = type;
+    this._data.vAlign = type;
   }
 
   /**Returns the type of the item */

@@ -20,6 +20,7 @@ export class KiiEmailWidgetComponent implements OnInit {
   constructor(
     private service: KiiEmailTemplateService,
     ) { 
+      console.log("WIDGET is:",this.widget)
     }
 
 
