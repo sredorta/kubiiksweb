@@ -43,8 +43,40 @@
         }
         .toolbar {
             background:mat-color($primary);
+            color:mat-color($foreground,text);
         }
       }
+  }
+  //Style main menu
+  .cdk-overlay-connected-position-bounding-box .kii-email-toolbar-menu {
+    fa-icon.is-icon-active{
+      color:mat-color($accent);
+    }
+
+    .icon svg {
+      fill:mat-color($foreground,text);
+    }
+    .icon.is-icon-active svg  {
+      fill:mat-color($accent);
+    }
+    
+    .padding-item {
+      display:flex;
+      justify-content: flex-start;
+      align-items: center;
+      mat-slider {
+        flex: 1 1 auto;
+      }
+    }
+    .right svg {
+      transform:scale(-1,1);
+    }
+    .top svg {
+      transform:rotate(90deg);
+    }    
+    .bottom svg {
+      transform:rotate(270deg);
+    }
   }
 
 

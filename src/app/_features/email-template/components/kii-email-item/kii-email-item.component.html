@@ -5,7 +5,12 @@
                         'font-family':item.getFont(), 
                         'font-weight':item.getFontBold()?'bold':'normal', 
                         'font-style':item.getFontItalic()?'italic':'normal', 
-                        'text-decoration':item.getFontUnderline()?'underline':'none'}">
+                        'text-decoration':item.getFontUnderline()?'underline':'none',
+                        'padding-top': item.getPaddingPx('top'),
+                        'padding-bottom': item.getPaddingPx('bottom'),
+                        'padding-left': item.getPaddingPx('left'),
+                        'padding-right': item.getPaddingPx('right')
+                    }">
     <div class="toolbar" [ngClass]="getClasses(item)">
         <kii-email-toolbar [item]="item"></kii-email-toolbar>
     </div>

@@ -40,6 +40,9 @@ export class EmailWidget {
   getData() {
     return this._data;
   }
+  getContent() {
+    return this._data.content;
+  }
 
 }
 
@@ -107,6 +110,25 @@ export interface IEmailItem {
   /**Underline font */
   fontUnderline?: boolean;
 
+  /**Padding top */
+  paddingTop?:number;
+
+  /**Padding left*/
+  paddingLeft?:number;
+
+  /**Padding right */
+  paddingRight?:number;
+
+  /**Padding bottom */
+  paddingBottom?:number;
+
+  /**Horizontal align: left,right,center */
+  hAlign?:string;
+
+  /**Vertical align: top,bottom,center */
+  vAlign?:string;
+
+
   /**Children elements */
   childs?: IEmailItem[];
 
@@ -150,6 +172,19 @@ export class EmailItem {
       if (obj.fontBold) this._data.fontBold = obj.fontBold;
       if (obj.fontItalic) this._data.fontItalic = obj.fontItalic;
       if (obj.fontUnderline) this._data.fontUnderline = obj.fontUnderline;
+      if (obj.paddingBottom) this._data.paddingBottom = obj.paddingBottom;
+      else this._data.paddingBottom = 0;
+      if (obj.paddingTop) this._data.paddingTop = obj.paddingTop;
+      else this._data.paddingTop = 0;
+      if (obj.paddingLeft) this._data.paddingLeft = obj.paddingLeft;
+      else this._data.paddingLeft = 0;
+      if (obj.paddingRight) this._data.paddingRight = obj.paddingRight;
+      else this._data.paddingRight = 0;
+      if (obj.hAlign) this._data.hAlign = obj.hAlign;
+      else this._data.hAlign = "left";
+      if (obj.vAlign) this._data.vAlign = obj.vAlign;
+      else this._data.vAlign = "top";
+
       if (obj.childs) { 
          this._data.childs = obj.childs;
          for (let child of obj.childs) {
@@ -175,6 +210,13 @@ export class EmailItem {
       this._data.fontBold=false;
       this._data.fontItalic = false;
       this._data.fontUnderline = false;
+      this._data.paddingBottom = 0;
+      this._data.paddingTop = 0;
+      this._data.paddingLeft = 0;
+      this._data.paddingRight = 0;
+      this._data.hAlign="left";
+      this._data.vAlign="top";
+
       this._data.id = 0;
     }
     console.log("Resulting element",this._data);
@@ -245,11 +287,54 @@ export class EmailItem {
     return this._data;
   }
 
+  /**Gets the padding value */
+  getPadding(type:string) {
+    switch (type) {
+      case "top": return this._data.paddingTop;
+      case "bottom": return this._data.paddingBottom;
+      case "left": return this._data.paddingLeft;
+      default: return this._data.paddingRight;
+    }
+  }
+
+  /**Gets the padding value in px format */
+  getPaddingPx(type:string) {
+    return this.getPadding(type) + "px";
+  }
+
   /**Returns the children of the element ordered by position */
   getChildren() {
     return this.children.sort((a,b)=> a._data.position>b._data.position?1:-1);
   }
 
+  setPadding(type:string,value:number) {
+    switch (type) {
+      case "top": this._data.paddingTop = value; break;
+      case "bottom": this._data.paddingBottom = value; break;
+      case "left": this._data.paddingLeft = value; break;
+      default: this._data.paddingRight = value; break;
+    }
+  }
+
+  /**Returns vertical alignment: top, bottom,center */
+  getAlignVertical() {
+    return this._data.vAlign;
+  }
+
+  /**Returns horizontal alignment: left,right,center */
+  getAlignHorizontal() {
+    return this._data.hAlign;
+  }
+
+  /**Sets the horizontal alignment: left,right,center */
+  setAlignHorizontal(type:string) {
+    this._data.hAlign = type;
+  }
+  
+  /**Sets the vertical alignment: top,bottom,center */
+  setAlignVertical(type:string) {
+    this._data.hAlign = type;
+  }
 
   /**Returns the type of the item */
   getType() {

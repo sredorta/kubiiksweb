@@ -11,6 +11,8 @@ import { faUnderline } from '@fortawesome/free-solid-svg-icons/faUnderline';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
+import { MatSliderChange } from '@angular/material';
 
 
 
@@ -33,7 +35,8 @@ export class KiiEmailToolbarComponent  implements OnInit {
     underline:faUnderline,
     trash: faTrash,
     up: faChevronUp,
-    down: faChevronDown
+    down: faChevronDown,
+    menu: faEllipsisV
   };
 
  
@@ -112,6 +115,28 @@ export class KiiEmailToolbarComponent  implements OnInit {
   onMoveDownItem(item:EmailItem) {
     console.log("Moving item down", item.getData().position);
     item.moveDown(item);
+  }
+
+  /**Stops event propagation */
+  onClickStop(event) {
+    event.stopPropagation();
+  }
+
+  /**When padding slider changes */
+  onPaddingChange(type:string,event: MatSliderChange) {
+    console.log("Padding",type,event);
+    this.item.setPadding(type,event.value);
+  }
+
+  onHorizontalAlign(type:string) {
+    console.log("HAlign",type);
+    this.item.setAlignHorizontal(type);
+
+  }
+
+  onVerticalAlign(type:string) {
+    console.log("VAlign",type);
+    this.item.setAlignVertical(type);
   }
 
 }

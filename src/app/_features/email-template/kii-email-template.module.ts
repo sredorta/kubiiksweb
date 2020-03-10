@@ -11,7 +11,7 @@ import { KiiEmailItemComponent } from './components/kii-email-item/kii-email-ite
 import { KiiEmailEditorComponent } from './components/kii-email-editor/kii-email-editor.component';
 import { KiiEmailTemplateService } from './services/kii-email-template.service';
 import { KiiEmailToolbarComponent } from './components/kii-email-toolbar/kii-email-toolbar.component';
-import { MatButtonModule, MatMenuModule } from '@angular/material';
+import { MatButtonModule, MatMenuModule, MatSliderModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { KiiEmailWidgetComponent } from './components/kii-email-widget/kii-email-widget.component';
 
@@ -23,6 +23,7 @@ import { KiiEmailWidgetComponent } from './components/kii-email-widget/kii-email
     RouterModule,
     MatButtonModule,
     MatMenuModule,
+    MatSliderModule,
     FontAwesomeModule,
     KiiEmailTemplateRoutingModule,
   ],
