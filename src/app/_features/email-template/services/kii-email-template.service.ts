@@ -74,6 +74,9 @@ export enum EBlockType {
 
 export interface IEmailItem {
 
+  /**Unique identifier of the element */
+  id?:number;
+
   /**Position of the element */
   position?:number;
 
@@ -114,6 +117,7 @@ export interface IEmailItem {
 
 export class EmailItem {
   private _data: IEmailItem = {
+    id : null,
     type : EItemType.CONTAINER,
     position:0,
     width:"100%",
@@ -135,11 +139,8 @@ export class EmailItem {
   constructor(obj?:IEmailItem) {
     console.log("Constructing element with ",obj);
     if (obj) {
-      if (obj.position) {
-        this._data.position = obj.position
-      } else {
-        //TODO find latest position and assign
-      }
+      if (obj.id)       this._data.id = obj.id;
+      if (obj.position) this._data.position = obj.position
       this._data.type = obj.type;
       if (obj.width)    this._data.width = obj.width;
       if (obj.bgColor)  this._data.bgColor = obj.bgColor;
@@ -163,6 +164,7 @@ export class EmailItem {
          this._data.widget = obj.widget;
          this.widget = new EmailWidget({type:obj.widget.type});
       }
+      this.setId();
 
     } else {
       //Set defaults for container
@@ -173,6 +175,7 @@ export class EmailItem {
       this._data.fontBold=false;
       this._data.fontItalic = false;
       this._data.fontUnderline = false;
+      this._data.id = 0;
     }
     console.log("Resulting element",this._data);
   }
@@ -291,6 +294,39 @@ export class EmailItem {
   /**Sets the font italic */
   setFontItalic(value:boolean) {
     this._data.fontItalic = value;
+  }
+
+  /**Sets Id to the next identifier */
+  setId() {
+    this._data.id = this._getNextId();
+  }
+
+  /**Gets next available id */
+  private _getNextId() {
+    let maxId : any = {value:0};
+    let container = this.getContainer();
+    function _getId(item:EmailItem,max:any) {
+      if (item._data.id>max.value)
+        max.value = item._data.id;
+      for (let child of item.children) {
+        _getId(child,max);
+      }
+    }  
+    _getId(container,maxId);
+    return maxId.value+1;
+  }
+
+  /**Sets position so that we can reorder in array blocks */
+  setPosition() {
+    if (this.parent) {
+      let max = 0;
+      for (let child of this.parent.children) {
+        if (child._data.position>max) {
+          max = child._data.position;
+        }
+      }
+      this._data.position = max +1;
+    }
   }
 
   /**Gets the json data*/
@@ -420,6 +456,8 @@ export class EmailItem {
     parent._data.childs.push(myChild._data);
     parent.children.push(myChild)
     myChild.parent = parent;
+    myChild.setId();
+    myChild.setPosition();
     return myChild;
   }
 
