@@ -18,8 +18,8 @@
         <ng-container *ngFor="let myItem of item.getChildren()">
                 <kii-email-item [item]="myItem" [ngClass]="getClasses(myItem)"></kii-email-item>
         </ng-container>
-        <ng-container *ngIf="item.isWidget()">
-            <kii-email-widget [widget]="item.widget"></kii-email-widget>
+        <ng-container *ngIf="item.isItem()">
+            <kii-email-widget [widget]="item.widget" (onChange)="onWidgetChanges($event)" [ngClass]="getClasses(item)"></kii-email-widget>
         </ng-container>
     </div>
 </div>

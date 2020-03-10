@@ -8,7 +8,7 @@ export interface IEmailWidget {
     content?:string;
 }
 export class EmailWidget {
-  private _data : IEmailWidget = {
+  public _data : IEmailWidget = {
     type : EWidgetType.TEXT,
     content:null
   }
@@ -42,6 +42,9 @@ export class EmailWidget {
   }
   getContent() {
     return this._data.content;
+  }
+  setContent(content:string) {
+    this._data.content = content;
   }
 
 }
@@ -159,7 +162,7 @@ export class EmailItem {
   widget: EmailWidget = null;
 
   constructor(obj?:IEmailItem) {
-    console.log("Constructing element with ",obj);
+    //console.log("Constructing element with ",obj);
     if (obj) {
       if (obj.id)       this._data.id = obj.id;
       if (obj.position) this._data.position = obj.position
@@ -184,6 +187,7 @@ export class EmailItem {
       else this._data.hAlign = "left";
       if (obj.vAlign) this._data.vAlign = obj.vAlign;
       else this._data.vAlign = "top";
+      if (obj.widget) this._data.widget = obj.widget;
 
       if (obj.childs) { 
          this._data.childs = obj.childs;
@@ -197,9 +201,9 @@ export class EmailItem {
       }
       if (obj.widget){
          this._data.widget = obj.widget;
-         this.widget = new EmailWidget({type:obj.widget.type});
+         this.widget = new EmailWidget({type:obj.widget.type,content:obj.widget.content});
       }
-      this.setId();
+      if (!this._data.id) this.setId();
 
     } else {
       //Set defaults for container
@@ -219,7 +223,7 @@ export class EmailItem {
 
       this._data.id = 0;
     }
-    console.log("Resulting element",this._data);
+    //console.log("Resulting element",this._data);
   }
 
 
@@ -305,6 +309,20 @@ export class EmailItem {
   /**Returns the children of the element ordered by position */
   getChildren() {
     return this.children.sort((a,b)=> a._data.position>b._data.position?1:-1);
+  }
+
+  setWidget(widget: IEmailWidget,item:EmailItem) {
+    let container = this.getContainer();
+    function _findItem(item:IEmailItem,id:number,widget:IEmailWidget) {
+      if (item.id == id) {
+        item.widget = widget; 
+        return;
+      }
+      for (let child of item.childs) {
+        _findItem(child,id,widget);
+      }
+    }
+    _findItem(container._data,item._data.id,widget);
   }
 
   setPadding(type:string,value:number) {
@@ -635,8 +653,8 @@ export class EmailItem {
     }
   }
 
-  /**Adds a widget to the current cell by creating an item with a widget inside */
-  addWidget(type:EWidgetType) {
+  /**Adds a widget to the current cell by creating an item */
+  addWidget(type:EWidgetType,content?:string) {
       console.log("WE WILL ADD WIDGET",type);
       let item : IEmailItem = {
         type: EItemType.ITEM

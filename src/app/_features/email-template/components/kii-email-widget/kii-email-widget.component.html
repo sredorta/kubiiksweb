@@ -1,4 +1,4 @@
-<div class="kii-email-widget-wrp"
+<div class="kii-email-widget-wrp" [ngClass]="getClasses()"
                   [ngStyle]="{
 
                   }">
@@ -7,7 +7,10 @@
       <p>Image</p>
    </ng-container>
    <ng-container *ngIf="widget.isText()">
-      Text a bit more long to see font style
+      <div class="content" [innerHtml]="trustedHtml"></div>
+      <div class="editing-part">
+         <textarea #myTextArea type="text" class="textarea" [value]="untrustedHtml" (keyup)="textareaKey($event)"></textarea>
+      </div>
    </ng-container>
    <ng-container *ngIf="widget.isHeading()">
       <h1>Heading</h1>

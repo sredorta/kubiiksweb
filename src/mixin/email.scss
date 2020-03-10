@@ -25,7 +25,6 @@
       .menu-block-type {
           .first,.second,.third {
             background:rgba(white,0.4);
-
           }
       }
   }
@@ -35,17 +34,21 @@
       .wrp {
         .content {
             border:1px solid rgba(mat-color($primary),0.5);
-            background: rgba(mat-color($primary),0.1)
-
         }  
-        .content.is-active {
-            border:2px solid mat-color($primary);
+        .content.is-active:not(.container) {
+            border:4px solid mat-color($primary);
         }
         .toolbar {
             background:mat-color($primary);
             color:mat-color($foreground,text);
         }
       }
+  }
+  //Style widget
+  kii-email-widget {
+    .editing-part {
+      background:rgba(mat-color($primary),0.2);
+    }
   }
   //Style main menu
   .cdk-overlay-connected-position-bounding-box .kii-email-toolbar-menu {
@@ -59,7 +62,7 @@
     .icon.is-icon-active svg  {
       fill:mat-color($accent);
     }
-    
+
     .padding-item {
       display:flex;
       justify-content: flex-start;

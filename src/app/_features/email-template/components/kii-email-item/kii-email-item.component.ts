@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
-import { KiiEmailTemplateService, EItemType } from '../../services/kii-email-template.service';
+import { KiiEmailTemplateService, EItemType, IEmailWidget } from '../../services/kii-email-template.service';
 import { EmailItem } from 'src/app/_features/email-template/services/kii-email-template.service';
 import { isNgTemplate } from '@angular/compiler';
 
@@ -57,7 +57,7 @@ export class KiiEmailItemComponent  implements OnInit {
 
   /**Sets this block as active */
   onClick(event) {
-    console.log("CLICKED ON ITEM");
+    console.log("CLICKED ON ITEM",this.item.widget);
     //Check if parent has also an active child
     let isParentActive = false;
     if (this.item.parent==null) isParentActive = true;
@@ -72,6 +72,13 @@ export class KiiEmailItemComponent  implements OnInit {
 
   }
 
+  /**When widget has changes ! */
+  onWidgetChanges(event:IEmailWidget) {
+    console.log("We have got widget changes !",event);
+    console.log("CURRENT ITEM",this.item);
+    //Need to update widget data !
+    this.item.setWidget(event,this.item);
+  }
 
 
 

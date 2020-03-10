@@ -14,6 +14,7 @@ import { KiiEmailToolbarComponent } from './components/kii-email-toolbar/kii-ema
 import { MatButtonModule, MatMenuModule, MatSliderModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { KiiEmailWidgetComponent } from './components/kii-email-widget/kii-email-widget.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -22,6 +23,8 @@ import { KiiEmailWidgetComponent } from './components/kii-email-widget/kii-email
     CommonModule,
     RouterModule,
     MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatMenuModule,
     MatSliderModule,
     FontAwesomeModule,
