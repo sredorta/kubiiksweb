@@ -9,7 +9,7 @@
             <textarea #myTextArea type="text" class="textarea" [value]="untrustedHtml" (keyup)="textareaKey($event)"></textarea>
       </ng-container>
       <ng-container *ngIf="item.widget.isButton()">
-         <input  #color type="color" [ngModel]="item.widget.getContent().colorBtn" (ngModelChange)="onBtnColor($event)">
+         <input *ngIf="item.widget.getContent().typeBtn!='link'" class="color-input" #color type="color" [ngModel]="item.widget.getContent().colorBtn" (ngModelChange)="onBtnColor($event)">
          <input class="url-input" placeholder="http://www...." type="text" [ngModel]="item.widget.getContent().url" (ngModelChange)="onUrlChange($event)">
          <input class="url-input" placeholder="Button" type="text" [ngModel]="item.widget.getContent().txtBtn" (ngModelChange)="onTxtChange($event)">
 
@@ -41,7 +41,9 @@
          </div>
       </ng-container>
       <ng-container *ngIf="item.widget.isImage()">
-         <p>Image</p>
+         <input class="url-input" placeholder="Alt text..." type="text" [ngModel]="item.widget.getContent().imgAlt" (ngModelChange)="onAltTxtChange($event)">
+         <mat-slider color="primary" min="0" max="100" step="1" [value]="item.widget.getContent().imgWidth" thumbLabel tickInterval="1" (change)="onImageWidthChange($event)"></mat-slider>
+         <button mat-flat-button color="primary" (click)="onNewImageRequested()">Get image</button>
       </ng-container>
    </div>
 </div>

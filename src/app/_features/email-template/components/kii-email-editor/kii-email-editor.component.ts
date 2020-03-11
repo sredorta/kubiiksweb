@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ComponentFactoryResolver, Renderer2, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ComponentFactoryResolver, Renderer2, Input, SimpleChanges } from '@angular/core';
 import { Location } from '@angular/common';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
@@ -34,7 +34,13 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
   /**Event generated each time email changes */
   @Output() onChange :EventEmitter<string> = new EventEmitter<string>();
 
+  /**Request for a new image so that the dialog can be open */
+  @Output() onRequestImage = new EventEmitter<boolean>();
 
+  /**Result of the image uploaded */
+  @Input() resultImage: string = null; 
+
+  imageRequestId:number;
 
 
   constructor(
@@ -43,21 +49,30 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
       super();
       this.item = new EmailItem(
 
-        {"id":8,"type":"container","position":0,"width":"100%","bgColor":"white","txtColor":"black","font":"Verdana","fontSize":"16px","fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":2,"type":"block","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":3,"type":"cell","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":4,"type":"item","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[],"widget":{"type":"text","content":{"textarea":"Hello wolrd<p style=\"margin-top:0px;margin-bottom:0px\">&nbsp;</p>here we are"}},"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"},{"id":9,"type":"item","position":2,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[],"widget":{"type":"button","content":{"textarea":"","url":"http://www.google.com","txtBtn":"googel link","colorBtn":"#ff8000"}},"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}
-        );
-
-      this.item.isActive = true;
+{"id":8,"type":"container","position":0,"width":"100%","bgColor":"white","txtColor":"black","font":"Verdana","fontSize":"16px","fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":9,"type":"block","position":2,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":10,"type":"cell","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[],"widget":{"type":"image","content":{"textarea":"","url":"https://localhost:4300/server/public/images/email/i-forgot-day-fun__1583406795053.jpg","txtBtn":"Button","typeBtn":"link","colorBtn":"#303030","imgWidth":40}},"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":{"type":"button","content":{"textarea":"","url":"http://www.google.com","txtBtn":"googel link","colorBtn":"#c0c0c0","typeBtn":"flat"}},"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"},{"id":11,"type":"block","position":1,"width":"100%","bgColor":"#000000","txtColor":"#ffffff","font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":12,"type":"cell","position":1,"width":"33%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":14,"type":"item","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[],"widget":{"type":"image","content":{"textarea":"","url":"https://localhost:4300/server/public/images/email/icon-512x512__1583930290357.png","txtBtn":"Button","typeBtn":"link","colorBtn":"#303030","imgAlt":"Logo","imgWidth":100}},"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"},{"id":13,"type":"cell","position":2,"width":"66%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":15,"type":"item","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":"28px","fontBold":true,"fontItalic":null,"fontUnderline":null,"childs":[],"widget":{"type":"text","content":{"textarea":"kubiiks"}},"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"},{"id":16,"type":"item","position":2,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":"24px","fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[],"widget":{"type":"text","content":{"textarea":"Mot de passe oublié"}},"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":20,"paddingRight":0,"hAlign":"left","vAlign":"center"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}
       
 
-
+)
+      this.item.isActive = true;
+      
+      //Emit image request if required
+      this.service.imageRequest.subscribe(res => {
+        this.imageRequestId = res;
+        this.onRequestImage.emit(true);
+      })
     }
 
 
 
   ngOnInit() {
     console.log("GENERATED ITEM:",this.item);
+  }
 
-
+  ngOnChanges(changes:SimpleChanges) {
+    if (changes.resultImage) {
+      this.service.image = changes.resultImage.currentValue;
+      this.service.isImageAvailable.next(this.imageRequestId);
+    }
   }
 
   outputData() {

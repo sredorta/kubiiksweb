@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { isNgTemplate } from '@angular/compiler';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 
 //ITEM ELEMENT HAS ONE WIDGET
@@ -14,6 +14,8 @@ export interface IEmailWidgetContent {
   txtBtn?:string;
   typeBtn?: 'link' | 'flat' | 'stroked';
   colorBtn?:string;
+  imgAlt?:string;
+  imgWidth?:number;
 }
 export class EmailWidget {
   private _data : IEmailWidget = {
@@ -23,7 +25,9 @@ export class EmailWidget {
       url:"",
       txtBtn:"Button",
       typeBtn:"link",
-      colorBtn:'#303030'
+      colorBtn:'#303030',
+      imgAlt: "Image",
+      imgWidth:100
     }
   }
   constructor(obj: IEmailWidget) {
@@ -571,6 +575,14 @@ export class EmailItem {
   removeItem(item:EmailItem) {
     if (item && item.parent) {
         item.parent.children = item.parent.children.filter(obj=> obj._data.id != item._data.id);
+        let container = this.getContainer();
+        function _removeId(item:IEmailItem,id:number) {
+          item.childs = item.childs.filter(obj=> obj.id != id);
+          for (let child of item.childs) {
+             _removeId(child,id);
+          }
+        }
+        _removeId(container._data,item._data.id);
     }
   }
 
@@ -700,74 +712,12 @@ export class EmailItem {
 })
 export class KiiEmailTemplateService {
 
-  private container : EmailItem = new EmailItem();
+  public imageRequest : Subject<number> = new Subject<number>();
+  public isImageAvailable : Subject<number> = new Subject<number>();
+
+  public image : string = null;
 
   constructor() { }
-
-/*  getContainer() {
-    return this.container;
-  }*/
-
-  /**Adds child to element by keeping parents... correct */
-  /*addChild(child:IEmailItem,parent?:EmailItem) {
-    if (!parent) parent = this;
-    parent._data.childs.push(child);
-    let myChild = new EmailItem(child);
-    parent.children.push(myChild)
-    myChild.parent = parent;
-    return myChild;
-  }*/
-
-  /**Add a block to element */
-  /*addBlock(type: EBlockType) {
-    let cell : IEmailItem = {
-      width: "100%",
-      type: EItemType.CELL,
-    }
-    let block : IEmailItem = {
-      type: EItemType.BLOCK,
-    }
-
-    switch (type) {
-      case EBlockType.SIMPLE: {
-         let myBlock = this.addChild(block);
-         this.addChild(cell,myBlock);
-         break;
-      }
-      case EBlockType.DOUBLE: {
-        let myBlock = this.addChild(block);
-        cell.width = "50%";
-        this.addChild(cell,myBlock);
-        this.addChild(cell,myBlock);
-        break;
-      }
-      case EBlockType.DOUBLE_LEFT: {
-        let myBlock = this.addChild(block);
-        cell.width = "33%";
-        this.addChild(cell,myBlock);
-        cell.width = "66%";
-        this.addChild(cell,myBlock);
-        break;
-      }
-      case EBlockType.DOUBLE_RIGHT: {
-        let myBlock = this.addChild(block);
-        cell.width = "66%";
-        this.addChild(cell,myBlock);
-        cell.width = "33%";
-        this.addChild(cell,myBlock);
-        break;
-      }
-      case EBlockType.TRIPLE: {
-        let myBlock = this.addChild(block);
-        cell.width = "33%";
-        this.addChild(cell,myBlock);
-        this.addChild(cell,myBlock);
-        this.addChild(cell,myBlock);
-        break;
-      }                  
-    }
-  }  */
-
 
 
 }

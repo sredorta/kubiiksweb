@@ -24,6 +24,7 @@ export class KiiEmailItemComponent  implements OnInit {
 
 
   ngOnInit() {
+
   }
 
   ngOnChanges(changes:SimpleChanges) {
