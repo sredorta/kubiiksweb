@@ -5,6 +5,7 @@ import { SSL_OP_NETSCAPE_CA_DN_BUG } from 'constants';
 import { npost } from 'q';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
+import { url } from 'inspector';
 
 
 
@@ -24,6 +25,8 @@ export class KiiEmailWidgetComponent implements OnInit {
 
   trustedHtml:SafeHtml = ""; 
   untrustedHtml:String = "";
+  url:string = "test";
+  txt:string = "button";
 
   @ViewChild('myTextArea',{static:false}) textarea : ElementRef;
 
@@ -48,9 +51,10 @@ export class KiiEmailWidgetComponent implements OnInit {
 
 
   setInitialTextarea() {
-    this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(this.widget.getContent());
-    //Replace any <p>.*</p> by \n for untrusted
     let content = this.widget.getContent();
+    if (!content) content = "";
+    this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(content);
+    //Replace any <p>.*</p> by \n for untrusted
     let tmp = content.split("/p>");
     content = "";
     tmp.forEach((value)=> {
@@ -89,8 +93,25 @@ export class KiiEmailWidgetComponent implements OnInit {
   getClasses() {
     let result = {};
     result[this.widget.getType()] = true;
+    result['is-empty'] = this.widget.getContent()==null?true:false;
     return result;
   }
 
+  /**When url changes */
+  onUrlChange(event:string) {
+    this.url = event;
+    if (this.url.indexOf("http://") == 0 || this.url.indexOf("https://") == 0) {
+        this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
+          `<a href="${this.url}" target="_self" style="display: inline-block;font-family:arial,helvetica,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #3AAEE0; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; width: auto; padding: 10px 20px; mso-border-alt: none;">
+              <span style="line-height:120%;"><span style="font-size: 14px; line-height: 16.8px;">${this.txt}</span></span>
+          </a>`
+        );
+    } else 
+        this.trustedHtml = "";
+  }
+  /**When txt changes for the button*/
+  onTxtChange(event:string) {
+    this.txt = event;
+  }
 
 }

@@ -32,8 +32,8 @@ export class EmailWidget {
   }
 
   /**Returns if widget is heading */
-  isHeading() {
-    return this._data.type == EWidgetType.HEADING;
+  isButton() {
+    return this._data.type == EWidgetType.BUTTON;
   }
 
   /**Returns data of the widget */
@@ -59,9 +59,10 @@ export enum EItemType {
 }
 
 export enum EWidgetType {
-  HEADING ="heading",
   TEXT = "text",
-  IMAGE = "image"
+  IMAGE = "image",
+  BUTTON ="button"
+
 }
 
 export enum EFontType {

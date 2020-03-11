@@ -1,7 +1,7 @@
 <div class="wrp">
     <button mat-icon-button [matMenuTriggerFor]="menuExtraItem"><fa-icon [icon]="icons['menu']"></fa-icon></button>
     <mat-menu #menuExtraItem="matMenu">
-        <div style="padding:10px;"  class="kii-email-toolbar-menu" (click)="onClickStop($event)">
+        <div style="padding:10px;"  class="kii-email-toolbar-menu">
             <div style="font-weight:bold;text-align:center;border-bottom:1px solid;margin-bottom:10px">{{item.getData().type}}</div>
             <div style="border-bottom:1px dashed" *ngIf="item.isContainer() || item.isCell()"><small>Add</small></div>
                 <ng-container *ngIf="item.isContainer()">
@@ -125,9 +125,8 @@
                     </button>
                 </ng-container>    
                 <ng-container *ngIf="item.isCell()">
-                    <button mat-button *ngFor="let type of item.getAllWidgetTypes()"  class="item" (click)="onAddWidget(item,type)">
-                            <!--<fa-icon [icon]="getIcon(type)"></fa-icon>-->
-                            <p>{{type}}</p>
+                    <button mat-button *ngFor="let type of item.getAllWidgetTypes()"  class="widget-icon" (click)="onAddWidget(item,type)">
+                            <fa-icon [icon]="getWidgetIcon(type)"></fa-icon>
                     </button>
                 </ng-container>
             
@@ -311,7 +310,7 @@
 
         </div>
     </mat-menu>
-    <ng-container *ngIf="item.isBlock()">
+    <ng-container *ngIf="item.isBlock() || item.isItem()" >
         <button mat-icon-button (click)="onMoveUpItem(item)"><fa-icon [icon]="icons['up']"></fa-icon></button>
         <button mat-icon-button (click)="onMoveDownItem(item)"><fa-icon [icon]="icons['down']"></fa-icon></button>
         <button mat-icon-button (click)="onRemoveItem(item)"><fa-icon [icon]="icons['trash']"></fa-icon></button>

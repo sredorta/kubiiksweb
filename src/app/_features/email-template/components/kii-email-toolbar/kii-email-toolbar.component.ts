@@ -12,6 +12,11 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons/faEllipsisV';
+import { faImage } from '@fortawesome/free-solid-svg-icons/faImage';
+import { faParagraph } from '@fortawesome/free-solid-svg-icons/faParagraph';
+import { faLink } from '@fortawesome/free-solid-svg-icons/faLink';
+
+
 import { MatSliderChange } from '@angular/material';
 
 
@@ -36,7 +41,10 @@ export class KiiEmailToolbarComponent  implements OnInit {
     trash: faTrash,
     up: faChevronUp,
     down: faChevronDown,
-    menu: faEllipsisV
+    menu: faEllipsisV,
+    image: faImage,
+    text: faParagraph,
+    button: faLink
   };
 
  
@@ -137,6 +145,10 @@ export class KiiEmailToolbarComponent  implements OnInit {
   onVerticalAlign(type:string) {
     console.log("VAlign",type);
     this.item.setAlignVertical(type);
+  }
+
+  getWidgetIcon(type:EWidgetType) {
+    return this.icons[type];
   }
 
 }
