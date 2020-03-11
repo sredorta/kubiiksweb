@@ -1,18 +1,20 @@
+<ng-container *ngIf="item.widget">
 <div class="kii-email-widget-wrp" [ngClass]="getClasses()"
                   [ngStyle]="{
 
                   }">
    <div class="content" [innerHtml]="trustedHtml"></div>
    <div class="editing-part">
-      <ng-container *ngIf="widget.isText()">
+      <ng-container *ngIf="item.widget.isText()">
             <textarea #myTextArea type="text" class="textarea" [value]="untrustedHtml" (keyup)="textareaKey($event)"></textarea>
       </ng-container>
-      <ng-container *ngIf="widget.isButton()">
-         <input class="url-input" placeholder="http://www...." type="text" [ngModel]="url" (ngModelChange)="onUrlChange($event)">
-         <input class="url-input" placeholder="Button" type="text" [ngModel]="txt" (ngModelChange)="onTxtChange($event)">
+      <ng-container *ngIf="item.widget.isButton()">
+         <input  #color type="color" [ngModel]="item.widget.getContent().colorBtn" (ngModelChange)="onBtnColor($event)">
+         <input class="url-input" placeholder="http://www...." type="text" [ngModel]="item.widget.getContent().url" (ngModelChange)="onUrlChange($event)">
+         <input class="url-input" placeholder="Button" type="text" [ngModel]="item.widget.getContent().txtBtn" (ngModelChange)="onTxtChange($event)">
 
          <div class="button-type">
-            <button mat-button>
+            <button mat-button (click)="setBtnType('link')">
                   <svg width="50" height="50" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                      <g transform="translate(0 -283.77)">
                      <text x="2.0079985" y="291.23584" fill="#000000" font-family="sans-serif" font-size="2.8222px" letter-spacing="0px" opacity=".76" stroke-width=".26458" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="2.0079985" y="291.23584" fill="#000000" font-family="sans-serif" font-size="2.8222px" stroke-width=".26458" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal">Button</tspan></text>
@@ -20,7 +22,7 @@
                      </g>
                      </svg>
             </button>
-            <button mat-button>
+            <button mat-button (click)="setBtnType('stroked')">
                   <svg width="50" height="50" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                      <g transform="translate(0 -283.77)">
                      <rect x=".84501" y="287.12" width="11.619" height="6.5548" ry=".87407" fill-opacity="0" stroke="#000" stroke-linejoin="round" stroke-opacity=".75294" stroke-width=".78793" style="paint-order:stroke markers fill"/>
@@ -28,19 +30,19 @@
                      </g>
                      </svg>                     
             </button>
-            <button mat-button>
+            <button mat-button (click)="setBtnType('flat')">
             <svg width="50" height="50" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                <g transform="translate(0 -283.77)">
                <rect x=".84501" y="287.12" width="11.619" height="6.5548" ry=".87407" stroke-width="0" style="paint-order:stroke markers fill" opacity="0.5"/>
                <text x="2.0079985" y="291.23584" fill="#ffffff" font-family="sans-serif" font-size="2.8222px" letter-spacing="0px" opacity=".711" stroke-width=".26458" word-spacing="0px" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal;line-height:1.25" xml:space="preserve"><tspan x="2.0079985" y="291.23584" fill="#ffffff" font-family="sans-serif" font-size="2.8222px" stroke-width=".26458" style="font-feature-settings:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-variant-numeric:normal">Button</tspan></text>
                </g>
                </svg>     
-            </button>      
+            </button> 
          </div>
       </ng-container>
-      <ng-container *ngIf="widget.isImage()">
+      <ng-container *ngIf="item.widget.isImage()">
          <p>Image</p>
       </ng-container>
    </div>
 </div>
-
+</ng-container>

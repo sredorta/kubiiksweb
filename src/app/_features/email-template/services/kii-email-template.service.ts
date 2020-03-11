@@ -1,20 +1,35 @@
 import { Injectable } from '@angular/core';
 import { isNgTemplate } from '@angular/compiler';
+import { Subject } from 'rxjs';
 
 
 //ITEM ELEMENT HAS ONE WIDGET
 export interface IEmailWidget {
     type: EWidgetType | string;
-    content?:string;
+    content?:IEmailWidgetContent;
+}
+export interface IEmailWidgetContent {
+  textarea?:string;
+  url?:string;
+  txtBtn?:string;
+  typeBtn?: 'link' | 'flat' | 'stroked';
+  colorBtn?:string;
 }
 export class EmailWidget {
-  public _data : IEmailWidget = {
+  private _data : IEmailWidget = {
     type : EWidgetType.TEXT,
-    content:null
+    content: {
+      textarea:"",
+      url:"",
+      txtBtn:"Button",
+      typeBtn:"link",
+      colorBtn:'#303030'
+    }
   }
   constructor(obj: IEmailWidget) {
     this._data.type = obj.type;
-    this._data.content = obj.content;
+    if (obj.content) this._data.content = obj.content;
+
   }
 
   getType() {
@@ -43,7 +58,7 @@ export class EmailWidget {
   getContent() {
     return this._data.content;
   }
-  setContent(content:string) {
+  setContent(content:IEmailWidgetContent) {
     this._data.content = content;
   }
 

@@ -19,7 +19,7 @@
                 <kii-email-item [item]="myItem" [ngClass]="getClasses(myItem)"></kii-email-item>
         </ng-container>
         <ng-container *ngIf="item.isItem()">
-            <kii-email-widget [widget]="item.widget" (onChange)="onWidgetChanges($event)" [ngClass]="getClasses(item)"></kii-email-widget>
+            <kii-email-widget [item]="item" (onChange)="onWidgetChanges($event)" [ngClass]="getClasses(item)"></kii-email-widget>
         </ng-container>
     </div>
 </div>

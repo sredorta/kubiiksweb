@@ -233,7 +233,7 @@
                 </ng-container>
                 <ng-container *ngIf="item.isBlock() || item.isCell() || item.isWidget()">
                     <div style="border-bottom:1px dashed"><small>Padding</small></div>
-                    <div class="padding-item icon left">
+                    <div class="padding-item icon left"  (click)="onClickStop($event)">
                         <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                             <g transform="translate(0 -283.77)" stroke-width="0">
                             <rect x="1.5902" y="285.73" width="2.4054" height="9.2715" style="paint-order:stroke markers fill"/>
@@ -251,7 +251,7 @@
                         </svg>
                         <mat-slider min="0" max="50" step="1" [value]="item.getPadding('left')" thumbLabel tickInterval="1" (change)="onPaddingChange('left',$event)"></mat-slider>
                     </div>
-                    <div class="padding-item icon right">
+                    <div class="padding-item icon right"  (click)="onClickStop($event)">
                             <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                                 <g transform="translate(0 -283.77)" stroke-width="0">
                                 <rect x="1.5902" y="285.73" width="2.4054" height="9.2715" style="paint-order:stroke markers fill"/>
@@ -269,7 +269,7 @@
                             </svg>
                             <mat-slider min="0" max="50" step="1" [value]="item.getPadding('right')" thumbLabel tickInterval="1" (change)="onPaddingChange('right',$event)"></mat-slider>
                     </div>
-                    <div class="padding-item icon top">
+                    <div class="padding-item icon top"  (click)="onClickStop($event)">
                             <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                                 <g transform="translate(0 -283.77)" stroke-width="0">
                                 <rect x="1.5902" y="285.73" width="2.4054" height="9.2715" style="paint-order:stroke markers fill"/>
@@ -287,7 +287,7 @@
                             </svg>
                             <mat-slider min="0" max="50" step="1" [value]="item.getPadding('top')" thumbLabel tickInterval="1" (change)="onPaddingChange('top',$event)"></mat-slider>
                     </div>                
-                    <div class="padding-item icon bottom">
+                    <div class="padding-item icon bottom"  (click)="onClickStop($event)">
                             <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                                 <g transform="translate(0 -283.77)" stroke-width="0">
                                 <rect x="1.5902" y="285.73" width="2.4054" height="9.2715" style="paint-order:stroke markers fill"/>
