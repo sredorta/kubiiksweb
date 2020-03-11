@@ -6,6 +6,19 @@
     }
 }
 
+.preview {
+    .email-body {
+        display:block;
+        max-width: 600px;
+    }
+    min-height: 100px;
+    border:1px solid red;
+    width:100%;
+    table,div {
+        min-height: 50px;
+        border:1px solid rgba(red,0.5);
+    }
+}
 
 @media only screen and (max-width: 700px) {
 

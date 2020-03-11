@@ -9,4 +9,7 @@
    </div>-->
 </div>
 <button mat-button color="primary" (click)="outputData()">Get DATA</button>
+<button mat-button color="primary" (click)="outputHtml()">Get HTML</button>
+
+<div #previewElem class="preview" [innerHtml]="trustedHtml2"></div>
 

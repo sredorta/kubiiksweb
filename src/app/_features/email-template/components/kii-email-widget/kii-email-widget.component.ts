@@ -44,7 +44,6 @@ export class KiiEmailWidgetComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onresize(event?) {
-    console.log("resize",this.contentElem);
     if (this.contentElem) {
       this.calculateWidth();
     }
@@ -122,7 +121,9 @@ export class KiiEmailWidgetComponent implements OnInit {
         if (this.item.widget.getContent().textarea == "")  result['is-empty'] = true;
         break;
       default:
-        if (!(this.item.widget.getContent().url.indexOf("http://") == 0 || this.item.widget.getContent().url.indexOf("https://") == 0))  result['is-empty'] = true 
+       if (!this.item.widget.getContent().url) result['is-empty'] = true;
+       else
+        if ( !(this.item.widget.getContent().url.indexOf("http://") == 0 || this.item.widget.getContent().url.indexOf("https://") == 0))  result['is-empty'] = true 
     }
     return result;
   }
