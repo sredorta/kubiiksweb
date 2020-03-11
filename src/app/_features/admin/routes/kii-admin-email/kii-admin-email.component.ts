@@ -58,6 +58,10 @@ export class KiiAdminEmailComponent extends KiiBaseAbstract implements OnInit {
     )
   }
 
+  ngAfterViewInit() {
+    
+  }
+
   /**Opens the dialog of the image gallery when asked */
   onRequestImage() {
       console.log("OPENNING GALLERY DIALOG !!!");

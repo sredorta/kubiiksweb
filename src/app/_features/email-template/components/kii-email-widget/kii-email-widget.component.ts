@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, Input, ElementRef, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, Input, ElementRef, SimpleChanges, HostListener, Renderer2 } from '@angular/core';
 import { EmailItem, EWidgetType, IEmailWidget, KiiEmailTemplateService } from '../../services/kii-email-template.service';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
@@ -35,11 +35,25 @@ export class KiiEmailWidgetComponent implements OnInit {
 
   color:string = "black";
 
+  calcWidth:string = "100%";
+
+
+
   @ViewChild('myTextArea',{static:false}) textarea : ElementRef;
+  @ViewChild('contentElem',{static:false}) contentElem : ElementRef;
+
+  @HostListener('window:resize', ['$event'])
+  onresize(event?) {
+    console.log("resize",this.contentElem);
+    if (this.contentElem) {
+      this.calculateWidth();
+    }
+  }
 
   constructor(
     private sanitize: DomSanitizer,
-    private service: KiiEmailTemplateService
+    private service: KiiEmailTemplateService,
+    private r : Renderer2
     ) { 
       console.log("WIDGET is:",this.item)
     }
@@ -73,6 +87,7 @@ export class KiiEmailWidgetComponent implements OnInit {
 
 
   setInitial() {
+    this.calculateWidth();
     switch (this.item.widget.getType()) {
       case EWidgetType.TEXT: {
         let content = this.item.widget.getContent().textarea;
@@ -185,10 +200,12 @@ export class KiiEmailWidgetComponent implements OnInit {
   updateImage() {
     if (this.item.widget.getType() == EWidgetType.IMAGE && this.item.widget.getContent().url)
       this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
-        `<img src=${this.item.widget.getContent().url} style="display: inline-block;height:auto;width:${this.item.widget.getContent().imgWidth}%" title=${this.item.widget.getContent().imgAlt} alt=${this.item.widget.getContent().imgAlt} width="${this.item.widget.getContent().imgWidth}%">`
+        `
+        <img src=${this.item.widget.getContent().url} style="display:block;height:auto;width:${this.calcWidth}" title=${this.item.widget.getContent().imgAlt} alt=${this.item.widget.getContent().imgAlt}>
+        `
       );
+    this.calculateWidth();  
     this.onChange.emit({type: this.item.widget.getType(), content:this.item.widget.getContent()});
-
   }
 
   /**Requests image so that the dialog can be created */
@@ -206,6 +223,18 @@ export class KiiEmailWidgetComponent implements OnInit {
   onImageWidthChange(event: MatSliderChange) {
     this.item.widget.getContent().imgWidth = event.value;
     this.updateImage();
+  }
+
+  /**Calculates image width as we cannot use % here */
+  calculateWidth() {
+    if (this.contentElem && this.contentElem.nativeElement && this.contentElem.nativeElement.children && this.contentElem.nativeElement.children[0] && this.contentElem.nativeElement.children[0].width) {
+      let contentWidth = this.contentElem.nativeElement.offsetWidth;
+      let width = (contentWidth * this.item.widget.getContent().imgWidth)/100;
+      width = parseInt(width.toString());
+      setTimeout(()=> {
+        this.calcWidth = width + "px";
+      });
+    }
   }
 
 

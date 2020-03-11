@@ -1,5 +1,5 @@
-<div class="kii-email-editor-wrp">
-   <kii-email-item [item]="item"></kii-email-item>
+<div class="kii-email-editor-wrp" [ngStyle]="{'max-width':getContainerWidth()}">
+   <kii-email-item #itemComp [item]="item"></kii-email-item>
    <!--<kii-email-toolbar></kii-email-toolbar>
    <div class="kii-email" [ngStyle]="{'background':data.bgColor, 'color':data.txtColor}">
       <ng-container *ngFor="let block of structure.blocks">

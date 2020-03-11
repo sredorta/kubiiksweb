@@ -3,7 +3,7 @@
                   [ngStyle]="{
 
                   }">
-   <div class="content" [innerHtml]="trustedHtml"></div>
+   <div #contentElem class="content" [innerHtml]="trustedHtml"></div>
    <div class="editing-part">
       <ng-container *ngIf="item.widget.isText()">
             <textarea #myTextArea type="text" class="textarea" [value]="untrustedHtml" (keyup)="textareaKey($event)"></textarea>

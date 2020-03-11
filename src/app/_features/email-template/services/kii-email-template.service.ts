@@ -240,6 +240,7 @@ export class EmailItem {
       this._data.paddingRight = 0;
       this._data.hAlign="left";
       this._data.vAlign="top";
+      this._data.width='600';
 
       this._data.id = 0;
     }
