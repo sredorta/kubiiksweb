@@ -55,7 +55,10 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
     ) { 
       super();
       this.item = new EmailItem(
-        {"id":6,"type":"container","position":0,"width":"600","bgColor":"#ff8000","txtColor":"#e4e4e4","font":"Verdana","fontSize":"18px","fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":7,"type":"block","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":8,"type":"cell","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":11,"type":"item","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[],"widget":{"type":"text","content":{"textarea":"flkdsjdsflks fjkljsf lsafkdj lfksdj sdflkj sfdlk"}},"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"center","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"},{"id":9,"type":"block","position":2,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":10,"type":"cell","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":9,"paddingTop":9,"paddingLeft":10,"paddingRight":11,"hAlign":"left","vAlign":"top"}
+
+        {"id":0,"type":"container","position":0,"width":"600","bgColor":"white","txtColor":"black","font":"Verdana","fontSize":"16px","fontBold":false,"fontItalic":false,"fontUnderline":false,"childs":[{"id":2,"type":"block","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":3,"type":"cell","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[{"id":4,"type":"item","position":1,"width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"childs":[],"widget":{"type":"text","content":{"textarea":"fdskaljsfdalksjdaf lksdfaj lskdfaj sdflakj sdfalkj sdfalkjsdfa lkjsdf lksdfj lskafdj asdflkj sadflkjasdf lkjdsaf lksdafj lksadfj lksadfj"}},"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}],"widget":null,"paddingBottom":0,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"hAlign":"left","vAlign":"top"}
+
+
 
 )
       this.item.isActive = true;
@@ -97,9 +100,7 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
     console.log(this.json);
     this._addHeading();
     this._addStyle();
-    this._addBodyStart();
-    //this._addContent();
-    this._addBodyEnd();
+    this._addBody();
     console.log(this.html);
     this.trustedHtml2 = this.sanitize.bypassSecurityTrustHtml(this.html);
   }
@@ -239,19 +240,18 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
 
   /**Gets a property by tracing up items if is not defined */
   private _getProperty(elem:IEmailItem,property:string) {
-    console.log("Finding property:",property)
-    if (elem[property] && elem[property]!=null && elem[property]!=undefined) {
+    console.log("Finding property:",property, elem[property])
+    if (elem[property]!=null && elem[property]!=undefined) {
       console.log("Found ",elem[property]);
       return elem[property];
     }
+    let obj = this;
     function _traceUp(elem:IEmailItem) {
-        let parent = this._getParent(elem.id);
-        if (parent[property] && parent[property]!=null && parent[property]!=undefined) {
-          console.log("Found ",elem[property]);
+        let parent = obj._getParent(elem.id);
+        if (parent[property]!=null && parent[property]!=undefined) {
           return parent[property];
         }
         if (parent.type == 'container') {
-          console.log("Container and not found", null);
           return null;  
         }
         return _traceUp(parent);  
@@ -264,64 +264,67 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
   /**Gets style and return a string so that is included in html */
   _getStyle(item:IEmailItem) {
     let style = "";
-    let padding =`padding-top:${this.json.paddingTop}px;padding-left:${this.json.paddingLeft}px;padding-right:${this.json.paddingRight}px;padding-bottom:${this.json.paddingBottom}px;`;
-    let fonts = `font-family:${this._getProperty(item,'font')};font-size:${this._getProperty(item,'fontSize')};font-color:${this._getProperty(item,'txtColor')};`;
-    style = style.concat(padding,fonts);
+    //Padding part
+    let padding =`padding-top:${item.paddingTop}px;padding-left:${item.paddingLeft}px;padding-right:${item.paddingRight}px;padding-bottom:${item.paddingBottom}px;`;
+    //Fonts part
+    let fonts = `font-family:${this._getProperty(item,'font')};font-size:${this._getProperty(item,'fontSize')};color:${this._getProperty(item,'txtColor')};`;
+    if (this._getProperty(item,'fontBold')) fonts = fonts.concat('font-weight:bold;');
+    if (this._getProperty(item,'fontItalic')) fonts = fonts.concat('font-style:italic;');
+    if (this._getProperty(item,'fontUnderline')) fonts = fonts.concat('text-decoration:underline;');
+
+    //background
+    let background = `background-color:${this._getProperty(item,'bgColor')};`;
+
+    //alignment
+    let alignment = `vertical-align:${this._getProperty(item,'vAlign')};`;
+
+    //size
+    let width = `vertical-align:${this._getProperty(item,'width')};`;
+
+    style = style.concat(padding,fonts,background,alignment,width);
     console.log("Final style",style);
     return style;
   }
 
 
-  _addBodyStart() {
+  _addBody() {
     this.html = this.html + `
       <div class="email-body" style="margin: 0px;padding: 0px;-webkit-text-size-adjust: 100%;background-color:${this.json.bgColor}">
       <table align="center" width=${this.json.width} cellspacing="0" cellpadding="0" style="width:${this.json.width}px;vertical-align: top;min-width: 320px;max-width:${this.json.width}px;margin: 0 auto;background-color: ${this.json.bgColor};">
         <tbody>
         <tr>
           <td style="${this._getStyle(this.json)}" valign="top" bgcolor=${this.json.bgColor} align="center">
-            <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
-              <tbody>
-                <tr>
-                  <td style="${this._getStyle(this.json)}" valign="top" align="center">Test Email Sample | <a href="#" target="_blank" style="color:#0d1121; text-decoration:underline;">View Online</a></td>
-                </tr>
-              </tbody>  
-            </table>
+            ${this._addContent()}
           </td>
         </tr>
         </tbody>
       </table>
+      </div>
+      </html>
       `;
   }
 
-  _addBodyEnd() {
-    this.html = this.html + `
-    </div>
-
-    </html>
-    `;
-  }
 
   _addContent() {
     //Loop through blocks
-    let blocks :any[] = [];
+    let result = ""
     this.json.childs.forEach(block => {
-      console.log("BLOCK",block)
-      blocks.push(this._addBlock(block));
+      console.log("BLOCK",block);
+      result = result.concat(
+        `
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center">
+        <tbody>
+          <tr>
+            <td style="${this._getStyle(block)}" valign="top" align="center">Test Email Sample | <a href="#" target="_blank" style="color:#0d1121; text-decoration:underline;">View Online</a></td>
+          </tr>
+        </tbody>  
+        </table>
+        `
+        )
     });
-  }
+    console.log(result);
+    return result;
 
-  _addBlock(block:any) {
-    block.htmlStart = `
-    
-    `;
-
-    block.htmlEnd = `
-    `;
-
-    let cells :any[] = [];
-    block.childs.forEach(cell => {
-      cells.push(this._addCell(cell));
-    });
   }
 
   _addCell(cell:any) {

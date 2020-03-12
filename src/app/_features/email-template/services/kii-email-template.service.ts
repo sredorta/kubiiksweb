@@ -192,9 +192,9 @@ export class EmailItem {
       if (obj.txtColor) this._data.txtColor = obj.txtColor;
       if (obj.font)     this._data.font = obj.font;
       if (obj.fontSize) this._data.fontSize = obj.fontSize;
-      if (obj.fontBold) this._data.fontBold = obj.fontBold;
-      if (obj.fontItalic) this._data.fontItalic = obj.fontItalic;
-      if (obj.fontUnderline) this._data.fontUnderline = obj.fontUnderline;
+      if (obj.fontBold!=null) this._data.fontBold = obj.fontBold;
+      if (obj.fontItalic!=null) this._data.fontItalic = obj.fontItalic;
+      if (obj.fontUnderline!=null) this._data.fontUnderline = obj.fontUnderline;
       if (obj.paddingBottom) this._data.paddingBottom = obj.paddingBottom;
       else this._data.paddingBottom = 0;
       if (obj.paddingTop) this._data.paddingTop = obj.paddingTop;
