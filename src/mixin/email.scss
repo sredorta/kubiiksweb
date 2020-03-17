@@ -16,34 +16,108 @@
       .kii-email-editor-wrp {
           border:1px solid mat-color($primary);
       }
-  }
-
-  kii-email-toolbar {
-      .wrp {
-        background:mat-color($primary);   
-      }
-      .menu-block-type {
-          .first,.second,.third {
-            background:rgba(white,0.4);
-          }
-      }
-  }
-
-
-  kii-email-item {
-      .wrp {
-        .content {
-            border:1px solid rgba(mat-color($primary),0.5);
-        }  
-        .content.is-active:not(.container) {
-            border:4px solid mat-color($primary);
-        }
-        .toolbar {
-            background:mat-color($primary);
-            color:mat-color($foreground,text);
+      .block,.cell,.widget {
+        border:2px dashed transparent;
+        &.is-active {
+          border:2px dashed mat-color($primary);
         }
       }
   }
+  kii-email-container-toolbar {
+    .wrp {
+      background:mat-color($primary);   
+    }
+  }
+  .cdk-overlay-connected-position-bounding-box .kii-email-toolbar-menu {
+    .block-type-container {
+      box-sizing: border-box;
+      width:50px;
+      height:20px;
+      margin:5px;
+      display:flex;
+      flex-direction: row;
+      .child {
+        box-sizing: border-box;
+        height:20px;
+        border:1px solid mat-color($foreground,text);
+      }
+    }
+    .block-type-container.simple {
+      .first {
+        flex:1;
+      }
+      .second,.third,.fourth {
+        display:none;
+      }
+    }
+    .block-type-container.double {
+      .first,.second {
+        flex:1;
+      }
+      .third,.fourth {
+        display:none;
+      }
+    }
+    .block-type-container.triple {
+      .first,.second,.third {
+        flex:1;
+      }
+      .fourth {
+        display:none;
+      }
+    }
+    .block-type-container.double_2080 {
+      .first {
+        flex:1;
+      }
+      .second {
+        flex:3;
+      }
+      .third,.fourth {
+        display:none;
+      }
+    }
+    .block-type-container.double_3070 {
+      .first {
+        flex:1;
+      }
+      .second {
+        flex:2;
+      }
+      .third,.fourth {
+        display:none;
+      }
+    }
+    .block-type-container.double_8020 {
+      .first {
+        flex:3;
+      }
+      .second {
+        flex:1;
+      }
+      .third,.fourth {
+        display:none;
+      }
+    }
+    .block-type-container.double_7030 {
+      .first {
+        flex:2;
+      }
+      .second {
+        flex:1;
+      }
+      .third,.fourth {
+        display:none;
+      }
+    }
+    .block-type-container.quad {
+      .first,.second,.third,.fourth {
+        flex:1;
+      }
+    }
+
+  }
+
   //Style widget
   kii-email-widget {
     .editing-part {

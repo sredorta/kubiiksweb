@@ -1,72 +1,10 @@
 import { Injectable } from '@angular/core';
 import { isNgTemplate } from '@angular/compiler';
 import { Subject, BehaviorSubject } from 'rxjs';
+import { width } from '@fortawesome/free-solid-svg-icons/faArrowUp';
 
 
-//ITEM ELEMENT HAS ONE WIDGET
-export interface IEmailWidget {
-    type: EWidgetType | string;
-    content?:IEmailWidgetContent;
-}
-export interface IEmailWidgetContent {
-  textarea?:string;
-  url?:string;
-  txtBtn?:string;
-  typeBtn?: 'link' | 'flat' | 'stroked';
-  colorBtn?:string;
-  imgAlt?:string;
-  imgWidth?:number;
-}
-export class EmailWidget {
-  private _data : IEmailWidget = {
-    type : EWidgetType.TEXT,
-    content: {
-      textarea:"",
-      url:"",
-      txtBtn:"Button",
-      typeBtn:"link",
-      colorBtn:'#303030',
-      imgAlt: "Image",
-      imgWidth:100
-    }
-  }
-  constructor(obj: IEmailWidget) {
-    this._data.type = obj.type;
-    if (obj.content) this._data.content = obj.content;
 
-  }
-
-  getType() {
-    return this._data.type;
-  }
-
-  /**Returns if widget is image */
-  isImage() {
-    return this._data.type == EWidgetType.IMAGE;
-  }
-
-  /**Returns if widget is text */
-  isText() {
-    return this._data.type == EWidgetType.TEXT;
-  }
-
-  /**Returns if widget is heading */
-  isButton() {
-    return this._data.type == EWidgetType.BUTTON;
-  }
-
-  /**Returns data of the widget */
-  getData() {
-    return this._data;
-  }
-  getContent() {
-    return this._data.content;
-  }
-  setContent(content:IEmailWidgetContent) {
-    this._data.content = content;
-  }
-
-}
 
 
 //Enumerators
@@ -90,13 +28,7 @@ export enum EFontType {
   UNDERLINE="underline"
 }
 
-export enum EBlockType {
-  SIMPLE = "simple",
-  DOUBLE = "double",
-  DOUBLE_LEFT = "double_left",
-  DOUBLE_RIGHT = "double_right",
-  TRIPLE = "triple"
-}
+
 
 export interface IEmailItem {
 
@@ -160,100 +92,252 @@ export interface IEmailItem {
 }
 
 
-export class EmailItem {
-  private _data: IEmailItem = {
-    id : null,
-    type : EItemType.CONTAINER,
-    position:0,
-    width:"100%",
-    bgColor:null,
-    txtColor:null,
-    font:null,
-    fontSize:null,
-    fontBold:null,
-    fontItalic:null,
-    fontUnderline:null,
-    childs:[],
-    widget: null
-  };
-  isActive : boolean = false;
-  parent: EmailItem = null;
-  children : EmailItem[] = [];
-  widget: EmailWidget = null;
+//Enumerators
+export enum EElemType {
+  CONTAINER = "container",
+  BLOCK = "block",
+  CELL = "cell",
+  WIDGET = "widget"
+}
 
-  constructor(obj?:IEmailItem) {
-    //console.log("Constructing element with ",obj);
-    if (obj) {
-      if (obj.id)       this._data.id = obj.id;
-      if (obj.position) this._data.position = obj.position
-      this._data.type = obj.type;
-      if (obj.width)    this._data.width = obj.width;
-      if (obj.bgColor)  this._data.bgColor = obj.bgColor;
-      if (obj.txtColor) this._data.txtColor = obj.txtColor;
-      if (obj.font)     this._data.font = obj.font;
-      if (obj.fontSize) this._data.fontSize = obj.fontSize;
-      if (obj.fontBold!=null) this._data.fontBold = obj.fontBold;
-      if (obj.fontItalic!=null) this._data.fontItalic = obj.fontItalic;
-      if (obj.fontUnderline!=null) this._data.fontUnderline = obj.fontUnderline;
-      if (obj.paddingBottom) this._data.paddingBottom = obj.paddingBottom;
-      else this._data.paddingBottom = 0;
-      if (obj.paddingTop) this._data.paddingTop = obj.paddingTop;
-      else this._data.paddingTop = 0;
-      if (obj.paddingLeft) this._data.paddingLeft = obj.paddingLeft;
-      else this._data.paddingLeft = 0;
-      if (obj.paddingRight) this._data.paddingRight = obj.paddingRight;
-      else this._data.paddingRight = 0;
-      if (obj.hAlign) this._data.hAlign = obj.hAlign;
-      else this._data.hAlign = "left";
-      if (obj.vAlign) this._data.vAlign = obj.vAlign;
-      else this._data.vAlign = "top";
-      if (obj.widget) this._data.widget = obj.widget;
+export enum EBlockType {
+  SIMPLE = "simple",
+  DOUBLE = "double",
+  DOUBLE_2080 = "double_2080",
+  DOUBLE_8020 = "double_8020",
+  DOUBLE_3070 = "double_3070",
+  DOUBLE_7030 = "double_7030",
+  TRIPLE = "triple",
+  QUAD = "quad"
+}
 
-      if (obj.childs) { 
-         this._data.childs = obj.childs;
-         for (let child of obj.childs) {
-           let myChild = new EmailItem(child)
-           this.children.push(myChild);
-           myChild.parent = this;
-         }
-      } else {
-        this._data.childs = [];
-      }
-      if (obj.widget){
-         this._data.widget = obj.widget;
-         this.widget = new EmailWidget({type:obj.widget.type,content:obj.widget.content});
-      }
-      if (!this._data.id) this.setId();
+//JSON DATA OF THE EMAIL
+export interface IEmailData {
+  /**Unique identifier of the element */
+  id?:number;
 
+  /**Type of the element: container,block,cell */
+  type?: EElemType | string;
+
+  /**Width property */
+  width?:string;
+
+  /**Background color */
+  bgColor?:string;
+
+  /**Text color */
+  txtColor?:string;
+
+  /**Font to use for the element */
+  font?:string;
+
+  /**Font size to use for the element */
+  fontSize?:string;
+
+  /**Bold font*/
+  fontBold?: boolean;
+  
+  /**Italic font */
+  fontItalic?:boolean;
+    
+  /**Underline font */
+  fontUnderline?: boolean;
+
+  blocks?: IEmailBlock[];
+}
+
+//BLOCK JSON DATA
+export interface IEmailBlock {
+    /**Unique identifier of the element */
+    id?:number;
+
+    /**Type of the element: container,block,cell */
+    type?: EElemType | string;
+
+    /**Position of the block */
+    position?:number;
+
+    /**Format of block: simple,double... */
+    format?: EBlockType | string;
+  
+    /**Width property */
+    width?:string;
+  
+    /**Background color */
+    bgColor?:string;
+  
+    /**Text color */
+    txtColor?:string;
+  
+    /**Font to use for the element */
+    font?:string;
+  
+    /**Font size to use for the element */
+    fontSize?:string;
+  
+    /**Bold font*/
+    fontBold?: boolean;
+  
+    /**Italic font */
+    fontItalic?:boolean;
+  
+    /**Underline font */
+    fontUnderline?: boolean;
+
+    /**Cells of the block */
+    cells?: IEmailCell[];
+}
+
+export interface IEmailCell {
+  /**Unique identifier of the element */
+  id?:number;
+
+  /**Type of the element: container,block,cell */
+  type?: EElemType | string;
+
+  /**Width property */
+  width?:string;
+
+  /**Background color */
+  bgColor?:string;
+
+  /**Text color */
+  txtColor?:string;
+
+  /**Font to use for the element */
+  font?:string;
+
+  /**Font size to use for the element */
+  fontSize?:string;
+
+  /**Bold font*/
+  fontBold?: boolean;
+
+  /**Italic font */
+  fontItalic?:boolean;
+
+  /**Underline font */
+  fontUnderline?: boolean;
+
+  /**Padding top */
+  paddingTop?:number;
+
+  /**Padding left*/
+  paddingLeft?:number;
+
+  /**Padding right */
+  paddingRight?:number;
+
+  /**Padding bottom */
+  paddingBottom?:number;
+
+  /**Horizontal align: left,right,center */
+  hAlign?:string;
+
+  /**Vertical align: top,bottom,center */
+  vAlign?:string;
+
+  /**Contains the content of the cell */
+  widgets?: IEmailWidget[] | any[];
+}
+
+//ITEM ELEMENT HAS ONE WIDGET
+export interface IEmailWidget {
+  /**Unique identifier of the element */
+  id?:number;
+
+  /**Type of the element: container,block,cell */
+  type?: EElemType | string;
+
+  /**Position of the block */
+  position?:number;
+
+  /**Subtype of the widget: text,button,image */
+  format?: EWidgetType | string;
+
+  /**Textarea content in case of text */
+  textarea?:string;
+
+  /**URL of the link or of the image */
+  url?:string;
+
+  /**Button text */
+  txtBtn?:string;
+
+  /**Type of button: link,flat or stroked */
+  typeBtn?: 'link' | 'flat' | 'stroked';
+
+  /**Color of the text of the button */
+  colorBtn?:string;
+
+  /**Color of the background of the button */
+  bgColorBtn?:string;
+
+  /**Alt text of the image */
+  imgAlt?:string;
+
+  /**Image width */
+  imgWidth?:number;  
+}
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class KiiEmailTemplateService {
+
+  private data : IEmailData = {};
+  
+  /**Selection filter */
+  private selectionFilter : EElemType = EElemType.BLOCK;
+
+  public imageRequest : Subject<number> = new Subject<number>();
+  public isImageAvailable : Subject<number> = new Subject<number>();
+
+  public image : string = null;
+
+  constructor() { }
+
+  /**Generates new empty template or load existing one */
+  initialize(json:IEmailData = null) {
+    if (!json) {
+      this.data.id = 0;
+      this.data.type = EElemType.CONTAINER;
+      this.data.bgColor = "white";
+      this.data.txtColor = "black";
+      this.data.width = "600";
+      this.data.font = "Verdana";
+      this.data.fontBold =false;
+      this.data.fontItalic = false;
+      this.data.fontUnderline = false;
+      this.data.fontSize = "14px";
+      this.data.blocks = [];
     } else {
-      //Set defaults for container
-      this._data.bgColor = "white";
-      this._data.txtColor = "black";
-      this._data.font = "Verdana";
-      this._data.fontSize="16px";
-      this._data.fontBold=false;
-      this._data.fontItalic = false;
-      this._data.fontUnderline = false;
-      this._data.paddingBottom = 0;
-      this._data.paddingTop = 0;
-      this._data.paddingLeft = 0;
-      this._data.paddingRight = 0;
-      this._data.hAlign="left";
-      this._data.vAlign="top";
-      this._data.width='600';
-
-      this._data.id = 0;
+      this.data = json;
     }
-    //console.log("Resulting element",this._data);
   }
 
+  /**Returns the current template json */
+  getJson() {
+    return this.data;
+  }
 
-  /**Returns available font sizes */
+  /**Returns the container width */
+  getContainerWidth() {
+    return this.data.width;
+  }
+
+  /**Returns list of Block types */
+  getAllBlockTypes() {
+    return Object.values(EBlockType);
+  } 
+
+  /** ¡Returns available font sizes */
   getAllFontSizes() {
-    return ["12px","14px","16px","18px","24px","28px"];
+    return ['12px','14px','16px','18px','22px','26px','30px','34px'];
   }
 
-  /**Returns array of fonts */
+  /**Returns all available fonts */
   getAllFonts() {
     return [
       "Arial",
@@ -266,459 +350,350 @@ export class EmailItem {
     ]
   }
 
-  /**Returns list of EItemTypes */
-  getAllItemTypes() {
-      return Object.values(EItemType);
-  }
-
-  /**Returns list of Block types */
-  getAllBlockTypes() {
-    return Object.values(EBlockType);
-  } 
-
-  /**Returns list of widgets */
+  /**Returns all widget types */
   getAllWidgetTypes() {
     return Object.values(EWidgetType);
-  } 
-
-  /**Returns if the item is container */
-  isContainer() {
-    return this._data.type == EItemType.CONTAINER;
   }
 
-  /**Returns if the item is a block row */
-  isBlock() {
-    return this._data.type == EItemType.BLOCK;
+  /**Returns the tipe of the element */
+  getElementType(id:number) {
+    return this._findId(id).type;
   }
 
-  /**Returns if the item is cell */
-  isCell() {
-    return this._data.type == EItemType.CELL;
-  }
-
-  /**REturns if the item is a item type */
-  isItem() {
-    return this._data.type == EItemType.ITEM;
-  }
-
-  /**Returns if the item is a widget */
-  isWidget() {
-    if (this.widget) return true;
-    return false;
-  }
-  
-  /**Gets the data of the item */
-  getData() {
-    return this._data;
-  }
-
-  /**Gets the padding value */
-  getPadding(type:string) {
-    switch (type) {
-      case "top": return this._data.paddingTop;
-      case "bottom": return this._data.paddingBottom;
-      case "left": return this._data.paddingLeft;
-      default: return this._data.paddingRight;
+  _findId(id:number) {
+    if (id == 0) return this.data;
+    for (let block of this.getBlocks())  {
+       if (block.id == id) return block;
+       for (let cell of block.cells) {
+         if (cell.id == id) return cell;
+         for (let widget of this.getWidgets(cell.id)) {
+           if (widget.id == id) return widget;
+         }
+       }
     }
+    return this.data;
   }
 
-  /**Gets the padding value in px format */
-  getPaddingPx(type:string) {
-    return this.getPadding(type) + "px";
-  }
-
-  /**Returns the children of the element ordered by position */
-  getChildren() {
-    return this.children.sort((a,b)=> a._data.position>b._data.position?1:-1);
-  }
-
-  setWidget(widget: IEmailWidget,item:EmailItem) {
-    let container = this.getContainer();
-    function _findItem(item:IEmailItem,id:number,widget:IEmailWidget) {
-      if (item.id == id) {
-        item.widget = widget; 
-        return;
-      }
-      for (let child of item.childs) {
-        _findItem(child,id,widget);
-      }
-    }
-    _findItem(container._data,item._data.id,widget);
-  }
-
-  setPadding(type:string,value:number) {
-    switch (type) {
-      case "top": this._data.paddingTop = value; break;
-      case "bottom": this._data.paddingBottom = value; break;
-      case "left": this._data.paddingLeft = value; break;
-      default: this._data.paddingRight = value; break;
-    }
-  }
-
-  /**Returns vertical alignment: top, bottom,center */
-  getAlignVertical() {
-    return this._data.vAlign;
-  }
-
-  /**Returns horizontal alignment: left,right,center */
-  getAlignHorizontal() {
-    return this._data.hAlign;
-  }
-
-  /**Sets the horizontal alignment: left,right,center */
-  setAlignHorizontal(type:string) {
-    this._data.hAlign = type;
-  }
-
-  /**Sets the vertical alignment: top,bottom,center */
-  setAlignVertical(type:string) {
-    this._data.vAlign = type;
-  }
-
-  /**Returns the type of the item */
-  getType() {
-    return this._data.type;
-  }
-
-  /**Returns the width of the item */
-  getWidth() {
-    return this._data.width;
-  }
-
-  /**Sets text color of item */
-  setColor(color:string) {
-    this._data.txtColor = color;
-  }
-
-  /**Sets background color of item */
-  setBgColor(color:string) {
-    this._data.bgColor = color;
-  }
-
-  /**Sets the fontSize of the item */
-  setFontSize(size:string) {
-    this._data.fontSize = size;
-  }
-
-  /**Sets the font familyt for the item */
-  setFont(family:string) {
-    this._data.font = family;
-  }
-
-  /**Sets the font bold */
-  setFontBold(value:boolean) {
-      this._data.fontBold = value;
-  }
-
-  /**Sets the font underline */
-  setFontUnderline(value:boolean) {
-    this._data.fontUnderline = value;
-  }  
-
-  /**Sets the font italic */
-  setFontItalic(value:boolean) {
-    this._data.fontItalic = value;
-  }
-
-  /**Sets Id to the next identifier */
-  setId() {
-    this._data.id = this._getNextId();
-  }
-
-  /**Gets next available id */
-  private _getNextId() {
-    let maxId : any = {value:0};
-    let container = this.getContainer();
-    function _getId(item:EmailItem,max:any) {
-      if (item._data.id>max.value)
-        max.value = item._data.id;
-      for (let child of item.children) {
-        _getId(child,max);
-      }
-    }  
-    _getId(container,maxId);
-    return maxId.value+1;
-  }
-
-  /**Sets position so that we can reorder in array blocks */
-  setPosition() {
-    if (this.parent) {
-      let max = 0;
-      for (let child of this.parent.children) {
-        if (child._data.position>max) {
-          max = child._data.position;
+  _getNextId() {
+    let id = 0;
+    for (let block of this.data.blocks) {
+      if (block.id>id) id = block.id;
+      for (let cell of block.cells) {
+        if (cell.id>id) id = cell.id;
+        for (let widget of cell.widgets) {
+          if (widget.id>id) id = widget.id;
         }
       }
-      this._data.position = max +1;
     }
+    id = id + 1;
+    return id;
+  }
+  _getNextBlockPosition() {
+     let position = 0;
+     for (let block of this.data.blocks) {
+       if (block.position> position) position = block.position;
+     }
+     position = position+1;
+     return position;
   }
 
-  /**Gets the json data*/
-  getJson() {
-    let container = this.getContainer();
-    console.log("CONTAINER DATA",container);
-    return JSON.stringify(container._data);
-  }
-
-  /**Returns the color of the item by going up in the hiearchy if not defined */
-  getColor() {
-    function _getColor(item:EmailItem) {
-      if (item._data.txtColor){
-        return item._data.txtColor;
-      } 
-      if (item.parent)
-        return _getColor(item.parent)
-    }  
-    return _getColor(this);
-  }
-
-  /**Returns the background color of the item by going up in the hierarchy if not defined */
-  getBgColor() {
-    function _getBgColor(item:EmailItem) {
-          if (item._data.bgColor){
-            return item._data.bgColor;
-          } 
-          if (item.parent)
-            return _getBgColor(item.parent)
-    }    
-    return _getBgColor(this);
-  }
-
-  /**Returns the text fontSize of the item by going up in the hierarchy if not defined */
-  getFontSize() {
-    function _getFontSize(item:EmailItem) {
-        if (item._data.fontSize){
-          return item._data.fontSize;
-        } 
-        if (item.parent)
-          return _getFontSize(item.parent)
-    }    
-    return _getFontSize(this);
-  }
-
-  /**Returns the text font family of the item by going up in the hierarchy if not defined */
-  getFont() {
-    function _getFont(item:EmailItem) {
-        if (item._data.font){
-          return item._data.font;
-        } 
-        if (item.parent)
-          return _getFont(item.parent)
-    }    
-    return _getFont(this);
-  }
-
-  /**Returns the text if bold or parse up hierarchy */
-  getFontBold() {
-    function _getFontBold(item:EmailItem) {
-        if (item._data.fontBold !=undefined && item._data.fontBold!=null){
-          return item._data.fontBold;
-        } 
-        if (item.parent)
-          return _getFontBold(item.parent)
-    }    
-    return _getFontBold(this);
-  }  
-
-  /**Returns the text if underline or parse up hierarchy */
-  getFontUnderline() {
-    function _getFontUnderline(item:EmailItem) {
-        if (item._data.fontUnderline !=undefined && item._data.fontUnderline!=null){
-          return item._data.fontUnderline;
-        } 
-        if (item.parent)
-          return _getFontUnderline(item.parent)
-    }    
-    return _getFontUnderline(this);
-  }  
-
-  /**Returns the text if italic or parse up hierarchy */
-  getFontItalic() {
-    function _getFontItalic(item:EmailItem) {
-        if (item._data.fontItalic !=undefined && item._data.fontItalic!=null){
-          return item._data.fontItalic;
-        } 
-        if (item.parent)
-          return _getFontItalic(item.parent)
-    }    
-    return _getFontItalic(this);
-  }  
-
-
-
-  /**Removes any active element by recurivelly going down on children */
-  resetActive() {
-    let container = this.getContainer();
-    _removeActive(container);
-    
-    function _removeActive(item:EmailItem) {
-        if (item.children.length) {
-            for (let elem of item.children) {
-              elem.isActive = false;
-              _removeActive(elem)
-            }
+  getParent(id:number) {
+    if (id == 0) return this.data;
+    if (this.data.blocks.findIndex(obj=> obj.id == id)>=0) return this.data;
+    else {
+      for (let block of this.data.blocks) {
+        if (block.cells.findIndex(obj=>obj.id ==id)>=0) return block;
+        for (let cell of block.cells) {
+          if (cell.widgets.findIndex(obj=>obj.id ==id)>=0) return cell;
         }
-    }
-  }
-
-  /**Gets the root element by recursivelly going parents up */
-  getContainer() {
-    function _getParent(item:EmailItem) {
-      if (item.parent)
-        return _getParent(item.parent)
-      else
-        return item;
-    }
-    return _getParent(this);
-  }
-
-  /**Removes item from array */
-  removeItem(item:EmailItem) {
-    if (item && item.parent) {
-        item.parent.children = item.parent.children.filter(obj=> obj._data.id != item._data.id);
-        let container = this.getContainer();
-        function _removeId(item:IEmailItem,id:number) {
-          item.childs = item.childs.filter(obj=> obj.id != id);
-          for (let child of item.childs) {
-             _removeId(child,id);
-          }
-        }
-        _removeId(container._data,item._data.id);
-    }
-  }
-
-  /**Moves item up in the position */
-  moveUp(item:EmailItem) {
-    if (item.parent) {
-      let myIndex = item.parent.children.findIndex(obj=> obj._data.id == item._data.id);
-      if (myIndex>0) {
-        let myElem = item.parent.children[myIndex];
-        let myPrevElem = item.parent.children[myIndex-1];
-        if (myElem && myPrevElem) {
-          let tmp = myElem._data.position;
-          myElem._data.position = myPrevElem._data.position;
-          myPrevElem._data.position = tmp;
-        }
-      } 
-    }
-  }
-
-  /**Moves item down in the position */
-  moveDown(item:EmailItem) {
-    if (item.parent) {
-      let myIndex = item.parent.children.findIndex(obj=> obj._data.id == item._data.id);
-      if (myIndex < item.parent.children.length) {
-        let myElem = item.parent.children[myIndex];
-        let myNextElem = item.parent.children[myIndex+1];
-        if (myElem && myNextElem) {
-          let tmp = myElem._data.position;
-          myElem._data.position = myNextElem._data.position;
-          myNextElem._data.position = tmp;
-        }
-      } 
+      }
     }
   }
 
 
-  /**Adds child to element by keeping parents... correct */
-  addChild(child:IEmailItem,parent?:EmailItem) {
-    if (!parent) parent = this;
-    let myChild = new EmailItem(child);
-    parent._data.childs.push(myChild._data);
-    parent.children.push(myChild)
-    myChild.parent = parent;
-    myChild.setId();
-    myChild.setPosition();
-    return myChild;
+
+  /**Adds a cell to a specific block */
+  addCell(blockId:number, width:string) {
+    let block = <IEmailBlock>this._findId(blockId);
+    if (block.type == EElemType.BLOCK) {
+      let cell = {
+        id: this._getNextId(),
+        type:EElemType.CELL,
+        width:width,
+        bgColor:null,
+        txtColor:null,
+        font:null,
+        fontSize:null,
+        fontBold:null,
+        fontItalic:null,
+        fontUnderline:null,
+        paddingTop:0,
+        paddingLeft:0,
+        paddingRight:0,
+        paddingBottom:0,
+        hAlign:"left",
+        vAlign:"top",
+        widgets:[]
+      };
+      block.cells.push(cell);
+    }
+
   }
 
-  /**Add a block to element */
+  /**Returns the cells of a block */
+  getCells(blockId:number) {
+    let block = <IEmailBlock>this._findId(blockId);
+    return block.cells;
+  }
+
+
+  /**Adds a block to the container */
   addBlock(type: EBlockType) {
-    let cell : IEmailItem = {
-      width: "100%",
-      type: EItemType.CELL,
-    }
-    let block : IEmailItem = {
-      type: EItemType.BLOCK,
+    let myId = this._getNextId();
+    this.data.blocks.push(
+      {
+        id: myId,
+        type: EElemType.BLOCK,
+        position: this._getNextBlockPosition(),
+        format: type,
+        width:"100%",
+        bgColor:null,
+        txtColor:null,
+        font:null,
+        fontSize:null,
+        fontBold: null,
+        fontItalic: null,
+        fontUnderline: null,
+        cells: []
+      })
+      switch (type) {
+        case EBlockType.DOUBLE:
+          this.addCell(myId,"50%");
+          this.addCell(myId,"50%");
+          break;
+        case EBlockType.DOUBLE_2080:
+          this.addCell(myId,"20%");
+          this.addCell(myId,"80%");
+          break;    
+        case EBlockType.DOUBLE_3070:
+          this.addCell(myId,"30%");
+          this.addCell(myId,"70%");
+          break;         
+        case EBlockType.DOUBLE_8020:
+          this.addCell(myId,"80%");
+          this.addCell(myId,"20%");
+          break;    
+        case EBlockType.DOUBLE_7030:
+          this.addCell(myId,"70%");
+          this.addCell(myId,"30%");
+          break;       
+        case EBlockType.TRIPLE:
+          this.addCell(myId,"33%");
+          this.addCell(myId,"33%");
+          this.addCell(myId,"34%");
+          break;             
+        case EBlockType.QUAD:
+          this.addCell(myId,"25%");
+          this.addCell(myId,"25%");
+          this.addCell(myId,"25%");          
+          this.addCell(myId,"25%");
+          break;          
+        default: 
+          this.addCell(myId,"100%");
+      }
+  }
+
+  /**Returns orderder blocks */
+  getBlocks() {
+    return this.data.blocks.sort((a,b)=> a.position>b.position?1:-1);
+  }
+
+  /**Adds widget to a cell */
+  addWidget(cellId:number,type:EWidgetType) {
+    let cell = <IEmailCell>this._findId(cellId);
+    
+    function getNextPosition(cell) {
+      let position=0;
+      for (let widget of cell.widgets) {
+        if (widget.position>position) position=widget.position;
+      }
+      position =position+1;
+      return position;
     }
 
-    switch (type) {
-      case EBlockType.SIMPLE: {
-         let myBlock = this.addChild(block);
-         this.addChild(cell,myBlock);
-         break;
-      }
-      case EBlockType.DOUBLE: {
-        let myBlock = this.addChild(block);
-        cell.width = "50%";
-        this.addChild(cell,myBlock);
-        this.addChild(cell,myBlock);
-        break;
-      }
-      case EBlockType.DOUBLE_LEFT: {
-        let myBlock = this.addChild(block);
-        cell.width = "33%";
-        this.addChild(cell,myBlock);
-        cell.width = "66%";
-        this.addChild(cell,myBlock);
-        break;
-      }
-      case EBlockType.DOUBLE_RIGHT: {
-        let myBlock = this.addChild(block);
-        cell.width = "66%";
-        this.addChild(cell,myBlock);
-        cell.width = "33%";
-        this.addChild(cell,myBlock);
-        break;
-      }
-      case EBlockType.TRIPLE: {
-        let myBlock = this.addChild(block);
-        cell.width = "33%";
-        this.addChild(cell,myBlock);
-        this.addChild(cell,myBlock);
-        this.addChild(cell,myBlock);
-        break;
-      }                  
+    if (cell.type == EElemType.CELL) {
+      let widget: IEmailWidget = {
+        id: this._getNextId(),
+        position:getNextPosition(cell),
+        type:EElemType.WIDGET,
+        format: type,
+        textarea:"Text",
+        url:"",
+        txtBtn:"Text",
+        typeBtn: 'link',
+        colorBtn:"red",
+        bgColorBtn:"blue",
+        imgAlt:"Alt text",
+        imgWidth:600
+      };
+      cell.widgets.push(widget);
     }
   }
 
-  /**Adds a widget to the current cell by creating an item */
-  addWidget(type:EWidgetType,content?:string) {
-      console.log("WE WILL ADD WIDGET",type);
-      let item : IEmailItem = {
-        type: EItemType.ITEM
+  /**Returns widgets ordered by position */
+  getWidgets(cellId:number) {
+    let elem = this._findId(cellId);
+    return elem.widgets.sort((a,b)=> a.position>b.position?1:-1);
+  }
+
+
+  /**Sets selection type */
+  setSelectionFilter(type: EElemType) {
+    this.selectionFilter = type;
+  }
+
+  /**Returns current selection filter */
+  getSelectionFilter() {
+    return this.selectionFilter;
+  }
+
+  /**Removes element */
+  remove(id:number) {
+    let item = this._findId(id);
+    let parent = this.getParent(item.id);
+    if (parent.type == EElemType.CONTAINER) {
+      let container = <IEmailData>parent;
+      let index = container.blocks.findIndex(obj=>obj.id ==id);
+      if (index>=0) container.blocks.splice(index,1);
+    }
+    //Widgets
+    if (parent.type == EElemType.CELL) {
+      let cell = <IEmailCell>parent;
+      let index = cell.widgets.findIndex(obj=> obj.id == id);
+      if (index>=0) cell.widgets.splice(index,1);
+    }
+    this.data = {...this.data};
+  }
+
+  /**Moves item up */
+  moveUp(id:number) {
+    let item = this._findId(id);
+    let parent = this.getParent(item.id);
+    if (parent.type == EElemType.CONTAINER) {
+      let container = <IEmailData>parent;
+      let currIndex = container.blocks.findIndex(obj=> obj.position == item.position);
+      let prevIndex = container.blocks.findIndex(obj=> obj.position == item.position-1);
+        if (prevIndex>=0 && currIndex>=0) {
+           let tmp = container.blocks[prevIndex].position;
+           container.blocks[prevIndex].position = container.blocks[currIndex].position;
+           container.blocks[currIndex].position = tmp;
+        }
+    }
+    if (parent.type == EElemType.CELL) {
+      let cell = <IEmailCell>parent;
+      let currIndex = cell.widgets.findIndex(obj=> obj.position == item.position);
+      let prevIndex = cell.widgets.findIndex(obj=> obj.position == item.position-1);
+        if (prevIndex>=0 && currIndex>=0) {
+          let tmp = cell.widgets[prevIndex].position;
+          cell.widgets[prevIndex].position = cell.widgets[currIndex].position;
+          cell.widgets[currIndex].position = tmp;
+        }
+    }
+  }
+
+  /**Moves item down */
+  moveDown(id:number) {
+    let item = this._findId(id);
+    let parent = this.getParent(item.id);
+    if (parent.type == EElemType.CONTAINER) {
+      let container = <IEmailData>parent;
+      let currIndex = container.blocks.findIndex(obj=> obj.position == item.position);
+      let nextIndex = container.blocks.findIndex(obj=> obj.position == item.position+1);
+        if (nextIndex>=0 && currIndex>=0) {
+           let tmp = container.blocks[currIndex].position;
+           container.blocks[currIndex].position = container.blocks[nextIndex].position;
+           container.blocks[nextIndex].position = tmp;
+        }
+    }
+    if (parent.type == EElemType.CELL) {
+      let cell = <IEmailCell>parent;
+      let currIndex = cell.widgets.findIndex(obj=> obj.position == item.position);
+      let nextIndex = cell.widgets.findIndex(obj=> obj.position == item.position+1);
+        if (nextIndex>=0 && currIndex>=0) {
+          let tmp = cell.widgets[currIndex].position;
+          cell.widgets[currIndex].position = cell.widgets[nextIndex].position;
+          cell.widgets[nextIndex].position = tmp;
+        }
+    }
+  }
+
+
+  /**Returns property if defined or traces up until defined */
+  getPropertyValue(id:number, property:string) {
+    let elem = this._findId(id);
+    if (!elem) console.error("Element not found",id);
+    if(!(elem[property]==null) && !(elem[property]==undefined)) {
+      return elem[property];
+    } else {
+      let result = null;
+      let myId = elem.id;
+      while (result == null) {
+        let parent = this.getParent(myId);
+        if (parent[property]!=null && parent[property]!=undefined){
+          return parent[property];
+        }
+        myId = parent.id;
       }
-      let myItem = this.addChild(item);
-      myItem._data.widget = <IEmailWidget>{type:type};
-      myItem.widget = new EmailWidget(myItem._data.widget);
+    }
   }
 
-
-
-
-  /**Returns if there is a sibling active element */
-  hasSblingActive() {
-    if (!this.parent) return false;
-    let active = this.parent.getChildren().find(obj=>obj.isActive == true);
-    if (active) return true;
-    return false;
+  /**Returns if item isBold */
+  isBold(id:number) {
+    return this.getPropertyValue(id,'fontBold');
   }
 
-}
+  /**Returns if item is Italic */
+  isItalic(id:number) {
+    return this.getPropertyValue(id,'fontItalic');
+  }
 
+  /**Returns if item is underline */
+  isUnderline(id:number) {
+    return this.getPropertyValue(id,'fontUnderline');
+  }
 
+  /**Returns horizontal alignment */
+  getAlignHorizontal(id:number) {
+    let elem = this._findId(id);
+    if(!(elem['hAlign']==null) && !(elem['hAlign']==undefined))
+      return elem['hAlign'];
+    else 
+      return 'left';
+  }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class KiiEmailTemplateService {
+  /**Returns vertical alignment */
+  getAlignVertical(id:number) {
+    let elem = this._findId(id);
+    if(!(elem['vAlign']==null) && !(elem['vAlign']==undefined))
+      return elem['vAlign'];
+    else 
+      return 'top';
+  }
 
-  public imageRequest : Subject<number> = new Subject<number>();
-  public isImageAvailable : Subject<number> = new Subject<number>();
+  /**Returns the padding of element */
+  getPadding(id:number, side: 'left' | 'right' |'top'|'bottom') {
+    let elem = this._findId(id);
+    switch (side) {
+      case 'left': return elem.paddingLeft;
+      case 'right': return elem.paddingRight;
+      case 'top': return elem.paddingTop;
+      case 'bottom': return elem.paddingBottom;
+      default: return 0;
+    }
+  }
 
-  public image : string = null;
-
-  constructor() { }
-
-
+  /**Returns padding in px format string */
+  getPaddingPx(id:number, side: 'left' | 'right' |'top'|'bottom') {
+    return this.getPadding(id,side) + 'px';
+  }
 }

@@ -1,15 +1,50 @@
 <div class="kii-email-editor-wrp" [ngStyle]="{'max-width':getContainerWidth()}">
-   <kii-email-item #itemComp [item]="item"></kii-email-item>
-   <!--<kii-email-toolbar></kii-email-toolbar>
-   <div class="kii-email" [ngStyle]="{'background':data.bgColor, 'color':data.txtColor}">
-      <ng-container *ngFor="let block of structure.blocks">
-         <kii-email-block [block]="block"></kii-email-block>
-      </ng-container>
-      <p>Text of the body to see</p>
-   </div>-->
+<!--
+'padding-top': item.getPaddingPx('top'),
+'padding-bottom': item.getPaddingPx('bottom'),
+'padding-left': item.getPaddingPx('left'),
+'padding-right': item.getPaddingPx('right')-->
+
+      <kii-email-container-toolbar [elemId]="selectedElem"></kii-email-container-toolbar>
+      <div class="container"
+                           [ngStyle]="{'background':service.getPropertyValue(0,'bgColor'), 
+                           'color':service.getPropertyValue(0,'txtColor'), 
+                           'font-weight':service.getPropertyValue(0,'fontBold')?'bold':'normal', 
+                           'font-style':service.getPropertyValue(0,'fontItalic')?'italic':'normal', 
+                           'text-decoration':service.getPropertyValue(0,'fontUnderline')?'underline':'none',
+                           'font-size':service.getPropertyValue(0,'fontSize'),
+                           'font-family':service.getPropertyValue(0,'font')
+                           }">
+         <div class="block" [ngClass]="getBlockClasses(block)" *ngFor="let block of service.getBlocks()" (click)="selectBlock(block.id)"
+                           [ngStyle]="{'background':service.getPropertyValue(block.id,'bgColor'), 
+                           'color':service.getPropertyValue(block.id,'txtColor'), 
+                           'font-weight':service.getPropertyValue(block.id,'fontBold')?'bold':'normal', 
+                           'font-style':service.getPropertyValue(block.id,'fontItalic')?'italic':'normal', 
+                           'text-decoration':service.getPropertyValue(block.id,'fontUnderline')?'underline':'none',
+                           'font-size':service.getPropertyValue(block.id,'fontSize'),
+                           'font-family':service.getPropertyValue(block.id,'font')
+                           }">
+               <div class="cell" [ngClass]="getCellClasses(cell)" *ngFor="let cell of block.cells" (click)="selectCell(cell.id)"
+                           [ngStyle]="{'background':service.getPropertyValue(cell.id,'bgColor'), 
+                           'color':service.getPropertyValue(cell.id,'txtColor'), 
+                           'font-weight':service.getPropertyValue(cell.id,'fontBold')?'bold':'normal', 
+                           'font-style':service.getPropertyValue(cell.id,'fontItalic')?'italic':'normal', 
+                           'text-decoration':service.getPropertyValue(cell.id,'fontUnderline')?'underline':'none',
+                           'font-size':service.getPropertyValue(cell.id,'fontSize'),
+                           'font-family':service.getPropertyValue(cell.id,'font'),
+                           'padding-top': service.getPaddingPx(cell.id,'top'),
+                           'padding-bottom': service.getPaddingPx(cell.id,'bottom'),
+                           'padding-left': service.getPaddingPx(cell.id,'left'),
+                           'padding-right': service.getPaddingPx(cell.id,'right')
+                           }">
+                     <div class="widget" [ngClass]="{'is-active': widget.id == selectedElem}" *ngFor="let widget of service.getWidgets(cell.id)" (click)="selectWidget(widget.id)">
+                        <kii-email-widget [id]="widget.id" [isActive]="widget.id == selectedElem"></kii-email-widget>
+                     </div>
+               </div>
+         </div>
+      </div>
 </div>
 <button mat-button color="primary" (click)="outputData()">Get DATA</button>
-<button mat-button color="primary" (click)="outputHtml()">Get HTML</button>
+<button mat-button color="primary" (click)="outputHtml()">Preview</button>
 
-<div #previewElem class="preview" [innerHtml]="trustedHtml2"></div>
-
+<kii-email-preview [json]="preview"></kii-email-preview>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, Input, ElementRef, SimpleChanges, HostListener, Renderer2 } from '@angular/core';
-import { EmailItem, EWidgetType, IEmailWidget, KiiEmailTemplateService } from '../../services/kii-email-template.service';
+import { EWidgetType, IEmailWidget, KiiEmailTemplateService } from '../../services/kii-email-template.service';
 import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { faTint } from '@fortawesome/free-solid-svg-icons/faTint';
@@ -18,13 +18,13 @@ export class KiiEmailWidgetComponent implements OnInit {
     color:faTint
   };
   /**Item to work on */
-  @Input() item: EmailItem = new EmailItem(); 
+  @Input() id: number; 
 
-  /**Requests new image so that can be inserted */
-  @Output() onRequestImage = new EventEmitter<number>();
+  /**When element is active */
+  @Input() isActive : boolean = false;
 
-  /**Contains the requested image */
-  @Input() requestedImage: string;
+  /**Contains current widget data */
+  widget: IEmailWidget = null;
 
 
   /**Event generated each time email changes */
@@ -32,40 +32,29 @@ export class KiiEmailWidgetComponent implements OnInit {
 
   trustedHtml:SafeHtml = ""; 
   untrustedHtml:String = "";
-
   color:string = "black";
-
-  calcWidth:string = "100%";
-
-
 
   @ViewChild('myTextArea',{static:false}) textarea : ElementRef;
   @ViewChild('contentElem',{static:false}) contentElem : ElementRef;
 
-  @HostListener('window:resize', ['$event'])
-  onresize(event?) {
-    if (this.contentElem) {
-      this.calculateWidth();
-    }
-  }
+
 
   constructor(
     private sanitize: DomSanitizer,
     private service: KiiEmailTemplateService,
     private r : Renderer2
     ) { 
-      console.log("WIDGET is:",this.item)
     }
 
 
   ngOnInit() {
-      console.log("GENERATED ITEM:",this.item.widget);
+      this.widget = this.service._findId(this.id);
+
       this.service.isImageAvailable.subscribe(res => {
-        if (this.item.getData().id == res) {
-            this.item.widget.getContent().url = this.service.image;
+        if (this.widget.id == res) {
+            this.widget.url = this.service.image;
             this.service.image = null;
             this.updateImage();
-            console.log(this.item.widget.getContent());
         }
       })
   }
@@ -77,37 +66,51 @@ export class KiiEmailWidgetComponent implements OnInit {
   }
 
   ngOnChanges(changes:SimpleChanges) {
-    if (changes.item) {
-      this.item = changes.item.currentValue;
-      this.setInitial();
-      console.log("WIDGET:",this.item.widget.getContent())
+    if (changes.isActive) {
+      this.isActive = changes.isActive.currentValue;
     }
+    if (changes.id) {
+      this.id = changes.id.currentValue;
+      this.widget = this.service._findId(this.id);
+      this.setInitial();
+    }
+  }
+
+  isText() {
+    return this.widget.format==EWidgetType.TEXT;
+  }
+  isButton() {
+    return this.widget.format == EWidgetType.BUTTON;
+  }
+  isImage() {
+    return this.widget.format == EWidgetType.IMAGE;
   }
 
 
   setInitial() {
-    this.calculateWidth();
-    switch (this.item.widget.getType()) {
-      case EWidgetType.TEXT: {
-        let content = this.item.widget.getContent().textarea;
-        if (!content) content = "";
-        this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(content);
-        //Replace any <p>.*</p> by \n for untrusted
-        let tmp = content.split("/p>");
-        content = "";
-        tmp.forEach((value)=> {
-          content = content + value.replace(/<p.*/g,'\n');
-        })
-        this.untrustedHtml = content;
-        break;
-      }
-      case EWidgetType.BUTTON: {
-        this.updateButton();
-        break;
-      }  
-      case EWidgetType.IMAGE: {
-        this.updateImage();
-        break;
+    if (this.widget) {
+      switch (this.widget.format) {
+        case EWidgetType.TEXT: {
+          let content = this.widget.textarea;
+          if (!content) content = "";
+          this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(content);
+          //Replace any <p>.*</p> by \n for untrusted
+          let tmp = content.split("/p>");
+          content = "";
+          tmp.forEach((value)=> {
+            content = content + value.replace(/<p.*/g,'\n');
+          })
+          this.untrustedHtml = content;
+          break;
+        }
+        case EWidgetType.BUTTON: {
+          this.updateButton();
+          break;
+        }  
+        case EWidgetType.IMAGE: {
+          this.updateImage();
+          break;
+        }
       }
     }
   }
@@ -115,15 +118,15 @@ export class KiiEmailWidgetComponent implements OnInit {
   /**Gets classes for wrapper */
   getClasses() {
     let result = {};
-    result[this.item.widget.getType()] = true;
-    switch (this.item.widget.getType()) {
+    result[this.widget.format] = true;
+    switch (this.widget.format) {
       case EWidgetType.TEXT: 
-        if (this.item.widget.getContent().textarea == "")  result['is-empty'] = true;
+        if (this.widget.textarea == "")  result['is-empty'] = true;
         break;
       default:
-       if (!this.item.widget.getContent().url) result['is-empty'] = true;
+       if (!this.widget.url) result['is-empty'] = true;
        else
-        if ( !(this.item.widget.getContent().url.indexOf("http://") == 0 || this.item.widget.getContent().url.indexOf("https://") == 0))  result['is-empty'] = true 
+        if ( !(this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0))  result['is-empty'] = true 
     }
     return result;
   }
@@ -137,8 +140,8 @@ export class KiiEmailWidgetComponent implements OnInit {
         this.untrustedHtml = this.textarea.nativeElement.value;
       }
       this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(this.untrustedHtml.replace(/\n/g,'<p style="margin-top:0px;margin-bottom:0px">&nbsp;</p>'))
-      this.item.widget.setContent({textarea:this.untrustedHtml.replace(/\n/g,'<p style="margin-top:0px;margin-bottom:0px">&nbsp;</p>')});
-      this.onChange.emit({type: this.item.widget.getType(), content:this.item.widget.getContent()});
+      this.widget.textarea = this.untrustedHtml.replace(/\n/g,'<p style="margin-top:0px;margin-bottom:0px">&nbsp;</p>');
+      this.onChange.emit(this.widget);
     }
   }
 
@@ -146,97 +149,93 @@ export class KiiEmailWidgetComponent implements OnInit {
 
   /**When url changes */
   onUrlChange(event:string) {
-    this.item.widget.getContent().url = event;
+    this.widget.url = event;
     this.updateButton();
   }
   /**When txt changes for the button*/
   onTxtChange(event:string) {
-    this.item.widget.getContent().txtBtn = event;
+    this.widget.txtBtn = event;
     this.updateButton();
   }
 
 
   /**When button color changes */
   onBtnColor(event:string) {
-    this.item.widget.getContent().colorBtn = event;
+    this.widget.colorBtn = event;
     this.updateButton();
   }
+
+  /**When button color changes */
+  onBtnBgColor(event:string) {
+    this.widget.bgColorBtn = event;
+    this.updateButton();
+  }  
+
   /**Sets the button style */
   setBtnType(type:'link' | 'flat' | 'stroked') {
-    this.item.widget.getContent().typeBtn = type;
+    this.widget.typeBtn = type;
     this.updateButton();
   }
 
   /**Updates button content */
   updateButton() {
-    if (this.item.widget.getContent().url.indexOf("http://") == 0 || this.item.widget.getContent().url.indexOf("https://") == 0) {
-      switch(this.item.widget.getContent().typeBtn) {
+    if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) {
+      switch(this.widget.typeBtn) {
         case 'flat':
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
-            `<a href="${this.item.widget.getContent().url}"  target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:inherit !important;background-color: ${this.item.widget.getContent().colorBtn}; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding: 10px 20px; mso-border-alt: none;">
-                <span style="line-height:120%;"><span>${this.item.widget.getContent().txtBtn}</span></span>
+            `<a href="${this.widget.url}"  target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};background:${this.widget.bgColorBtn}; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding: 10px 20px; mso-border-alt: none;">
+                <span style="line-height:120%;"><span>${this.widget.txtBtn}</span></span>
             </a>`
           );
           break;
         case 'stroked':
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
-            `<a href="${this.item.widget.getContent().url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.item.widget.getContent().colorBtn};border: ${this.item.widget.getContent().colorBtn} 3px solid; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding: 10px 20px; mso-border-alt: none;">
-                <span style="line-height:120%;"><span>${this.item.widget.getContent().txtBtn}</span></span>
+            `<a href="${this.widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};border: ${this.widget.colorBtn} 3px solid; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding: 10px 20px; mso-border-alt: none;">
+                <span style="line-height:120%;"><span>${this.widget.txtBtn}</span></span>
             </a>`
           );
           break;
         default:
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
-            `<a href="${this.item.widget.getContent().url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:inherit !important; width: auto; padding: 0px 10px; mso-border-alt: none;">
-                <span style="line-height:120%;"><span>${this.item.widget.getContent().txtBtn}</span></span>
+            `<a href="${this.widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};width: auto; padding: 0px 10px; mso-border-alt: none;">
+                <span style="line-height:120%;"><span>${this.widget.txtBtn}</span></span>
             </a>`
           );
           break;
       }
-      this.onChange.emit({type: this.item.widget.getType(), content:this.item.widget.getContent()});
+      this.onChange.emit(this.widget);
     } else 
         this.trustedHtml = "";
   }
   /**Updates image when new image is recieved or at initial stage*/
   updateImage() {
-    if (this.item.widget.getType() == EWidgetType.IMAGE && this.item.widget.getContent().url)
+    if (this.widget.format == EWidgetType.IMAGE && this.widget.url)
       this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
         `
-        <img src=${this.item.widget.getContent().url} style="display:block;height:auto;width:${this.calcWidth}" title=${this.item.widget.getContent().imgAlt} alt=${this.item.widget.getContent().imgAlt}>
+        <img src=${this.widget.url} style="display:block;height:auto;max-width:${this.widget.imgWidth}px;width:100%" title=${this.widget.imgAlt} alt=${this.widget.imgAlt}>
         `
       );
-    this.calculateWidth();  
-    this.onChange.emit({type: this.item.widget.getType(), content:this.item.widget.getContent()});
+    this.onChange.emit(this.widget);
   }
 
   /**Requests image so that the dialog can be created */
   onNewImageRequested() {
-    this.service.imageRequest.next(this.item.getData().id);
+    this.service.imageRequest.next(this.widget.id);
   }
 
   /**When alt text changes */
   onAltTxtChange(event:string) {
-    this.item.widget.getContent().imgAlt = event;
+    this.widget.imgAlt = event;
     this.updateImage();
   }
 
   /**When image width changes */
   onImageWidthChange(event: MatSliderChange) {
-    this.item.widget.getContent().imgWidth = event.value;
+    this.widget.imgWidth = event.value;
     this.updateImage();
   }
 
-  /**Calculates image width as we cannot use % here */
-  calculateWidth() {
-    if (this.contentElem && this.contentElem.nativeElement && this.contentElem.nativeElement.children && this.contentElem.nativeElement.children[0] && this.contentElem.nativeElement.children[0].width) {
-      let contentWidth = this.contentElem.nativeElement.offsetWidth;
-      let width = (contentWidth * this.item.widget.getContent().imgWidth)/100;
-      width = parseInt(width.toString());
-      setTimeout(()=> {
-        this.calcWidth = width + "px";
-      });
-    }
-  }
+  
 
 
 }

@@ -1,147 +1,31 @@
+
 <div class="wrp">
-    <button mat-icon-button [matMenuTriggerFor]="menuExtraItem"><fa-icon [icon]="icons['menu']"></fa-icon></button>
-    <mat-menu #menuExtraItem="matMenu">
+    <input #bgColorContainer type="color" (change)="onBgColor(0,$event)">
+    <input #colorContainer type="color" (change)="onTxtColor(0,$event)">
+    <input #bgColor type="color" (change)="onBgColor(elemId,$event)">
+    <input #color type="color" (change)="onTxtColor(elemId,$event)">
+    <div class="row">
+    <button mat-icon-button [matMenuTriggerFor]="menuContainer"><fa-icon [icon]="icons['menu']"></fa-icon></button>
+    <mat-menu #menuContainer="matMenu">
         <div style="padding:10px;"  class="kii-email-toolbar-menu">
-            <div style="font-weight:bold;text-align:center;border-bottom:1px solid;margin-bottom:10px">{{item.getData().type}}</div>
-            <div style="border-bottom:1px dashed" *ngIf="item.isContainer() || item.isCell()"><small>Add</small></div>
-                <ng-container *ngIf="item.isContainer()">
-                    <button mat-button *ngFor="let type of item.getAllBlockTypes()"  class="block-type" (click)="onAddBlock(item,type)">
-                                <svg *ngIf="type=='simple'" width="80" height="20" version="1.1" viewBox="0 0 21.167 6.6146" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                                    <g
-                                    id="layer1"
-                                    transform="translate(0,-290.38542)">
-                                   <rect
-                                      y="290.98648"
-                                      x="0.5345391"
-                                      height="5.5124335"
-                                      width="19.811354"
-                                      id="rect1396"
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
-                                    </g>
-                                    </svg>
-                                <svg *ngIf="type=='double'" width="80" height="20" version="1.1" viewBox="0 0 21.167 6.6146" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-            
-                                    <g
-                                    inkscape:label="Layer 1"
-                                    inkscape:groupmode="layer"
-                                    id="layer1"
-                                    transform="translate(0,-290.38542)">
-                                    <rect
-                                      y="290.98648"
-                                      x="0.5345391"
-                                      height="5.5124335"
-                                      width="19.811354"
-                                      id="rect1396"
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
-                                    <rect
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.18877739;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
-                                      id="rect1400"
-                                      width="9.9520464"
-                                      height="5.586247"
-                                      x="10.430753"
-                                      y="290.94958" />
-                                    </g>
-                                </svg>
-                                <svg *ngIf="type=='double_left'" width="80" height="20" version="1.1" viewBox="0 0 21.167 6.6146" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                                    <g
-                                    inkscape:label="Layer 1"
-                                    inkscape:groupmode="layer"
-                                    id="layer1"
-                                    transform="translate(0,-290.38542)">
-                                   <rect
-                                      y="290.98648"
-                                      x="0.5345391"
-                                      height="5.5124335"
-                                      width="19.811354"
-                                      id="rect1396"
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
-                                   <rect
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.22667849;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
-                                      id="rect1400"
-                                      width="14.349379"
-                                      height="5.586247"
-                                      x="6.0334206"
-                                      y="290.94958" />
-                                    </g>
-                                </svg>
-                                <svg *ngIf="type=='double_right'" width="80" height="20" version="1.1" viewBox="0 0 21.167 6.6146" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                                    <g
-                                    inkscape:label="Layer 1"
-                                    inkscape:groupmode="layer"
-                                    id="layer1"
-                                    transform="translate(0,-290.38542)">
-                                   <rect
-                                      y="290.98648"
-                                      x="0.5345391"
-                                      height="5.5124335"
-                                      width="19.811354"
-                                      id="rect1396"
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
-                                   <rect
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.13846128;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
-                                      id="rect1400"
-                                      width="5.3538857"
-                                      height="5.586247"
-                                      x="15.028913"
-                                      y="290.94958" />
-                                    </g>
-                                </svg>
-                                <svg *ngIf="type=='triple'" width="80" height="20" version="1.1" viewBox="0 0 21.167 6.6146" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-                                    <g
-                                    inkscape:label="Layer 1"
-                                    inkscape:groupmode="layer"
-                                    id="layer1"
-                                    transform="translate(0,-290.38542)">
-                                   <rect
-                                      y="290.98648"
-                                      x="0.5345391"
-                                      height="5.5124335"
-                                      width="19.811354"
-                                      id="rect1396"
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
-                                   <rect
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.15272029;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
-                                      id="rect1400"
-                                      width="6.5133729"
-                                      height="5.586247"
-                                      x="13.869425"
-                                      y="290.94958" />
-                                   <rect
-                                      y="290.95035"
-                                      x="7.2231779"
-                                      height="5.5847268"
-                                      width="6.6454878"
-                                      id="rect1408"
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.15424038;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill" />
-                                   <rect
-                                      style="opacity:0.8;fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0.154618;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:stroke markers fill"
-                                      id="rect1410"
-                                      width="6.6785188"
-                                      height="5.5843492"
-                                      x="0.53548795"
-                                      y="290.98743" />
-                                    </g>
-                                </svg>
-                    </button>
-                </ng-container>    
-                <ng-container *ngIf="item.isCell()">
-                    <button mat-button *ngFor="let type of item.getAllWidgetTypes()"  class="widget-icon" (click)="onAddWidget(item,type)">
-                            <fa-icon [icon]="getWidgetIcon(type)"></fa-icon>
-                    </button>
-                </ng-container>
-            
-
-
-
-            <div style="border-bottom:1px dashed"><small>Background</small></div>
-                <button mat-icon-button><fa-icon [icon]="icons['bgColor']" (click)="bgColor.click()"></fa-icon></button>
-            <div style="border-bottom:1px dashed"><small>Font</small></div>
-                <button mat-icon-button><fa-icon [icon]="icons['color']" (click)="color.click()"></fa-icon></button>
-                <button mat-icon-button (click)="setFontStyle('bold')"><fa-icon [icon]="icons['bold']"  [ngClass]="{'is-icon-active':item.getFontBold()}"></fa-icon></button>
-                <button mat-icon-button (click)="setFontStyle('italic')"><fa-icon [icon]="icons['italic']" [ngClass]="{'is-icon-active':item.getFontItalic()}"></fa-icon></button>
-                <button mat-icon-button (click)="setFontStyle('underline')"><fa-icon [icon]="icons['underline']" [ngClass]="{'is-icon-active':item.getFontUnderline()}" ></fa-icon></button>
+                <div style="border-bottom:1px dashed;margin-bottom:10px;"><small>Add block</small></div>
+                <button mat-button *ngFor="let type of service.getAllBlockTypes()"  class="block-type" (click)="onAddBlock(type)">
+                            <div class="block-type-container" [ngClass]="type">
+                                <div class="child first"></div>
+                                <div class="child second"></div>
+                                <div class="child third"></div>
+                                <div class="child fourth"></div>
+                            </div>
+                </button>
+                <div style="border-bottom:1px dashed;margin-bottom:10px;"><small>Background</small></div>
+                <button mat-icon-button><fa-icon [icon]="icons['bgColor']" (click)="bgColorContainer.click()"></fa-icon></button>
+                <div style="border-bottom:1px dashed;margin-bottom:10px;"><small>Font</small></div>
+                <button mat-icon-button><fa-icon [icon]="icons['color']" (click)="colorContainer.click()"></fa-icon></button>
+                <button mat-icon-button (click)="setFontStyle(0,'bold')"><fa-icon [icon]="icons['bold']"  [ngClass]="{'is-icon-active':service.isBold(0)}"></fa-icon></button>
+                <button mat-icon-button (click)="setFontStyle(0,'italic')"><fa-icon [icon]="icons['italic']" [ngClass]="{'is-icon-active':service.isItalic(0)}"></fa-icon></button>
+                <button mat-icon-button (click)="setFontStyle(0,'underline')"><fa-icon [icon]="icons['underline']" [ngClass]="{'is-icon-active':service.isUnderline(0)}" ></fa-icon></button>
                 <button mat-icon-button [matMenuTriggerFor]="menuFontSize" (click)="onClickStop($event)" class="icon">
-                        <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                        <svg width="20" height="20" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                             <g transform="translate(0 -283.77)" stroke-width="0">
                             <rect x="2.7929" y="291.53" width="1.2027" height="3.4664" opacity=".609" style="paint-order:stroke markers fill"/>
                             <rect transform="rotate(269.73)" x="-291.55" y=".21978" width="1.2027" height="3.6081" opacity=".609" style="paint-order:stroke markers fill"/>
@@ -153,17 +37,60 @@
                         </svg>
                 </button>
                 <mat-menu #menuFontSize="matMenu">
-                        <button *ngFor="let size of item.getAllFontSizes()" mat-menu-item  class="item" (click)="onSetFontSize(item,size)"><span [ngStyle]="{'font-size':size}">{{size}}</span></button>
-                </mat-menu>  
-                <button mat-icon-button [matMenuTriggerFor]="menuFont" (click)="onClickStop($event)">
+                        <button *ngFor="let size of service.getAllFontSizes()" mat-menu-item  class="item" (click)="onSetFontSize(0,size)"><span [ngStyle]="{'font-size':size}">{{size}}</span></button>
+                </mat-menu> 
+                <button mat-icon-button  [matMenuTriggerFor]="menuFontFamily" (click)="onClickStop($event)">
                         <fa-icon [icon]="icons['font']"></fa-icon>
                 </button>
-                <mat-menu #menuFont="matMenu">
-                                <button *ngFor="let font of item.getAllFonts()" mat-menu-item  class="item" (click)="onSetFont(item,font)"><div [ngStyle]="{'font-family':font}">{{font}}</div></button>
+                <mat-menu #menuFontFamily="matMenu">
+                                <button *ngFor="let font of service.getAllFonts()" mat-menu-item  class="item" (click)="onSetFont(0,font)"><div [ngStyle]="{'font-family':font}">{{font}}</div></button>
                 </mat-menu>
-                <ng-container *ngIf="item.isCell()">
+        </div>
+    </mat-menu>
+    </div>
+    <!--ROW for SELECTED TYPE-->
+    <div class="row extra">
+        <ng-container *ngIf="elemId!=0">
+        <button mat-icon-button [matMenuTriggerFor]="menuItem"><fa-icon [icon]="icons['menu']"></fa-icon></button>
+        <mat-menu #menuItem="matMenu">
+            <div style="padding:10px;"  class="kii-email-toolbar-menu">
+                <ng-container *ngIf="isCell()">
+                    <div style="border-bottom:1px dashed;margin-bottom:10px;"><small>Add widget</small></div>
+                    <button mat-button *ngFor="let type of service.getAllWidgetTypes()"  class="widget-icon" (click)="onAddWidget(elemId,type)">
+                            <fa-icon [icon]="getWidgetIcon(type)"></fa-icon>
+                    </button>
+                </ng-container>    
+                <div style="border-bottom:1px dashed;margin-bottom:10px;"><small>Background</small></div>
+                <button mat-icon-button><fa-icon [icon]="icons['bgColor']" (click)="bgColor.click()"></fa-icon></button>
+                    <div style="border-bottom:1px dashed;margin-bottom:10px;"><small>Font</small></div>
+                    <button mat-icon-button><fa-icon [icon]="icons['color']" (click)="color.click()"></fa-icon></button>
+                    <button mat-icon-button (click)="setFontStyle(elemId,'bold')"><fa-icon [icon]="icons['bold']"  [ngClass]="{'is-icon-active':service.isBold(elemId)}"></fa-icon></button>
+                    <button mat-icon-button (click)="setFontStyle(elemId,'italic')"><fa-icon [icon]="icons['italic']" [ngClass]="{'is-icon-active':service.isItalic(elemId)}"></fa-icon></button>
+                    <button mat-icon-button (click)="setFontStyle(elemId,'underline')"><fa-icon [icon]="icons['underline']" [ngClass]="{'is-icon-active':service.isUnderline(elemId)}" ></fa-icon></button>
+                    <button mat-icon-button [matMenuTriggerFor]="menuFontSize" (click)="onClickStop($event)" class="icon">
+                            <svg width="20" height="20" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                                <g transform="translate(0 -283.77)" stroke-width="0">
+                                <rect x="2.7929" y="291.53" width="1.2027" height="3.4664" opacity=".609" style="paint-order:stroke markers fill"/>
+                                <rect transform="rotate(269.73)" x="-291.55" y=".21978" width="1.2027" height="3.6081" opacity=".609" style="paint-order:stroke markers fill"/>
+                                <g transform="matrix(2 0 0 2 -7.1976 -296.89)">
+                                <rect x="7.116" y="292.38" width="1.2027" height="3.6081" style="paint-order:stroke markers fill"/>
+                                <rect transform="rotate(269.73)" x="-292.56" y="4.5382" width="1.2027" height="3.6081" style="paint-order:stroke markers fill"/>
+                                </g>
+                                </g>
+                            </svg>
+                    </button>
+                    <mat-menu #menuFontSize="matMenu">
+                            <button *ngFor="let size of service.getAllFontSizes()" mat-menu-item  class="item" (click)="onSetFontSize(elemId,size)"><span [ngStyle]="{'font-size':size}">{{size}}</span></button>
+                    </mat-menu> 
+                    <button mat-icon-button  [matMenuTriggerFor]="menuFontFamily" (click)="onClickStop($event)">
+                            <fa-icon [icon]="icons['font']"></fa-icon>
+                    </button>
+                    <mat-menu #menuFontFamily="matMenu">
+                                    <button *ngFor="let font of service.getAllFonts()" mat-menu-item  class="item" (click)="onSetFont(elemId,font)"><div [ngStyle]="{'font-family':font}">{{font}}</div></button>
+                    </mat-menu>
+                    <ng-container *ngIf="isCell()">
                     <div style="border-bottom:1px dashed"><small>Alignment horizontal</small></div>
-                    <button mat-icon-button class="icon" [ngClass]="{'is-icon-active':item.getAlignHorizontal() == 'left'}" (click)="onHorizontalAlign('left')">
+                    <button mat-icon-button class="icon" [ngClass]="{'is-icon-active':service.getAlignHorizontal(elemId) == 'left'}" (click)="onHorizontalAlign(elemId,'left')">
                         <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                             <g transform="translate(0 -283.77)" stroke-width="0">
                             <rect x="1.5902" y="285.73" width=".65729" height="9.2715" style="paint-order:stroke markers fill"/>
@@ -174,7 +101,7 @@
                             </g>
                             </svg>
                     </button>
-                    <button mat-icon-button class="icon" [ngClass]="{'is-icon-active':item.getAlignHorizontal() == 'center'}" (click)="onHorizontalAlign('center')">
+                    <button mat-icon-button class="icon" [ngClass]="{'is-icon-active':service.getAlignHorizontal(elemId) == 'center'}" (click)="onHorizontalAlign(elemId,'center')">
                             <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                                 <g transform="translate(0 -283.77)" stroke-width="0">
                                         <rect x="1.5902" y="285.73" width=".65729" height="9.2715" style="paint-order:stroke markers fill"/>
@@ -185,7 +112,7 @@
                                 </g>
                             </svg>
                     </button>
-                    <button mat-icon-button class="icon right" [ngClass]="{'is-icon-active':item.getAlignHorizontal() == 'right'}" (click)="onHorizontalAlign('right')">
+                    <button mat-icon-button class="icon right" [ngClass]="{'is-icon-active':service.getAlignHorizontal(elemId) == 'right'}" (click)="onHorizontalAlign(elemId,'right')">
                             <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                                 <g transform="translate(0 -283.77)" stroke-width="0">
                                 <rect x="1.5902" y="285.73" width=".65729" height="9.2715" style="paint-order:stroke markers fill"/>
@@ -197,7 +124,7 @@
                                 </svg>
                     </button>
                     <div style="border-bottom:1px dashed"><small>Alignment vertical</small></div>
-                    <button mat-icon-button class="icon top" [ngClass]="{'is-icon-active':item.getAlignVertical() == 'top'}" (click)="onVerticalAlign('top')">
+                    <button mat-icon-button class="icon top" [ngClass]="{'is-icon-active':service.getAlignVertical(elemId) == 'top'}" (click)="onVerticalAlign(elemId,'top')">
                         <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                             <g transform="translate(0 -283.77)" stroke-width="0">
                             <rect x="1.5902" y="285.73" width=".65729" height="9.2715" style="paint-order:stroke markers fill"/>
@@ -208,7 +135,7 @@
                             </g>
                             </svg>
                     </button>
-                    <button mat-icon-button class="icon top" [ngClass]="{'is-icon-active':item.getAlignVertical() == 'center'}" (click)="onVerticalAlign('center')">
+                    <button mat-icon-button class="icon top" [ngClass]="{'is-icon-active':service.getAlignVertical(elemId) == 'middle'}" (click)="onVerticalAlign(elemId,'middle')">
                             <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                                 <g transform="translate(0 -283.77)" stroke-width="0">
                                         <rect x="1.5902" y="285.73" width=".65729" height="9.2715" style="paint-order:stroke markers fill"/>
@@ -219,7 +146,7 @@
                                 </g>
                             </svg>
                     </button>
-                    <button mat-icon-button class="icon bottom" [ngClass]="{'is-icon-active':item.getAlignVertical() == 'bottom'}" (click)="onVerticalAlign('bottom')">
+                    <button mat-icon-button class="icon bottom" [ngClass]="{'is-icon-active':service.getAlignVertical(elemId) == 'bottom'}" (click)="onVerticalAlign(elemId,'bottom')">
                             <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
                                 <g transform="translate(0 -283.77)" stroke-width="0">
                                 <rect x="1.5902" y="285.73" width=".65729" height="9.2715" style="paint-order:stroke markers fill"/>
@@ -230,8 +157,6 @@
                                 </g>
                                 </svg>
                     </button>
-                </ng-container>
-                <ng-container>
                     <div style="border-bottom:1px dashed"><small>Padding</small></div>
                     <div class="padding-item icon left"  (click)="onClickStop($event)">
                         <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -249,7 +174,7 @@
                             </g>
                             </g>
                         </svg>
-                        <mat-slider min="0" max="50" step="1" [value]="item.getPadding('left')" thumbLabel tickInterval="1" (change)="onPaddingChange('left',$event)"></mat-slider>
+                        <mat-slider min="0" max="50" step="1" [value]="service.getPadding(elemId,'left')" thumbLabel tickInterval="1" (change)="onPaddingChange(elemId,'left',$event)"></mat-slider>
                     </div>
                     <div class="padding-item icon right"  (click)="onClickStop($event)">
                             <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -267,7 +192,7 @@
                                 </g>
                                 </g>
                             </svg>
-                            <mat-slider min="0" max="50" step="1" [value]="item.getPadding('right')" thumbLabel tickInterval="1" (change)="onPaddingChange('right',$event)"></mat-slider>
+                            <mat-slider min="0" max="50" step="1" [value]="service.getPadding(elemId,'right')" thumbLabel tickInterval="1" (change)="onPaddingChange(elemId,'right',$event)"></mat-slider>
                     </div>
                     <div class="padding-item icon top"  (click)="onClickStop($event)">
                             <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -285,7 +210,7 @@
                                 </g>
                                 </g>
                             </svg>
-                            <mat-slider min="0" max="50" step="1" [value]="item.getPadding('top')" thumbLabel tickInterval="1" (change)="onPaddingChange('top',$event)"></mat-slider>
+                            <mat-slider min="0" max="50" step="1" [value]="service.getPadding(elemId,'top')" thumbLabel tickInterval="1" (change)="onPaddingChange(elemId,'top',$event)"></mat-slider>
                     </div>                
                     <div class="padding-item icon bottom"  (click)="onClickStop($event)">
                             <svg width="25" height="25" version="1.1" viewBox="0 0 13.229 13.229" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -303,21 +228,18 @@
                                 </g>
                                 </g>
                             </svg>
-                            <mat-slider min="0" max="50" step="1" [value]="item.getPadding('bottom')" thumbLabel tickInterval="1" (change)="onPaddingChange('bottom',$event)"></mat-slider>
-                    </div>                
-                </ng-container>
-                    
-
-        </div>
-    </mat-menu>
-    <ng-container *ngIf="item.isBlock() || item.isItem()" >
-        <button mat-icon-button (click)="onMoveUpItem(item)"><fa-icon [icon]="icons['up']"></fa-icon></button>
-        <button mat-icon-button (click)="onMoveDownItem(item)"><fa-icon [icon]="icons['down']"></fa-icon></button>
-        <button mat-icon-button (click)="onRemoveItem(item)"><fa-icon [icon]="icons['trash']"></fa-icon></button>
+                            <mat-slider min="0" max="50" step="1" [value]="service.getPadding(elemId,'bottom')" thumbLabel tickInterval="1" (change)="onPaddingChange(elemId,'bottom',$event)"></mat-slider>
+                    </div>       
+                    </ng-container>
+                </div>
+        </mat-menu>
+        {{type}}
+        <ng-container *ngIf="isBlock() || isWidget()">
+                <button mat-icon-button (click)="onMoveUpItem()"><fa-icon [icon]="icons['up']"></fa-icon></button>
+                <button mat-icon-button (click)="onMoveDownItem()"><fa-icon [icon]="icons['down']"></fa-icon></button>
+                <button mat-icon-button (click)="onRemoveItem()"><fa-icon [icon]="icons['trash']"></fa-icon></button>
+        </ng-container>
     </ng-container>
-
-        <input #bgColor type="color" (change)="onBgColor($event)">
-        <input #color type="color" (change)="onColor($event)">
-
+    </div>
 </div>
 

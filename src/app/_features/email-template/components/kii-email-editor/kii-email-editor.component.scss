@@ -4,22 +4,49 @@
         width:100%;
         min-height: 100px;
     }
-}
-
-.preview {
-    .email-body {
-        display:block;
-        max-width: 600px;
+    .block {
+        display:flex;
+        flex-direction: row;
+        min-height: 30px;
+        .cell {
+            min-height: 30px;
+            flex:1;
+            display:flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        .cell.h-center {
+            align-items: center;
+        }
+        .cell.h-right {
+            align-items: flex-end;
+        }
+        .cell.v-center {
+            justify-content: center;
+        }
+        .cell.v-bottom {
+            justify-content: flex-end;
+        }
     }
-    min-height: 100px;
-    border:1px solid red;
-    width:100%;
-    table,div {
-        min-height: 50px;
-        border:1px solid rgba(red,0.5);
+    .block.double_2080 {
+        .cell:nth-child(2) {
+            flex:3;
+        }
     }
-}
-
-@media only screen and (max-width: 700px) {
-
+    .block.double_3070 {
+        .cell:nth-child(2) {
+            flex:2;
+        }
+    }
+    .block.double_8020 {
+        .cell:nth-child(1) {
+            flex:3;
+        }
+    }
+    .block.double_7030 {
+        .cell:nth-child(1) {
+            flex:2;
+        }
+    }    
 }

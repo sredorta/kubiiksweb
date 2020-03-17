@@ -1,17 +1,18 @@
-<ng-container *ngIf="item.widget">
+<ng-container *ngIf="widget!=null">
 <div class="kii-email-widget-wrp" [ngClass]="getClasses()"
                   [ngStyle]="{
 
                   }">
    <div #contentElem class="content" [innerHtml]="trustedHtml"></div>
-   <div class="editing-part">
-      <ng-container *ngIf="item.widget.isText()">
+   <div *ngIf="isActive" class="editing-part">
+      <ng-container *ngIf="isText()">
             <textarea #myTextArea type="text" class="textarea" [value]="untrustedHtml" (keyup)="textareaKey($event)"></textarea>
       </ng-container>
-      <ng-container *ngIf="item.widget.isButton()">
-         <input *ngIf="item.widget.getContent().typeBtn!='link'" class="color-input" #color type="color" [ngModel]="item.widget.getContent().colorBtn" (ngModelChange)="onBtnColor($event)">
-         <input class="url-input" placeholder="http://www...." type="text" [ngModel]="item.widget.getContent().url" (ngModelChange)="onUrlChange($event)">
-         <input class="url-input" placeholder="Button" type="text" [ngModel]="item.widget.getContent().txtBtn" (ngModelChange)="onTxtChange($event)">
+      <ng-container *ngIf="isButton()">
+         <input  class="color-input" #color type="color" [ngModel]="widget.colorBtn" (ngModelChange)="onBtnColor($event)">
+         <input  class="color-input" #color type="color" [ngModel]="widget.bgColorBtn" (ngModelChange)="onBtnBgColor($event)">
+         <input class="url-input" placeholder="http://www...." type="text" [ngModel]="widget.url" (ngModelChange)="onUrlChange($event)">
+         <input class="url-input" placeholder="Button" type="text" [ngModel]="widget.txtBtn" (ngModelChange)="onTxtChange($event)">
 
          <div class="button-type">
             <button mat-button (click)="setBtnType('link')">
@@ -40,9 +41,9 @@
             </button> 
          </div>
       </ng-container>
-      <ng-container *ngIf="item.widget.isImage()">
-         <input class="url-input" placeholder="Alt text..." type="text" [ngModel]="item.widget.getContent().imgAlt" (ngModelChange)="onAltTxtChange($event)">
-         <mat-slider color="primary" min="0" max="100" step="1" [value]="item.widget.getContent().imgWidth" thumbLabel tickInterval="1" (change)="onImageWidthChange($event)"></mat-slider>
+      <ng-container *ngIf="isImage()">
+         <input class="url-input" placeholder="Alt text..." type="text" [ngModel]="widget.imgAlt" (ngModelChange)="onAltTxtChange($event)">
+         <mat-slider color="primary" min="0" max="600" step="1" [value]="widget.imgWidth" thumbLabel tickInterval="1" (change)="onImageWidthChange($event)"></mat-slider>
          <button mat-flat-button color="primary" (click)="onNewImageRequested()">Get image</button>
       </ng-container>
    </div>

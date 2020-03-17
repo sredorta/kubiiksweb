@@ -7,14 +7,14 @@ import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
 import { KiiEmailTemplateRoutingModule } from './kii-email-template-routing.module';
-import { KiiEmailItemComponent } from './components/kii-email-item/kii-email-item.component';
 import { KiiEmailEditorComponent } from './components/kii-email-editor/kii-email-editor.component';
 import { KiiEmailTemplateService } from './services/kii-email-template.service';
-import { KiiEmailToolbarComponent } from './components/kii-email-toolbar/kii-email-toolbar.component';
 import { MatButtonModule, MatMenuModule, MatSliderModule } from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { KiiEmailWidgetComponent } from './components/kii-email-widget/kii-email-widget.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { KiiEmailContainerToolbarComponent } from './components/kii-email-container-toolbar/kii-email-container-toolbar.component';
+import { KiiEmailPreviewComponent } from './components/kii-email-preview/kii-email-preview.component';
 
 
 
@@ -31,9 +31,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     KiiEmailTemplateRoutingModule,
   ],
   declarations: [
+    KiiEmailPreviewComponent,
     KiiEmailWidgetComponent,
-    KiiEmailToolbarComponent,
-    KiiEmailItemComponent,
+    KiiEmailContainerToolbarComponent,
     KiiEmailEditorComponent,
   ],
   entryComponents:[],
@@ -41,7 +41,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     KiiEmailTemplateService
   ],
   exports:[
-    KiiEmailEditorComponent
+    KiiEmailEditorComponent,
+    KiiEmailPreviewComponent
   ]
 })
 export class KiiEmailTemplateModule { 
