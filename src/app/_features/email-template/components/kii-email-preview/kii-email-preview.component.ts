@@ -14,7 +14,7 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
   icons = [];
 
   /**Scaling reducing factor */
-  @Input() factor : number = 1;
+  @Input() factor : number = 3;
   @Input() json: IEmailData;
 
 
@@ -38,12 +38,36 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
     }
   }
 
+
+  _scaleFont(fontSize:string) {
+      if (!fontSize) return null;
+      fontSize = fontSize.replace('px','');
+      fontSize = (parseInt(fontSize)/(this.factor*0.5)) + 'px';
+      console.log("FONT SIZE:",fontSize)
+      return fontSize;
+  }
+
   /**Sets data */
   setJson(json:IEmailData) {
     console.log("SET JSON",json);
     //Do all the scaling
     if (json) {
-      json.width = String(parseInt(json.width)/this.factor);
+      if (this.factor>1) { //Scaling if required
+          json.width = String(parseInt(json.width)/this.factor);
+          json.fontSize = this._scaleFont(json.fontSize);
+          for (let block of json.blocks) {
+            block.fontSize = this._scaleFont(block.fontSize);
+            for (let cell of block.cells) {
+              cell.fontSize = this._scaleFont(cell.fontSize);
+              cell.paddingTop = cell.paddingTop/this.factor;
+              cell.paddingBottom = cell.paddingBottom/this.factor;
+              cell.paddingLeft = cell.paddingLeft/this.factor;
+              cell.paddingRight = cell.paddingRight/this.factor;
+
+            }
+          }
+      }
+
       this.json = json;
       console.log("Preview",this.json);
       this._addHeading();
@@ -186,8 +210,8 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
   }  
   _addBody() {
     this.html = this.html + `
-      <div class="email-body" style="margin: 0px;padding: 0px;-webkit-text-size-adjust: 100%;background-color:${this.json.bgColor}">
-      <table align="center" width=${this.json.width} cellspacing="0" cellpadding="0" style="width:${this.json.width}px;vertical-align: top;min-width: 320px;max-width:${this.json.width}px;margin: 0 auto;background-color: ${this.json.bgColor};">
+      <div class="email-body" style="margin: 0px;padding: 0px;-webkit-text-size-adjust: 100%;>
+      <table align="center" width=${this.json.width} cellspacing="0" cellpadding="0" style="width:${this.json.width}px;vertical-align: top;max-width:${this.json.width}px;margin: 0 auto;background-color: ${this.json.bgColor};">
         <tbody>
             ${this._addContent()}
         </tbody>
@@ -205,7 +229,7 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
       console.log("Adding block",block);
         result = result.concat(
           `
-          <table align="center" width="100%" cellspacing="0" cellpadding="0" style="width:${this.json.width}px;vertical-align: top;min-width: 320px;max-width:${this.json.width}px;margin: 0 auto;background-color: ${this.json.bgColor};">
+          <table align="center" width="100%" cellspacing="0" cellpadding="0" style="width:${this.json.width}px;vertical-align: top;max-width:${this.json.width}px;margin: 0 auto;background-color: ${this.json.bgColor};">
           <tbody>
           <tr style="${this._getStyle(block.id)}">
           `);
@@ -234,6 +258,17 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
 
   _addItem(widget:IEmailWidget) {
     if (widget) {
+      let paddingY = '10px';
+      let paddingX = '20px';
+      let padding = paddingY + ' ' + paddingX;
+      let border = '3px';
+      if (this.factor>1) {
+        paddingY = (10/(this.factor*0.5))+'px';
+        paddingX = (20/(this.factor*0.5))+'px';
+        padding = paddingY + ' ' + paddingX;
+        border = Math.ceil(3/(this.factor)) + 'px';
+      }
+
       switch (widget.format) {
         case EWidgetType.TEXT: {
           return widget.textarea;
@@ -241,15 +276,15 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
         case EWidgetType.BUTTON: {
           switch(widget.typeBtn) {
             case 'flat':
-              return `<a href="${widget.url}"  target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${widget.colorBtn};background:${widget.bgColorBtn}; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding: 10px 20px; mso-border-alt: none;">
+              return `<a href="${widget.url}"  target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${widget.colorBtn};background:${widget.bgColorBtn}; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding:${padding}; mso-border-alt: none;">
                     <span style="line-height:120%;"><span>${widget.txtBtn}</span></span>
                 </a>`;
             case 'stroked':
-                return `<a href="${widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${widget.colorBtn};border: ${widget.colorBtn} 3px solid; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding: 10px 20px; mso-border-alt: none;">
+                return `<a href="${widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${widget.colorBtn};border:${border} solid ${widget.colorBtn}; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding:${padding}; mso-border-alt: none;">
                     <span style="line-height:120%;"><span>${widget.txtBtn}</span></span>
                 </a>`;
             default:
-                return `<a href="${widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${widget.colorBtn};width: auto; padding: 0px 10px; mso-border-alt: none;">
+                return `<a href="${widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${widget.colorBtn};width: auto; padding: 0px ${paddingY}; mso-border-alt: none;">
                     <span style="line-height:120%;"><span>${widget.txtBtn}</span></span>
                 </a>`;
           }
