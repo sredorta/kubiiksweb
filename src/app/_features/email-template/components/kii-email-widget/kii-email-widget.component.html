@@ -3,7 +3,16 @@
                   [ngStyle]="{
 
                   }">
-   <div #contentElem class="content" [innerHtml]="trustedHtml"></div>
+   <div #contentElem [ngStyle]="{
+      'background':service.getPropertyValue(id,'bgColor'), 
+      'color':service.getPropertyValue(id,'txtColor'), 
+      'font-weight':service.getPropertyValue(id,'fontBold')?'bold':'normal', 
+      'font-style':service.getPropertyValue(id,'fontItalic')?'italic':'normal', 
+      'text-decoration':service.getPropertyValue(id,'fontUnderline')?'underline':'none',
+      'font-size':service.getPropertyValue(id,'fontSize'),
+      'font-family':service.getPropertyValue(id,'font')
+      }" class="content" [innerHtml]="trustedHtml"></div>
+
    <div *ngIf="isActive" class="editing-part">
       <ng-container *ngIf="isText()">
             <textarea #myTextArea type="text" class="textarea" [value]="untrustedHtml" (keyup)="textareaKey($event)"></textarea>

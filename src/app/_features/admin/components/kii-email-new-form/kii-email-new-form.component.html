@@ -1,0 +1,21 @@
+<kii-spinner-overlay [show]="isFormLoading">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate> 
+        <mat-form-field [appearance]="kiiInputAppearance" style="width:100%">
+            <mat-label>{{'admin.email.name.l' | translate | async}}</mat-label>
+            <input matInput formControlName="name" placeholder="{{'admin.email.name.p' | translate | async}}" required type="text">
+            <mat-hint>{{'admin.email.name.h' | translate | async}}</mat-hint>
+            <mat-error kiiInputError="name"></mat-error>            
+        </mat-form-field>
+        <mat-form-field [appearance]="kiiInputAppearance" style="width:100%">
+            <mat-label>{{'admin.email.description.l' | translate | async}}</mat-label>
+            <input matInput formControlName="description" placeholder="{{'admin.email.description.p' | translate | async}}" required type="text">
+            <mat-hint>{{'admin.email.description.h' | translate | async}}</mat-hint>
+            <mat-error kiiInputError="description"></mat-error>            
+        </mat-form-field>
+        <div class="control-wrapper">
+            <button mat-button type="reset" color="primary">{{'admin.cancel' | translate | async}}</button>
+            <button mat-flat-button type="submit" color="primary">{{'admin.create' | translate | async}}</button>
+        </div>
+    </form>
+</kii-spinner-overlay>
+

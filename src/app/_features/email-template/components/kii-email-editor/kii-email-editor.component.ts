@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ComponentFactoryResolver, Renderer2, Input, SimpleChanges, ElementRef, ɵSafeHtml } from '@angular/core';
 import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract.js';
-import { KiiEmailTemplateService, IEmailItem, EItemType, EBlockType, EWidgetType, IEmailData, IEmailBlock, IEmailCell } from '../../services/kii-email-template.service';
+import { KiiEmailTemplateService, IEmailItem, EItemType, EBlockType, EWidgetType, IEmailData, IEmailBlock, IEmailCell, EElemType } from '../../services/kii-email-template.service';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 
@@ -22,6 +22,12 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
   /**Result of the image uploaded */
   @Input() resultImage: string = null; 
 
+  /**Input email data to edit */
+  @Input() json : IEmailData = null;
+
+  /**Contains the data of the email */
+  private data : IEmailData = {};
+
   imageRequestId:number;
 
   /**Contains the current selected element so that we can change the toolbar accordingly */
@@ -31,8 +37,8 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
 
 
 
+
   html:string = "";
-  json: IEmailItem ;
 
   trustedHtml2 : SafeHtml = "";
 
@@ -41,10 +47,8 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
     public service: KiiEmailTemplateService,
     ) { 
       super();
-      let json =
-      {"id":0,"type":"container","bgColor":"#808080","txtColor":"black","width":"600","font":"Verdana","fontBold":false,"fontItalic":false,"fontUnderline":false,"fontSize":"14px","blocks":[{"id":1,"type":"block","position":1,"format":"simple","width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"cells":[{"id":2,"type":"cell","width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"paddingBottom":0,"hAlign":"left","vAlign":"top","widgets":[{"id":3,"position":1,"type":"widget","format":"text","textarea":"Text","url":"","txtBtn":"Text","typeBtn":"link","colorBtn":"red","bgColorBtn":"blue","imgAlt":"Alt text","imgWidth":600}]}]},{"id":4,"type":"block","position":2,"format":"simple","width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"cells":[{"id":5,"type":"cell","width":"100%","bgColor":null,"txtColor":null,"font":null,"fontSize":null,"fontBold":null,"fontItalic":null,"fontUnderline":null,"paddingTop":0,"paddingLeft":0,"paddingRight":0,"paddingBottom":0,"hAlign":"left","vAlign":"top","widgets":[{"id":6,"position":1,"type":"widget","format":"button","textarea":"Text","url":"http://www.google.com","txtBtn":"Text","typeBtn":"stroked","colorBtn":"red","bgColorBtn":"blue","imgAlt":"Alt text","imgWidth":600}]}]}]}
-
-      this.service.initialize(json);
+      console.log("JSON IS",this.json);
+      this.initialize(this.json);
       //Emit image request if required
       this.service.imageRequest.subscribe(res => {
         this.imageRequestId = res;
@@ -65,7 +69,35 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
       this.service.image = changes.resultImage.currentValue;
       this.service.isImageAvailable.next(this.imageRequestId);
     }
+    if (changes.json) {
+      console.log("Changes",changes.json.currentValue);
+      this.json = changes.json.currentValue;
+      this.initialize(this.json);
+    }
   }
+
+
+  /**Generates new empty template or load existing one */
+  initialize(json:IEmailData = null) {
+      if (!json) {
+        this.data.id = 0;
+        this.data.type = EElemType.CONTAINER;
+        this.data.bgColor = "white";
+        this.data.txtColor = "black";
+        this.data.width = "600";
+        this.data.font = "Verdana";
+        this.data.fontBold =false;
+        this.data.fontItalic = false;
+        this.data.fontUnderline = false;
+        this.data.fontSize = "14px";
+        this.data.blocks = [];
+      } else {
+        this.data = <IEmailData>JSON.parse(JSON.stringify(json));
+      }
+      console.log("DATA is",this.data);
+  }
+
+
 
   /**Selects current object id */
   selectBlock(id:number) {

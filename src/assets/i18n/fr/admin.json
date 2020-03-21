@@ -99,6 +99,21 @@
     "admin.summary.image.t": "Image principale",
     "admin.summary.image.s": "Définisez l'image principale",
 
+    "admin.email.id": "id",
+    "admin.email.name": "Nom",
+    "admin.email.description": "Description",
+    "admin.email.created": "Crée",
+    "admin.email.updated": "Modifié",
+    "admin.email.name.l": "Nom",
+    "admin.email.name.p": "Nom",
+    "admin.email.name.h": "Nom du modèle de courriel",
+    "admin.email.description.l": "Description",
+    "admin.email.description.p": "Description",
+    "admin.email.description.h": "Description du modèle de courriel",
+
+
+
+
 
     "admin.link.dialog.t": "Création d'un lien",
     "admin.link.type.l" : "Type de lien",

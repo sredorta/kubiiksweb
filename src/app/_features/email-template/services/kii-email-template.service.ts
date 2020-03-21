@@ -313,7 +313,7 @@ export class KiiEmailTemplateService {
       this.data.fontSize = "14px";
       this.data.blocks = [];
     } else {
-      this.data = json;
+      this.data = <IEmailData>JSON.parse(JSON.stringify(json));
     }
   }
 

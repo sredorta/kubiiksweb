@@ -11,19 +11,44 @@ import { KiiImageGalleryDialogComponent } from '../../components/kii-image-galle
 import { IConfigImageUpload } from 'src/app/_features/form/components/kii-image-upload/kii-image-upload.component';
 import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { KiiTableAbstract } from 'src/app/abstracts/kii-table.abstract';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Email } from '../../models/email';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
+import { KiiAdminEmailService } from '../../services/kii-admin-email.service';
+import { resolveMx } from 'dns';
+import { faKey } from '@fortawesome/free-solid-svg-icons/faKey';
 
 @Component({
   selector: 'kii-admin-email',
   templateUrl: './kii-admin-email.component.html',
-  styleUrls: ['./kii-admin-email.component.scss']
+  styleUrls: ['./kii-admin-email.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('500ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],  
 })
-export class KiiAdminEmailComponent extends KiiBaseAbstract implements OnInit {
+export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
 
   setting : Setting;
-  isLoading:boolean = false;
+
+  /**Contains all current emails */
+  emails : Email[] = [];
 
   /**Contains any image response */
   image : string = null;
+
+  /**Contains icons */
+  icons: any = {
+    add: faPlusSquare,
+    key: faKey
+  }
+
+  /**Contains current language */
+  currentLang:string;
 
   uploadConfig : IConfigImageUpload = {
     label:'admin.summary.image.t', 
@@ -42,6 +67,7 @@ export class KiiAdminEmailComponent extends KiiBaseAbstract implements OnInit {
   constructor(
     private kiiTrans: KiiTranslateService,
     private kiiMainSetting: KiiMainSettingService,
+    private kiiAdminEmail: KiiAdminEmailService,
     private KiiAdminSetting: KiiAdminSettingService,
     public articles: KiiMainArticleService,
     private dialog: MatDialog
@@ -52,11 +78,70 @@ export class KiiAdminEmailComponent extends KiiBaseAbstract implements OnInit {
   ngOnInit() {
     this.kiiTrans.setRequiredContext(['main','auth','form','admin']);
     this.addSubscriber(
+      this.kiiTrans.onChange.subscribe(res => {
+        this.currentLang = res;
+      })
+    )
+    this.addSubscriber(
       this.kiiMainSetting.onChange.subscribe(res => {
         console.log(res);
       })
     )
+    this.displayedColumns = ['id', 'name', 'description','createdAt', 'updatedAt', 'isProtected'];
+    this.loadEmails();
+    //Subscribe to email changes and refresh table
+    this.addSubscriber(
+      this.kiiAdminEmail.onChange.subscribe(emails => {
+          //Filter out cathegories of templates that are for kubiiks users only
+          /*if (!this.loggedInUser.hasRole('kubiiks')) {
+              this.emails = emails.filter(obj => obj.isProtected != true);
+          }*/
+          this.emails = this.kiiAdminEmail.value();
+          this.initTable(this.emails);
+          this.tableSettings();
+          this.isDataLoading = false;
+      }, () => this.isDataLoading = false)
+    );
   }
+
+  loadEmails() {
+    this.isDataLoading = true;
+    this.addSubscriber(
+      this.kiiAdminEmail.load().subscribe(res => {
+        this.emails = res;
+        this.kiiAdminEmail.set(this.emails);
+        this.isDataLoading = false;
+      },() => this.isDataLoading =false)
+    )
+  }
+
+
+  /**Defines all filtering and sorting table settings */
+  tableSettings() {
+    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+      return data.description.toLowerCase().includes(filter) || data.name.toLowerCase().includes(filter);
+    };
+    //Define the sorting if special
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+         case 'id': return item.id;
+         case 'description': return item.description;
+         default: return item[property];
+      }
+    };
+  }
+
+  onCreate(value:any) {
+    console.log(value);
+    /*this.isDataLoading = true;
+    this.addSubscriber(
+      this.kiiAdminEmail.create(value).subscribe(res => {
+
+          this.isDataLoading = false;
+      }, () => this.isDataLoading = false)
+    )*/
+  }
+
 
   ngAfterViewInit() {
     
@@ -64,7 +149,6 @@ export class KiiAdminEmailComponent extends KiiBaseAbstract implements OnInit {
 
   /**Opens the dialog of the image gallery when asked */
   onRequestImage() {
-      console.log("OPENNING GALLERY DIALOG !!!");
       let dialogRef = this.dialog.open(KiiImageGalleryDialogComponent, {
         data: {configUpload:this.uploadConfig},
         scrollStrategy: new NoopScrollStrategy(),
@@ -76,8 +160,16 @@ export class KiiAdminEmailComponent extends KiiBaseAbstract implements OnInit {
           this.image = result;
         })
       )
-      
   }
+
+  onEditEmail(email:any) {
+    console.log("Editing",email)
+  }
+
+  onDeleteEmail(email:any) {
+    console.log("Deleting",email);
+  }
+
 
   //REMOVE ME !!!!!!!!!!!!!!!!
   testEmail() {

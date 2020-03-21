@@ -113,15 +113,6 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
           vertical-align: top;
           border-collapse: collapse;
         }
-        table {
-          border:1px solid red;
-        }
-        tr {
-          border:1px solid blue;
-        }
-        td {
-          border:1px solid green;
-        }
 
         p, ul {
           margin: 0;
@@ -271,7 +262,7 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
 
       switch (widget.format) {
         case EWidgetType.TEXT: {
-          return widget.textarea;
+          return `<span style="display:block;${this._getStyle(widget.id)}">${widget.textarea}</span>`;
         }
         case EWidgetType.BUTTON: {
           switch(widget.typeBtn) {
