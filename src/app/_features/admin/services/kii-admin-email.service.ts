@@ -64,7 +64,38 @@ export class KiiAdminEmailService extends KiiBaseAbstract {
         }))
     }
 
+    /**Updates current email content */
+    public update(email:Email) {
+      return this.http.post<Email>(environment.apiURL + '/email/update', {email: email}).pipe(map(res => new Email(res)));
+    }
 
+    /**Creates a new email template */
+    public create(data:any) {
+      return this.http.post<Email>(environment.apiURL  + '/email/create', data).pipe(map(res => new Email(res)));
+    }  
+
+
+    /**Adds an element at the begining of the array in memory and triggers onChange*/
+    public addUnshift(element: Email) {
+      this._emails.value.unshift(element);
+      this._emails.next(this._emails.value);
+      this.onChange.next(true);
+    }
+
+    /**Deletes element in database*/
+    public delete(element:Email) {
+      return this.http.post<any>(environment.apiURL + '/email/delete', {id:element.id});
+    }
+
+    /**Removes element from memory and triggers onChange*/
+    public splice(element:Email) {
+      let index = this._emails.value.findIndex(obj => <any>obj.id == <unknown><any>element.id);
+      if (index>=0) {
+          this._emails.value.splice(index,1);
+          this._emails.next(this._emails.value);
+          this.onChange.next(true);
+      }
+    }
 
     /**Updates the element only in memory and triggers onChange */
     /*public refresh(element:Article, notify:boolean=true) {

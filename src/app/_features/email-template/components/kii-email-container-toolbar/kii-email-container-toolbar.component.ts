@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, SimpleChange, Input, SimpleChanges } from '@angular/core';
 import { faThLarge } from '@fortawesome/free-solid-svg-icons/faThLarge';
 import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
-import { KiiEmailTemplateService, EBlockType, EWidgetType, EFontType, EElemType } from '../../services/kii-email-template.service';
+import { KiiEmailTemplateService, EBlockType, EWidgetType, EFontType, EElemType, IEmailCell, IEmailData } from '../../services/kii-email-template.service';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
 import { faTint } from '@fortawesome/free-solid-svg-icons/faTint';
 import { faFont } from '@fortawesome/free-solid-svg-icons/faFont';
@@ -16,10 +16,8 @@ import { faImage } from '@fortawesome/free-solid-svg-icons/faImage';
 import { faParagraph } from '@fortawesome/free-solid-svg-icons/faParagraph';
 import { faLink } from '@fortawesome/free-solid-svg-icons/faLink';
 import { faMousePointer } from '@fortawesome/free-solid-svg-icons/faMousePointer';
-
-
 import { MatSliderChange } from '@angular/material';
-import { element } from 'protractor';
+import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
 
 
 
@@ -31,6 +29,9 @@ import { element } from 'protractor';
 export class KiiEmailContainerToolbarComponent  implements OnInit {
 
   @Input() elemId : number;
+
+  @Output() onSave  = new EventEmitter<boolean>();
+
   type : string;
 
   icons :any = {
@@ -48,7 +49,8 @@ export class KiiEmailContainerToolbarComponent  implements OnInit {
     menu: faEllipsisV,
     image: faImage,
     text: faParagraph,
-    button: faLink
+    button: faLink,
+    save: faSave
   };
 
  
@@ -198,6 +200,10 @@ export class KiiEmailContainerToolbarComponent  implements OnInit {
 
   onAddWidget(id:number,type:EWidgetType) {
     this.service.addWidget(id,type);
+  }
+
+  onSaveData() {
+    this.onSave.emit(true);
   }
 
 }

@@ -12,6 +12,21 @@
   $background:map-get($theme,background);
   $is-dark-theme: map-get($theme, is-dark);
 
+  kii-email-template {
+    .kii-email-editor-wrp {
+      border:1px solid mat-color($primary);
+    }
+    .block,.cell,.widget {
+      border:2px dashed transparent;
+      &.is-active {
+        border:2px dashed mat-color($primary);
+      }
+    }
+
+  }
+
+
+
   kii-email-editor {
       .kii-email-editor-wrp {
           border:1px solid mat-color($primary);

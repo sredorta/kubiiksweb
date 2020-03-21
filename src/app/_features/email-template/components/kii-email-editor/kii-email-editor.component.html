@@ -5,7 +5,7 @@
 'padding-left': item.getPaddingPx('left'),
 'padding-right': item.getPaddingPx('right')-->
 
-      <kii-email-container-toolbar [elemId]="selectedElem"></kii-email-container-toolbar>
+      <kii-email-container-toolbar [elemId]="selectedElem" (onSave)="onSaveData()"></kii-email-container-toolbar>
       <div class="container"
                            [ngStyle]="{'background':service.getPropertyValue(0,'bgColor'), 
                            'color':service.getPropertyValue(0,'txtColor'), 
@@ -44,7 +44,4 @@
          </div>
       </div>
 </div>
-<button mat-button color="primary" (click)="outputData()">Get DATA</button>
-<button mat-button color="primary" (click)="outputHtml()">Preview</button>
 
-<kii-email-preview [json]="preview"></kii-email-preview>

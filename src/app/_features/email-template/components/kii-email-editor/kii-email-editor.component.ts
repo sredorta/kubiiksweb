@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ComponentFactoryRes
 import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract.js';
 import { KiiEmailTemplateService, IEmailItem, EItemType, EBlockType, EWidgetType, IEmailData, IEmailBlock, IEmailCell, EElemType } from '../../services/kii-email-template.service';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
+import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
 
 
 
@@ -11,10 +12,16 @@ import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./kii-email-editor.component.scss']
 })
 export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
-  icons = [];
+  icons = {
+    save: faSave
+  };
 
   /**Event generated each time email changes */
   @Output() onChange :EventEmitter<string> = new EventEmitter<string>();
+
+  /**Event generated when we require to save changes */
+  @Output() onSave :EventEmitter<IEmailData> = new EventEmitter<IEmailData>();
+
 
   /**Request for a new image so that the dialog can be open */
   @Output() onRequestImage = new EventEmitter<boolean>();
@@ -25,15 +32,11 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
   /**Input email data to edit */
   @Input() json : IEmailData = null;
 
-  /**Contains the data of the email */
-  private data : IEmailData = {};
 
   imageRequestId:number;
 
   /**Contains the current selected element so that we can change the toolbar accordingly */
   selectedElem:number = 0;
-
-  preview : IEmailData;
 
 
 
@@ -48,7 +51,7 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
     ) { 
       super();
       console.log("JSON IS",this.json);
-      this.initialize(this.json);
+      this.service.initialize(this.json);
       //Emit image request if required
       this.service.imageRequest.subscribe(res => {
         this.imageRequestId = res;
@@ -69,32 +72,11 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
       this.service.image = changes.resultImage.currentValue;
       this.service.isImageAvailable.next(this.imageRequestId);
     }
-    if (changes.json) {
+    if (changes.json && changes.json.firstChange) {
       console.log("Changes",changes.json.currentValue);
       this.json = changes.json.currentValue;
-      this.initialize(this.json);
+      this.service.initialize(this.json);
     }
-  }
-
-
-  /**Generates new empty template or load existing one */
-  initialize(json:IEmailData = null) {
-      if (!json) {
-        this.data.id = 0;
-        this.data.type = EElemType.CONTAINER;
-        this.data.bgColor = "white";
-        this.data.txtColor = "black";
-        this.data.width = "600";
-        this.data.font = "Verdana";
-        this.data.fontBold =false;
-        this.data.fontItalic = false;
-        this.data.fontUnderline = false;
-        this.data.fontSize = "14px";
-        this.data.blocks = [];
-      } else {
-        this.data = <IEmailData>JSON.parse(JSON.stringify(json));
-      }
-      console.log("DATA is",this.data);
   }
 
 
@@ -140,11 +122,6 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
     return this.service.getContainerWidth() + 'px';
   }
 
-  outputData() {
-    console.log(JSON.stringify(this.service.getJson()));
-    console.log(this.service.getJson());
-  }
-
   getBlockClasses(block:IEmailBlock) {
     let result = {};
     result[block.format] = true;
@@ -164,8 +141,9 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
     return result;
   }
 
-  /**Generates preview */
-  outputHtml() {
-    this.preview = JSON.parse(JSON.stringify(this.service.getJson()));
+  /**Emit data to be saved */
+  onSaveData() {
+    this.onSave.emit(this.service.getJson());
   }
+
 }

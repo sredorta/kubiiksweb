@@ -53,7 +53,7 @@
       <ng-container *ngIf="isImage()">
          <input class="url-input" placeholder="Alt text..." type="text" [ngModel]="widget.imgAlt" (ngModelChange)="onAltTxtChange($event)">
          <mat-slider color="primary" min="0" max="600" step="1" [value]="widget.imgWidth" thumbLabel tickInterval="1" (change)="onImageWidthChange($event)"></mat-slider>
-         <button mat-flat-button color="primary" (click)="onNewImageRequested()">Get image</button>
+         <button mat-flat-button color="primary" (click)="onNewImageRequested()"><fa-icon [icon]="icons['photo']"></fa-icon></button>
       </ng-container>
    </div>
 </div>

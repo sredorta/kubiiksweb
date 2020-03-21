@@ -18,6 +18,9 @@ import { faPlusSquare } from '@fortawesome/free-solid-svg-icons/faPlusSquare';
 import { KiiAdminEmailService } from '../../services/kii-admin-email.service';
 import { resolveMx } from 'dns';
 import { faKey } from '@fortawesome/free-solid-svg-icons/faKey';
+import { IEmailData } from 'src/app/_features/email-template/services/kii-email-template.service';
+import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
+import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
 
 @Component({
   selector: 'kii-admin-email',
@@ -44,7 +47,8 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
   /**Contains icons */
   icons: any = {
     add: faPlusSquare,
-    key: faKey
+    key: faKey,
+    delete: faTrash
   }
 
   /**Contains current language */
@@ -104,6 +108,7 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
     );
   }
 
+  /**Loads all available email templates */
   loadEmails() {
     this.isDataLoading = true;
     this.addSubscriber(
@@ -131,20 +136,38 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
     };
   }
 
+  /**Creates a new template based on the reference */
   onCreate(value:any) {
     console.log(value);
-    /*this.isDataLoading = true;
+    this.isDataLoading = true;
     this.addSubscriber(
       this.kiiAdminEmail.create(value).subscribe(res => {
-
+          this.kiiAdminEmail.addUnshift(res);
           this.isDataLoading = false;
       }, () => this.isDataLoading = false)
-    )*/
+    )
   }
 
+  /**Deletes a template */
+  onDelete(email:Email) {
+    let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
+      scrollStrategy: new NoopScrollStrategy(),
+      panelClass: "admin-theme",
+      data: {text: "admin.email.confirm.text"}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        //this.isDataLoading = true;
+        console.log("Deleting",email);
 
-  ngAfterViewInit() {
-    
+        this.addSubscriber(
+          this.kiiAdminEmail.delete(email).subscribe(res => {
+            this.kiiAdminEmail.splice(email);
+            this.isDataLoading = false;
+          }, () => this.isDataLoading = false)
+        )
+      }
+    });
   }
 
   /**Opens the dialog of the image gallery when asked */
@@ -162,29 +185,19 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
       )
   }
 
-  onEditEmail(email:any) {
-    console.log("Editing",email)
+  /**Saves template modifications */
+  onSaveTemplate(email:Email,data:IEmailData) {
+    console.log("Saving",email,data);
+    email.data = JSON.stringify(data);
+    this.isDataLoading = true;
+    this.addSubscriber(
+      this.kiiAdminEmail.update(email).subscribe(res => {
+        console.log(res);
+        this.isDataLoading = false;
+      },()=>this.isDataLoading = false)
+    )
   }
 
-  onDeleteEmail(email:any) {
-    console.log("Deleting",email);
-  }
 
-
-  //REMOVE ME !!!!!!!!!!!!!!!!
-  testEmail() {
-    console.log("Sending email test !");
-  }
-
-  /**Updates preview when changes on email editor */
-  updatePreview(html:string) {
-    console.log("Updating preview",html);
-    this.previewHtml=html;
-  }
-
- 
-  exportHtml() {
-    this.emailEditor.exportHtml((data) => console.log('exportHtml', data));
-  }
 
 }

@@ -4,6 +4,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { faTint } from '@fortawesome/free-solid-svg-icons/faTint';
 import { MatSliderChange } from '@angular/material';
+import { faImages } from '@fortawesome/free-solid-svg-icons/faImages';
 
 
 
@@ -15,7 +16,8 @@ import { MatSliderChange } from '@angular/material';
 export class KiiEmailWidgetComponent implements OnInit {
   icons : any = {
     edit: faEdit,
-    color:faTint
+    color:faTint,
+    photo: faImages
   };
   /**Item to work on */
   @Input() id: number; 

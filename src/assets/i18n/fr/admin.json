@@ -110,6 +110,7 @@
     "admin.email.description.l": "Description",
     "admin.email.description.p": "Description",
     "admin.email.description.h": "Description du modèle de courriel",
+    "admin.email.confirm.text": "Etes-vous sûr de vouloir effacer ce modèle de courriel ?",
 
 
 

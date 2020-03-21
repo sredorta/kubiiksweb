@@ -45,18 +45,12 @@
                   [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                   <div class="element-detail-wrapper">
                     <div *ngIf="element == expandedElement" class="kii-detail-expansion">
-                        <!--<div class="preview-wrapper">
-                          <kii-email-preview [json]="element.getJson()" [factor]="4"></kii-email-preview>
-                          <div class="button-wrapper">
-                              <button  mat-flat-button  color="primary" (click)="onEditEmail(element)">{{'admin.edit' | translate | async}}</button>                        
-                              <button  mat-button  color="primary" (click)="onDeleteEmail(element)">{{'admin.delete' | translate | async}}</button>                        
-                          </div>
-                        </div>-->
-                        <div class="edit-wrapper fcc" *ngIf="element.getJson()!=null && element.getJson()!=undefined">
-                          <kii-email-template  [json]="element.getJson()"></kii-email-template>
+                        <div *ngIf="!element.isProtected" class="delete-wrapper">
+                          <button mat-button color="warn" (click)="onDelete(element)"><fa-icon [icon]="icons['delete']"></fa-icon>{{'admin.delete' | translate | async}}</button>
                         </div>
-                        <!--<kii-email-preview *ngIf="!isEditing" [email]="element"></kii-email-preview>
-                        <kii-email-edit-form *ngIf="isEditing" [email]="element" (kiiOnSubmit)="onSave(element,$event)"></kii-email-edit-form>-->
+                        <div class="edit-wrapper" *ngIf="element.getJson()!=null && element.getJson()!=undefined">
+                          <kii-email-editor  [json]="element.getJson()" (onSave)="onSaveTemplate(element, $event)" (onRequestImage)="onRequestImage()" [resultImage]="image"></kii-email-editor>
+                        </div>
                     </div>  
                   </div>
               </div>
