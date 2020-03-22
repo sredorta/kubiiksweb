@@ -6,7 +6,7 @@
 'padding-right': item.getPaddingPx('right')-->
       <div class="title-wrapper">
             <fa-icon [icon]="icons['title']"></fa-icon>
-            <input class="title-input" placeholder="Title..." type="text" [ngModel]="title" (ngModelChange)="onTitleChange($event)">
+            <input class="title-input" placeholder="Title..." type="text" [ngModel]="json.title" (ngModelChange)="onTitleChange($event)">
       </div>
       <kii-email-container-toolbar [elemId]="selectedElem" (onSave)="onSaveData()"></kii-email-container-toolbar>
       <div class="container"

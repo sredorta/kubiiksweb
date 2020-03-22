@@ -56,6 +56,9 @@
                         <div class="edit-wrapper" *ngIf="element.getJson()!=null && element.getJson()!=undefined">
                           <kii-email-editor  [json]="element.getJson()" (onSave)="onSaveTemplate(element, $event)" (onRequestImage)="onRequestImage()" [resultImage]="image"></kii-email-editor>
                         </div>
+                        <div class="send-wrapper">
+                          <button mat-flat-button color="primary" (click)="onSendEmail(element)"><fa-icon [icon]="icons['send']"></fa-icon>Send</button>
+                        </div>
                     </div>  
                   </div>
               </div>

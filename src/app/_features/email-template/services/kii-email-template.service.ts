@@ -245,7 +245,7 @@ export class KiiEmailTemplateService {
       this.data.type = EElemType.CONTAINER;
       this.data.bgColor = "white";
       this.data.txtColor = "black";
-      this.data.width = "600";
+      this.data.width = "700";
       this.data.font = "Verdana";
       this.data.fontBold =false;
       this.data.fontItalic = false;

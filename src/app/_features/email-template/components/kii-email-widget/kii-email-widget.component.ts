@@ -6,6 +6,7 @@ import { faTint } from '@fortawesome/free-solid-svg-icons/faTint';
 import { MatSliderChange } from '@angular/material';
 import { faImages } from '@fortawesome/free-solid-svg-icons/faImages';
 import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
+import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 
 
 
@@ -30,7 +31,6 @@ export class KiiEmailWidgetComponent implements OnInit {
   /**Contains current widget data */
   widget: IEmailWidget = null;
 
-
   /**Event generated each time email changes */
   @Output() onChange :EventEmitter<IEmailWidget> = new EventEmitter<IEmailWidget>();
 
@@ -38,9 +38,10 @@ export class KiiEmailWidgetComponent implements OnInit {
   untrustedHtml:String = "";
   color:string = "black";
 
-  @ViewChild('myTextArea',{static:false}) textarea : ElementRef;
   @ViewChild('contentElem',{static:false}) contentElem : ElementRef;
-
+  @ViewChild(CKEditorComponent,{static:false}) myEditor : CKEditorComponent;
+  /**Editor configuration */
+  public editorConfig = {};
 
 
   constructor(
@@ -48,6 +49,17 @@ export class KiiEmailWidgetComponent implements OnInit {
     private service: KiiEmailTemplateService,
     private r : Renderer2
     ) { 
+
+      this.editorConfig = {
+        toolbar: [
+          'fontColor', 
+          'fontBackgroundColor',
+          'bold',
+          'italic',
+          'underline',
+          'strikethrough'
+        ]
+      };
     }
 
 
@@ -136,7 +148,7 @@ export class KiiEmailWidgetComponent implements OnInit {
   }
 
   /**Override input enter */
-  textareaKey(event:any) {
+  /*textareaKey(event:any) {
     if (event && event.key) {
       if (event.key == "Enter") {
         this.untrustedHtml = this.untrustedHtml + '\n';
@@ -147,6 +159,11 @@ export class KiiEmailWidgetComponent implements OnInit {
       this.widget.textarea = this.untrustedHtml.replace(/\n/g,'<p style="margin-top:0px;margin-bottom:0px">&nbsp;</p>');
       this.onChange.emit(this.widget);
     }
+  }*/
+  onChangeContent(event:any) {
+      console.log(event);
+      this.widget.textarea = event;
+      this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(this.widget.textarea);
   }
 
 

@@ -15,7 +15,7 @@
 
    <div *ngIf="isActive" class="editing-part">
       <ng-container *ngIf="isText()">
-            <textarea #myTextArea type="text" class="textarea" [value]="untrustedHtml" (keyup)="textareaKey($event)"></textarea>
+            <kii-editor [ngModel]="widget.textarea" (onChange)="onChangeContent($event)"></kii-editor>
       </ng-container>
       <ng-container *ngIf="isButton()">
          <input  class="color-input" #color type="color" [ngModel]="widget.colorBtn" (ngModelChange)="onBtnColor($event)">

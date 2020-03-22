@@ -34,9 +34,6 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
   /**Input email data to edit */
   @Input() json : IEmailData = null;
 
-  /**Email title */
-  title : string = this.service.getTitle();
-
 
   imageRequestId:number;
 
@@ -81,7 +78,6 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
       console.log("Changes",changes.json.currentValue);
       this.json = changes.json.currentValue;
       this.service.initialize(this.json);
-      this.title = this.service.getTitle();
     }
   }
 
@@ -149,6 +145,7 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
 
   /**Emit data to be saved */
   onSaveData() {
+    console.log("DATA",this.service.getJson());
     this.onSave.emit(this.service.getJson());
   }
 

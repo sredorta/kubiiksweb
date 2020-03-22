@@ -15,6 +15,8 @@ import { KiiEmailWidgetComponent } from './components/kii-email-widget/kii-email
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { KiiEmailContainerToolbarComponent } from './components/kii-email-container-toolbar/kii-email-container-toolbar.component';
 import { KiiEmailPreviewComponent } from './components/kii-email-preview/kii-email-preview.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { KiiEditorComponent } from './components/kii-editor/kii-editor.component';
 
 
 
@@ -28,10 +30,12 @@ import { KiiEmailPreviewComponent } from './components/kii-email-preview/kii-ema
     MatMenuModule,
     MatSliderModule,
     FontAwesomeModule,
+    CKEditorModule,
     KiiEmailTemplateRoutingModule,
   ],
   declarations: [
     KiiEmailPreviewComponent,
+    KiiEditorComponent,
     KiiEmailWidgetComponent,
     KiiEmailContainerToolbarComponent,
     KiiEmailEditorComponent,

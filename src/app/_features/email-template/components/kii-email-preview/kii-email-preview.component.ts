@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ComponentFactoryResolver, Renderer2, Input, SimpleChanges, ElementRef, ɵSafeHtml, ChangeDetectionStrategy } from '@angular/core';
 import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract.js';
-import { KiiEmailTemplateService, IEmailItem, EItemType, EBlockType, EWidgetType, IEmailData, IEmailBlock, IEmailCell, IEmailWidget, EElemType } from '../../services/kii-email-template.service';
+import { KiiEmailTemplateService, EItemType, EBlockType, EWidgetType, IEmailData, IEmailBlock, IEmailCell, IEmailWidget, EElemType } from '../../services/kii-email-template.service';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 

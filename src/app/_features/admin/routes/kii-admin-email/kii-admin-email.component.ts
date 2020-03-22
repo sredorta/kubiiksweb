@@ -22,6 +22,7 @@ import { IEmailData } from 'src/app/_features/email-template/services/kii-email-
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
 import { faSearchengin } from '@fortawesome/free-brands-svg-icons/faSearchengin';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane';
 
 @Component({
   selector: 'kii-admin-email',
@@ -50,7 +51,8 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
     add: faPlusSquare,
     key: faKey,
     delete: faTrash,
-    search: faSearchengin
+    search: faSearchengin,
+    send: faPaperPlane
   }
 
   /**Contains current language */
@@ -200,6 +202,14 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
     )
   }
 
+  onSendEmail(email:Email) {
+    console.log("Sending email",email);
+    this.addSubscriber(
+      this.kiiAdminEmail.test(email).subscribe(res => {
+        console.log("HTML:",res);
+      })
+    )
+  }
 
 
 }
