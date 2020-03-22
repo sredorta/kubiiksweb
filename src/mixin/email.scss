@@ -37,6 +37,8 @@
     }
   }
   .cdk-overlay-connected-position-bounding-box .kii-email-toolbar-menu {
+    overflow-y:auto;
+    max-height: 200px;
     .block-type-container {
       box-sizing: border-box;
       width:50px;

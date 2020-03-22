@@ -54,7 +54,7 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
     )
     this.addSubscriber(
       this.data.isInitialLoaded.subscribe(res => {
-        this.isLoading = !res;
+        this.isLoading = false;
       })
     )
 

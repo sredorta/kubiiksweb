@@ -18,8 +18,7 @@ export enum EItemType {
 export enum EWidgetType {
   TEXT = "text",
   IMAGE = "image",
-  BUTTON ="button"
-
+  BUTTON ="button",
 }
 
 export enum EFontType {
@@ -198,14 +197,17 @@ export interface IEmailWidget {
   /**Textarea content in case of text */
   textarea?:string;
 
-  /**URL of the link or of the image */
+  /**URL of the link*/
   url?:string;
+
+  /**URL of the image */
+  imageUrl?:string;
 
   /**Button text */
   txtBtn?:string;
 
   /**Type of button: link,flat or stroked */
-  typeBtn?: 'link' | 'flat' | 'stroked';
+  typeBtn?: 'link' | 'flat' | 'stroked' | 'image_button';
 
   /**Color of the text of the button */
   colorBtn?:string;
@@ -480,6 +482,7 @@ export class KiiEmailTemplateService {
         format: type,
         textarea:"Text",
         url:"",
+        imageUrl:"",
         txtBtn:"Text",
         typeBtn: 'link',
         colorBtn:"red",

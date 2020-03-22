@@ -7,6 +7,7 @@ import { MatSliderChange } from '@angular/material';
 import { faImages } from '@fortawesome/free-solid-svg-icons/faImages';
 import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
 import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+import { faImage } from '@fortawesome/free-solid-svg-icons/faImage';
 
 
 
@@ -20,7 +21,8 @@ export class KiiEmailWidgetComponent implements OnInit {
     edit: faEdit,
     color:faTint,
     bgcolor: faPalette,
-    photo: faImages
+    photo: faImages,
+    image: faImage
   };
   /**Item to work on */
   @Input() id: number; 
@@ -67,8 +69,9 @@ export class KiiEmailWidgetComponent implements OnInit {
       this.widget = this.service._findId(this.id);
 
       this.service.isImageAvailable.subscribe(res => {
+        console.log("We got image",res);
         if (this.widget.id == res) {
-            this.widget.url = this.service.image;
+            this.widget.imageUrl = this.service.image;
             this.service.image = null;
             this.updateImage();
         }
@@ -139,6 +142,10 @@ export class KiiEmailWidgetComponent implements OnInit {
       case EWidgetType.TEXT: 
         if (this.widget.textarea == "")  result['is-empty'] = true;
         break;
+      case EWidgetType.IMAGE:
+        if (!this.widget.imageUrl) result['is-empty'] = true;
+        else if ( !(this.widget.imageUrl.indexOf("http://") == 0 || this.widget.imageUrl.indexOf("https://") == 0))  result['is-empty'] = true 
+        break;
       default:
        if (!this.widget.url) result['is-empty'] = true;
        else
@@ -147,19 +154,8 @@ export class KiiEmailWidgetComponent implements OnInit {
     return result;
   }
 
-  /**Override input enter */
-  /*textareaKey(event:any) {
-    if (event && event.key) {
-      if (event.key == "Enter") {
-        this.untrustedHtml = this.untrustedHtml + '\n';
-      } else {
-        this.untrustedHtml = this.textarea.nativeElement.value;
-      }
-      this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(this.untrustedHtml.replace(/\n/g,'<p style="margin-top:0px;margin-bottom:0px">&nbsp;</p>'))
-      this.widget.textarea = this.untrustedHtml.replace(/\n/g,'<p style="margin-top:0px;margin-bottom:0px">&nbsp;</p>');
-      this.onChange.emit(this.widget);
-    }
-  }*/
+
+  /**When ckeditor changes */
   onChangeContent(event:any) {
       console.log(event);
       this.widget.textarea = event;
@@ -193,16 +189,17 @@ export class KiiEmailWidgetComponent implements OnInit {
   }  
 
   /**Sets the button style */
-  setBtnType(type:'link' | 'flat' | 'stroked') {
+  setBtnType(type:'link' | 'flat' | 'stroked' | 'image_button') {
     this.widget.typeBtn = type;
     this.updateButton();
   }
 
   /**Updates button content */
   updateButton() {
-    if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) {
+    
       switch(this.widget.typeBtn) {
         case 'flat':
+          if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) 
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
             `<a href="${this.widget.url}"  target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};background:${this.widget.bgColorBtn}; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding: 10px 20px; mso-border-alt: none;">
                 <span style="line-height:120%;"><span>${this.widget.txtBtn}</span></span>
@@ -210,13 +207,24 @@ export class KiiEmailWidgetComponent implements OnInit {
           );
           break;
         case 'stroked':
+          if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) 
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
             `<a href="${this.widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};border: ${this.widget.colorBtn} 3px solid; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding: 10px 20px; mso-border-alt: none;">
                 <span style="line-height:120%;"><span>${this.widget.txtBtn}</span></span>
             </a>`
           );
           break;
+        case 'image_button':
+          if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) 
+          if (this.widget.imageUrl.indexOf("http://") == 0 || this.widget.imageUrl.indexOf("https://") == 0) 
+          this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
+            `<a href="${this.widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};width: auto; padding: 10px 20px; mso-border-alt: none;">
+                <img src=${this.widget.imageUrl} style="height:auto;max-width:${this.widget.imgWidth}px;width:100%" title=${this.widget.txtBtn} alt=${this.widget.txtBtn}>
+            </a>`
+          );
+          break;
         default:
+         if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) 
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
             `<a href="${this.widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};width: auto; padding: 0px 10px; mso-border-alt: none;">
                 <span style="line-height:120%;"><span>${this.widget.txtBtn}</span></span>
@@ -225,15 +233,13 @@ export class KiiEmailWidgetComponent implements OnInit {
           break;
       }
       this.onChange.emit(this.widget);
-    } else 
-        this.trustedHtml = "";
   }
   /**Updates image when new image is recieved or at initial stage*/
   updateImage() {
-    if (this.widget.format == EWidgetType.IMAGE && this.widget.url)
+    if (this.widget.format == EWidgetType.IMAGE && this.widget.imageUrl)
       this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
         `
-        <img src=${this.widget.url} style="display:block;height:auto;max-width:${this.widget.imgWidth}px;width:100%" title=${this.widget.imgAlt} alt=${this.widget.imgAlt}>
+        <img src=${this.widget.imageUrl} style="display:block;height:auto;max-width:${this.widget.imgWidth}px;width:100%" title=${this.widget.imgAlt} alt=${this.widget.imgAlt}>
         `
       );
     this.onChange.emit(this.widget);
@@ -253,7 +259,8 @@ export class KiiEmailWidgetComponent implements OnInit {
   /**When image width changes */
   onImageWidthChange(event: MatSliderChange) {
     this.widget.imgWidth = event.value;
-    this.updateImage();
+    if (this.isImage()) this.updateImage();
+    if (this.isButton()) this.updateButton();
   }
 
   

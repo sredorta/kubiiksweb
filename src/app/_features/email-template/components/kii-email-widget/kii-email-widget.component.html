@@ -18,11 +18,12 @@
             <kii-editor [ngModel]="widget.textarea" (onChange)="onChangeContent($event)"></kii-editor>
       </ng-container>
       <ng-container *ngIf="isButton()">
-         <input  class="color-input" #color type="color" [ngModel]="widget.colorBtn" (ngModelChange)="onBtnColor($event)">
-         <input  class="color-input" #bgcolor type="color" [ngModel]="widget.bgColorBtn" (ngModelChange)="onBtnBgColor($event)">
-         <button mat-icon-button (click)="color.click()" [ngStyle]="{'color':widget.colorBtn}"><fa-icon [icon]="icons['color']"></fa-icon></button>
-         <button mat-icon-button (click)="bgcolor.click()" [ngStyle]="{'color':widget.bgColorBtn}"><fa-icon [icon]="icons['bgcolor']"></fa-icon></button>
-
+         <ng-container *ngIf="widget.typeBtn!='image_button'">
+            <input  class="color-input" #color type="color" [ngModel]="widget.colorBtn" (ngModelChange)="onBtnColor($event)">
+            <input  class="color-input" #bgcolor type="color" [ngModel]="widget.bgColorBtn" (ngModelChange)="onBtnBgColor($event)">
+            <button mat-icon-button (click)="color.click()" [ngStyle]="{'color':widget.colorBtn}"><fa-icon [icon]="icons['color']"></fa-icon></button>
+            <button mat-icon-button (click)="bgcolor.click()" [ngStyle]="{'color':widget.bgColorBtn}"><fa-icon [icon]="icons['bgcolor']"></fa-icon></button>
+         </ng-container>
          <input class="url-input" placeholder="http://www...." type="text" [ngModel]="widget.url" (ngModelChange)="onUrlChange($event)">
          <input class="url-input" placeholder="Button" type="text" [ngModel]="widget.txtBtn" (ngModelChange)="onTxtChange($event)">
 
@@ -51,10 +52,14 @@
                </g>
                </svg>     
             </button> 
+            <button mat-button (click)="setBtnType('image_button')">
+               <fa-icon [icon]="icons['image']" style="font-size:24px"></fa-icon>
+            </button> 
+
          </div>
       </ng-container>
-      <ng-container *ngIf="isImage()">
-         <input class="url-input" placeholder="Alt text..." type="text" [ngModel]="widget.imgAlt" (ngModelChange)="onAltTxtChange($event)">
+      <ng-container *ngIf="isImage() || (isButton() && widget.typeBtn=='image_button')">
+         <input *ngIf="isImage()" class="url-input" placeholder="Alt text..." type="text" [ngModel]="widget.imgAlt" (ngModelChange)="onAltTxtChange($event)">
          <mat-slider color="primary" min="0" max="600" step="1" [value]="widget.imgWidth" thumbLabel tickInterval="1" (change)="onImageWidthChange($event)"></mat-slider>
          <button mat-flat-button color="primary" (click)="onNewImageRequested()"><fa-icon [icon]="icons['photo']"></fa-icon></button>
       </ng-container>
