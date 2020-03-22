@@ -4,6 +4,7 @@
     "admin.delete": "Suprimer",
     "admin.save": "Enregistrer",
     "admin.cancel": "Annuler",
+    "admin.search": "Chercher",
 
     "admin.menu.settings": "Configuration",
     "admin.menu.users": "Utilizateurs",

@@ -19,7 +19,10 @@
       </ng-container>
       <ng-container *ngIf="isButton()">
          <input  class="color-input" #color type="color" [ngModel]="widget.colorBtn" (ngModelChange)="onBtnColor($event)">
-         <input  class="color-input" #color type="color" [ngModel]="widget.bgColorBtn" (ngModelChange)="onBtnBgColor($event)">
+         <input  class="color-input" #bgcolor type="color" [ngModel]="widget.bgColorBtn" (ngModelChange)="onBtnBgColor($event)">
+         <button mat-icon-button (click)="color.click()" [ngStyle]="{'color':widget.colorBtn}"><fa-icon [icon]="icons['color']"></fa-icon></button>
+         <button mat-icon-button (click)="bgcolor.click()" [ngStyle]="{'color':widget.bgColorBtn}"><fa-icon [icon]="icons['bgcolor']"></fa-icon></button>
+
          <input class="url-input" placeholder="http://www...." type="text" [ngModel]="widget.url" (ngModelChange)="onUrlChange($event)">
          <input class="url-input" placeholder="Button" type="text" [ngModel]="widget.txtBtn" (ngModelChange)="onTxtChange($event)">
 

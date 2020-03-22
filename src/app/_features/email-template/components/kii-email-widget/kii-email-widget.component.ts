@@ -5,6 +5,7 @@ import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { faTint } from '@fortawesome/free-solid-svg-icons/faTint';
 import { MatSliderChange } from '@angular/material';
 import { faImages } from '@fortawesome/free-solid-svg-icons/faImages';
+import { faPalette } from '@fortawesome/free-solid-svg-icons/faPalette';
 
 
 
@@ -17,6 +18,7 @@ export class KiiEmailWidgetComponent implements OnInit {
   icons : any = {
     edit: faEdit,
     color:faTint,
+    bgcolor: faPalette,
     photo: faImages
   };
   /**Item to work on */

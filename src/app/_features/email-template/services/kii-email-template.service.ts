@@ -29,69 +29,6 @@ export enum EFontType {
 }
 
 
-
-export interface IEmailItem {
-
-  /**Unique identifier of the element */
-  id?:number;
-
-  /**Position of the element */
-  position?:number;
-
-  /**Email item type : container,block,cell... */
-  type: EItemType | string;
-
-  /**Width property */
-  width?:string;
-
-  /**Background color */
-  bgColor?:string;
-
-  /**Text color */
-  txtColor?:string;
-
-  /**Font to use for the element */
-  font?:string;
-
-  /**Font size to use for the element */
-  fontSize?:string;
-
-  /**Bold font*/
-  fontBold?: boolean;
-
-  /**Italic font */
-  fontItalic?:boolean;
-
-  /**Underline font */
-  fontUnderline?: boolean;
-
-  /**Padding top */
-  paddingTop?:number;
-
-  /**Padding left*/
-  paddingLeft?:number;
-
-  /**Padding right */
-  paddingRight?:number;
-
-  /**Padding bottom */
-  paddingBottom?:number;
-
-  /**Horizontal align: left,right,center */
-  hAlign?:string;
-
-  /**Vertical align: top,bottom,center */
-  vAlign?:string;
-
-
-  /**Children elements */
-  childs?: IEmailItem[];
-
-  /**Child widget if element is of type ITEM */
-  widget?: IEmailWidget | any;
-}
-
-
 //Enumerators
 export enum EElemType {
   CONTAINER = "container",
@@ -118,6 +55,9 @@ export interface IEmailData {
 
   /**Type of the element: container,block,cell */
   type?: EElemType | string;
+
+  /**Title of the email */
+  title?:string;
 
   /**Width property */
   width?:string;
@@ -311,6 +251,7 @@ export class KiiEmailTemplateService {
       this.data.fontItalic = false;
       this.data.fontUnderline = false;
       this.data.fontSize = "14px";
+      this.data.title = "";
       this.data.blocks = [];
     } else {
       this.data = <IEmailData>JSON.parse(JSON.stringify(json));
@@ -320,6 +261,16 @@ export class KiiEmailTemplateService {
   /**Returns the current template json */
   getJson() {
     return this.data;
+  }
+
+  /**Returns the current title */
+  getTitle() {
+    return this.data.title;
+  }
+
+  /**Sets email title */
+  setTitle(title:string) {
+    this.data.title =title;
   }
 
   /**Returns the container width */

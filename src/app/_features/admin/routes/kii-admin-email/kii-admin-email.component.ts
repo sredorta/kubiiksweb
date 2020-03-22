@@ -21,6 +21,7 @@ import { faKey } from '@fortawesome/free-solid-svg-icons/faKey';
 import { IEmailData } from 'src/app/_features/email-template/services/kii-email-template.service';
 import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
+import { faSearchengin } from '@fortawesome/free-brands-svg-icons/faSearchengin';
 
 @Component({
   selector: 'kii-admin-email',
@@ -48,7 +49,8 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
   icons: any = {
     add: faPlusSquare,
     key: faKey,
-    delete: faTrash
+    delete: faTrash,
+    search: faSearchengin
   }
 
   /**Contains current language */

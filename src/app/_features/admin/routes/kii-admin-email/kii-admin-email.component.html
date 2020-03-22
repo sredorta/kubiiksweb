@@ -4,6 +4,11 @@
   <kii-spinner-overlay [show]="isDataLoading">  
     <h1>{{'admin.emails.title' | translate | async}}</h1>
     <div class="table-wrapper">
+    <mat-form-field appearance="standard" style="padding-top:10px;min-width:250px;max-width:350px">
+            <mat-label>{{'admin.search' | translate | async}}</mat-label>
+            <input matInput  (keyup)="keyUp.next($event.target.value)" autocomplete="off">
+            <fa-icon matSuffix [icon]="icons['search']"></fa-icon>
+    </mat-form-field>
     <mat-expansion-panel #expansion style="margin-bottom:5px">
             <mat-expansion-panel-header>
               <mat-panel-title><fa-icon [icon]="icons['add']"></fa-icon><span>{{'admin.create' | translate | async}}</span></mat-panel-title>

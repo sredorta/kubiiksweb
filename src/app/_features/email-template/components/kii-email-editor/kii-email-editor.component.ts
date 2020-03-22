@@ -1,8 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ComponentFactoryResolver, Renderer2, Input, SimpleChanges, ElementRef, ɵSafeHtml } from '@angular/core';
 import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract.js';
-import { KiiEmailTemplateService, IEmailItem, EItemType, EBlockType, EWidgetType, IEmailData, IEmailBlock, IEmailCell, EElemType } from '../../services/kii-email-template.service';
+import { KiiEmailTemplateService, IEmailData, IEmailBlock, IEmailCell } from '../../services/kii-email-template.service';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
+import { faHeading } from '@fortawesome/free-solid-svg-icons/faHeading';
 
 
 
@@ -13,7 +14,8 @@ import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
 })
 export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
   icons = {
-    save: faSave
+    save: faSave,
+    title: faHeading
   };
 
   /**Event generated each time email changes */
@@ -31,6 +33,9 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
 
   /**Input email data to edit */
   @Input() json : IEmailData = null;
+
+  /**Email title */
+  title : string = this.service.getTitle();
 
 
   imageRequestId:number;
@@ -76,6 +81,7 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
       console.log("Changes",changes.json.currentValue);
       this.json = changes.json.currentValue;
       this.service.initialize(this.json);
+      this.title = this.service.getTitle();
     }
   }
 
@@ -144,6 +150,11 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
   /**Emit data to be saved */
   onSaveData() {
     this.onSave.emit(this.service.getJson());
+  }
+
+  /**When title changes */
+  onTitleChange(title:any) {
+    this.service.setTitle(title);
   }
 
 }
