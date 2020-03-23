@@ -8,6 +8,7 @@ import { KiiLoginOauthComponent } from './routes/kii-login-oauth/kii-login-oauth
 import { KiiProfileComponent } from './routes/kii-profile/kii-profile.component';
 import { KiiAlertsComponent } from './routes/kii-alerts/kii-alerts.component';
 import { KiiEstablishPasswordComponent } from './routes/kii-establish-password/kii-establish-password.component';
+import { KiiNewsletterUnsubscribeComponent } from './routes/kii-newsletter-unsubscribe/kii-newsletter-unsubscribe.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   },
   { path: 'profile', component:KiiProfileComponent},
   { path: 'notifications', component:KiiAlertsComponent},
+  { path: 'unsubscribe',component: KiiNewsletterUnsubscribeComponent}, //Newsletter unsubscribe
 
 
 ];

@@ -75,6 +75,7 @@ import { KiiEstablishPasswordFormComponent } from './components/kii-establish-pa
 import { KiiProfileFormComponent } from './components/kii-profile-form/kii-profile-form.component';
 import { KiiTableModule } from '../table/kii-table.module';
 import { KiiAuthThemeComponent } from './components/kii-auth-theme/kii-auth-theme.component';
+import { KiiNewsletterUnsubscribeComponent } from './routes/kii-newsletter-unsubscribe/kii-newsletter-unsubscribe.component';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { KiiAuthThemeComponent } from './components/kii-auth-theme/kii-auth-them
     KiiAuthRoutingModule,
   ],
   declarations: [
+    KiiNewsletterUnsubscribeComponent,
     KiiAuthThemeComponent,
     KiiPasswordStrengthDirective,
     KiiAlertsComponent,

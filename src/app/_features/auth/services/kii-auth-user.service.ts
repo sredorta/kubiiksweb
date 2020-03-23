@@ -112,4 +112,9 @@ export class KiiAuthUserService {
     return this.http.post<any>(environment.apiURL + '/alert/delete', {id: alert.id});//.pipe(map(res => new Alert(res)));
   }
 
+   /**Unsubscribe to newsletter*/
+   public unsubscribeNews(email:string) {
+    return this.http.post<any>(environment.apiURL + '/newsletter/unsubscribe', {email: email});
+  } 
+
 }

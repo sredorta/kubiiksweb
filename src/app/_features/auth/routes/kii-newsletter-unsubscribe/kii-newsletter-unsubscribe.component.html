@@ -1,0 +1,18 @@
+<kii-auth-theme></kii-auth-theme>
+<div class="newsletter-unsubscribe-wrp">
+    <div class="content">
+        <kii-spinner-overlay [show]="isLoading">
+        <mat-card>
+            <mat-card-header>
+                <div mat-card-avatar class="logo"></div>
+                <mat-card-title>{{'a.newsletter.unsubscribe.t' | translate | async}}</mat-card-title>
+                <mat-card-subtitle>{{'a.newsletter.unsubscribe.s' | translate | async}}</mat-card-subtitle>
+            </mat-card-header>
+            <div class="fcc" style="padding:10px">
+                <button mat-flat-button color="primary" (click)="onSubmit()">{{'a.newsletter.unsubscribe.btn' | translate | async}}</button>
+            </div>
+        </mat-card>
+        </kii-spinner-overlay>
+    </div>
+</div>
+

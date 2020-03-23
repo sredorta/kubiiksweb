@@ -48,7 +48,7 @@ export class KiiEmailWidgetComponent implements OnInit {
 
   constructor(
     private sanitize: DomSanitizer,
-    private service: KiiEmailTemplateService,
+    public service: KiiEmailTemplateService,
     private r : Renderer2
     ) { 
 
