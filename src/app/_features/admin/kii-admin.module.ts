@@ -86,6 +86,8 @@ import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email
 import { KiiEmailTemplateModule } from '../email-template/kii-email-template.module';
 import { KiiEmailNewFormComponent } from './components/kii-email-new-form/kii-email-new-form.component';
 import { KiiEmailSendFormComponent } from './components/kii-email-send-form/kii-email-send-form.component';
+import { KiiAdminDiskComponent } from './routes/kii-admin-disk/kii-admin-disk.component';
+import { KiiFileSizePipe } from './pipes/kii-file-size.pipe';
 
 @NgModule({
   imports: [
@@ -106,6 +108,8 @@ import { KiiEmailSendFormComponent } from './components/kii-email-send-form/kii-
     ]
   ],
   declarations: [
+    KiiFileSizePipe,
+    KiiAdminDiskComponent,
     KiiEmailSendFormComponent,
     KiiEmailNewFormComponent,
     KiiAdminEmailComponent,

@@ -39,7 +39,6 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
   constructor(private kiiAdminArticle: KiiAdminArticleService, private sanitizer: DomSanitizer) { super() }
 
   ngOnInit() {
-    console.log("ARTICLE:",this.article);
     this.uploadConfig = {
       label:'admin.summary.image.t', 
       hint:'admin.summary.image.s',

@@ -10,27 +10,13 @@ export class DiskResult {
     /**Disk total size */
     totalSize : number = 0;
 
-    /**System files size */
-    systemSize : number = 0;
-
     /**removable total file size */
     removableSize : number = 0;
 
-    /**Disk chart */
-    disk : any[] = [];
+    /**Used file size */
+    usedSize: number = 0;
 
-
-    /**Images chart */
-    images : any[] = [];
-
-    /**Videos chart */
-    videos : any[] = [];
-
-    /**Removable images Size */
-    removableImagesSize : number = 0;
-
-    /**Removable videos Size */
-    removableVideosSize : number = 0;
+    chart:any[] = [];
     
 
   constructor(obj: any | null) {
@@ -53,11 +39,11 @@ export class KiiAdminDiskService {
   constructor(private http: HttpClient) { }
 
     /**Gets stats */
-    public scan() :Observable<any> {
+    public scan() :Observable<DiskResult> {
       return this.http.post(environment.apiURL + '/disk/scan', {}).pipe(map(res => new DiskResult(res)));
     }
     /**Gets stats */
-    public optimize() :Observable<any> {
+    public optimize() :Observable<DiskResult> {
         return this.http.post(environment.apiURL + '/disk/optimize', {}).pipe(map(res => new DiskResult(res)));
     }
 

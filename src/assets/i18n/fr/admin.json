@@ -117,6 +117,18 @@
     "admin.email.users": "À tous les utilizateurs enregistrés",
     "admin.email.newsletters": "À tous les utilizateurs enregistrés aux bulletins d'information",
     "admin.email.send": "Envoyer le courriel",
-    "admin.gallery.dialog.t" : "Gallerie d'images"
+    "admin.gallery.dialog.t" : "Gallerie d'images",
+
+    "admin.disk.title"                 : "Gestion de l'espace disc",
+    "admin.disk.total.title"           : "Espace disc utilisé",
+    "admin.disk.total.subtitle"        : "Distribution de l'espace disc",
+    "admin.disk.current"               : "Total espace disc utilisé",
+    "admin.disk.images.title"          : "Espace disc images",
+    "admin.disk.images.subtitle"       : "Espace disc utilisé pour les images",
+    "admin.disk.videos.title"          : "Espace disc vidéos",
+    "admin.disk.videos.subtitle"       : "Espace disc utilisé pour les videos",
+    "admin.disk.removable"             : "Peuvent être effacés",
+    "admin.disk.optimize"              : "Optimisé le disque et gagner"
+
 
 }
