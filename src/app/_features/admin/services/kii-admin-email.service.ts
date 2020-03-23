@@ -97,14 +97,14 @@ export class KiiAdminEmailService extends KiiBaseAbstract {
       }
     }
     /**Gets html of the email for previewing */
-    public preview(element:Email) {
+    /*public preview(element:Email) {
       return this.http.post<any>(environment.apiURL + '/email/preview',{email:element});
-    }
+    }*/
 
     /**Sends email test to current loggedin user */
-    public test(element:Email) {
+    /*public test(element:Email) {
       return this.http.post<any>(environment.apiURL + '/email/send-test',{email:element});
-    }
+    }*/
 
     /**Sends email to required recipients */
     public send(element:Email, options:any) {

@@ -55,7 +55,7 @@ export class KiiEmailContainerToolbarComponent  implements OnInit {
 
  
   constructor(
-    private service : KiiEmailTemplateService
+    public service : KiiEmailTemplateService
     ) { 
     }
 

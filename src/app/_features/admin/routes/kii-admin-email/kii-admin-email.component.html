@@ -17,7 +17,7 @@
               <kii-email-new-form (kiiOnSubmit)="onCreate($event)"></kii-email-new-form>
            </div>
     </mat-expansion-panel>
-    <table mat-table  [dataSource]="dataSource" matSort multiTemplateDataRows class="table" [trackBy]="trackById">
+    <table mat-table  [dataSource]="dataSource" matSort multiTemplateDataRows class="table">
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'admin.email.id' | translate | async}}</th>
             <td mat-cell *matCellDef="let element">{{element.id}}</td>
@@ -70,18 +70,10 @@
             class="element-row"
             [class.expanded-row] = "expandedElement === element"
             [class.is-reference] = "element.name === 'reference'"
-            (click)="expandedElement = expandedElement === element ? null : element;disableRoleSliders=true; isEditing = false"></tr>
+            (click)="expandedElement = expandedElement === element ? null : element;"></tr>
         <tr mat-row *matRowDef="let element; columns: ['expandedDetail']" class="detail-row"></tr>
     </table>  
     <mat-paginator [pageSizeOptions]="[10, 20, 50]"></mat-paginator>
     </div>
-
-
-
-    <!--<kii-email-editor (onRequestImage)="onRequestImage()" [resultImage]="image"></kii-email-editor>-->
-    <!--<kii-email-preview [html]="previewHtml"></kii-email-preview>-->
-    <!--<button mat-flat-button color="primary" (click)="testEmail()">Test email</button>-->
-    <!--<email-editor></email-editor>-->
-    <button (click)="exportHtml()">Export</button>
   </kii-spinner-overlay>  
 </div>
