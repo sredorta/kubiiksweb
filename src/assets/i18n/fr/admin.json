@@ -112,10 +112,11 @@
     "admin.email.description.p": "Description",
     "admin.email.description.h": "Description du modèle de courriel",
     "admin.email.confirm.text": "Etes-vous sûr de vouloir effacer ce modèle de courriel ?",
-
-
-
-
+    "admin.email.send.t": "Séléctioner les destinataires du courriel",
+    "admin.email.self": "À mon compte de courriel électronique",
+    "admin.email.users": "À tous les utilizateurs enregistrés",
+    "admin.email.newsletters": "À tous les utilizateurs enregistrés aux bulletins d'information",
+    "admin.email.send": "Envoyer le courriel",
 
     "admin.link.dialog.t": "Création d'un lien",
     "admin.link.type.l" : "Type de lien",

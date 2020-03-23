@@ -1,0 +1,12 @@
+h2 {
+    border-bottom: 1px solid;
+}
+form {
+    display:flex;
+    flex-direction: column;
+    mat-form-field {margin:10px 0px;}
+}
+
+.controls {
+    margin:20px 0px;
+}

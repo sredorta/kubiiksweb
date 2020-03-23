@@ -87,6 +87,7 @@ import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email
 import { EmailEditorModule } from 'angular-email-editor';
 import { KiiEmailTemplateModule } from '../email-template/kii-email-template.module';
 import { KiiEmailNewFormComponent } from './components/kii-email-new-form/kii-email-new-form.component';
+import { KiiEmailSendFormComponent } from './components/kii-email-send-form/kii-email-send-form.component';
 
 @NgModule({
   imports: [
@@ -107,6 +108,7 @@ import { KiiEmailNewFormComponent } from './components/kii-email-new-form/kii-em
     ]
   ],
   declarations: [
+    KiiEmailSendFormComponent,
     KiiEmailNewFormComponent,
     KiiAdminEmailComponent,
     KiiLinkDialogComponent,

@@ -106,6 +106,11 @@ export class KiiAdminEmailService extends KiiBaseAbstract {
       return this.http.post<any>(environment.apiURL + '/email/send-test',{email:element});
     }
 
+    /**Sends email to required recipients */
+    public send(element:Email, options:any) {
+      return this.http.post<any>(environment.apiURL + '/email/send',{email:element, options:options});
+    }
+
     /**Updates the element only in memory and triggers onChange */
     /*public refresh(element:Article, notify:boolean=true) {
       let myIndex = this._articles.value.findIndex(obj => obj.id == element.id);

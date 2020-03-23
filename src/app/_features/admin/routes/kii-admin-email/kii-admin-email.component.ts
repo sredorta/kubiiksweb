@@ -202,10 +202,11 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
     )
   }
 
-  onSendEmail(email:Email) {
-    console.log("Sending email",JSON.parse(email.data));
+  onSendEmail(email:Email, options:any) {
+    console.log("Options:",options);
+    //console.log("Sending email",JSON.parse(email.data));
     this.addSubscriber(
-      this.kiiAdminEmail.test(email).subscribe(res => {
+      this.kiiAdminEmail.send(email,options).subscribe(res => {
         console.log("HTML:",res);
       })
     )

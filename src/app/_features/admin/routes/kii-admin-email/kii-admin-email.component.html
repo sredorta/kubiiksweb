@@ -53,11 +53,11 @@
                         <div *ngIf="!element.isProtected" class="delete-wrapper">
                           <button mat-button color="warn" (click)="onDelete(element)"><fa-icon [icon]="icons['delete']"></fa-icon>{{'admin.delete' | translate | async}}</button>
                         </div>
+                        <div class="send-wrapper">
+                          <kii-email-send-form (kiiOnSubmit)="onSendEmail(element,$event)"></kii-email-send-form>
+                        </div>
                         <div class="edit-wrapper" *ngIf="element.getJson()!=null && element.getJson()!=undefined">
                           <kii-email-editor  [json]="element.getJson()" (onSave)="onSaveTemplate(element, $event)" (onRequestImage)="onRequestImage()" [resultImage]="image"></kii-email-editor>
-                        </div>
-                        <div class="send-wrapper">
-                          <button mat-flat-button color="primary" (click)="onSendEmail(element)"><fa-icon [icon]="icons['send']"></fa-icon>Send</button>
                         </div>
                     </div>  
                   </div>
