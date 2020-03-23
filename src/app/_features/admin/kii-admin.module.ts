@@ -79,12 +79,10 @@ import { KiiAdminContentComponent } from './routes/kii-admin-content/kii-admin-c
 import { KiiAdminArticleComponent } from './components/kii-admin-article/kii-admin-article.component';
 import { KiiAdminArticleItemComponent } from './components/kii-admin-article-item/kii-admin-article-item.component';
 import { KiiArticleSummaryFormComponent } from './components/kii-article-summary-form/kii-article-summary-form.component';
-import { KiiLinkDialogComponent } from './components/kii-link-dialog/kii-link-dialog.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { KiiAdminEditorComponent } from './components/kii-admin-editor/kii-admin-editor.component';
 import { KiiImageGalleryDialogComponent } from './components/kii-image-gallery-dialog/kii-image-gallery-dialog.component';
 import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email.component';
-import { EmailEditorModule } from 'angular-email-editor';
 import { KiiEmailTemplateModule } from '../email-template/kii-email-template.module';
 import { KiiEmailNewFormComponent } from './components/kii-email-new-form/kii-email-new-form.component';
 import { KiiEmailSendFormComponent } from './components/kii-email-send-form/kii-email-send-form.component';
@@ -111,7 +109,6 @@ import { KiiEmailSendFormComponent } from './components/kii-email-send-form/kii-
     KiiEmailSendFormComponent,
     KiiEmailNewFormComponent,
     KiiAdminEmailComponent,
-    KiiLinkDialogComponent,
     KiiImageGalleryDialogComponent,
     KiiAdminEditorComponent,
     KiiArticleSummaryFormComponent,

@@ -48,7 +48,6 @@
                             <a *ngIf="element.phone!=null && element.phone!=undefined && isMobile" href="tel:{{element.phone}}" mat-button color="primary"><i class="fas fa-phone"></i></a>                    
                             <a *ngIf="loggedInUser.hasRole('email') || loggedInUser.hasRole('admin')" mat-button color="primary" (click)="loadEmails()"><i class="fas fa-envelope"></i></a>
                         </div>
-                        <!--<kii-email-compose-form *ngIf="emails.length>0" [emails]="emails" [user]="element"></kii-email-compose-form>-->
                         <div class="roles-wrapper">
                           <mat-checkbox  (change)="disableRoleSliders = !disableRoleSliders">{{'admin.users.rolescheckbox' | translate | async}}</mat-checkbox>
                           <mat-slide-toggle *ngFor="let role of roles" [checked]="hasRole(element, role.id)" (change)="onRoleChange($event,element.id, role.id)" [disabled]="disableRoleSliders">{{role.name}}</mat-slide-toggle>

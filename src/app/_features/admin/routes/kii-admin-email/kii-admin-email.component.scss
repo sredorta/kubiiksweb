@@ -54,6 +54,11 @@
         min-width:60px;
         max-width:60px;
     }
+    .mat-column-name,
+    .mat-column-description
+    {
+        padding-right: 5px;
+    }
     .mat-column-isProtected {
         width:60px;
         min-width:60px;
@@ -85,11 +90,6 @@
     }
 
     .element-detail-wrapper {
-        .edit-wrapper {
-            kii-email-editor {
-                width:100%;
-            }
-        }
         .delete-wrapper {
             display:flex;
             justify-content: flex-end;

@@ -39,6 +39,7 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
   constructor(private kiiAdminArticle: KiiAdminArticleService, private sanitizer: DomSanitizer) { super() }
 
   ngOnInit() {
+    console.log("ARTICLE:",this.article);
     this.uploadConfig = {
       label:'admin.summary.image.t', 
       hint:'admin.summary.image.s',
@@ -63,6 +64,8 @@ export class KiiAdminArticleComponent extends KiiBaseAbstract implements OnInit 
       if (this.article.exists() && !this.savedArticle.exists()){
         this.savedArticle = new Article({...this.article});
       }
+      if (this.article.exists() && this.uploadConfig)
+        this.uploadConfig.storage = <DiskType>this.article.disk;
     }
   } 
 

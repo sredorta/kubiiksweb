@@ -133,6 +133,9 @@
     .editing-part {
       background:rgba(mat-color($primary),0.2);
     }
+    .kii-email-widget-wrp.is-empty {
+      border: 1px solid mat-color($warn);
+    }
   }
   //Style main menu
   .cdk-overlay-connected-position-bounding-box .kii-email-toolbar-menu {

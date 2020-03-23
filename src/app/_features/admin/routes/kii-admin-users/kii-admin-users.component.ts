@@ -102,22 +102,6 @@ export class KiiAdminUsersComponent extends KiiTableAbstract implements OnInit {
     }))
   }
 
-  /**Loads all email templates */
-  loadEmails() {
-/*    if (this.emails.length>0) {
-      this.emails = [];
-    } else {
-      this.isDataLoading = true;
-      this.emails = [];
-      this.addSubscriber(
-        this.kiiApiEmail.load().subscribe(emails => {
-          this.emails = emails;    
-          this.kiiApiEmail.set(this.emails);    
-          this.isDataLoading = false;
-        })
-      )
-    }*/
-  }
 
   /**Checks if specific user has the role */
   hasRole(user: IUser, id:number) {

@@ -117,21 +117,6 @@
     "admin.email.users": "À tous les utilizateurs enregistrés",
     "admin.email.newsletters": "À tous les utilizateurs enregistrés aux bulletins d'information",
     "admin.email.send": "Envoyer le courriel",
-
-    "admin.link.dialog.t": "Création d'un lien",
-    "admin.link.type.l" : "Type de lien",
-    "admin.link.type.h" : "Choisir un type de lien",
-    "admin.link.title.l" : "Titre du lien",
-    "admin.link.title.p" : "Lien vers google",
-    "admin.link.title.h" : "Titre qui aparait pour accesibilité",
-    "admin.link.url.l"   : "Adresse du lien",
-    "admin.link.url.p"   : "https://google.com",
-    "admin.link.url.h"   : "Écrivez l'adresse du lien",
-    "admin.link.default" : "Lien estandard",
-    "admin.link.button"  : "Bouton",
-    "admin.link.flat"    : "Boutton plat",
-    "admin.link.raised"  : "Bouton surelevé",
-    "admin.link.stroked" : "Bouton avec contour",
     "admin.gallery.dialog.t" : "Gallerie d'images"
 
 }

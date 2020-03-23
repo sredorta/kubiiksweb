@@ -218,7 +218,7 @@ export class KiiEmailWidgetComponent implements OnInit {
           if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) 
           if (this.widget.imageUrl.indexOf("http://") == 0 || this.widget.imageUrl.indexOf("https://") == 0) 
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
-            `<a href="${this.widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};width: auto; padding: 10px 20px; mso-border-alt: none;">
+            `<a href="${this.widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};width: auto; padding: 5px; mso-border-alt: none;">
                 <img src=${this.widget.imageUrl} style="height:auto;max-width:${this.widget.imgWidth}px;width:100%" title=${this.widget.txtBtn} alt=${this.widget.txtBtn}>
             </a>`
           );
@@ -257,13 +257,16 @@ export class KiiEmailWidgetComponent implements OnInit {
   }
 
   /**When image width changes */
-  onImageWidthChange(event: MatSliderChange) {
-    this.widget.imgWidth = event.value;
-    if (this.isImage()) this.updateImage();
-    if (this.isButton()) this.updateButton();
+  onImageWidthChangeInput(event: any) {
+    if (event && event.srcElement && event.srcElement.valueAsNumber) {
+      let value = event.srcElement.valueAsNumber;
+      if (value>600) value=600;
+      console.log("EVENT IS",value);
+      this.widget.imgWidth = value;
+      if (this.isImage()) this.updateImage();
+      if (this.isButton()) this.updateButton();
+    }
   }
-
-  
 
 
 }

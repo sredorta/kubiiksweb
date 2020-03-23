@@ -118,7 +118,7 @@ import { KiiHorizontalScrollerComponent } from './components/kii-horizontal-scro
     KiiAppearDirective,
   ],
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
-  entryComponents:[KiiBottomSheetCookiesComponent, KiiBottomSheetSoftwareUpdateComponent, KiiHttpErrorComponent],
+  entryComponents:[KiiBottomSheetCookiesComponent, KiiBottomSheetSoftwareUpdateComponent, KiiHttpErrorComponent, KiiPopupDialogComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
   ],
