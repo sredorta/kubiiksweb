@@ -89,6 +89,7 @@ import { KiiAdminDiskComponent } from './routes/kii-admin-disk/kii-admin-disk.co
 import { KiiFileSizePipe } from './pipes/kii-file-size.pipe';
 import { KiiAdminNotificationComponent } from './routes/kii-admin-notification/kii-admin-notification.component';
 import { KiiNewFormComponent } from './components/kii-new-form/kii-new-form.component';
+import { KiiNotificationFormComponent } from './components/kii-notification-form/kii-notification-form.component';
 
 @NgModule({
   imports: [
@@ -109,6 +110,7 @@ import { KiiNewFormComponent } from './components/kii-new-form/kii-new-form.comp
     ]
   ],
   declarations: [
+    KiiNotificationFormComponent,
     KiiAdminNotificationComponent,
     KiiFileSizePipe,
     KiiAdminDiskComponent,

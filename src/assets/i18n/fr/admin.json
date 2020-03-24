@@ -108,12 +108,21 @@
     "admin.new.description.p": "Description",
     "admin.new.description.h": "Description du modèle",
 
+    "admin.notifications.title": "Géstion des notifications",
     "admin.notification.id": "id",
     "admin.notification.name": "Nom",
     "admin.notification.description": "Description",
     "admin.notification.created" : "Crée",
     "admin.notification.updated" : "Modifié",
     "admin.notification.confirm.text": "Etes-vous sûr de vouloir effacer ce modèle de notification ?",
+
+    "admin.notification.title.l" : "Titre",
+    "admin.notification.title.p" : "Nouveaux articles disponibles en magasin",
+    "admin.notification.title.h" : "Titre de la notification",
+    "admin.notification.body.l"  : "Contenu",
+    "admin.notification.body.p"  : "Des nouveux articles sont arrivés dans notre magasin...",
+    "admin.notification.body.h"  : "Contenu de la notification",
+
 
     "admin.email.id": "id",
     "admin.email.name": "Nom",

@@ -170,8 +170,10 @@ export class KiiAdminNotificationComponent extends KiiTableAbstract implements O
   }
 
   /**Saves template modifications */
-  onSaveTemplate(element:Onpush) {
-    console.log("Saving",element);
+  onUpdate(element:Onpush,event:any) {
+    console.log("Saving",element,event);
+    element.title = event.title;
+    element.body = event.body;
     this.isDataLoading = true;
     this.addSubscriber(
       this.kiiAdminNotification.update(element).subscribe(res => {
