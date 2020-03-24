@@ -22,6 +22,7 @@ import { SEO } from '../../models/seo';
 import { KiiPwaService } from '../../services/kii-main-pwa.service';
 import { KiiPopupDialogComponent } from '../kii-popup-dialog/kii-popup-dialog.component';
 import { KiiAuthUserService } from 'src/app/_features/auth/services/kii-auth-user.service';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'kii-app',
@@ -48,7 +49,9 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private stats : KiiMainStatsService,
   private data: KiiMainDataService,
   private kiiSettings: KiiMainSettingService,
-  private pwa: KiiPwaService
+  private auth : KiiMainUserService,
+  private pwa: KiiPwaService,
+  private swPush : SwPush
   ) { super() }
 
 
@@ -84,6 +87,36 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     }, () => {
         settingsSubs.unsubscribe();
     })
+
+    //TODO add onPUSH to any connection even if not loggedIn
+
+
+    //Subscribe to onPush notifications for users
+    this.addSubscriber(
+      this.auth.getLoggedInUser().subscribe(res => {
+        if (res.exists()) {
+          this.pwa.onPushNotificationSubscription(); //Adds onPush field to user
+        }
+      })
+    )
+    //Subscribe to notifications click and redirect to site if click
+    if (isPlatformBrowser(this.platform)) {
+      this.addSubscriber(
+        this.swPush.messages.subscribe((res:any) => {
+          console.log("RECIEVED SWPUSH MESSAGE",res);
+          //Update auth user as we have to update alerts
+          if (res && res.notification && res.notification.data && res.notification.data.user)
+            this.auth.setLoggedInUser(new User(res.notification.data.user));
+        })
+      )
+      //When notification is click go to home page
+      this.addSubscriber(
+        this.swPush.notificationClicks.subscribe( event => {
+          const url = event.notification.data.url;
+          window.open(url, '_blank');
+        })
+      )
+    }
 
 
 
@@ -151,7 +184,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       let value = this.kiiSettings.getByKey("popup-show").value;
       if (value != "disabled" && (!storage || !storage.includes(value))) {
         setTimeout(() => {
-            console.log("WE ARE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! POPUP NOW!!");
             this.dialog.open(KiiPopupDialogComponent, {
               scrollStrategy: new NoopScrollStrategy()
             });

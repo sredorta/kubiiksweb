@@ -46,7 +46,6 @@
                         <div class="button-icons">
                             <a *ngIf="element.mobile!=null && element.mobile!=undefined && isMobile" href="tel:{{element.mobile}}" mat-button color="primary"><i class="fas fa-mobile-alt"></i></a>   
                             <a *ngIf="element.phone!=null && element.phone!=undefined && isMobile" href="tel:{{element.phone}}" mat-button color="primary"><i class="fas fa-phone"></i></a>                    
-                            <a *ngIf="loggedInUser.hasRole('email') || loggedInUser.hasRole('admin')" mat-button color="primary" (click)="loadEmails()"><i class="fas fa-envelope"></i></a>
                         </div>
                         <div class="roles-wrapper">
                           <mat-checkbox  (change)="disableRoleSliders = !disableRoleSliders">{{'admin.users.rolescheckbox' | translate | async}}</mat-checkbox>

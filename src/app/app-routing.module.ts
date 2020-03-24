@@ -49,10 +49,10 @@ let routes: Routes = [
   },  
 
   //Not found
-  /*{
+  {
     path: 'not-found',
     loadChildren : () => import('./routes/not-found-page/not-found-page.module').then(m => m.NotFoundPageModule), 
-  },*/
+  },
 
 ]
 
