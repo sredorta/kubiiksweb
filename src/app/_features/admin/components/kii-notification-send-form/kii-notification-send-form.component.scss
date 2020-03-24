@@ -1,0 +1,14 @@
+h2 {
+    border-bottom: 1px solid;
+}
+mat-radio-group {
+    display:flex;
+    flex-direction: column;
+    mat-radio-button {
+        padding:5px 0px;
+    }
+
+}
+button {
+    margin:20px 0px;
+}

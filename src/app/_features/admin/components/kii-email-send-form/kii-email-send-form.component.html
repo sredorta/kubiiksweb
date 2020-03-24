@@ -1,20 +1,5 @@
 <h2>{{'admin.email.send.t' | translate | async}}</h2>    
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" novalidate autocomplete="on"> 
-     <!--<mat-form-field [appearance]="kiiInputAppearance">
-         <mat-label>{{'a.email.l' | translate | async}}</mat-label>
-         <input matInput formControlName="username" placeholder="{{'a.email.p' | translate | async}}" required type="email" autocomplete="email">
-         <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['email']"></fa-icon></mat-icon>
-         <mat-hint>{{'a.email.h' | translate | async}}</mat-hint>
-         <mat-error kiiInputError="username"></mat-error>    
-     </mat-form-field>
-
-     <mat-form-field [appearance]="kiiInputAppearance">
-         <mat-label>{{'a.password.l' | translate | async}}</mat-label>
-         <input kiiPasswordStrength matInput formControlName="password" placeholder="{{'a.password.p' | translate | async}}" required type="password" autocomplete="current-password">
-         <mat-icon matPrefix class="icon"><fa-icon [icon]="icon['password']"></fa-icon></mat-icon>
-         <mat-hint>{{'a.password.h' | translate| async}}</mat-hint>
-         <mat-error kiiInputError="password"></mat-error>
-     </mat-form-field>-->
      <mat-checkbox formControlName="self">{{'admin.email.self' | translate | async}}</mat-checkbox>
      <mat-checkbox formControlName="users">{{'admin.email.users' | translate | async}}</mat-checkbox>
      <mat-checkbox formControlName="newsletters">{{'admin.email.newsletters' | translate | async}}</mat-checkbox>

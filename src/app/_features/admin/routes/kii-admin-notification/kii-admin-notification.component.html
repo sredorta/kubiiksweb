@@ -50,12 +50,9 @@
                         <div class="edit-wrapper">
                           <kii-notification-form [notification]="element" (kiiOnSubmit)="onUpdate(element,$event)"></kii-notification-form>
                         </div>
-                        <!--<div class="send-wrapper">
-                          <kii-email-send-form (kiiOnSubmit)="onSendEmail(element,$event)"></kii-email-send-form>
+                        <div class="send-wrapper">
+                            <kii-notification-send-form (kiiOnSubmit)="onNotificationSend(element,$event)"></kii-notification-send-form>
                         </div>
-                        <div class="edit-wrapper" *ngIf="element.getJson()!=null && element.getJson()!=undefined">
-                          <kii-email-editor  [json]="element.getJson()" (onSave)="onSaveTemplate(element, $event)" (onRequestImage)="onRequestImage()" [resultImage]="image"></kii-email-editor>
-                        </div>-->
                     </div>  
                   </div>
               </div>

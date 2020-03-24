@@ -44,6 +44,7 @@ import {MatAutocompleteModule,
   MatTooltipModule,
   MatSlideToggleModule,
   MatSliderModule,
+  MatRadioModule,
   //MatTreeModule,
   //MatPaginatorIntl,
   //MatSnackBar,
@@ -90,6 +91,7 @@ import { KiiFileSizePipe } from './pipes/kii-file-size.pipe';
 import { KiiAdminNotificationComponent } from './routes/kii-admin-notification/kii-admin-notification.component';
 import { KiiNewFormComponent } from './components/kii-new-form/kii-new-form.component';
 import { KiiNotificationFormComponent } from './components/kii-notification-form/kii-notification-form.component';
+import { KiiNotificationSendFormComponent } from './components/kii-notification-send-form/kii-notification-send-form.component';
 
 @NgModule({
   imports: [
@@ -107,9 +109,11 @@ import { KiiNotificationFormComponent } from './components/kii-notification-form
       MatSlideToggleModule,
       MatSliderModule,
       MatExpansionModule,
+      MatRadioModule,
     ]
   ],
   declarations: [
+    KiiNotificationSendFormComponent,
     KiiNotificationFormComponent,
     KiiAdminNotificationComponent,
     KiiFileSizePipe,

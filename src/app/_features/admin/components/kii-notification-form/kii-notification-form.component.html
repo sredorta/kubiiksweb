@@ -12,7 +12,7 @@
             <mat-hint>{{'admin.notification.body.h' | translate | async}}</mat-hint>
             <mat-error kiiInputError="body"></mat-error>            
         </mat-form-field>
-        <div class="control-wrapper">
+        <div class="control-wrapper" *ngIf="myForm.touched">
             <button mat-button type="reset" color="primary">{{'admin.cancel' | translate | async}}</button>
             <button mat-flat-button type="submit" color="primary">{{'admin.save' | translate | async}}</button>
         </div>

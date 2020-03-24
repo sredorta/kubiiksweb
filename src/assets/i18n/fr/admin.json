@@ -115,13 +115,17 @@
     "admin.notification.created" : "Crée",
     "admin.notification.updated" : "Modifié",
     "admin.notification.confirm.text": "Etes-vous sûr de vouloir effacer ce modèle de notification ?",
-
     "admin.notification.title.l" : "Titre",
     "admin.notification.title.p" : "Nouveaux articles disponibles en magasin",
     "admin.notification.title.h" : "Titre de la notification",
     "admin.notification.body.l"  : "Contenu",
     "admin.notification.body.p"  : "Des nouveux articles sont arrivés dans notre magasin...",
     "admin.notification.body.h"  : "Contenu de la notification",
+    "admin.notification.send.t"  : "Envoyer la notification à:",
+    "admin.notification.self" : "Moi (test)",
+    "admin.notification.users": "Utilizateurs",
+    "admin.notification.all": "Visiteurs",
+    "admin.notification.send": "Envoyer",
 
 
     "admin.email.id": "id",

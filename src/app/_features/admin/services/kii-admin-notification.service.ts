@@ -95,28 +95,12 @@ export class KiiAdminNotificationService extends KiiBaseAbstract {
           this.onChange.next(true);
       }
     }
-    /**Gets html of the email for previewing */
-    /*public preview(element:Email) {
-      return this.http.post<any>(environment.apiURL + '/email/preview',{email:element});
-    }*/
 
-    /**Sends email test to current loggedin user */
-    /*public test(element:Email) {
-      return this.http.post<any>(environment.apiURL + '/email/send-test',{email:element});
-    }*/
 
     /**Sends notification to required recipients */
     public send(element:Onpush, options:any) {
-      console.error("NOT DONE YET !");
-      return this.http.post<any>(environment.apiURL + '/email/send',{email:element, options:options});
+      return this.http.post<any>(environment.apiURL + '/notification/send',{notification:element, options:options});
     }
 
-    /**Updates the element only in memory and triggers onChange */
-    /*public refresh(element:Article, notify:boolean=true) {
-      let myIndex = this._articles.value.findIndex(obj => obj.id == element.id);
-      if (myIndex>=0) {
-            this._articles.value[myIndex] = element;
-           if (notify) this.onChange.next(!this.onChange.value);
-      }
- } */
+
 }

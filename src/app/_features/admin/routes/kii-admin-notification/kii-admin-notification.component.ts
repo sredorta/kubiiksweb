@@ -183,14 +183,17 @@ export class KiiAdminNotificationComponent extends KiiTableAbstract implements O
     )
   }
 
-  onSendEmail(email:Email, options:any) {
+  onNotificationSend(notification:Onpush, options:string) {
+    console.log("Notification",notification);
     console.log("Options:",options);
     //console.log("Sending email",JSON.parse(email.data));
-    /*this.addSubscriber(
-      this.kiiAdminEmail.send(email,options).subscribe(res => {
-        console.log("HTML:",res);
-      })
-    )*/
+    this.isDataLoading = true;
+    this.addSubscriber(
+      this.kiiAdminNotification.send(notification,options).subscribe(res => {
+        console.log("NOTIFICATION:",res);
+        this.isDataLoading = false;
+      },()=> {this.isDataLoading = false})
+    )
   }
 
 

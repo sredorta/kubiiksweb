@@ -1,0 +1,7 @@
+<h2>{{'admin.notification.send.t' | translate | async}}</h2>    
+<mat-radio-group [(ngModel)]="destination">
+  <mat-radio-button value="self">{{'admin.notification.self' | translate | async}}</mat-radio-button>
+  <mat-radio-button value="users">{{'admin.notification.users' | translate | async}}</mat-radio-button>
+  <mat-radio-button value="all">{{'admin.notification.all' | translate | async}}</mat-radio-button>
+</mat-radio-group>
+<button mat-flat-button color="primary" (click)="send()">{{'admin.notification.send' | translate | async}}</button>
