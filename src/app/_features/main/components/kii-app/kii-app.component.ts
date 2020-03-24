@@ -90,12 +90,14 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
     //TODO add onPUSH to any connection even if not loggedIn
 
+    //Subscribe to general onPush notifications (any connection)
+    this.pwa.onPushNotificationSubscriptionSession(); //Stores onPush data to session
 
     //Subscribe to onPush notifications for users
     this.addSubscriber(
       this.auth.getLoggedInUser().subscribe(res => {
         if (res.exists()) {
-          this.pwa.onPushNotificationSubscription(); //Adds onPush field to user
+          this.pwa.onPushNotificationSubscriptionUser(); //Adds onPush field to user
         }
       })
     )
@@ -104,7 +106,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       this.addSubscriber(
         this.swPush.messages.subscribe((res:any) => {
           console.log("RECIEVED SWPUSH MESSAGE",res);
-          //Update auth user as we have to update alerts
+          //Update auth user as we have to update alerts if notification is to user
           if (res && res.notification && res.notification.data && res.notification.data.user)
             this.auth.setLoggedInUser(new User(res.notification.data.user));
         })

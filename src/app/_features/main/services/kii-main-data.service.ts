@@ -62,7 +62,7 @@ export class KiiMainDataService extends KiiBaseAbstract {
           if (myData) {
             this._update(myData);
             this.transfer.set(key,null);
-            console.log("RESTORED FROM TRANSFER STATE", myData);
+            //console.log("RESTORED FROM TRANSFER STATE", myData);
             this.isInitialLoaded.next(true);
           } 
         }
@@ -70,7 +70,7 @@ export class KiiMainDataService extends KiiBaseAbstract {
         if (!myData) {
           this.addSubscriber(
             this.http.post<_IInitialData>(environment.apiURL + '/initial', {page:page_name,articleId:articleId}).subscribe(res => {
-              console.log("INITIAL DATA", res);
+              //console.log("INITIAL DATA", res);
               if (isPlatformServer(this._platformId)) {
                 this.transfer.set(key, res);
               }
@@ -98,7 +98,7 @@ export class KiiMainDataService extends KiiBaseAbstract {
           setTimeout(()=> {
               this.addSubscriber(
                 this.http.get<_IInitialData>(environment.apiURL + '/initial/full').subscribe(res => {
-                  console.log("FULL LOAD !", res);
+                  //console.log("FULL LOAD !", res);
                   this._update(res);
                   this.isFullLoaded = true;
                 })

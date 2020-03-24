@@ -23,11 +23,13 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons/faTrash';
 import { KiiConfirmDialogComponent } from 'src/app/_features/form/components/kii-confirm-dialog/kii-confirm-dialog.component';
 import { faSearchengin } from '@fortawesome/free-brands-svg-icons/faSearchengin';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane';
+import { KiiAdminNotificationService } from '../../services/kii-admin-notification.service';
+import { Onpush } from '../../models/onpush';
 
 @Component({
-  selector: 'kii-admin-email',
-  templateUrl: './kii-admin-email.component.html',
-  styleUrls: ['./kii-admin-email.component.scss'],
+  selector: 'kii-admin-notification',
+  templateUrl: './kii-admin-notification.component.html',
+  styleUrls: ['./kii-admin-notification.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -36,12 +38,12 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane';
     ]),
   ],  
 })
-export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
+export class KiiAdminNotificationComponent extends KiiTableAbstract implements OnInit {
 
   setting : Setting;
 
-  /**Contains all current emails */
-  emails : Email[] = [];
+  /**Contains all current notification templates */
+  notifications : Onpush[] = [];
 
   /**Contains any image response */
   image : string = null;
@@ -75,7 +77,7 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
   constructor(
     private kiiTrans: KiiTranslateService,
     private kiiMainSetting: KiiMainSettingService,
-    private kiiAdminEmail: KiiAdminEmailService,
+    private kiiAdminNotification: KiiAdminNotificationService,
     private KiiAdminSetting: KiiAdminSettingService,
     public articles: KiiMainArticleService,
     private dialog: MatDialog
@@ -90,30 +92,27 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
         this.currentLang = res;
       })
     )
-    this.displayedColumns = ['id', 'name', 'description','createdAt', 'updatedAt', 'isProtected'];
-    this.loadEmails();
-    //Subscribe to email changes and refresh table
+
+    this.displayedColumns = ['id', 'name', 'description','createdAt', 'updatedAt'];
+    this.loadNotifications();
+    //Subscribe to notifications changes and refresh table
     this.addSubscriber(
-      this.kiiAdminEmail.onChange.subscribe(emails => {
-          //Filter out cathegories of templates that are for kubiiks users only
-          /*if (!this.loggedInUser.hasRole('kubiiks')) {
-              this.emails = emails.filter(obj => obj.isProtected != true);
-          }*/
-          this.emails = this.kiiAdminEmail.value();
-          this.initTable(this.emails);
+      this.kiiAdminNotification.onChange.subscribe(emails => {
+          this.notifications = this.kiiAdminNotification.value();
+          this.initTable(this.notifications);
           this.tableSettings();
           this.isDataLoading = false;
       }, () => this.isDataLoading = false)
     );
   }
 
-  /**Loads all available email templates */
-  loadEmails() {
+  /**Loads all available notifications templates */
+  loadNotifications() {
     this.isDataLoading = true;
     this.addSubscriber(
-      this.kiiAdminEmail.load().subscribe(res => {
-        this.emails = res;
-        this.kiiAdminEmail.set(this.emails);
+      this.kiiAdminNotification.load().subscribe(res => {
+        this.notifications = res;
+        this.kiiAdminNotification.set(this.notifications);
         this.isDataLoading = false;
       },() => this.isDataLoading =false)
     )
@@ -129,39 +128,40 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch (property) {
          case 'id': return item.id;
+         case 'name': return item.name;
          case 'description': return item.description;
          default: return item[property];
       }
     };
   }
 
-  /**Creates a new template based on the reference */
+  /**Creates a new notification template */
   onCreate(value:any) {
     console.log(value);
     this.isDataLoading = true;
     this.addSubscriber(
-      this.kiiAdminEmail.create(value).subscribe(res => {
-          this.kiiAdminEmail.addUnshift(res);
+      this.kiiAdminNotification.create(value).subscribe(res => {
+          this.kiiAdminNotification.addUnshift(res);
           this.isDataLoading = false;
       }, () => this.isDataLoading = false)
     )
   }
 
   /**Deletes a template */
-  onDelete(email:Email) {
+  onDelete(element:Onpush) {
     let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
       scrollStrategy: new NoopScrollStrategy(),
       panelClass: "admin-theme",
-      data: {text: "admin.email.confirm.text"}
+      data: {text: "admin.notification.confirm.text"}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         //this.isDataLoading = true;
-        console.log("Deleting",email);
+        console.log("Deleting",element);
 
         this.addSubscriber(
-          this.kiiAdminEmail.delete(email).subscribe(res => {
-            this.kiiAdminEmail.splice(email);
+          this.kiiAdminNotification.delete(element).subscribe(res => {
+            this.kiiAdminNotification.splice(element);
             this.isDataLoading = false;
           }, () => this.isDataLoading = false)
         )
@@ -169,28 +169,12 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
     });
   }
 
-  /**Opens the dialog of the image gallery when asked */
-  onRequestImage() {
-      let dialogRef = this.dialog.open(KiiImageGalleryDialogComponent, {
-        data: {configUpload:this.uploadConfig},
-        scrollStrategy: new NoopScrollStrategy(),
-        minWidth:"320px",
-        panelClass:"admin-theme"
-      });
-      this.addSubscriber(
-        dialogRef.afterClosed().subscribe(result => {
-          this.image = result;
-        })
-      )
-  }
-
   /**Saves template modifications */
-  onSaveTemplate(email:Email,data:IEmailData) {
-    console.log("Saving",email,data);
-    email.data = JSON.stringify(data);
+  onSaveTemplate(element:Onpush) {
+    console.log("Saving",element);
     this.isDataLoading = true;
     this.addSubscriber(
-      this.kiiAdminEmail.update(email).subscribe(res => {
+      this.kiiAdminNotification.update(element).subscribe(res => {
         console.log(res);
         this.isDataLoading = false;
       },()=>this.isDataLoading = false)
@@ -200,11 +184,11 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
   onSendEmail(email:Email, options:any) {
     console.log("Options:",options);
     //console.log("Sending email",JSON.parse(email.data));
-    this.addSubscriber(
+    /*this.addSubscriber(
       this.kiiAdminEmail.send(email,options).subscribe(res => {
         console.log("HTML:",res);
       })
-    )
+    )*/
   }
 
 

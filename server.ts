@@ -86,14 +86,14 @@ export function app() {
         console.log("HTML =>>");
         console.log(html.substr(0,200));
         console.log("-----------METAS--------------------");
-        for (let line of html.split('\n')) {
-          if (line.includes('meta ')) {
-            for (let line2 of line.split('<meta')) {
-              if (!line2.includes('*/'))
-              console.log('<meta ' + line2);
-            }
-          }
-        }
+        //for (let line of html.split('\n')) {
+        //  if (line.includes('meta ')) {
+        //    for (let line2 of line.split('<meta')) {
+        //      if (!line2.includes('*/'))
+        //      console.log('<meta ' + line2);
+        //    }
+        //  }
+        //}
         console.log("-------------------------------");
         if (error) {
           res.statusCode = 404;

@@ -14,6 +14,7 @@ import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
 import { faChartLine } from '@fortawesome/free-solid-svg-icons/faChartLine';
 import { KiiAdminArticleService } from '../../services/kii-admin-article.service.js';
 import { environment } from 'src/environments/environment.js';
+import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
 
 
 
@@ -42,6 +43,7 @@ export class KiiAdminMenuComponent extends KiiBaseAbstract implements OnInit {
       this.icons['popup'] = faWindowRestore;
       this.icons['disk'] = faSave;
       this.icons['stats'] = faChartLine;
+      this.icons['bell'] = faBell;
     }
 
 

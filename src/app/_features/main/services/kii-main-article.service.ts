@@ -36,7 +36,6 @@ export class KiiMainArticleService extends KiiBaseAbstract {
 
     /**Sets settings */
     set(articles:Article[]) {
-      console.log("SETTING ARTICLES",articles);
       this._articles.next(articles);
       if (articles.length>0) {
         this.loaded = true;

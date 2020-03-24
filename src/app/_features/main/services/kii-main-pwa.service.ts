@@ -46,9 +46,7 @@ export class KiiPwaService {
         navigator.serviceWorker.getRegistrations().then(registrations => {
           if (registrations.length == 0) {
             navigator.serviceWorker.register('/ngsw-worker.js').then(function(registration) {
-              console.log("SERVICE WORKER REGISTERED!!");
-              ///obj.data.loadInitialData("all");
-
+              console.log("SERVICE WORKER REGISTERED!!",registration);
             }).catch(function(error) {
               console.log('SERVICE WORKER REGISTRATION FAILED:', error);
             });
@@ -102,23 +100,47 @@ export class KiiPwaService {
     return this.swUpdate.isEnabled;
   }
 
-  /**Requests for subscribription to onPush notifications */
-  onPushNotificationSubscription() {
+  /**Requests for subscribription to onPush notifications for a user*/
+  onPushNotificationSubscriptionUser() {
     if (isPlatformBrowser(this._platformId) && this.swPush.isEnabled) {
       this.swPush.requestSubscription({
         serverPublicKey: environment.vapidPublic
       })
       .then(sub => {
-        this.http.post(environment.apiURL + '/notification/settings', { onPush : sub }).subscribe();
+        this.http.post(environment.apiURL + '/notification/settings/user', {onPush : sub }).subscribe();
       })
       .catch(err => console.error('Could not subscribe to notifications', err));
-
-      //When we recieve an onPush notification let's do whatever is required
-      this.swPush.messages.pipe(map((res:any) => <Notification>res.notification)).subscribe(notification => {
-        //console.log("swPush.messages.subscription");
-        //console.log("Notification is:",notification)
-      })
     }
+  }
+
+  /**Requests for subscribription to onPush notifications for any connection*/
+  onPushNotificationSubscriptionSession() {
+    if (isPlatformBrowser(this._platformId) && this.swPush.isEnabled) {
+      this.swPush.requestSubscription({
+        serverPublicKey: environment.vapidPublic
+      })
+      .then(sub => {
+        //GET THE SW ID
+        let session = this._getSessionId();
+        console.log("SESSION IS:",session);
+        this.http.post(environment.apiURL + '/notification/settings/session', { session:session,onPush : sub }).subscribe();
+      })
+      .catch(err => console.error('Could not subscribe to notifications', err));
+    }
+  }  
+
+  /**Generates unique sessionId */
+  _getSessionId() {
+    if (localStorage.getItem('onpush_session'))
+      return localStorage.getItem('onpush_session');
+    const stringArr = [];
+    for(let i = 0; i< 6; i++){
+      // tslint:disable-next-line:no-bitwise
+      const S4 = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+      stringArr.push(S4);
+    }
+    localStorage.setItem('onpush_session',stringArr.join('-'));
+    return stringArr.join('-');  
   }
 
   installApp() {

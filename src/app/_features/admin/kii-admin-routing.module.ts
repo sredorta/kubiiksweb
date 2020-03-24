@@ -8,6 +8,7 @@ import { KiiAdminSettingsComponent } from './routes/kii-admin-settings/kii-admin
 import { KiiAdminContentComponent } from './routes/kii-admin-content/kii-admin-content.component';
 import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email.component';
 import { KiiAdminDiskComponent } from './routes/kii-admin-disk/kii-admin-disk.component';
+import { KiiAdminNotificationComponent } from './routes/kii-admin-notification/kii-admin-notification.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'settings',  component: KiiAdminSettingsComponent },
   { path: 'content', component:KiiAdminContentComponent},
   { path: 'emails', component:KiiAdminEmailComponent},
+  { path: 'notifications', component: KiiAdminNotificationComponent},
   { path: 'stats', component:KiiAdminStatsComponent},
   { path: 'users', component:KiiAdminUsersComponent},
   { path: 'popup', component:KiiAdminPopupComponent},
