@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { IChatRoom, KiiSocketService, SocketEvents, ChatDataType, IChatMessage } from 'src/app/routes/chat/service/kii-socket.service';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
+import { faUserClock } from '@fortawesome/free-solid-svg-icons/faUserClock';
+import { KiiChatDialogComponent } from '../../components/kii-chat-dialog/kii-chat-dialog.component';
 
 @Component({
   selector: 'kii-admin-chats',
@@ -11,6 +13,10 @@ import { KiiTranslateService } from 'src/app/_features/translate/services/kii-tr
   styleUrls: ['./kii-admin-chats.component.scss']
 })
 export class KiiAdminChatsComponent extends KiiBaseAbstract implements OnInit {
+
+  icons = {
+    clock: faUserClock
+  }
 
   rooms : IChatRoom[] = [];
   currentRoom: IChatRoom;
@@ -62,8 +68,7 @@ export class KiiAdminChatsComponent extends KiiBaseAbstract implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.currentRoom = room;
       this.kiiSocket.socket.emit(SocketEvents.CHAT_DATA,{room:this.currentRoom.id, type:ChatDataType.JoinRoom, object:{room:this.currentRoom}});
-  
-/*      let dialogRef = this.dialog.open(KiiChatDialogComponent, {
+      let dialogRef = this.dialog.open(KiiChatDialogComponent, {
         panelClass: 'kii-chat-dialog',
         minWidth:'300px',
         maxWidth:'500px',
@@ -74,7 +79,7 @@ export class KiiAdminChatsComponent extends KiiBaseAbstract implements OnInit {
          //Leave all rooms
          this.kiiSocket.chatLeave(result);
 
-      });*/
+      });
     }
   }
 

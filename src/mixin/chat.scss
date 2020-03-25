@@ -32,11 +32,14 @@
         padding:0px 15px;
       }
       .mat-card-actions:last-child {
-        margin-bottom:20px;
+        margin-bottom:0px;
+        padding-bottom:30px;
       }
     }
-
-
+  }
+  .cdk-overlay-pane.kii-chat-dialog .mat-dialog-container {
+    box-sizing: border-box;
+    padding:0px;
   }
 
 

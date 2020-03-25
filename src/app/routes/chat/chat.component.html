@@ -1,38 +1,6 @@
 <kii-chat-theme></kii-chat-theme>
 <kii-toolbar></kii-toolbar>
 <div class="chat-wrapper">
-<mat-card class="card-chat">
-    <mat-card-header>
-      <mat-card-title>{{'chat.title' |translate | async}}</mat-card-title>
-      <mat-card-subtitle>{{'chat.subtitle' | translate | async}}</mat-card-subtitle>
-      <div class="header-icon" mat-card-avatar><mat-icon [matBadge]="room.participants" matBadgeOverlap="true"><fa-icon [icon]="icons['users']"></fa-icon></mat-icon></div>
-    </mat-card-header>
-    <mat-card-content #content  [scrollTop]="content.scrollHeight"> 
-      <div *ngFor="let message of messages" >
-          <div class="message" [ngClass]="{'i-am-sender' : iAmSender(message), 'i-am-reciever': !iAmSender(message), 'is-bot': isBot(message)}">
-             <div *ngIf="isBot(message)" class="bot-image"></div>
-             <div class="message-text">
-                <div class="message-owner">{{getMessageOwner(message)}}</div>
-                <div class="message-content">{{message.message}}</div>
-                <div class="message-date"><span>{{message.date | date:'HH:mm'}}</span></div>
-              </div>
-          </div>
-      </div>
-    </mat-card-content>
-    <mat-card-actions>
-    <div class="writting-part" ><span *ngIf="writting" class="writting-visible"><i class="far fa-comment-dots"></i>{{'kiilib.chat.writting' | translate | async}}</span></div>
-    <div class="dialog-actions">
-        <form [formGroup]="myForm" novalidate> 
-            <mat-form-field [appearance]="kiiInputAppearance">
-                <textarea #control matInput formControlName="newMessage" rows="2" placeholder="{{'chat.input.message.p' | translate | async}}" type="text"></textarea>
-                <mat-hint>{{'chat.input.message.h' | translate | async}}</mat-hint>
-            </mat-form-field>        
-            <div class="kii-button-wrapper">
-                  <button  mat-mini-fab  color="primary" type="button" (click)="onSubmit()"><fa-icon [icon]="icons['send']"></fa-icon></button>
-            </div>
-        </form>
-    </div>
-    </mat-card-actions>
-</mat-card>
+<kii-chat></kii-chat>
 </div>
 

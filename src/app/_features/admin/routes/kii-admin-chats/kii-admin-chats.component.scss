@@ -1,12 +1,21 @@
+h1 {
+    border-bottom: 1px solid;
+}
 .kii-admin-chats-wrapper {
     box-sizing: border-box;
     padding:10px;
     padding-top:60px;
     min-height: 100vh;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+
+    .kii-admin-chats-content {
+        padding:20px;
+        display: inline-block;
+    }
 }
+
+
+
+
 .kii-admin-chats-rooms-wrapper {
     width:100%;
     display:flex;
@@ -16,6 +25,9 @@
     align-self: center;
 }
 .kii-room-button {
+    border:1px solid;
+    width:180px;
+    height:180px;
     margin:20px;
 }
 .mat-badge-content {
@@ -70,14 +82,9 @@ kii-chat {
     min-height: 80vh;
 }
 
-.kii-admin-chats-title {
-    opacity: 0.7;
-    font-size: 28px;
-    padding:20px;
-
-}
 
 .kii-admin-chats-title.empty {
+    padding:10px;
     border:1px solid;
     border-radius: 5px;
 }

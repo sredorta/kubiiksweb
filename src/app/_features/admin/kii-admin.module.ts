@@ -94,6 +94,7 @@ import { KiiNotificationFormComponent } from './components/kii-notification-form
 import { KiiNotificationSendFormComponent } from './components/kii-notification-send-form/kii-notification-send-form.component';
 import { KiiAdminChatsComponent } from './routes/kii-admin-chats/kii-admin-chats.component';
 import { ChatModule } from 'src/app/routes/chat/chat.module';
+import { KiiChatDialogComponent } from './components/kii-chat-dialog/kii-chat-dialog.component';
 
 @NgModule({
   imports: [
@@ -116,6 +117,7 @@ import { ChatModule } from 'src/app/routes/chat/chat.module';
     ]
   ],
   declarations: [
+    KiiChatDialogComponent,
     KiiAdminChatsComponent,
     KiiNotificationSendFormComponent,
     KiiNotificationFormComponent,
@@ -143,7 +145,7 @@ import { ChatModule } from 'src/app/routes/chat/chat.module';
     KiiMobileFormatPipe,
     KiiThousandsSuffixPipe
   ],
-  entryComponents:[KiiImageGalleryDialogComponent],
+  entryComponents:[KiiImageGalleryDialogComponent, KiiChatDialogComponent],
   providers:[KiiAdminUserService],
   exports:[
   ]

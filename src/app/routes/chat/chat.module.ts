@@ -35,6 +35,7 @@ import { ChatRoutingModule } from './chat-routing.module';
 import { ChatComponent } from './chat.component';
 import { KiiFormModule } from 'src/app/_features/form/kii-form.module';
 import { KiiChatThemeComponent } from './kii-chat-theme/kii-chat-theme.component';
+import { KiiChatComponent } from './kii-chat/kii-chat.component';
 
 
 @NgModule({
@@ -51,11 +52,13 @@ import { KiiChatThemeComponent } from './kii-chat-theme/kii-chat-theme.component
   ],
   declarations: [
     KiiChatThemeComponent,
+    KiiChatComponent,
     ChatComponent
   ],
   providers:[
   ],
   exports:[
+    KiiChatComponent
   ]
 })
 export class ChatModule { 

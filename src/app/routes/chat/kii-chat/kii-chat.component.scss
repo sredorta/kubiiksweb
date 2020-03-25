@@ -1,0 +1,147 @@
+.card-chat {
+    box-sizing: border-box;
+    min-width: 300px;
+    max-width: 600px;
+    width:100%;
+}
+.header-icon {
+    padding-top:10px;
+    fa-icon {
+        font-size: 26px;
+    }
+}
+.mat-card-content {
+    min-height: 130px;
+    max-height: 40vh;
+    height:100vh;
+    overflow-y: scroll;
+}
+
+
+.message {
+    color:black;
+    font-size: 12px;
+    max-width:70%;
+    margin-top:5px;
+}
+.message.i-am-sender {
+    margin-left:auto;
+    margin-right:0;
+    padding:10px;
+    padding-right:30px;
+    background-image: url("/assets/kiilib/images/comment-chat-right.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.message.i-am-reciever:not(.is-bot) {
+    margin-left:0;
+    margin-right:auto;
+    padding:10px;
+    padding-left:30px;
+    background-image: url("/assets/kiilib/images/comment-chat-left.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.message.i-am-reciever.is-bot {
+    margin:0 auto;
+    display:flex;
+    padding:10px;
+    font-size: 12px;
+    background-image: url("/assets/kiilib/images/comment-chat-bot.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.message-content {
+    width:100%;
+    max-width: 100%;
+    word-break: break-all;
+    display:inline-block;
+}
+
+.bot-image {
+    margin-left: 20px;
+    margin-right:20px;
+    width:40px;
+    height:40px;
+    background-image: url("/assets/kiilib/images/bot.svg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+
+
+
+
+.message-date {
+    font-size: 12px;
+    padding-right: 10px;
+    opacity: 0.7;
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}  
+
+.message-owner {
+    font-weight:bold;
+    font-size: 12px;
+}
+
+form {
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    mat-form-field {
+        width:100%;
+    }
+}
+.kii-button-wrapper {
+    margin-left:20px;
+    fa-icon {
+        font-size: 20px;
+    }
+}
+
+.writting-part {
+    padding-left:10px;
+    height:20px;
+    margin-bottom:5px;
+}
+.writting-visible {
+    font-size: 12px;
+    opacity:0.8;
+    font-weight: bold;
+    font-style: italic;
+    i {
+        margin-right:5px;
+    }
+}
+
+@keyframes flickerAnimation {
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  @-o-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  @-moz-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  @-webkit-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  .writting-visible {
+     -webkit-animation: flickerAnimation 1s infinite;
+     -moz-animation: flickerAnimation 1s infinite;
+     -o-animation: flickerAnimation 1s infinite;
+      animation: flickerAnimation 1s infinite;
+  }

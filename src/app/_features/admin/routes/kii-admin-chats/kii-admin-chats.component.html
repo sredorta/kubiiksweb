@@ -1,20 +1,18 @@
 <kii-toolbar></kii-toolbar>
 <kii-admin-theme></kii-admin-theme>
 <div class="admin-theme kii-admin-chats-wrapper">
+  <h1>{{'admin.chat.title' | translate | async}}</h1>
   <div *ngIf="rooms.length>0" class="kii-admin-chats-content">
-    <p class="kii-admin-chats-title"><i class="fas fa-comments" style="margin-right:10px"></i>{{'admin.chat.rooms.title' | translate | async}}</p>
     <div class="kii-admin-chats-rooms-wrapper">
-        <div *ngFor="let room of rooms">
-            <button class="kii-room-button" mat-stroked-button color="primary" [matBadge]="countMessages(room.messages)" matBadgePosition="before" matBadgeColor="accent" (click)="openRoom(room)">
+            <button *ngFor="let room of rooms" class="kii-room-button" mat-button color="primary" [matBadge]="countMessages(room.messages)" matBadgePosition="before" matBadgeColor="accent" (click)="openRoom(room)">
                 <div class="kii-admin-room">
                   <div class="date-wrapper">
-                    <small><i class="far fa-clock"></i>{{room.date | date:'HH:mm'}}</small>
+                    <small><fa-icon [icon]="icons['clock']"></fa-icon>{{room.date | date:'HH:mm'}}</small>
                   </div>
                   <i class="fas fa-person-booth"></i>
                   <small>{{room.id}}</small>
                 </div>
             </button>
-        </div>
     </div>
 </div>
 <div *ngIf="rooms.length==0" class="kii-admin-chats-empty-wrapper">

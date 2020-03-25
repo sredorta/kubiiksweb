@@ -157,6 +157,7 @@ $admin-theme: create-dark-theme($admin-primary, $admin-accent, $admin-warn, $mat
 @import './mixin/contact.scss';
 @import './mixin/demo.scss';
 @import './mixin/email.scss';
+@import './mixin/chat.scss';
 
 
 @mixin design-mixin($main-theme) {
@@ -164,6 +165,7 @@ $admin-theme: create-dark-theme($admin-primary, $admin-accent, $admin-warn, $mat
     @include contact-mixin($main-theme);
     @include demo-mixin($main-theme);
     @include email-mixin($admin-theme); //Email editting is only admin
+    @include chat-mixin($admin-theme); //Email editting is only admin
 
 }
 
