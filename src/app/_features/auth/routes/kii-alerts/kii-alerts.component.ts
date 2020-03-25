@@ -54,7 +54,8 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
   constructor(
     private kiiTrans: KiiTranslateService,
     private kiiAuth: KiiMainUserService,
-    private kiiApiAuth: KiiAuthUserService
+    private kiiApiAuth: KiiAuthUserService,
+    private router: Router
     
     ) { 
     super();
@@ -136,14 +137,13 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
 
   rowClick(alert:Alert) {
     console.log("clicked on", alert.type);
-/*    switch (alert.type) {
+    switch (alert.type) {
         case "chat": 
-          let translatedPath: any = this.localize.translateRoute('/admin-chats');
-          this.router.navigate([translatedPath]);
+          this.router.navigate(['/'+this.kiiTrans.get()+'/admin/chats']);
           break;
         default: 
           //Do nothing  
-    }*/
+    }
   }
 
 }

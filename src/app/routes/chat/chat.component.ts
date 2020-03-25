@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationStart } from '@angular/router';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { Article } from 'src/app/_features/main/models/article';
 import { KiiMainDataService } from 'src/app/_features/main/services/kii-main-data.service';
@@ -27,7 +27,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane';
 })
 export class ChatComponent extends KiiFormAbstract implements OnInit {
 
-  
+
   /**Contains icons used in the chat */
   icons = {
     users: faUserFriends,
@@ -70,18 +70,13 @@ export class ChatComponent extends KiiFormAbstract implements OnInit {
       private socket: KiiSocketService, 
       private auth: KiiMainUserService,
       private trans: KiiTranslateService,
-
-      private route: ActivatedRoute, 
-      private data : KiiMainDataService,
-      private articles: KiiMainArticleService,
-      private router : Router
-            ) { super()}
+      ) { super()}
 
             ngOnInit() {
+              console.log("CHAT INIT !!!!");
               this.trans.setRequiredContext(['chat']);
               this.kiiApiStats.send(StatAction.CHAT_ENTER,null);
               this.createForm();
-              this.socket.getChatAdmins();  //Request chat admins
               this.socket.chatStart();      //Creates and gets room if we are not admin
 
               this.addSubscriber(
@@ -159,6 +154,7 @@ export class ChatComponent extends KiiFormAbstract implements OnInit {
                   senderName: this.loggedInUser.firstName
                 }
                 if (this.isFirstMessage && !this.isAdminContext) {
+                  console.log("SENDING FIRST MESSAGE TO SOCKET !");
                    this.socket.sendChatData({room:this.room.id, type: ChatDataType.FirstMessage, object: {message:myMessage}});
                    this.isFirstMessage = false;
                 } else 
@@ -194,6 +190,8 @@ export class ChatComponent extends KiiFormAbstract implements OnInit {
               for (let subscription of this._subscriptions) {
                 subscription.unsubscribe();
               }
+              console.log("LEAVING CHAT !");
+              this.socket.chatLeave(this.room);
             }
 
 }

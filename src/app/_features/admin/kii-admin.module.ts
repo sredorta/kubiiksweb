@@ -92,6 +92,8 @@ import { KiiAdminNotificationComponent } from './routes/kii-admin-notification/k
 import { KiiNewFormComponent } from './components/kii-new-form/kii-new-form.component';
 import { KiiNotificationFormComponent } from './components/kii-notification-form/kii-notification-form.component';
 import { KiiNotificationSendFormComponent } from './components/kii-notification-send-form/kii-notification-send-form.component';
+import { KiiAdminChatsComponent } from './routes/kii-admin-chats/kii-admin-chats.component';
+import { ChatModule } from 'src/app/routes/chat/chat.module';
 
 @NgModule({
   imports: [
@@ -103,6 +105,7 @@ import { KiiNotificationSendFormComponent } from './components/kii-notification-
     KiiFormModule,
     KiiTableModule,
     CKEditorModule,
+    ChatModule,
     KiiEmailTemplateModule,
     KiiAdminRoutingModule,
     [
@@ -113,6 +116,7 @@ import { KiiNotificationSendFormComponent } from './components/kii-notification-
     ]
   ],
   declarations: [
+    KiiAdminChatsComponent,
     KiiNotificationSendFormComponent,
     KiiNotificationFormComponent,
     KiiAdminNotificationComponent,

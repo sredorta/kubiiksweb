@@ -141,6 +141,10 @@
     "admin.email.send": "Envoyer le courriel",
     "admin.gallery.dialog.t" : "Gallerie d'images",
 
+    "admin.chat.rooms.empty" : "Il n'y a pas de chat actif en ce moment",
+    "admin.chat.rooms.title" : "Liste de chats actifs",
+
+
     "admin.disk.title"                 : "Gestion de l'espace disc",
     "admin.disk.total.title"           : "Espace disc utilisé",
     "admin.disk.total.subtitle"        : "Distribution de l'espace disc",

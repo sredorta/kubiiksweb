@@ -9,6 +9,7 @@ import { KiiAdminContentComponent } from './routes/kii-admin-content/kii-admin-c
 import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email.component';
 import { KiiAdminDiskComponent } from './routes/kii-admin-disk/kii-admin-disk.component';
 import { KiiAdminNotificationComponent } from './routes/kii-admin-notification/kii-admin-notification.component';
+import { KiiAdminChatsComponent } from './routes/kii-admin-chats/kii-admin-chats.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: 'users', component:KiiAdminUsersComponent},
   { path: 'popup', component:KiiAdminPopupComponent},
   { path: 'disk', component:KiiAdminDiskComponent},
+  { path: 'chats', component:KiiAdminChatsComponent},
+
 
 
 ];

@@ -5,6 +5,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { Socket } from 'socket.io-client';
 import { environment } from 'src/environments/environment';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
+import { IUser, User } from 'src/app/_features/main/models/user';
+import { KiiMainUserService } from 'src/app/_features/main/services/kii-main-user.service';
 
 
 /**Enumerator with all socket events*/
@@ -12,8 +14,6 @@ export enum SocketEvents {
   CONNECT = "connect",
   DISCONNECT = "disconnect",
   AUTHENTICATE = "authenticate",
-  UPDATE_USER = "update-user-data",
-  CHAT_ADMINS_DATA = "chat-admins",
   CHAT_DATA="chat-data",
     //CHAT_ADMIN_ROOMS="chat-admin-rooms",
   //CHAT_NEW_NOTIFY ="chat-new-notify",
@@ -86,12 +86,7 @@ export enum ChatDataType {
 })
 export class KiiSocketService {
   /**Socket for comunication */
-  socket = io();
-
-
-  /**Chat admins */
-  private _chatAdmins:Array<IChatUser> = [];
-  private _chatAdmins$ = new BehaviorSubject<IChatUser[]>([]); 
+  socket = null;
 
   /**Data provided by socket */
   private _data$ = new BehaviorSubject<IChatData>(null);
@@ -99,6 +94,7 @@ export class KiiSocketService {
 
   constructor(
               private translate: KiiTranslateService,
+              private auth: KiiMainUserService,
               private ngZone: NgZone,
               @Inject(PLATFORM_ID) private platformId: any) {
     if (isPlatformBrowser(platformId)) {
@@ -106,6 +102,7 @@ export class KiiSocketService {
       this.ngZone.runOutsideAngular(() => {
         this.socket = io(environment.mainExtURL,{secure:true});
       });
+      this.loadOnAuthentication();  //Answers authentication requests
       this.loadOnChatData();        //Interface for all socket room to room data
     }
   }
@@ -115,6 +112,25 @@ export class KiiSocketService {
   ////////////////////////////////////////////////////////////////////////
   //Functions for handling socket events
   ////////////////////////////////////////////////////////////////////////
+  /**Handles authentification of user */
+  private loadOnAuthentication() {
+    this.socket.on(SocketEvents.AUTHENTICATE, () => {
+        this.updateAuth();
+    });       
+  }
+  /**Updates authentication, only if we are on browser */
+  updateAuth() {
+    console.log("SOCKET: THEY ASKED US TO AUTHENTICATE !");
+    if (isPlatformBrowser(this.platformId)) {
+      let data : ISocketAuth = {
+        token: localStorage.getItem('token'),
+        language: this.translate.get()
+      }
+      this.socket.emit(SocketEvents.AUTHENTICATE,data);
+    }
+  }
+
+
 
   /**Loads chat data */
   private loadOnChatData() {
@@ -131,9 +147,6 @@ export class KiiSocketService {
     this.socket.emit(SocketEvents.CHAT_DATA,data);
   }
 
-  getChatAdmins() {
-    this.socket.emit(SocketEvents.CHAT_ADMINS_DATA);
-  }
 
   chatStart() {
     this.socket.emit(SocketEvents.CHAT_DATA, {room:null, type:ChatDataType.CreateRoom, object:{language:this.translate.get()}});
@@ -152,11 +165,6 @@ export class KiiSocketService {
   /**Returns data when recieved by socket */
   onDataChange() {
     return this._data$;
-  }
-
-  /**Returns chat admins */
-  onChatAdmins() {
-    return this._chatAdmins$;
   }
 
 

@@ -1,0 +1,89 @@
+.kii-admin-chats-wrapper {
+    box-sizing: border-box;
+    padding:10px;
+    padding-top:60px;
+    min-height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.kii-admin-chats-rooms-wrapper {
+    width:100%;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+}
+.kii-room-button {
+    margin:20px;
+}
+.mat-badge-content {
+    transform: scale(2) !important;
+}
+.kii-admin-room {
+    padding:10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    small {
+        opacity:0.5;
+    }
+    i {
+        font-size: 50px;
+        margin:10px;
+    }
+    .date-wrapper {
+        width:100%;
+        display: flex;
+        justify-content: flex-end;
+        font-weight: bold;
+        i {
+            margin-right: 5px;
+            font-size: 12px;
+        }
+    }
+}
+
+.chat-wrapper {
+    padding:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+.chat-wrapper-container {
+    width:100%;
+    max-width: 700px;
+}
+kii-chat {
+    width:100%;
+}
+
+.kii-admin-chats-empty-wrapper {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 80vh;
+}
+
+.kii-admin-chats-title {
+    opacity: 0.7;
+    font-size: 28px;
+    padding:20px;
+
+}
+
+.kii-admin-chats-title.empty {
+    border:1px solid;
+    border-radius: 5px;
+}
+
+@media only screen and (max-width: 700px) {
+    .kii-admin-chats-title  {
+        font-size:22px;
+    }
+}
