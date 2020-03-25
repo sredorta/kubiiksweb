@@ -1,0 +1,43 @@
+@import '~@angular/material/theming';
+
+// mixin name will be used in main style.scss
+@mixin chat-mixin($theme) {
+  
+  // retrieve variables from theme 
+  // (all possible variables, use only what you really need)
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background:map-get($theme,background);
+  $is-dark-theme: map-get($theme, is-dark);
+
+  kii-chat {
+    .mat-card {
+      padding:0px;
+      .mat-card-header {
+        padding:15px;
+        color:white;
+        background-image:
+        linear-gradient(
+          135deg, 
+          mat-color(mat-palette($mat-lime, 900)), mat-color(mat-palette($mat-lime, 400))
+        );
+      }
+      .mat-card-content {
+        border-bottom:1px solid;
+        padding:10px 0px;
+      }
+      .mat-card-actions {
+        padding:0px 15px;
+      }
+      .mat-card-actions:last-child {
+        margin-bottom:20px;
+      }
+    }
+
+
+  }
+
+
+}

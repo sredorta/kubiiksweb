@@ -1,7 +1,12 @@
+
 <kii-main-theme></kii-main-theme>
-<div class="kii-app-wrp">
-<ng-content></ng-content>
-</div>
+    <div class="kii-app-wrp">
+        <ng-content></ng-content>
+        <button *ngIf="!loggedInUser.hasRole('chat') && isBrowser && !isChatRoute" mat-fab  attr.aria-label="{{'kiilib.chat.open' | translate | async}}" style="background-color:transparent !important"  class="chat-btn" [routerLink]="'chat' | translateRoute | async"></button>
+
+    </div>
+
+
 <!--<kii-popup-dialog [show]="showPopup" (onClose)="this.showPopup = false"></kii-popup-dialog>-->
 <ngx-json-ld [json]="schemaSite"></ngx-json-ld>
 <ngx-json-ld [json]="schemaCorporation"></ngx-json-ld>

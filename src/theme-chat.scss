@@ -1,0 +1,18 @@
+@import './styles.scss';
+@import './theme.scss';
+
+
+
+//INCLUDE Aditional to main blog mixins
+@import './mixin/chat.scss';
+
+@mixin design-mixin($theme) {
+    @include chat-mixin($theme);
+}
+
+//MATERIAL
+@include mat-card-theme($main-theme);
+@include mat-form-field-theme($main-theme);
+
+@include design-mixin($main-theme);
+

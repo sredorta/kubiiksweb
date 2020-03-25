@@ -37,6 +37,14 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   /**Indicates if popup has already been shown */
   private hasShownPopup : boolean = false;
 
+  /**Current loggedInUser */
+  loggedInUser : User = new User(null);
+
+  /**When we are in browser */
+  isBrowser = isPlatformBrowser(this.platform);
+
+  /**When we are in chat page so that chat icon han be hidden */
+  isChatRoute: boolean = false;
 
 
   constructor(@Inject(PLATFORM_ID) private platform: any,
@@ -63,6 +71,12 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     //Sets language required context
     this.kiiTrans.setRequiredContext(['main']);
 
+    //Keep track of auth user
+    this.addSubscriber(
+      this.auth.getLoggedInUser().subscribe(res => {
+        this.loggedInUser = res;
+      })
+    )
 
     //Load full data
     this.data.loadFullData(3000);
@@ -145,6 +159,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           this.stats.send(StatAction.NAVIGATION_START ,this.router.url);
+          this.isChatRoute = this.router.url.includes('/chat');
         }
       })
     )

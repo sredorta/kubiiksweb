@@ -44,6 +44,10 @@ let routes: Routes = [
     loadChildren : () => import('./_features/auth/kii-auth.module').then(m => m.KiiAuthModule), 
   },   
   {
+    path: 'chat',
+    loadChildren : () => import('./routes/chat/chat.module').then(m => m.ChatModule), 
+  },    
+  {
     path: 'admin',
     loadChildren : () => import('./_features/admin/kii-admin.module').then(m => m.KiiAdminModule), 
   },  
