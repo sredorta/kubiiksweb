@@ -12,6 +12,5 @@
         <p itemprop="name" class="title">{{data.title | translate | async}}</p>
         <p itemprop="description" class="sub">{{data.subtitle | translate | async}}</p>
     </div>
-     <!--<img class="icon" src="./assets/images/more.svg" alt="more" />-->
-     <button class="btn txt-l" mat-stroked-button>MORE</button>
+     <img *ngIf="!data.isShort" class="icon" src="./assets/images/header/more.svg" alt="more" />
 </div>
