@@ -65,6 +65,7 @@ import { KiiMainThemeComponent } from './components/kii-main-theme/kii-main-them
 import { KiiElementComponent } from './components/kii-element/kii-element.component';
 import { KiiAppearDirective } from './directives/kii-appear-directive';
 import { KiiHorizontalScrollerComponent } from './components/kii-horizontal-scroller/kii-horizontal-scroller.component';
+import { KiiLazyDirective } from './directives/kii-lazy-directive';
 
 
 @NgModule({
@@ -116,6 +117,7 @@ import { KiiHorizontalScrollerComponent } from './components/kii-horizontal-scro
     KiiHomeComponent,
     KiiHttpErrorComponent,
     KiiAppearDirective,
+    KiiLazyDirective,
   ],
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
   entryComponents:[KiiBottomSheetCookiesComponent, KiiBottomSheetSoftwareUpdateComponent, KiiHttpErrorComponent, KiiPopupDialogComponent],
@@ -129,6 +131,7 @@ import { KiiHorizontalScrollerComponent } from './components/kii-horizontal-scro
     KiiArticleSummaryComponent,
     KiiNiceDateFormatPipe,
     KiiAppearDirective,
+    KiiLazyDirective,
     KiiToolbarComponent,
     ToolbarComponent,
     KiiHeaderComponent,

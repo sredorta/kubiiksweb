@@ -59,13 +59,24 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private kiiSettings: KiiMainSettingService,
   private auth : KiiMainUserService,
   private pwa: KiiPwaService,
-  private swPush : SwPush
+  private swPush : SwPush,
+  private ngZone: NgZone
   ) { super() }
 
 
 
   ngOnInit() {
     console.log("KIIAPP ONINIT");
+    /*if (isPlatformBrowser(this.platform)) {
+      console.log("ENABLING LAZY !");
+      this.ngZone.runOutsideAngular(() => {
+        var lazyLoadInstance = new LazyLoad({
+          elements_selector: ".lazy"
+          // ... more custom settings?
+        });
+      });
+
+    }*/
     this.viewTrans.scroll();
 
     //Sets language required context

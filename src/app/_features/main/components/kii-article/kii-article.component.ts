@@ -41,17 +41,24 @@ export class KiiArticleComponent extends KiiBaseAbstract implements OnInit {
         this.currentLang = this.translate.getCurrent();
       })
     )
-    this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.article.content);
-
+    this.setHtml(this.article.content)
   }
 
 
   ngOnChanges(changes:SimpleChanges) {
     if (changes.article) {
       this.article = changes.article.currentValue;
-      this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(this.article.content);
+      this.setHtml(this.article.content)
     }
   } 
+
+  /**Patches html by introducing lazy loading on images */
+  setHtml(html:string) {
+    //html = html.replace(/<img src="/g,'<img src="/assets/kiilib/images/lazy.svg" data-src="');
+    //console.log(html);
+    this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(html);
+
+  }
 
 }
 

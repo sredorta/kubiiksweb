@@ -1,5 +1,7 @@
   <div class="kii-article-summary-container">
-      <div class="img-wrp"><img class="lazy" [src]="article.getImage()" alt="Image"></div>
+      <div class="img-wrp">
+        <img kiiLazy src="./assets/kiilib/images/lazy.svg" [attr.data-src]="article.getImage()" alt="Image">
+      </div>
       <div class="text-wrp">
         <p class="title">{{article.title}}</p>
         <p class="description">{{trimDescription(article.description)}}</p>
