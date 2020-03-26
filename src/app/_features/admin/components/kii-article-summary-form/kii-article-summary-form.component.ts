@@ -29,7 +29,6 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
   }
 
   ngOnInit() {
-    console.log("CURRENT IMAGE:",this.article.image);
     this.config = {
       label:'admin.summary.image.t', 
       hint:'admin.summary.image.s',
@@ -79,7 +78,6 @@ export class KiiArticleSummaryFormComponent extends KiiFormAbstract implements O
 
   /**Emit that we are saving */
   onSubmit(value:any) {
-    console.log(value)
     this.kiiOnSubmit.emit(value);
   }
 

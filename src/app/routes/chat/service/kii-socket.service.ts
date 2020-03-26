@@ -120,7 +120,6 @@ export class KiiSocketService {
   }
   /**Updates authentication, only if we are on browser */
   updateAuth() {
-    console.log("SOCKET: THEY ASKED US TO AUTHENTICATE !");
     if (isPlatformBrowser(this.platformId)) {
       let data : ISocketAuth = {
         token: localStorage.getItem('token'),

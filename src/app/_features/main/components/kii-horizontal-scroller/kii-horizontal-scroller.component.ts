@@ -82,7 +82,6 @@ export class KiiHorizontalScrollerComponent extends KiiBaseAbstract implements O
         this.onresize();
         this._scrollValue = this._scrollValue-this.scrollDelta;
         if (this._scrollValue<0) this._scrollValue = 0;
-        console.log(this._scrollValue);
         this.content.nativeElement.scrollLeft= this._scrollValue;
       }
   }

@@ -40,7 +40,6 @@ export class KiiImageGalleryDialogComponent extends KiiBaseAbstract implements O
     if (data && data.configUpload) {
       this.configUpload = data.configUpload;  
     }
-    console.log("CONFIG UPLOAD:",this.configUpload);
   }
 
 

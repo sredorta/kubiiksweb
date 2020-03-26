@@ -54,7 +54,7 @@ export class KiiAdminEmailService extends KiiBaseAbstract {
     /**Load all email templates */
     public load() {
         return this.http.get<Email[]>(environment.apiURL+ '/email/all').pipe(map(res => {
-            console.log("Recieved data:",res)
+            //console.log("Recieved data:",res)
             let result = [];
             for (let elem of res) {
                 result.push(new Email(elem))

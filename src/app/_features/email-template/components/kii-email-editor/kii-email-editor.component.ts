@@ -52,7 +52,6 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
     public service: KiiEmailTemplateService,
     ) { 
       super();
-      console.log("JSON IS",this.json);
       this.service.initialize(this.json);
       //Emit image request if required
       this.service.imageRequest.subscribe(res => {
@@ -75,7 +74,6 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
       this.service.isImageAvailable.next(this.imageRequestId);
     }
     if (changes.json && changes.json.firstChange) {
-      console.log("Changes",changes.json.currentValue);
       this.json = changes.json.currentValue;
       this.service.initialize(this.json);
     }
@@ -145,7 +143,6 @@ export class KiiEmailEditorComponent extends KiiFormAbstract implements OnInit {
 
   /**Emit data to be saved */
   onSaveData() {
-    console.log("DATA",this.service.getJson());
     this.onSave.emit(this.service.getJson());
   }
 

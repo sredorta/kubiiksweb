@@ -68,7 +68,6 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
   ngOnInit() {
     this.createForm();
     this.addSubscriber(this.kiiAuth.getLoggedInUser().subscribe(res => {
-        console.log("GOT USER",res);
         this.defaults = res;
     }))
   }
@@ -136,12 +135,6 @@ export class KiiProfileFormComponent extends KiiFormAbstract implements OnInit {
 
   /**Send only the modified values */
   onSubmit(value:any) {
-/*    let result = {};
-    Object.keys(this.myForm.controls).forEach(key => {
-      if (value[key] != this.defaults[key])
-        result[key] = value[key];  
-    })*/
-    console.log("SENDING",value)
     this.kiiOnSubmit.emit(value);
   }
 

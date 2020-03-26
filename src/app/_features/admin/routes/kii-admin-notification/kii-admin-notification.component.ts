@@ -137,7 +137,6 @@ export class KiiAdminNotificationComponent extends KiiTableAbstract implements O
 
   /**Creates a new notification template */
   onCreate(value:any) {
-    console.log(value);
     this.isDataLoading = true;
     this.addSubscriber(
       this.kiiAdminNotification.create(value).subscribe(res => {
@@ -157,7 +156,6 @@ export class KiiAdminNotificationComponent extends KiiTableAbstract implements O
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         //this.isDataLoading = true;
-        console.log("Deleting",element);
 
         this.addSubscriber(
           this.kiiAdminNotification.delete(element).subscribe(res => {
@@ -171,26 +169,20 @@ export class KiiAdminNotificationComponent extends KiiTableAbstract implements O
 
   /**Saves template modifications */
   onUpdate(element:Onpush,event:any) {
-    console.log("Saving",element,event);
     element.title = event.title;
     element.body = event.body;
     this.isDataLoading = true;
     this.addSubscriber(
       this.kiiAdminNotification.update(element).subscribe(res => {
-        console.log(res);
         this.isDataLoading = false;
       },()=>this.isDataLoading = false)
     )
   }
 
   onNotificationSend(notification:Onpush, options:string) {
-    console.log("Notification",notification);
-    console.log("Options:",options);
-    //console.log("Sending email",JSON.parse(email.data));
     this.isDataLoading = true;
     this.addSubscriber(
       this.kiiAdminNotification.send(notification,options).subscribe(res => {
-        console.log("NOTIFICATION:",res);
         this.isDataLoading = false;
       },()=> {this.isDataLoading = false})
     )

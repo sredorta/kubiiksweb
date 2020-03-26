@@ -54,7 +54,6 @@ export class KiiAdminNotificationService extends KiiBaseAbstract {
     /**Load all notification templates */
     public load() {
         return this.http.get<Onpush[]>(environment.apiURL+ '/notification/all').pipe(map(res => {
-            console.log("Recieved data:",res)
             let result = [];
             for (let elem of res) {
                 result.push(new Onpush(elem))

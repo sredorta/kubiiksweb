@@ -82,13 +82,11 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
       ) { super()}
 
             ngOnInit() {
-              console.log("CHAT INIT !!!!");
               this.trans.setRequiredContext(['chat']);
               this.kiiApiStats.send(StatAction.CHAT_ENTER,null);
               this.createForm();
               this.socket.chatStart();      //Creates and gets room if we are not admin
               if (this.isAdminContext) {
-                console.log("REQUESTING CONVERSATION FOR ROOM",this.room)
                 this.socket.socket.emit(SocketEvents.CHAT_DATA,{room:this.room.id, type:ChatDataType.StoredMessagesRequest, object:null});
               }
 
@@ -106,12 +104,10 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
                         this.messages.push(data.object.message);
                         break;
                       case ChatDataType.StoredMessagesRequest:
-                        console.log("RECIEVED: STOREDMESSAGES REQUEST",data)
                         //Give back our stored messages
                         this.socket.socket.emit(SocketEvents.CHAT_DATA, {room:this.room.id, type:ChatDataType.StoredMessagesResponse, object:{messages:this.messages,language:this.trans.get()}});
                         break;
                       case ChatDataType.StoredMessagesResponse:
-                        console.log("RECIEVED: STOREDMESSAGES RESPONSE",data);
                         if (this.isAdminContext)
                           this.messages = data.object.messages;
                         break;
@@ -173,7 +169,6 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
                   senderName: this.loggedInUser.firstName
                 }
                 if (this.isFirstMessage && !this.isAdminContext) {
-                  console.log("SENDING FIRST MESSAGE TO SOCKET !");
                    this.socket.sendChatData({room:this.room.id, type: ChatDataType.FirstMessage, object: {message:myMessage}});
                    this.isFirstMessage = false;
                 } else 
@@ -257,7 +252,6 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
                 subscription.unsubscribe();
               }
               if (!this.isAdminContext) this.saveConversation();
-              console.log("LEAVING CHAT !");
               this.socket.chatLeave(this.room);
             }
 

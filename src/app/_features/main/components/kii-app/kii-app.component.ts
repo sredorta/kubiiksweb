@@ -66,19 +66,7 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
 
 
   ngOnInit() {
-    console.log("KIIAPP ONINIT");
-    /*if (isPlatformBrowser(this.platform)) {
-      console.log("ENABLING LAZY !");
-      this.ngZone.runOutsideAngular(() => {
-        var lazyLoadInstance = new LazyLoad({
-          elements_selector: ".lazy"
-          // ... more custom settings?
-        });
-      });
-
-    }*/
     this.viewTrans.scroll();
-
     //Sets language required context
     this.kiiTrans.setRequiredContext(['main']);
 
@@ -90,12 +78,11 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     )
 
     //Load full data
-    this.data.loadFullData(3000);
+    this.data.loadFullData(5000);
     //If we change language we reload all data with new translations
     if (isPlatformBrowser(this.platform))
       this.addSubscriber(
         this.kiiTrans.onChange.subscribe(res => {
-          console.log("TRANSLATION CHANGED",res);
           this.data.isFullLoaded = false;
           this.data.loadFullData(0);
         })
@@ -130,7 +117,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     if (isPlatformBrowser(this.platform)) {
       this.addSubscriber(
         this.swPush.messages.subscribe((res:any) => {
-          console.log("RECIEVED SWPUSH MESSAGE",res);
           //Update auth user as we have to update alerts if notification is to user
           if (res && res.notification && res.notification.data && res.notification.data.user)
             this.auth.setLoggedInUser(new User(res.notification.data.user));
@@ -192,7 +178,6 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
           disableClose:true,
           scrollStrategy: new NoopScrollStrategy()
         }).afterDismissed().subscribe(res => {
-        console.log("Recieved result",res);
         if (res) {
           if (res.result == "accept") {
             this.cookies.accept();

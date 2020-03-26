@@ -30,7 +30,6 @@ export class KiiSettingItemComponent extends KiiFormAbstract implements OnInit {
   }
 
   onSubmit(value:any) {
-    console.log("OnSubmit",value);
     this.setting.value = value.result;
     this.addSubscriber(
       this.kiiAdminSetting.update(this.setting).subscribe(res => {

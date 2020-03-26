@@ -4,6 +4,7 @@ import { Article } from '../../models/article';
 import { KiiTranslateService } from 'src/app/_features/translate/services/kii-translate.service';
 import { faFeatherAlt } from '@fortawesome/free-solid-svg-icons/faFeatherAlt';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'kii-article',
@@ -31,6 +32,8 @@ export class KiiArticleComponent extends KiiBaseAbstract implements OnInit {
    created: faFeatherAlt
  }
 
+ articleChange$ = new BehaviorSubject<boolean>(true);
+
  @ViewChild('myEditor', {static: false}) textArea: ElementRef;
 
   constructor(private translate : KiiTranslateService,private sanitizer:DomSanitizer) { super() }
@@ -48,16 +51,15 @@ export class KiiArticleComponent extends KiiBaseAbstract implements OnInit {
   ngOnChanges(changes:SimpleChanges) {
     if (changes.article) {
       this.article = changes.article.currentValue;
-      this.setHtml(this.article.content)
+      this.setHtml(this.article.content);
     }
   } 
 
   /**Patches html by introducing lazy loading on images */
   setHtml(html:string) {
-    //html = html.replace(/<img src="/g,'<img src="/assets/kiilib/images/lazy.svg" data-src="');
-    //console.log(html);
+    html = html.replace(/<img src="/g,'<img src="/assets/kiilib/images/lazy.svg" data-src="');
     this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(html);
-
+    this.articleChange$.next(true);
   }
 
 }

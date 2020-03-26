@@ -99,7 +99,6 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
   }
 
   ngOnInit() {
-    console.log("IMAGE INIT:",this.image);
     if (this.image) this.formImage = this.image;
     //Set default config
     if (!this.config.defaultImage) this.config.defaultImage = './assets/kiilib/images/no-photo.svg';
@@ -115,8 +114,6 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
       this.svgImage = this.config.defaultImage;
     }
     this._fileName = this.image.replace(/.*\//,"");
-    console.log("IMAGE INIT END",this.image);
-    console.log("USING CONFIG",this.config);
   }
 
   ngAfterViewInit() {
@@ -145,7 +142,6 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
       if (changes.image.currentValue != null) {
         this.formImage = this.image;
         this.image = changes.image.currentValue;
-        console.log("IMAGE CHANGES", this.image);
         this._fileName = this.image.replace(/.*\//,"");
         if (this.isSVG()) this.svgImage = this.image;
       } 
@@ -198,15 +194,10 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
           if (!obj.isSVG())
             obj.image = reader.result.toString();
           else {
-            console.log("IS SVG !!!!!");
-            //this.image = obj.sanitizer.bypassSecurityTrustUrl(reader.result.toString());
             obj.svgImage = obj.sanitizer.bypassSecurityTrustUrl(reader.result.toString());
           }
           obj.isUploadable = true;
-          console.log(obj);
       };
-      console.log("OBJ",this);
-
     }
   }
 

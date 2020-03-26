@@ -144,7 +144,6 @@ export class KiiAdminUsersComponent extends KiiTableAbstract implements OnInit {
     })
     this.addSubscriber(
       dialogRef.afterClosed().subscribe((result:boolean) => {
-        console.log("Recieved :",result)
         if (result) {
           this.isDataLoading = true;
           this.addSubscriber(

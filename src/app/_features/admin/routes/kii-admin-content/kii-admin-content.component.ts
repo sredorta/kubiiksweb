@@ -60,7 +60,6 @@ export class KiiAdminContentComponent extends KiiBaseAbstract implements OnInit 
     //Get all available cathegories
     this.addSubscriber(
       this.cathegory.load().subscribe(res => {
-        console.log("Cathegories", res);
         this.cathegories = res;
         this.isDataLoading = false;
       },() => this.isDataLoading = false)
@@ -68,7 +67,6 @@ export class KiiAdminContentComponent extends KiiBaseAbstract implements OnInit 
 
     this.addSubscriber(
       this.articlesMain.onChange.subscribe(res => {
-        console.log("DETECTED CHANGES ON ARTICLES !!!",this.articlesAdmin.getByCathegory(this.selectedCathegory));
         if (this.selectedCathegory)
           this.selectedArticles = this.articlesAdmin.getByCathegory(this.selectedCathegory);
       })
@@ -77,20 +75,16 @@ export class KiiAdminContentComponent extends KiiBaseAbstract implements OnInit 
   }
 
   onCathegoryChange(data:MatSelectChange) {
-    console.log("SELECTED",data.value);
     this.selectedCathegory = data.value;
     this.selectedArticles = this.articlesAdmin.getByCathegory(data.value);
-    console.log(this.articlesAdmin.getByCathegory(this.selectedCathegory));
   }
 
   /**Create new article from selected cathegory */
   onCreate() {
-    console.log("OnCreate !");
     this.addSubscriber(
       this.articlesAdmin.create(this.selectedCathegory).subscribe(res => {
         this.articlesMain.value().push(res);
         this.articlesMain.set(this.articlesMain.value());
-        console.log("Created new Article",res);
       })
     )
   }

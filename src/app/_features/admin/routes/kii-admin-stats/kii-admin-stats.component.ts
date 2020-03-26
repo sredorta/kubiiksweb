@@ -301,7 +301,6 @@ export class KiiAdminStatsComponent extends KiiBaseAbstract implements OnInit {
     this.isDataLoading = true;
     this.addSubscriber(
       this.stats.analyze(this.days).subscribe(res => {
-        console.log("STATS", res);
         //Convert dates into Date objects
         for (let elem of res.visits_over_day) {
           elem[0] = new Date(elem[0]);

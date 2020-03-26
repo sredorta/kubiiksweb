@@ -84,7 +84,6 @@ export class KiiMainDataService extends KiiBaseAbstract {
           if (User.hasToken()) 
             this.addSubscriber(
               this.user.getAuthUser().subscribe(res => {
-                  console.log("WE ASKED AUTH USER AGAIN !!!",res);
                   this.user.setLoggedInUser(new User(res));
               })
             )

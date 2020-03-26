@@ -37,7 +37,6 @@ export class KiiAdminChatsComponent extends KiiBaseAbstract implements OnInit {
     
     this.addSubscriber(
       this.kiiSocket.onDataChange().subscribe(res => {
-        console.log("Recieved data change:",res);
         if (res) {
           switch (res.type) {
             case ChatDataType.WaitingRooms:
@@ -49,7 +48,6 @@ export class KiiAdminChatsComponent extends KiiBaseAbstract implements OnInit {
                 }
                 break;
             case ChatDataType.StoredMessagesResponse:
-                console.log("RECIEVED STORED MESSAGES",res);
                 let myRoomIndex = this.rooms.findIndex(obj=> obj.id == res.room);
                 if (myRoomIndex>=0) {
                   this.rooms[myRoomIndex].messages = res.object.messages; 

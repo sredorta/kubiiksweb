@@ -134,7 +134,6 @@ export class KiiEditorComponent  implements OnInit, ControlValueAccessor {
   propagateChange = (_: any) => {};
 
   writeValue(obj: any) : void {
-    console.log("SETTING VALUE",obj);
     this.content = obj;
   }
   registerOnChange(fn: any) : void {

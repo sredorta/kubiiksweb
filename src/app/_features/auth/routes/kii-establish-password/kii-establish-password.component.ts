@@ -29,7 +29,6 @@ export class KiiEstablishPasswordComponent extends KiiBaseAbstract implements On
       this.route.queryParams.subscribe(params => {
         if (params['id']) this.id = params['id'];
         if (params['key']) this.key = params['key'];
-        console.log(params);
       }));
   }
   onSubmit(value:any) {

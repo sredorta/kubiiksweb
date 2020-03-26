@@ -137,7 +137,6 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
 
   /**Creates a new template based on the reference */
   onCreate(value:any) {
-    console.log(value);
     this.isDataLoading = true;
     this.addSubscriber(
       this.kiiAdminEmail.create(value).subscribe(res => {
@@ -157,8 +156,6 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         //this.isDataLoading = true;
-        console.log("Deleting",email);
-
         this.addSubscriber(
           this.kiiAdminEmail.delete(email).subscribe(res => {
             this.kiiAdminEmail.splice(email);
@@ -186,23 +183,19 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
 
   /**Saves template modifications */
   onSaveTemplate(email:Email,data:IEmailData) {
-    console.log("Saving",email,data);
     email.data = JSON.stringify(data);
     this.isDataLoading = true;
     this.addSubscriber(
       this.kiiAdminEmail.update(email).subscribe(res => {
-        console.log(res);
         this.isDataLoading = false;
       },()=>this.isDataLoading = false)
     )
   }
 
   onSendEmail(email:Email, options:any) {
-    console.log("Options:",options);
     //console.log("Sending email",JSON.parse(email.data));
     this.addSubscriber(
       this.kiiAdminEmail.send(email,options).subscribe(res => {
-        console.log("HTML:",res);
       })
     )
   }

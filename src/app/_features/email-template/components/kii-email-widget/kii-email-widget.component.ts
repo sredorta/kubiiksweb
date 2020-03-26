@@ -69,7 +69,6 @@ export class KiiEmailWidgetComponent implements OnInit {
       this.widget = this.service._findId(this.id);
 
       this.service.isImageAvailable.subscribe(res => {
-        console.log("We got image",res);
         if (this.widget.id == res) {
             this.widget.imageUrl = this.service.image;
             this.service.image = null;
@@ -157,7 +156,6 @@ export class KiiEmailWidgetComponent implements OnInit {
 
   /**When ckeditor changes */
   onChangeContent(event:any) {
-      console.log(event);
       this.widget.textarea = event;
       this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(this.widget.textarea);
   }
@@ -260,8 +258,7 @@ export class KiiEmailWidgetComponent implements OnInit {
   onImageWidthChangeInput(event: any) {
     if (event && event.srcElement && event.srcElement.valueAsNumber) {
       let value = event.srcElement.valueAsNumber;
-      if (value>600) value=600;
-      console.log("EVENT IS",value);
+      if (value>700) value=700;
       this.widget.imgWidth = value;
       if (this.isImage()) this.updateImage();
       if (this.isButton()) this.updateButton();

@@ -99,7 +99,6 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
 
   /**When we save edited changes */
   onSaveEdited(value:any) {
-    console.log("SAVING FROM EDIT",value)
     this.article.title = value.title;
     this.article.description = value.description;
     this.article.image = value.image;
@@ -121,7 +120,6 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
 
   /**When article is deleted */
   onDelete() {
-    console.log("WE are in onDelete")
     let dialogRef = this.dialog.open(KiiConfirmDialogComponent, {
       scrollStrategy: new NoopScrollStrategy(),
       disableClose:true,
@@ -156,11 +154,9 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
   }
 
   onMoveDown() {
-    console.log("Moving down !");
     this.isDataLoading = true;
     this.addSubscriber(
       this.kiiAdminArticle.moveDown(this.article).subscribe(res => {
-        console.log(res);
         //Refresh the recieved articles
         for (let article of res) {
           this.kiiAdminArticle.refresh(article);
@@ -171,7 +167,6 @@ export class KiiAdminArticleItemComponent extends KiiBaseAbstract implements OnI
   }
 
   updateView(value:any) {
-    console.log("Updating view",value);
     this.previewArticle = new Article(null);
     this.previewArticle.title = value.title;
     this.previewArticle.description = value.description;

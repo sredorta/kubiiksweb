@@ -43,13 +43,11 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
       if (!fontSize) return null;
       fontSize = fontSize.replace('px','');
       fontSize = (parseInt(fontSize)/(this.factor*0.5)) + 'px';
-      console.log("FONT SIZE:",fontSize)
       return fontSize;
   }
 
   /**Sets data */
   setJson(json:IEmailData) {
-    console.log("SET JSON",json);
     //Do all the scaling
     if (json) {
       if (this.factor>1) { //Scaling if required
@@ -69,11 +67,9 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
       }
 
       this.json = json;
-      console.log("Preview",this.json);
       this._addHeading();
       this._addStyle();
       this._addBody();
-      console.log(this.html);
       this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(this.html);
     }
 
@@ -217,7 +213,6 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
     //Loop through blocks and adds content
     let result = ""
     this.json.blocks.forEach(block => {
-      console.log("Adding block",block);
         result = result.concat(
           `
           <table align="center" width="100%" cellspacing="0" cellpadding="0" style="width:${this.json.width}px;vertical-align: top;max-width:${this.json.width}px;margin: 0 auto;background-color: ${this.json.bgColor};">
@@ -368,7 +363,6 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
     }
     style = style.concat(fonts,background,width,padding,alignment);
 
-    console.log("Final style",style);
     return style;
   }
 

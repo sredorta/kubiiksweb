@@ -16,7 +16,6 @@ export class KiiPopupDialogComponent implements OnInit {
   }
 
   close() {
-    console.log("Closing dialog !");
     this.dialogRef.close(true);
   }
 }

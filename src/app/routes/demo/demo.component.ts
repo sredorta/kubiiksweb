@@ -56,7 +56,6 @@ export class DemoComponent extends KiiBaseAbstract implements OnInit {
     if (isPlatformBrowser(this.platform))
       this.addSubscriber(
         this.translate.onChange.subscribe(res => {
-          console.log("TRANSLATION CHANGED",res);
           this.data.isFullLoaded = false;
           this.data.loadInitialData('demo');
         })

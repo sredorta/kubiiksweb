@@ -184,6 +184,5 @@ export class KiiPaginatorComponent extends KiiBaseAbstract implements OnInit {
   }
 
   onFocus() {
-    console.log("focus",event);
   }
 }

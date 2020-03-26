@@ -69,7 +69,6 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
     this.addSubscriber(
       this.kiiAuth.getLoggedInUser().subscribe(res => {
         this.loggedInUser = res;
-        console.log("LoggedIn user:",this.loggedInUser)
       })
     )
    this.addSubscriber(
@@ -136,7 +135,6 @@ export class KiiAlertsComponent extends KiiTableAbstract implements OnInit {
   }
 
   rowClick(alert:Alert) {
-    console.log("clicked on", alert.type);
     switch (alert.type) {
         case "chat": 
           this.router.navigate(['/'+this.kiiTrans.get()+'/admin/chats']);

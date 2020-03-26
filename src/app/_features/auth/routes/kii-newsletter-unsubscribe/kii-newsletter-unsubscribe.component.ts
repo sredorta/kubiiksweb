@@ -39,7 +39,6 @@ export class KiiNewsletterUnsubscribeComponent extends KiiBaseAbstract implement
   onSubmit() {
     if (this.email) {
       this.isLoading = true;
-      console.log("EMAIL:", this.email);
       this.addSubscriber(
         this.kiiApiAuth.unsubscribeNews(this.email).subscribe(res=> {
           this.isLoading = false;

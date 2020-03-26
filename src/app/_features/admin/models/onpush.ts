@@ -20,7 +20,6 @@ export class Onpush {
 
     constructor(obj: IOnpush | null) {
         if (obj) {
-            console.log("Creating email object:",obj);
             this.id = obj.id;
             this.name = obj.name;
             this.description = obj.description;
