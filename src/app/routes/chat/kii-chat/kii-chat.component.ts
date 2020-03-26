@@ -19,6 +19,10 @@ import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane';
 import { faCommentDots } from '@fortawesome/free-solid-svg-icons/faCommentDots';
+import { isPlatformBrowser } from '@angular/common';
+import { KiiMainCookiesService } from 'src/app/_features/main/services/kii-main-cookies.service';
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 
 
 @Component({
@@ -33,7 +37,9 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
   icons = {
     users: faUserFriends,
     send: faPaperPlane,
-    writting: faCommentDots
+    writting: faCommentDots,
+    yes: faCheck,
+    no: faTimes
   }
 
   /**Contains loggedIn user if any */
@@ -72,6 +78,7 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
       private socket: KiiSocketService, 
       private auth: KiiMainUserService,
       private trans: KiiTranslateService,
+      private cookies: KiiMainCookiesService
       ) { super()}
 
             ngOnInit() {
@@ -80,6 +87,10 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
               this.kiiApiStats.send(StatAction.CHAT_ENTER,null);
               this.createForm();
               this.socket.chatStart();      //Creates and gets room if we are not admin
+              if (this.isAdminContext) {
+                console.log("REQUESTING CONVERSATION FOR ROOM",this.room)
+                this.socket.socket.emit(SocketEvents.CHAT_DATA,{room:this.room.id, type:ChatDataType.StoredMessagesRequest, object:null});
+              }
 
               this.addSubscriber(
                 this.auth.getLoggedInUser().subscribe(user => {
@@ -95,8 +106,14 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
                         this.messages.push(data.object.message);
                         break;
                       case ChatDataType.StoredMessagesRequest:
+                        console.log("RECIEVED: STOREDMESSAGES REQUEST",data)
                         //Give back our stored messages
                         this.socket.socket.emit(SocketEvents.CHAT_DATA, {room:this.room.id, type:ChatDataType.StoredMessagesResponse, object:{messages:this.messages,language:this.trans.get()}});
+                        break;
+                      case ChatDataType.StoredMessagesResponse:
+                        console.log("RECIEVED: STOREDMESSAGES RESPONSE",data);
+                        if (this.isAdminContext)
+                          this.messages = data.object.messages;
                         break;
                       case ChatDataType.Room :
                         this.room = data.object.room;  
@@ -106,7 +123,7 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
                         break;  
                       case ChatDataType.Writting :
                         this.writting = data.object.value; 
-                        break;   
+                        break;
                       default:
                     }
                   }
@@ -167,6 +184,11 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
                 this.myForm.controls["newMessage"].setValue("");
               }
             }
+
+            /**Intercept enter and send message */
+            onKeyUp(event:KeyboardEvent) {
+              if (event.key =="Enter") this.onSubmit();
+            }
           
             /**Returns if message is bot */
             isBot(message:IChatMessage) {
@@ -185,13 +207,52 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
               if (message.senderName) return message.senderName;
               return null;
             }
-          
+
+            /**Handles scroll */
+            ngAfterViewChecked() {
+              this.scrollToBottom();
+            }
+            private scrollToBottom(): void {
+              try {
+                  this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+              } catch(err) { }
+            } 
+
+  /**Stores current conversation in localStorage */
+  saveConversation() {
+    sessionStorage.setItem('chat-conversation',JSON.stringify(this.messages))
+  }
+
+  /**Removes any saved conversation */
+  ignoreConversation() {
+    sessionStorage.removeItem('chat-conversation');
+  }
+
+  /**Restores conversation from localStorage */
+  restoreConversation() {
+    if (sessionStorage.getItem('chat-conversation')) {
+      this.messages = <IChatMessage[]>JSON.parse(sessionStorage.getItem('chat-conversation'));
+      sessionStorage.removeItem('chat-conversation');
+    } 
+  }
+
+  /**Returns if user has stored conversation in localStorage*/
+  hasStoredConversation() {
+    if (sessionStorage.getItem('chat-conversation'))
+      if (JSON.parse(sessionStorage.getItem('chat-conversation')).length>1)
+        return true;
+    return false;    
+  }
+
+
+
             ngOnDestroy() {
               this.kiiApiStats.send(StatAction.CHAT_LEAVE,null);
               //Unsubscribe all
               for (let subscription of this._subscriptions) {
                 subscription.unsubscribe();
               }
+              if (!this.isAdminContext) this.saveConversation();
               console.log("LEAVING CHAT !");
               this.socket.chatLeave(this.room);
             }

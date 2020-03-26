@@ -49,6 +49,7 @@ export class KiiAdminChatsComponent extends KiiBaseAbstract implements OnInit {
                 }
                 break;
             case ChatDataType.StoredMessagesResponse:
+                console.log("RECIEVED STORED MESSAGES",res);
                 let myRoomIndex = this.rooms.findIndex(obj=> obj.id == res.room);
                 if (myRoomIndex>=0) {
                   this.rooms[myRoomIndex].messages = res.object.messages; 
@@ -77,7 +78,7 @@ export class KiiAdminChatsComponent extends KiiBaseAbstract implements OnInit {
       });
       dialogRef.afterClosed().subscribe(result => {
          //Leave all rooms
-         this.kiiSocket.chatLeave(result);
+         //this.kiiSocket.chatLeave(result);
 
       });
     }

@@ -76,7 +76,7 @@ export enum ChatDataType {
      Participants = "room-participants",
      Message = "message",
      Room = "room",
-     Writting = "writting"
+     Writting = "writting",
 }
 
 
@@ -148,6 +148,7 @@ export class KiiSocketService {
   }
 
 
+  /**Starts a chat */
   chatStart() {
     this.socket.emit(SocketEvents.CHAT_DATA, {room:null, type:ChatDataType.CreateRoom, object:{language:this.translate.get()}});
   }

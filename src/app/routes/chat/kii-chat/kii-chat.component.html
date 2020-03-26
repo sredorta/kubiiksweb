@@ -4,7 +4,14 @@
       <mat-card-subtitle>{{'chat.subtitle' | translate | async}}</mat-card-subtitle>
       <div class="header-icon" mat-card-avatar><mat-icon [matBadge]="room.participants" matBadgeOverlap="true"><fa-icon [icon]="icons['users']"></fa-icon></mat-icon></div>
     </mat-card-header>
-    <mat-card-content #content  [scrollTop]="content.scrollHeight"> 
+    <mat-card-content #content> 
+      <div *ngIf="hasStoredConversation()" class="fcc restore">
+        <span>{{'chat.restore.title' | translate | async}}</span>
+        <div class="fcc">
+            <button mat-icon-button color="accent" (click)="ignoreConversation()"><fa-icon [icon]="icons['no']"></fa-icon></button>
+            <button mat-icon-button color="accent" (click)="restoreConversation()"><fa-icon [icon]="icons['yes']"></fa-icon></button>
+        </div>
+      </div>
       <div *ngFor="let message of messages" >
           <div class="message" [ngClass]="{'i-am-sender' : iAmSender(message), 'i-am-reciever': !iAmSender(message), 'is-bot': isBot(message)}">
              <div *ngIf="isBot(message)" class="bot-image"></div>
@@ -21,7 +28,7 @@
     <div class="dialog-actions">
         <form [formGroup]="myForm" novalidate> 
             <mat-form-field [appearance]="kiiInputAppearance">
-                <textarea #control matInput formControlName="newMessage" rows="2" placeholder="{{'chat.input.message.p' | translate | async}}" type="text"></textarea>
+                <textarea #control matInput formControlName="newMessage" rows="2" placeholder="{{'chat.input.message.p' | translate | async}}" type="text" (keyup)="onKeyUp($event)"></textarea>
                 <mat-hint>{{'chat.input.message.h' | translate | async}}</mat-hint>
             </mat-form-field>        
             <div class="kii-button-wrapper">
