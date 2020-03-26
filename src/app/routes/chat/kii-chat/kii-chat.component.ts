@@ -202,8 +202,12 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
             }
           
             getMessageOwner(message:IChatMessage) {
+              let you = "You";
+              if (this.trans.translations[this.trans.get()] && this.trans.translations[this.trans.get()]['chat.you']) 
+                 you = this.trans.translations[this.trans.get()]['chat.you'];
+
               if (message.isBot) return 'bot';
-              if (message.sender == this.socket.socket.id) return 'you';
+              if (message.sender == this.socket.socket.id) return you;
               if (message.senderName) return message.senderName;
               return null;
             }
