@@ -7,7 +7,9 @@
     <div class="wrp-img" [style.maxWidth]="config.maxWidth">
         <input class="shadow" type="file" #fileInput (change)="loadImage($event)" [accept]="config.imageFormat">  
         <img  alt="picture" #shadowImg class="shadow" [src]="getImage()" crossOrigin="anonymous">
-        <img  alt="picture" #realImg class="upload-view" [src]="base64" crossOrigin="anonymous" >
+        <img *ngIf="!isSVG()" alt="picture-nonsvg" #realImg class="upload-view" [src]="base64" crossOrigin="anonymous" >
+        <img *ngIf="isSVG()" alt="picture-svg" class="upload-view" [src]="svgImage" crossOrigin="anonymous" >
+
         <mat-progress-bar mode="determinate" [value]="progress" [ngClass]="{'is-visible' : isLoading}"></mat-progress-bar>
     </div>
     <div class="icons">

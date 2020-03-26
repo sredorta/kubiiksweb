@@ -8,6 +8,7 @@ import { faRedoAlt } from '@fortawesome/free-solid-svg-icons/faRedoAlt';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { timingSafeEqual } from 'crypto';
 
 export interface IConfigImageUpload {
   label?:string,
@@ -59,7 +60,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
   @Output() onUpload = new EventEmitter<string>();
 
   /** Contains the current image in base64 format*/
-  base64:any = "";
+  base64:string = "";
 
   /**Defines if image has been selected and can be uploaded */
   isUploadable : boolean = false;
@@ -79,6 +80,9 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
   /**Contains svg blob */
   svgBlob : Blob = new Blob();
 
+  /**Contains svgImage */
+  svgImage : SafeUrl = null;
+
   /**Image link so that is send to form */
   formImage :string = null;
 
@@ -95,6 +99,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
   }
 
   ngOnInit() {
+    console.log("IMAGE INIT:",this.image);
     if (this.image) this.formImage = this.image;
     //Set default config
     if (!this.config.defaultImage) this.config.defaultImage = './assets/kiilib/images/no-photo.svg';
@@ -105,8 +110,12 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
     if (!this.config.compression_rate)  this.config.compression_rate = 0.9;
     if (!this.config.maxWidth) this.config.maxWidth = "100%";
     if (!this.config.imageFormat) this.config.imageFormat="image/*";
-    if (!this.image) this.image = this.config.defaultImage;
+    if (!this.image) {
+      this.image = this.config.defaultImage;
+      this.svgImage = this.config.defaultImage;
+    }
     this._fileName = this.image.replace(/.*\//,"");
+    console.log("IMAGE INIT END",this.image);
     console.log("USING CONFIG",this.config);
   }
 
@@ -136,7 +145,9 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
       if (changes.image.currentValue != null) {
         this.formImage = this.image;
         this.image = changes.image.currentValue;
+        console.log("IMAGE CHANGES", this.image);
         this._fileName = this.image.replace(/.*\//,"");
+        if (this.isSVG()) this.svgImage = this.image;
       } 
     }
   }
@@ -168,7 +179,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
           if (obj.config.crop) obj.base64 =  obj._resizeAndCropCanvas(myImage,canvas); 
           else obj.base64 = obj._resizeCanvas(myImage,canvas); 
         } else {
-          obj.base64=obj.sanitizer.bypassSecurityTrustUrl(obj.image);
+          obj.base64=obj.image;
         }
     };
   }
@@ -181,18 +192,28 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
       const [file] = event.target.files;
       reader.readAsDataURL(file);
       this.svgBlob = file;
-      let obj = this;
+      var obj = this;
       reader.onloadend = () => {
-          this._fileName = event.target.files[0].name;
-          if (!this.isSVG())
-            this.image = reader.result.toString();
-          else 
-            this.base64 = obj.sanitizer.bypassSecurityTrustUrl(reader.result.toString());
-          this.isUploadable = true;
+          obj._fileName = event.target.files[0].name;
+          if (!obj.isSVG())
+            obj.image = reader.result.toString();
+          else {
+            console.log("IS SVG !!!!!");
+            //this.image = obj.sanitizer.bypassSecurityTrustUrl(reader.result.toString());
+            obj.svgImage = obj.sanitizer.bypassSecurityTrustUrl(reader.result.toString());
+          }
+          obj.isUploadable = true;
+          console.log(obj);
       };
+      console.log("OBJ",this);
 
     }
   }
+
+  setBase64(base64:string) {
+    this.base64 = base64;
+  }
+
 
   /**Returns buttons position */
   getButtonsPosition() {
@@ -222,6 +243,7 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
   /**When we remove the image */
   removeImage() {
     this.image = this.config.defaultImage;
+    this.svgImage =  this.config.defaultImage;
     this._fileName = this.image.replace(/.*\//,"");
     this.setInitialImage();
     this.isUploadable = false;
@@ -370,7 +392,13 @@ export class KiiImageUploadComponent extends KiiBaseAbstract implements OnInit, 
 
   writeValue(obj: any) : void {
     this.formImage = obj;
-    this.image = obj;
+    if (obj!=null) {
+      this.svgImage = obj;
+      this.image = obj;
+    } else {
+      this.svgImage = this.config.defaultImage;
+      this.image = this.config.defaultImage;
+    }
   }
   registerOnChange(fn: any) : void {
     this.propagateChange = fn;
