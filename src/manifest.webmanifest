@@ -1,8 +1,8 @@
 {
-  "name": "kubiiks",
-  "short_name": "kubiiks",
-  "theme_color": "#d4e157",
-  "background_color": "#000000",
+  "name": "kiiweb",
+  "short_name": "kiiweb",
+  "theme_color": "#1976d2",
+  "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

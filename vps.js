@@ -78,13 +78,13 @@ console.log("////////////////////////////////////////");
 console.log("Use FileZilla to upload this to /var/www/kiiweb on the VPS");
 //console.log('Settings:');
 
-//console.log('NAME             : ' + NAME);
-//console.log('SHORT_NAME       : ' + SHORT_NAME);
-//console.log('DESCRIPTION      : ' + DESCRIPTION);
-//console.log('URL              : ' + URL);
-//console.log('BACKGROUND COLOR : ' + BACKGROUND_COLOR);
-//console.log('FOREGROUND_COLOR : ' + THEME_COLOR);
-//console.log("////////////////////////////////////////");
+console.log('NAME             : ' + NAME);
+console.log('SHORT_NAME       : ' + SHORT_NAME);
+console.log('DESCRIPTION      : ' + DESCRIPTION);
+console.log('URL              : ' + URL);
+console.log('BACKGROUND COLOR : ' + BACKGROUND_COLOR);
+console.log('FOREGROUND_COLOR : ' + THEME_COLOR);
+console.log("////////////////////////////////////////");
 
 const fs = require('fs-extra');
 
@@ -114,15 +114,16 @@ fs.copyFileSync('./dist/server.js', './dist/vps_boundle/dist/server.js');
 
 
 //Workout manifest
-//var manifest = fs.readFileSync('./dist/browser/manifest.webmanifest','utf8');
-//manifest = manifest.replace(/"name": "kiiweb"/, '"name": "'+NAME+'"');
-//manifest = manifest.replace(/"short_name": "kiiweb"/, '"short_name": "'+SHORT_NAME+'"');
-//manifest = manifest.replace(/"description": "kiiweb"/, '"description": "'+DESCRIPTION+'"');
-//manifest = manifest.replace(/"theme_color": "#1976d2"/,'"theme_color": "'+THEME_COLOR+'"');
-//manifest = manifest.replace(/"background_color": "#fafafa"/,'"background_color": "'+BACKGROUND_COLOR+'"');
-//manifest = manifest.replace(/https\:\/\/localhost\:4300/g, URL);
+var manifest = fs.readFileSync('./dist/browser/manifest.webmanifest','utf8');
+manifest = manifest.replace(/"name": "kiiweb"/, '"name": "'+NAME+'"');
+manifest = manifest.replace(/"short_name": "kiiweb"/, '"short_name": "'+SHORT_NAME+'"');
+manifest = manifest.replace(/"description": "kiiweb"/, '"description": "'+DESCRIPTION+'"');
+manifest = manifest.replace(/"theme_color": "#1976d2"/,'"theme_color": "'+THEME_COLOR+'"');
+manifest = manifest.replace(/"background_color": "#fafafa"/,'"background_color": "'+BACKGROUND_COLOR+'"');
+manifest = manifest.replace(/https\:\/\/localhost\:4300/g, URL);
+console.log(manifest);
+console.log("////////////////////////////////////////");
 
-//fs.removeSync('./dist/vps_boundle/dist/browser/manifest.webmanifest');
-//fs.writeFileSync('./dist/vps_boundle/dist/browser/manifest.webmanifest',manifest);
+fs.removeSync('./dist/vps_boundle/dist/browser/manifest.webmanifest');
+fs.writeFileSync('./dist/vps_boundle/dist/browser/manifest.webmanifest',manifest);
 
-//fs.copyFileSync('local.js',)

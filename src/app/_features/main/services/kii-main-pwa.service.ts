@@ -42,8 +42,10 @@ export class KiiPwaService {
 
     if (isPlatformBrowser(this._platformId)) {
       if (navigator.serviceWorker && environment.production) {
+        console.log("PWA !!!!");
         let obj = this;
         navigator.serviceWorker.getRegistrations().then(registrations => {
+          console.log(registrations);
           if (registrations.length == 0) {
             navigator.serviceWorker.register('/ngsw-worker.js').then(function(registration) {
               console.log("SERVICE WORKER REGISTERED!!",registration);
@@ -57,6 +59,7 @@ export class KiiPwaService {
               let myObj = this;
               navigator.serviceWorker.addEventListener('controllerchange',
                 function() {
+                  console.log("controllerchange !!!!");
                   if (refreshing) return;
                   refreshing = true;
                   let myBottomSheet = myObj.bottomSheet.open(KiiBottomSheetSoftwareUpdateComponent, {
@@ -73,6 +76,7 @@ export class KiiPwaService {
           }
         });
         swUpdate.available.subscribe(event => {
+          console.log("SWUPDATE !!!!",event);
           let myBottomSheet = this.bottomSheet.open(KiiBottomSheetSoftwareUpdateComponent, {
             panelClass :"default-theme",
             scrollStrategy: new NoopScrollStrategy(),   //Avoid scrolling to top !
