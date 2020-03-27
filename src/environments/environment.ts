@@ -12,7 +12,6 @@ export const environment = {
   apiExtURL: "https://localhost:4300/server/api",
   mainExtURL: "https://localhost:4300",
   vapidPublic: 'BJ2ZA-q_PZ8yCexelSbjYCtCwZw0fmYVaEQ5MLMqhR4_1DVPDHcWOC1nL0LMKavdoV9bBrCmRDUQu_z35Uk8Evs',
-
 };
 
 /*

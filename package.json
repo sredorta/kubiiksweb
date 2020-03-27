@@ -15,7 +15,8 @@
     "dev:ssr": "ng run kubiiksweb:serve-ssr",
     "serve:ssr": "node dist/server/main.js",
     "build:ssr": "ng build --prod && ng run kubiiksweb:server:production",
-    "prerender": "ng run kubiiksweb:prerender"
+    "prerender": "ng run kubiiksweb:prerender",
+    "build:vps": "ng build --prod --configuration=vps && ng run kubiiksweb:server:production  && node ./vps.js"
   },
   "private": true,
   "dependencies": {

@@ -4,14 +4,14 @@
     <kii-spinner ></kii-spinner>
 </div>
 <ng-container *ngIf="!isLoading">
-<kii-article [article]="articles.getByKey('home-header')"></kii-article>
+<kii-article [article]="articles.getByKey('home-header')" class="add-padding"></kii-article>
 <div class="features-container">
         <kii-element *ngFor="let article of articles.getByCathegory('home-features')" [ngClass]="article.cathegory">
             <kii-article-summary [article]="article"></kii-article-summary>
             <kii-article [article]="article"></kii-article>
         </kii-element>
 </div>
-<kii-article [article]="articles.getByKey('home-footer')"></kii-article>
+<kii-article [article]="articles.getByKey('home-footer')" class="add-padding"></kii-article>
 <kii-horizontal-scroller class="realisations-container">
         <kii-element *ngFor="let article of articles.getByCathegory('realisations')" [ngClass]="article.cathegory">
             <kii-article-summary [article]="article"></kii-article-summary>

@@ -6,7 +6,7 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 import { KiiAdminArticleService } from '../../services/kii-admin-article.service';
 import * as Editor from '../../../../../../../ckeditor5-build-classic/build/ckeditor.js';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+import { CKEditorComponent, CKEditor5 } from '@ckeditor/ckeditor5-angular';
 import { DiskType } from 'src/app/_features/form/services/kii-api-upload-image.service';
 import { MatDialog } from '@angular/material';
 import { KiiImageGalleryDialogComponent } from '../kii-image-gallery-dialog/kii-image-gallery-dialog.component';
@@ -41,8 +41,10 @@ export class KiiAdminEditorComponent  implements OnInit, ControlValueAccessor {
  /**ckeditor */
  public Editor = Editor;
 
- @ViewChild(CKEditorComponent,{static:false}) myEditor : CKEditorComponent;
+ /**Editor Instance */
+ private editorInstance : CKEditor5.Editor = null;
 
+ 
  /**Editor configuration */
  public editorConfig = {};
 
@@ -80,18 +82,18 @@ export class KiiAdminEditorComponent  implements OnInit, ControlValueAccessor {
   }
 
   /**On Editor ready fill with initial content*/
-  onEditorReady(editor: any) {
-    if (this.myEditor) {
-      this.myEditor.editorInstance.setData(this.content);
-    }
+  onEditorReady(editorInstance: CKEditor5.Editor) {
+    console.log("editor",editorInstance);
+    this.editorInstance = editorInstance;
+    this.editorInstance.setData(this.content);
   }
 
 
   /**When the editor changes we keep sync article with current content of editor */
   onChangeContent(event:any) {
-    if (this.myEditor) {
-     this.onChange.emit(this.myEditor.editorInstance.getData());
-     this.propagateChange(this.myEditor.editorInstance.getData());
+    if (this.editorInstance) {
+     this.onChange.emit(this.editorInstance.getData());
+     this.propagateChange(this.editorInstance.getData());
     }
   }
 
