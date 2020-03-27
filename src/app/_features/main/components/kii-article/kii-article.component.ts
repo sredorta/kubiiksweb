@@ -57,7 +57,8 @@ export class KiiArticleComponent extends KiiBaseAbstract implements OnInit {
 
   /**Patches html by introducing lazy loading on images */
   setHtml(html:string) {
-    html = html.replace(/<img src="/g,'<img src="/assets/kiilib/images/lazy.svg" data-src="');
+    if (html)
+      html = html.replace(/<img src="/g,'<img src="/assets/kiilib/images/lazy.svg" data-src="');
     this.trustedHtml = this.sanitizer.bypassSecurityTrustHtml(html);
     this.articleChange$.next(true);
   }
