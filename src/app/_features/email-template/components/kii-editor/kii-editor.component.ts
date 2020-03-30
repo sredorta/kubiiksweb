@@ -53,44 +53,6 @@ export class KiiEditorComponent  implements OnInit, ControlValueAccessor {
         'underline',
         'strikethrough'
       ],
-      fontColor: {
-        columns: 5,
-        documentColors: 200,
-        colors: [
-        {color: '#ffcccc',label:''},{color: '#ff6666',label:''},{color: '#ff0000',label:''},{color: '#990000',label:''},{color: '#330000',label:''},
-        {color: '#ffe5cc',label:''},{color: '#ffb266',label:''},{color: '#ff8000',label:''},{color: '#994c00',label:''},{color: '#331900',label:''},
-        {color: '#ffffcc',label:''},{color: '#ffff66',label:''},{color: '#ffff00',label:''},{color: '#999900',label:''},{color: '#333300',label:''},
-        {color: '#e5ffcc',label:''},{color: '#b2ff66',label:''},{color: '#80ff00',label:''},{color: '#4c9900',label:''},{color: '#193300',label:''},
-        {color: '#ccffcc',label:''},{color: '#66ff66',label:''},{color: '#00ff00',label:''},{color: '#009900',label:''},{color: '#003300',label:''},
-        {color: '#ccffe5',label:''},{color: '#66ffb2',label:''},{color: '#00ff80',label:''},{color: '#00994c',label:''},{color: '#003319',label:''},
-        {color: '#ccffff',label:''},{color: '#66ffff',label:''},{color: '#00ffff',label:''},{color: '#009999',label:''},{color: '#003333',label:''},
-        {color: '#cce5ff',label:''},{color: '#66b2ff',label:''},{color: '#0080ff',label:''},{color: '#004c99',label:''},{color: '#001933',label:''},
-        {color: '#ccccff',label:''},{color: '#6666ff',label:''},{color: '#0000ff',label:''},{color: '#000099',label:''},{color: '#000033',label:''},
-        {color: '#e5ccff',label:''},{color: '#b266ff',label:''},{color: '#7f00ff',label:''},{color: '#4c0099',label:''},{color: '#190033',label:''},
-        {color: '#ffccff',label:''},{color: '#ff66ff',label:''},{color: '#ff00ff',label:''},{color: '#990099',label:''},{color: '#330033',label:''},
-        {color: '#ffcce5',label:''},{color: '#ff66b2',label:''},{color: '#ff007f',label:''},{color: '#99004c',label:''},{color: '#330019',label:''},
-        {color: '#ffffff',label:''},{color: '#c0c0c0',label:''},{color: '#808080',label:''},{color: '#404040',label:''},{color: '#000000',label:''},
-        ]
-      },
-      fontBackgroundColor: {
-        columns: 5,
-        documentColors: 200,
-        colors: [
-        {color: '#ffcccc',label:''},{color: '#ff6666',label:''},{color: '#ff0000',label:''},{color: '#990000',label:''},{color: '#330000',label:''},
-        {color: '#ffe5cc',label:''},{color: '#ffb266',label:''},{color: '#ff8000',label:''},{color: '#994c00',label:''},{color: '#331900',label:''},
-        {color: '#ffffcc',label:''},{color: '#ffff66',label:''},{color: '#ffff00',label:''},{color: '#999900',label:''},{color: '#333300',label:''},
-        {color: '#e5ffcc',label:''},{color: '#b2ff66',label:''},{color: '#80ff00',label:''},{color: '#4c9900',label:''},{color: '#193300',label:''},
-        {color: '#ccffcc',label:''},{color: '#66ff66',label:''},{color: '#00ff00',label:''},{color: '#009900',label:''},{color: '#003300',label:''},
-        {color: '#ccffe5',label:''},{color: '#66ffb2',label:''},{color: '#00ff80',label:''},{color: '#00994c',label:''},{color: '#003319',label:''},
-        {color: '#ccffff',label:''},{color: '#66ffff',label:''},{color: '#00ffff',label:''},{color: '#009999',label:''},{color: '#003333',label:''},
-        {color: '#cce5ff',label:''},{color: '#66b2ff',label:''},{color: '#0080ff',label:''},{color: '#004c99',label:''},{color: '#001933',label:''},
-        {color: '#ccccff',label:''},{color: '#6666ff',label:''},{color: '#0000ff',label:''},{color: '#000099',label:''},{color: '#000033',label:''},
-        {color: '#e5ccff',label:''},{color: '#b266ff',label:''},{color: '#7f00ff',label:''},{color: '#4c0099',label:''},{color: '#190033',label:''},
-        {color: '#ffccff',label:''},{color: '#ff66ff',label:''},{color: '#ff00ff',label:''},{color: '#990099',label:''},{color: '#330033',label:''},
-        {color: '#ffcce5',label:''},{color: '#ff66b2',label:''},{color: '#ff007f',label:''},{color: '#99004c',label:''},{color: '#330019',label:''},
-        {color: '#ffffff',label:''},{color: '#c0c0c0',label:''},{color: '#808080',label:''},{color: '#404040',label:''},{color: '#000000',label:''},
-        ]
-      },
  }
 
  /**Editor Instance */

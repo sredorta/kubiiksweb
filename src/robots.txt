@@ -1,0 +1,5 @@
+Sitemap: https://www.kubiiks.com/server/sitemap.xml
+User-agent: *
+Disallow: */auth/*
+Disallow: */admin/*
+Allow: /

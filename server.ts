@@ -35,6 +35,12 @@ export function app() {
     maxAge: '1y'
   }));
 
+  //Provide robots.txt, sidemap is provided by the server as is dynamic
+  server.get('/robots.txt', (req,res) => {
+    res.sendFile(distFolder + '/robots.txt')
+  });
+
+
   //AVOID RENDERING AUTH AND ADMIN PAGES AND REDIRECT HOME IF RELOAD !
   //FOR AUTH WE NEED TO RENDER all pages that we get in like email validation, oauth...
   server.get('*/auth/login', (req, res) => {
