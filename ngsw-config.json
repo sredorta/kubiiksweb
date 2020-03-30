@@ -26,7 +26,22 @@
     }
   ],
 
-  "dataGroups": [{
+  "dataGroups": [
+    
+    {
+      "name": "no-cache",
+      "urls": [
+        "/server/api/auth/facebook",
+        "/server/api/auth/google"
+
+      ],
+      "cacheConfig": {
+        "maxSize": 0,
+        "maxAge": "0u",
+        "strategy": "freshness"
+      }
+    },
+    {
     "name": "api-performance",
     "urls": [
       "/server/public/**"
