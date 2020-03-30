@@ -1,8 +1,17 @@
 <form onsubmit="this.onSubmit()">
     <div class="ctrls">
-            <input #firstName placeholder="{{'m.news.first.l' | translate | async}}" required type="text" autocomplete="name">          
-            <input #lastName placeholder="{{'m.news.last.l' | translate | async}}" required type="text"  autocomplete="fname">
-            <input #email placeholder="{{'m.news.email.l' | translate | async}}" required type="email" autocomplete="email">
+            <label>
+                <p class="lbl">{{'m.news.first.l' | translate | async}}</p>
+                <input #firstName placeholder="John" required type="text" autocomplete="name"> 
+            </label>
+            <label>
+                <p class="lbl">{{'m.news.last.l' | translate | async}}</p>
+            <input #lastName placeholder="Doe" required type="text"  autocomplete="fname">
+            </label>
+            <label>
+                <p class="lbl">{{'m.news.email.l' | translate | async}}</p>
+                <input #email placeholder="john.doe@email.com" required type="email" autocomplete="email">
+            </label>
     </div>
     <a mat-button color="primary" title="{{'m.news.legal' | translate | async}}" [routerLink]="'legal/user-data' | translateRoute | async "><span class="txt-xs">{{'m.news.legal' | translate | async}}</span></a>
     <div class="fcr w100">
