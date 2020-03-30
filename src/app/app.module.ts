@@ -36,7 +36,7 @@ import { NgxJsonLdModule } from '@ngx-lite/json-ld';
     KiiMainModule.forRoot(),
     KiiTranslateModule.forRoot(),
     AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, scope: environment.mainExtURL})
   ],
   providers: [DeviceDetectorService],
   entryComponents: [KiiAppComponent],
