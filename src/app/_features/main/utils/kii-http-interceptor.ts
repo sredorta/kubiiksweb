@@ -12,6 +12,7 @@ import { KiiMainUserService } from '../services/kii-main-user.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { KiiMainDataService } from '../services/kii-main-data.service';
 
 
 //We intercept all http requests and do some things here
@@ -22,6 +23,7 @@ export class KiiHttpInterceptor implements HttpInterceptor {
         private kiiTrans: KiiTranslateService,
         private kiiAuth: KiiMainUserService,
         private router : Router,
+        private data: KiiMainDataService,
         private kiiBottomSheet: MatBottomSheet,
         //private bottomSheet: KiiBottomSheetComponent,
         @Inject(PLATFORM_ID) private _platformId: any, 
@@ -68,10 +70,17 @@ export class KiiHttpInterceptor implements HttpInterceptor {
             }
             ),
             catchError((error: HttpErrorResponse) => {
+                console.log("HERE !!!",error);
                 switch(error.status) {
                     case 0: //No internet connection
+                        this.data.offline.next(true);
                         break;
+                    case 504:   //Timeout
+                        this.data.offline.next(true);
+                        break;    
                     case 401: //Bad auth
+                        this.data.offline.next(false);
+
                         if (isPlatformBrowser(this._platformId)) {
                             User.removeToken();
                             this.kiiAuth.setLoggedInUser(new User(null));
@@ -83,7 +92,9 @@ export class KiiHttpInterceptor implements HttpInterceptor {
                         this.openBottomSheet(error.error.message);
                         break;
                     default: 
-                        this.openBottomSheet(error.error.message);
+                        this.data.offline.next(false);
+                        if (error && error.error && error.error.message)
+                            this.openBottomSheet(error.error.message);   
                         break;    
                 }
                 return throwError(error);

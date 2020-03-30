@@ -23,8 +23,6 @@ export class DemoComponent extends KiiBaseAbstract implements OnInit {
 
   displayedArticles : Article[] = [];
 
-  isLoading : boolean = true;
-
   constructor(
     private kiiTrans: KiiTranslateService,
     private kiiAuth: KiiMainUserService, 
@@ -44,11 +42,6 @@ export class DemoComponent extends KiiBaseAbstract implements OnInit {
       this.pages.onChange.subscribe(res => {
         if (this.pages.hasPage('demo'))
           this.data.seo(this.pages.getByKey('demo'), this.router.url);
-      })
-    )
-    this.addSubscriber(
-      this.data.isInitialLoaded.subscribe(res => {
-        this.isLoading = !res;
       })
     )
     this.data.loadInitialData('demo');

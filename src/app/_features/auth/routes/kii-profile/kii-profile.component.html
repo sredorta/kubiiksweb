@@ -8,13 +8,13 @@
                   <button mat-button (click)="delete()" class="btn"><fa-icon [icon]="icon['delete']"></fa-icon> {{'a.profile.delete' | translate | async}}</button>
                   <p class="dates">{{'a.created' | translate | async}} : {{{date:loggedInUser.createdAt,lang:currentLang} | kiiNiceDateFormat | async}}<fa-icon [icon]="icon['created']"></fa-icon></p>
                   <p class="dates">{{'a.updated' | translate | async}} : {{{date:loggedInUser.updatedAt,lang:currentLang} | kiiNiceDateFormat | async}}<fa-icon [icon]="icon['updated']"></fa-icon></p>        
-                  <p class="title c-accent txt-l"><fa-icon [icon]="icon['card']"></fa-icon>{{'a.card' | translate | async}}</p>
+                  <p class="title txt-l"><fa-icon [icon]="icon['card']"></fa-icon>{{'a.card' | translate | async}}</p>
                   <kii-spinner-overlay [show]="isLoading">
                   <kii-profile-form  (kiiOnSubmit)="onSubmit($event)"></kii-profile-form>
                   </kii-spinner-overlay>
               </div>
               <div *ngIf="loggedInUser.hasRoles()">
-                    <p class="title c-accent txt-l"><fa-icon [icon]="icon['roles']"></fa-icon>{{'a.roles' | translate | async}}</p>
+                    <p class="title txt-l"><fa-icon [icon]="icon['roles']"></fa-icon>{{'a.roles' | translate | async}}</p>
                     <mat-chip-list>
                         <mat-chip *ngFor="let role of loggedInUser.roles">{{role.name}}</mat-chip>
                     </mat-chip-list>

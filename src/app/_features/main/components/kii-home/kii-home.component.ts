@@ -16,8 +16,6 @@ import { KiiMainArticleService } from '../../services/kii-main-article.service';
 })
 export class KiiHomeComponent extends KiiBaseAbstract implements OnInit {
 
-  isLoading:boolean = true;
-
   constructor(private data: KiiMainDataService, 
               private pages: KiiMainPageService,
               public articles: KiiMainArticleService,
@@ -26,11 +24,7 @@ export class KiiHomeComponent extends KiiBaseAbstract implements OnInit {
               @Inject(PLATFORM_ID) private platform: any) { super()}
 
   ngOnInit() {
-    this.addSubscriber(
-      this.data.isInitialLoaded.subscribe(res => {
-        this.isLoading = !res;
-      })
-    )
+    console.log("HOME INIT !!!");
     this.addSubscriber(
       this.pages.onChange.subscribe(res => {
         if (this.pages.hasPage('home'))

@@ -34,6 +34,8 @@ interface _IInitialData  {
 })
 export class KiiMainDataService extends KiiBaseAbstract {
   isInitialLoaded :BehaviorSubject<boolean> = new BehaviorSubject(false);
+  offline :BehaviorSubject<boolean> = new BehaviorSubject(false);
+
 
   isFullLoaded:boolean = false;
 
@@ -52,6 +54,7 @@ export class KiiMainDataService extends KiiBaseAbstract {
 
   /**Loads the initial data and handles state transfer to avoid double http calls */
   public loadInitialData(page_name:string, articleId:number=0) : void {
+      console.log ("LOADING INITIAL DATA !");
       if (!this.isFullLoaded) {
         const key: StateKey<_IInitialData> = makeStateKey<_IInitialData>('transfer-intial');
         //RESTORE FROM TRANSFER STATE
@@ -75,8 +78,9 @@ export class KiiMainDataService extends KiiBaseAbstract {
                 this.transfer.set(key, res);
               }
               this._update(res);
+              console.log("GOT INITIAL FROM NETWORK",res);
               this.isInitialLoaded.next(true);
-            })
+            },()=> this.isInitialLoaded.next(true))
           )
         }
         //Get Auth user

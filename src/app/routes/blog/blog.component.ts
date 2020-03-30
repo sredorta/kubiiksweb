@@ -25,8 +25,6 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
 
   displayedArticles : Article[] = [];
 
-  isLoading : boolean = true;
-
   constructor(
     private kiiTrans: KiiTranslateService,
     private kiiAuth: KiiMainUserService, 
@@ -48,11 +46,6 @@ export class BlogComponent extends KiiBaseAbstract implements OnInit {
       this.pages.onChange.subscribe(res => {
         if (this.pages.hasPage('blog'))
           this.data.seo(this.pages.getByKey('blog'), this.router.url);
-      })
-    )
-    this.addSubscriber(
-      this.data.isInitialLoaded.subscribe(res => {
-        this.isLoading = !res;
       })
     )
     this.data.loadInitialData('blog');

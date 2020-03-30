@@ -1,12 +1,10 @@
 <kii-toolbar></kii-toolbar>
 <kii-header [data]="{title:article.title,subtitle:'', isShort:true}"></kii-header>
-<div *ngIf="isLoading" class="fcc" style="min-height: 140px">
+<div *ngIf="!article.exists()" class="fcc" style="min-height: 140px">
         <kii-spinner ></kii-spinner>
 </div>
-<ng-container *ngIf="!isLoading">
-    <div class="wrapper">
-        <kii-article [article]="article" [showCreated]="true"></kii-article>
-    </div>
-    <kii-footer></kii-footer>
-</ng-container>
+<div class="wrapper">
+    <kii-article [article]="article" [showCreated]="true"></kii-article>
+</div>
+<kii-footer></kii-footer>
 

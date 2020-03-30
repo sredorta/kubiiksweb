@@ -25,35 +25,11 @@
       }
     }
   ],
-  "dataGroups": [
-    {
-      "name": "api-excluded",
-      "urls": [
-        "/server/api/auth/facebook",
-        "/server/api/auth/google"
-      ],
-      "cacheConfig": {
-        "maxSize": 0,
-        "maxAge": "0u",
-        "strategy": "freshness"
-      }
-    },
-    {
-      "name": "api-get-auth",  
-      "urls": [
-        "/server/api/auth/get"
-      ],
-      "cacheConfig": {
-        "maxSize": 100,
-        "maxAge": "3d",
-        "strategy": "performance"
-      }
-    },
 
-
-  {
+  "dataGroups": [{
     "name": "api-performance",
     "urls": [
+      "/server/public/**"
     ],
     "cacheConfig": {
       "strategy": "performance",
@@ -64,18 +40,16 @@
   {
     "name": "api-freshness",
     "urls": [
-      "/server/public/**", 
-      "/server/api/initial/full",
-      "/server/api/stats"
+      "/server/api/initial",
+      "/server/api/initial/full"
     ],
     "cacheConfig": {
       "strategy": "freshness",
       "maxSize": 100,
       "maxAge": "3d",
-      "timeout": "10s"
+      "timeout": "2s"
     }
-  }
-  ]
+  }]
 
 
 }

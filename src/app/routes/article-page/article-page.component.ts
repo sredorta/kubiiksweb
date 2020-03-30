@@ -22,7 +22,6 @@ export class ArticlePageComponent extends KiiBaseAbstract implements OnInit {
   article : Article = new Article(null);
   currentLang : string = null;
   showCreated : boolean = false;
-  isLoading:boolean = true;
 
   constructor(
       private route: ActivatedRoute, 
@@ -33,11 +32,6 @@ export class ArticlePageComponent extends KiiBaseAbstract implements OnInit {
             ) { super()}
 
   ngOnInit() {
-    this.addSubscriber(
-      this.data.isInitialLoaded.subscribe(res => {
-        this.isLoading = !res;
-      })
-    )
     this.addSubscriber(
       this.route.params.subscribe(params => {
           this.id = +params['id']; // (+) converts string 'id' to a number

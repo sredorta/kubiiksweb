@@ -3,10 +3,10 @@
 
 <kii-toolbar></kii-toolbar>
 <kii-header [data]="{title:'c.header.t',subtitle:'c.header.s'}"></kii-header>
-<div *ngIf="isLoading" class="fcc" style="min-height: 140px">
+<div *ngIf="!articles.loaded" class="fcc" style="min-height: 140px">
         <kii-spinner ></kii-spinner>
 </div>
-<div class="content" *ngIf="!isLoading">
+<div class="content">
     <kii-article [article]="articles.getByKey('contact-header')"></kii-article>
     <div class="contact-form">
         <kii-article [article]="articles.getByKey('contact-form')"></kii-article>

@@ -23,7 +23,6 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
 
   schemaOrganization : any = {};
 
-  isLoading:boolean = true;
 
   constructor(
     private kiiTrans: KiiTranslateService,
@@ -52,12 +51,6 @@ export class ContactComponent extends KiiBaseAbstract implements OnInit {
           this.data.seo(this.pages.getByKey('contact'), this.router.url);
       })
     )
-    this.addSubscriber(
-      this.data.isInitialLoaded.subscribe(res => {
-        this.isLoading = false;
-      })
-    )
-
     this.data.loadInitialData('contact');
 
   }
