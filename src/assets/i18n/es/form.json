@@ -1,0 +1,19 @@
+{
+    "f.err.required" : "Campo obligatorio",
+    "f.err.minlength" : "Campo demasiado largo",
+    "f.err.maxlength" : "Campo demasiado corto",
+    "f.err.min"       : "Valor demasiado bajo",
+    "f.err.max"       : "Valor demasiado alto",
+    "f.err.email"     : "Formato de correo electrónico incorrecto",
+    "f.err.password"  : "Contraseña demasiado simple",
+    "f.err.checkPasswordsMatch": "Las contraseñas no son idénticas",
+    "f.err.pattern"   : "Formato incorrecto",
+    "f.cancel"        : "Anular",
+    "f.save"          : "Guardar",
+    "f.yes"           : "Si",
+    "f.confirm.t"     : "Atención",
+    "f.confirm.s"     : "Operación irreversible"  
+    }
+    
+
+

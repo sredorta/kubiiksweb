@@ -1,0 +1,50 @@
+{
+    "m.accept" : "Aceptar",
+    "m.decline" : "Rechazar",
+    "m.register" : "Inscribirse",
+
+    "m.header.t" : "kubiiks",
+    "m.header.s" : "Creador de experiencias web",
+
+    "m.menu.home" : "Inicio",
+    "m.menu.blog" : "Tecnología",
+    "m.menu.contact" : "Contáctanos",
+    "m.menu.login"  : "Conectarse",
+    "m.menu.signup" : "Crear una cuenta",
+    "m.menu.profile" : "Mi cuenta",
+    "m.menu.logout" : "Desconexión",
+    "m.menu.cookies" : "Utilización de cookies",
+    "m.menu.user-data" : "Utilización de datos personales",
+    "m.menu.admin"  : "Área administrador",
+    "m.menu.install" : "Instalar la aplicación",
+    "m.menu.demo" : "Demo",
+
+    "m.error.token" : "Su sesión ha caducado, usted debe conectarse de nuevo",
+
+    "m.cookies.title" : "Utilización de cookies",
+    "m.cookies.subtitle": "Esta página web o algunos de sus componentes utilizan cookies, que son necesarias para algunas funcionalidades como la generación de estadísticas o el compartir en redes sociales. ¿Aceptas el uso de cookies?",
+    "m.cookies.link" : "Saber más sobre los datos guardados",
+    "m.footer.created": "Aplicación creada por",
+    "m.news.first.l"    : "Nombre",
+    "m.news.last.l"    : "Nombre",
+    "m.news.email.l"    : "Correo electrónico",
+    "m.news.legal"      : "Condiciones de utilización de datos personales",
+
+    "m.created"            : "Creado",
+    "m.now"                : "Ahora",
+    "m.yesterday"          : "Ayer",
+    "m.minutesago.one"     : "Hace un minuto",
+    "m.hoursago.one"       : "Hace una hora",
+    "m.daysago.one"        : "Hace un día",
+    "m.weeksago.one"       : "Hace una semana",
+    "m.minutesago.more"    : "Hace {{count}} minutos",
+    "m.hoursago.more"      : "Hace {{count}} horas",
+    "m.daysago.more"       : "Hace {{count}} días",
+    "m.weeksago.more"      : "Hace {{count}} semanas",
+
+    "m.popup.close"         : "Acceder al sitio web",
+
+    "m.pwa.update.t" :"Une nueva versión es disponible",
+    "m.pwa.update.b" : "Cargar"
+}
+

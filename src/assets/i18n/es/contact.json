@@ -1,0 +1,15 @@
+{
+    "c.header.t" : "Contacto",
+    "c.header.s" : "Un equipo a su servicio",
+    "c.email.l": "Correo electrónico",
+    "c.email.p": "john@doe.com",
+    "c.email.h": "Escribe tu correo electrónico",
+    "c.subject.l": "Sujeto",
+    "c.subject.p": "Mas información",
+    "c.subject.h": "Escribe la razón para la que nos quiere contactar",
+    "c.message.l": "Mensaje",
+    "c.message.p": "Escribe tu mensaje aquí...",
+    "c.message.h": "Escriba su mensaje",
+    "c.send": "Enviar"
+}
+

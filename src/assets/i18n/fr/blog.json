@@ -7,6 +7,6 @@
     "b.search.notfound": "La recherche n'a donné aucun résultat",
     "b.search.found": "Trouvées",
     "b.search.display": "Affichées",
-    "b.search.outof": "Éléments sur un total de",
+    "b.search.outof": "éléments sur un total de",
     "b.search.page" : "Page"
 }

@@ -1,0 +1,12 @@
+{
+    "b.created" : "Publicado",
+    "b.readmore": "Leer más",
+    "b.header.t" : "Tecnología",
+    "b.header.s" : "Nuestra tecnología a su servicio",
+    "b.search.p" : "Buscar",
+    "b.search.notfound": "No se encontró ningún resultado",
+    "b.search.found": "Encontrados",
+    "b.search.display": "Mostrados",
+    "b.search.outof": "elementos de un total de",
+    "b.search.page" : "Página"
+}
