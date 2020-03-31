@@ -32,7 +32,7 @@
                 <mat-hint>{{'chat.input.message.h' | translate | async}}</mat-hint>
             </mat-form-field>        
             <div class="kii-button-wrapper">
-                  <button  mat-mini-fab  color="primary" type="button" (click)="onSubmit()"><fa-icon [icon]="icons['send']"></fa-icon></button>
+                  <button  mat-mini-fab  color="primary" type="button" (click)="onSubmit()" [disabled]="offline"><fa-icon [icon]="icons['send']"></fa-icon></button>
             </div>
         </form>
     </div>

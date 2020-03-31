@@ -1,14 +1,15 @@
-{
+
+ {
     "admin.create": "Ajouter",
     "admin.edit" : "Editer",
-    "admin.delete": "Suprimer",
+    "admin.delete": "Supprimer",
     "admin.save": "Enregistrer",
     "admin.cancel": "Annuler",
     "admin.search": "Chercher",
 
     "admin.menu.settings": "Configuration",
-    "admin.menu.users": "Utilizateurs",
-    "admin.menu.content":"Contenu",
+    "admin.menu.users": "Utilisateurs",
+    "admin.menu.content": "Contenu",
     "admin.menu.emails" : "Courriels",
     "admin.menu.notifications": "Notifications",
     "admin.menu.chats" : "Chats",
@@ -16,22 +17,22 @@
     "admin.menu.disk" : "Espace disque",
     "admin.menu.stats" : "Audience",
 
-    "admin.users.title" : "Géstion des utilizateurs",
+    "admin.users.title" : "Gestion des utilisateurs",
     "admin.users.search" : "Chercher",
     "admin.users.lastName" : "Nom",
     "admin.users.firstName" : "Prénom",
     "admin.users.email"     : "Courriel électronique",
     "admin.users.created"   : "Crée",
     "admin.users.data" : "Données de contact",
-    "admin.users.rolescheckbox" : "Modifier les rôles pour cet utilizateur",
+    "admin.users.rolescheckbox" : "Modifier les rôles pour cet utilisateur",
     "admin.users.isvalidated": "Compte de courriel validé",
-    "admin.users.delete" : "Supprimer l'utilizateur",
-    "admin.users.delete.text": "Êtes vous sur de vouloir effacer cet utilizateur ?",
+    "admin.users.delete" : "Supprimer l'utilisateur",
+    "admin.users.delete.text": "Êtes-vous sur de vouloir effacer cet utilisateur ?",
 
     "admin.content.l" : "Contenu",
-    "admin.content.title": "Géstion du contenu",
+    "admin.content.title": "Gestion du contenu",
 
-    "admin.emails.title": "Géstion des courriels",
+    "admin.emails.title": "Gestion des courriels",
 
     "admin.popup.title": "Message initial",
     "admin.popup.enable" : "Activer ou désactiver le message",
@@ -89,17 +90,17 @@
     "admin.stats.sunday" : "Dimanche",
     "admin.stats.language" : "Langue",
     "admin.stats.social.network" : "Réseau social",
-    "admin.cathegory.label": "Cathegorie",
-    "admin.cathegory.hint" : "Sélectioner une chategorie",
-    "admin.article.delete.text": "Êtes vous sur de vouloir suprimer cet article ?",
+    "admin.cathegory.label": "Catégorie",
+    "admin.cathegory.hint" : "Sélectionner une catégorie",
+    "admin.article.delete.text": "Êtes-vous sur de vouloir supprimer cet article ?",
     "admin.title.l" : "Titre",
     "admin.title.p" : "Titre",
     "admin.title.h" : "Écrivez le titre",
-    "admin.description.l": "Déscription",
-    "admin.description.p": "Déscription",
-    "admin.description.h": "Écrivez la déscription",
+    "admin.description.l": "Description",
+    "admin.description.p": "Description",
+    "admin.description.h": "Écrivez la description",
     "admin.summary.image.t": "Image principale",
-    "admin.summary.image.s": "Définisez l'image principale",
+    "admin.summary.image.s": "Définissez l'image principale",
 
     "admin.new.name.l": "Nom",
     "admin.new.name.p": "Nom",
@@ -108,7 +109,7 @@
     "admin.new.description.p": "Description",
     "admin.new.description.h": "Description du modèle",
 
-    "admin.notifications.title": "Géstion des notifications",
+    "admin.notifications.title": "Gestion des notifications",
     "admin.notification.id": "id",
     "admin.notification.name": "Nom",
     "admin.notification.description": "Description",
@@ -119,14 +120,13 @@
     "admin.notification.title.p" : "Nouveaux articles disponibles en magasin",
     "admin.notification.title.h" : "Titre de la notification",
     "admin.notification.body.l"  : "Contenu",
-    "admin.notification.body.p"  : "Des nouveux articles sont arrivés dans notre magasin...",
+    "admin.notification.body.p"  : "Des nouveaux articles sont arrivés dans notre magasin...",
     "admin.notification.body.h"  : "Contenu de la notification",
     "admin.notification.send.t"  : "Envoyer la notification à:",
     "admin.notification.self" : "Moi (test)",
-    "admin.notification.users": "Utilizateurs",
+    "admin.notification.users": "Utilisateurs",
     "admin.notification.all": "Visiteurs",
     "admin.notification.send": "Envoyer",
-
 
     "admin.email.id": "id",
     "admin.email.name": "Nom",
@@ -134,16 +134,15 @@
     "admin.email.created": "Crée",
     "admin.email.updated": "Modifié",
     "admin.email.confirm.text": "Etes-vous sûr de vouloir effacer ce modèle de courriel ?",
-    "admin.email.send.t": "Séléctioner les destinataires du courriel",
+    "admin.email.send.t": "Sélectionner les destinataires du courriel",
     "admin.email.self": "À mon compte de courriel électronique",
-    "admin.email.users": "À tous les utilizateurs enregistrés",
-    "admin.email.newsletters": "À tous les utilizateurs enregistrés aux bulletins d'information",
+    "admin.email.users": "À tous les utilisateurs enregistrés",
+    "admin.email.newsletters": "À tous les utilisateurs enregistrés aux bulletins d'information",
     "admin.email.send": "Envoyer le courriel",
-    "admin.gallery.dialog.t" : "Gallerie d'images",
+    "admin.gallery.dialog.t" : "Gallérie d'images",
 
-    "admin.chat.title" : "Géstion des chats",
+    "admin.chat.title" : "Gestion des chats",
     "admin.chat.rooms.empty" : "Il n'y a pas de chat actif en ce moment",
-
 
     "admin.disk.title"                 : "Gestion de l'espace disc",
     "admin.disk.total.title"           : "Espace disc utilisé",
@@ -152,9 +151,7 @@
     "admin.disk.images.title"          : "Espace disc images",
     "admin.disk.images.subtitle"       : "Espace disc utilisé pour les images",
     "admin.disk.videos.title"          : "Espace disc vidéos",
-    "admin.disk.videos.subtitle"       : "Espace disc utilisé pour les videos",
+    "admin.disk.videos.subtitle"       : "Espace disc utilisé pour les vidéos",
     "admin.disk.removable"             : "Peuvent être effacés",
     "admin.disk.optimize"              : "Optimisé le disque et gagner"
-
-
 }

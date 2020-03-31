@@ -23,6 +23,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { KiiMainCookiesService } from 'src/app/_features/main/services/kii-main-cookies.service';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
+import { KiiMainNetworkService } from 'src/app/_features/main/services/kii-main-network.service';
 
 
 @Component({
@@ -67,6 +68,9 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
   /**Contains if is first message sent */
   isFirstMessage : boolean = true;
 
+  /**When we are offline */
+  offline : boolean = false;
+
   /**Content of the chat */
   @ViewChild('content',{static:false}) content : ElementRef;
 
@@ -78,7 +82,8 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
       private socket: KiiSocketService, 
       private auth: KiiMainUserService,
       private trans: KiiTranslateService,
-      private cookies: KiiMainCookiesService
+      private cookies: KiiMainCookiesService,
+      private network: KiiMainNetworkService,
       ) { super()}
 
             ngOnInit() {
@@ -89,6 +94,12 @@ export class KiiChatComponent extends KiiFormAbstract implements OnInit {
               if (this.isAdminContext) {
                 this.socket.socket.emit(SocketEvents.CHAT_DATA,{room:this.room.id, type:ChatDataType.StoredMessagesRequest, object:null});
               }
+
+              this.addSubscriber(
+                this.network.offline.subscribe(res => {
+                  this.offline = res;
+                })
+              )
 
               this.addSubscriber(
                 this.auth.getLoggedInUser().subscribe(user => {

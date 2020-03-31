@@ -1,16 +1,18 @@
 {
-    "f.err.required" : "Champ obligatoire",
-    "f.err.minlength" : "Champ trop court",
-    "f.err.maxlength" : "Champ trop long",
-    "f.err.min"       : "Valeur trop basse",
-    "f.err.max"       : "Valeur trop grande",
-    "f.err.email"     : "Format de courriel incorrecte",
-    "f.err.password"  : "Mot de passe trop simple, ajouter des chiffres et des simboles",
-    "f.err.checkPasswordsMatch": "Les passwords ne sont pas identiques",
-    "f.err.pattern"   : "Format incorrecte",
-    "f.cancel"        : "Annuler",
-    "f.save"          : "Enregistrer",
-    "f.yes"           : "Oui",
-    "f.confirm.t"     : "Attention",
-    "f.confirm.s"     : "Opération irreversible"  
+"f.err.required" : "Champ obligatoire",
+"f.err.minlength" : "Champ trop court",
+"f.err.maxlength" : "Champ trop long",
+"f.err.min"       : "Valeur trop basse",
+"f.err.max"       : "Valeur trop grande",
+"f.err.email"     : "Format de courriel incorrecte",
+"f.err.password"  : "Mot de passe trop simple",
+"f.err.checkPasswordsMatch": "Les mots de passe ne sont pas identiques",
+"f.err.pattern"   : "Format incorrecte",
+"f.cancel"        : "Annuler",
+"f.save"          : "Enregistrer",
+"f.yes"           : "Oui",
+"f.confirm.t"     : "Attention",
+"f.confirm.s"     : "Opération irréversible"  
 }
+
+

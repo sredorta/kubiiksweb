@@ -1,30 +1,36 @@
 {
     "m.accept" : "Accept",
-    "m.decline" : "Decline",
+    "m.decline" : "Reject",
     "m.register" : "Subscribe",
 
     "m.header.t" : "kubiiks",
-    "m.header.s" : "Web experiences creator",
+    "m.header.s" : "Inspiring new internet experiences",
 
     "m.menu.home" : "Home",
-    "m.menu.blog" : "Tecnology",
-    "m.menu.contact" : "Contact us",
+    "m.menu.blog" : "Technology",
+    "m.menu.contact" : "Contact-us",
     "m.menu.login"  : "Login",
     "m.menu.signup" : "Signup",
-    "m.menu.cookies" : "Cookies usage",
-    "m.menu.user-data" : "User data conditions",
+    "m.menu.profile" : "My account",
+    "m.menu.logout" : "Logout",
+    "m.menu.cookies" : "Cookies utilisation",
+    "m.menu.user-data" : "User data terms and conditions",
+    "m.menu.admin"  : "Admin area",
+    "m.menu.install" : "Install the application",
     "m.menu.demo" : "Demo",
 
+    "m.error.token" : "Your session has expired, please login again",
 
     "m.cookies.title" : "Cookies usage",
-    "m.cookies.subtitle": "This website or its third-party tools use cookies, which are necessary for some functionalities like statistics and social sharing among others. Do you accept the cookies usage ?",
-    "m.cookies.link" : "Know more about what we use for cookies",
+    "m.cookies.subtitle": "This website or its third-party tools use cookies, which are necessary for some functionalities like statistics and social sharing among others. Do you accept the cookies usage?",
+    "m.cookies.link" : "I want to know more about what you store",
     "m.footer.created": "Application created by",
-    "m.news.first.l"    : "First Name",
-    "m.news.last.l"    : "Last Name",
+    "m.news.first.l"    : "First name",
+    "m.news.last.l"    : "Last name",
     "m.news.email.l"    : "Email",
-    "m.news.legal"      : "Personal data usage conditions",
+    "m.news.legal"      : "Personal data usage terms and conditions",
 
+    "m.created"            : "Created",
     "m.now"                : "Now",
     "m.yesterday"          : "Yesterday",
     "m.minutesago.one"     : "One minute ago",
@@ -34,7 +40,11 @@
     "m.minutesago.more"    : "{{count}} minutes ago",
     "m.hoursago.more"      : "{{count}} hours ago",
     "m.daysago.more"       : "{{count}} days ago",
-    "m.weeksago.more"      : "{{count}} weeks ago"
+    "m.weeksago.more"      : "{{count}} weeks ago",
 
+    "m.popup.close"         : "Access to the site",
 
+    "m.pwa.update.t" :"A new site version is available",
+    "m.pwa.update.b" : "Load"
 }
+

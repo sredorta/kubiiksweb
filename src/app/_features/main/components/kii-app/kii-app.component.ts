@@ -23,6 +23,7 @@ import { KiiPwaService } from '../../services/kii-main-pwa.service';
 import { KiiPopupDialogComponent } from '../kii-popup-dialog/kii-popup-dialog.component';
 import { KiiAuthUserService } from 'src/app/_features/auth/services/kii-auth-user.service';
 import { SwPush } from '@angular/service-worker';
+import { KiiMainNetworkService } from '../../services/kii-main-network.service';
 
 @Component({
   selector: 'kii-app',
@@ -46,6 +47,8 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   /**When we are in chat page so that chat icon han be hidden */
   isChatRoute: boolean = false;
 
+  /**Offline mode */
+  offline: boolean = false;
 
   constructor(@Inject(PLATFORM_ID) private platform: any,
   private bottomSheet: MatBottomSheet,
@@ -60,7 +63,8 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
   private auth : KiiMainUserService,
   private pwa: KiiPwaService,
   private swPush : SwPush,
-  private ngZone: NgZone
+  private ngZone: NgZone,
+  private network: KiiMainNetworkService
   ) { super() }
 
 
@@ -74,6 +78,12 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
     this.addSubscriber(
       this.auth.getLoggedInUser().subscribe(res => {
         this.loggedInUser = res;
+      })
+    )
+
+    this.addSubscriber(
+      this.network.offline.subscribe(res => {
+        this.offline = res;
       })
     )
 

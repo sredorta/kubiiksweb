@@ -2,24 +2,31 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, Rendere
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { KiiFormRestoreService } from '../../services/kii-form-restore.service';
 import { KiiMainNewsletterService, INewsletter } from '../../services/kii-main-newsletter.service';
+import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
+import { KiiMainNetworkService } from '../../services/kii-main-network.service';
 
 @Component({
   selector: 'kii-newsletter-form',
   templateUrl: './kii-newsletter-form.component.html',
   styleUrls: ['./kii-newsletter-form.component.scss']
 })
-export class KiiNewsletterFormComponent implements OnInit {
+export class KiiNewsletterFormComponent extends KiiBaseAbstract implements OnInit {
   @Output() onKiiSubmit = new EventEmitter<INewsletter>();
 
   @ViewChild('firstName',{static:false}) first : ElementRef;
   @ViewChild('lastName',{static:false}) last : ElementRef;
   @ViewChild('email',{static:false}) email : ElementRef;
 
+  offline : boolean = false;
 
-  constructor( private r: Renderer2) { }
+  constructor( private r: Renderer2, private network: KiiMainNetworkService) { super()}
 
   ngOnInit() {
-
+    this.addSubscriber(
+      this.network.offline.subscribe(res => {
+        this.offline = res;
+      })
+    )
   }
 
   onSubmit() {

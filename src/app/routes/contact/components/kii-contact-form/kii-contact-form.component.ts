@@ -4,6 +4,7 @@ import { KiiFormAbstract } from 'src/app/abstracts/kii-form.abstract';
 import { faAt } from '@fortawesome/free-solid-svg-icons/faAt';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons/faPaperPlane';
 import { KiiMainContactService } from '../../services/kii-main-contact.service';
+import { KiiMainNetworkService } from 'src/app/_features/main/services/kii-main-network.service';
 
 @Component({
   selector: 'kii-contact-form',
@@ -17,11 +18,17 @@ export class KiiContactFormComponent extends KiiFormAbstract implements OnInit {
     email:faAt,
     send: faPaperPlane
   }
+  offline:boolean = false;
 
-  constructor(private kiiContact : KiiMainContactService) { super() }
+  constructor(private kiiContact : KiiMainContactService,private network: KiiMainNetworkService) { super() }
 
   ngOnInit() {
     this.createForm();
+    this.addSubscriber(
+      this.network.offline.subscribe(res => {
+        this.offline = res;
+      })
+    )
   }
   createForm() {
     this.myForm =  new FormGroup({    

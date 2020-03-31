@@ -10,22 +10,21 @@
     "m.menu.blog" : "Technologie",
     "m.menu.contact" : "Contactez-nous",
     "m.menu.login"  : "Se connecter",
-    "m.menu.signup" : "Creer un compte",
+    "m.menu.signup" : "Créer un compte",
     "m.menu.profile" : "Mon compte",
-    "m.menu.logout" : "Se deconnecter",
+    "m.menu.logout" : "Se déconnecter",
     "m.menu.cookies" : "Utilisation de Cookies",
     "m.menu.user-data" : "Utilisation des données personnelles",
     "m.menu.admin"  : "Area administrateur",
     "m.menu.install" : "Installer l'application",
-    "m.menu.demo" : "Demo",
-
+    "m.menu.demo" : "Démo",
 
     "m.error.token" : "Votre session a expiré, connectez-vous à nouveau",
 
     "m.cookies.title" : "Utilisation de Cookies",
     "m.cookies.subtitle": "Ce site utilise des cookies, qui sont nécessaires pour des fonctionnalités comme la génération de statistiques ou le partage dans les réseaux sociaux. Acceptez-vous l'utilisation de cookies ?",
-    "m.cookies.link" : "En savoir plus sur ce que nous utilizons",
-    "m.footer.created": "Aplication réalisé par",
+    "m.cookies.link" : "En savoir plus sur ce que nous utilisons",
+    "m.footer.created": "Application réalisé par",
     "m.news.first.l"    : "Prénom",
     "m.news.last.l"    : "Nom",
     "m.news.email.l"    : "Courriel électronique",
@@ -43,8 +42,9 @@
     "m.daysago.more"       : "Il y a {{count}} jours",
     "m.weeksago.more"      : "Il y a {{count}} semaines",
 
-    "m.popup.close"         : "Acceder au site",
+    "m.popup.close"         : "Accéder au site",
 
     "m.pwa.update.t" :"Une nouvelle version est disponible",
     "m.pwa.update.b" : "Charger"
 }
+

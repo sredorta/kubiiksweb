@@ -15,6 +15,6 @@
     </div>
     <a mat-button color="primary" title="{{'m.news.legal' | translate | async}}" [routerLink]="'legal/user-data' | translateRoute | async "><span class="txt-xs">{{'m.news.legal' | translate | async}}</span></a>
     <div class="fcr w100">
-        <button mat-flat-button type="button" color="primary" (click)="onSubmit()">{{'m.register' | translate | async}}</button>
+        <button mat-flat-button type="button" color="primary" (click)="onSubmit()" [disabled]="offline">{{'m.register' | translate | async}}</button>
     </div>
 </form>

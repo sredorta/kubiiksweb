@@ -1,3 +1,14 @@
 {
-    "test": "Test"
+    "c.header.t" : "Contact",
+    "c.header.s" : "Our team is willing to hear from you",
+    "c.email.l": "Email",
+    "c.email.p": "john@doe.com",
+    "c.email.h": "Write your email address",
+    "c.subject.l": "Subject",
+    "c.subject.p": "Interested in your cool features",
+    "c.subject.h": "Write the reason of your message",
+    "c.message.l": "Message",
+    "c.message.p": "Write your message here...",
+    "c.message.h": "Write your message",
+    "c.send": "Send"
 }

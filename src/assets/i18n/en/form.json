@@ -1,3 +1,16 @@
 {
-    "test": "test"
+    "f.err.required" : "Required field",
+    "f.err.minlength" : "Too short content",
+    "f.err.maxlength" : "Too long content",
+    "f.err.min"       : "Too low value",
+    "f.err.max"       : "Too high value",
+    "f.err.email"     : "Wrong email format",
+    "f.err.password"  : "Password too simple",
+    "f.err.checkPasswordsMatch": "Passwords not matching",
+    "f.err.pattern"   : "Wrong format",
+    "f.cancel"        : "Cancel",
+    "f.save"          : "Save",
+    "f.yes"           : "Yes",
+    "f.confirm.t"     : "Attention",
+    "f.confirm.s"     : "Irreversible operation"  
 }

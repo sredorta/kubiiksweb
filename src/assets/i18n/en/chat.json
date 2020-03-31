@@ -1,4 +1,9 @@
 {
-    "test":"test",
+    "chat.title": "Chat",
+    "chat.subtitle": "Welcome to our chat",
+    "chat.input.message.p": "Tell us something...",
+    "chat.input.message.h": "Write your message",
+    "chat.writting": "Writing...",
+    "chat.restore.title": "Restore saved conversation ?",
     "chat.you": "You"
 }
