@@ -34,8 +34,6 @@ interface _IInitialData  {
 })
 export class KiiMainDataService extends KiiBaseAbstract {
   isInitialLoaded :BehaviorSubject<boolean> = new BehaviorSubject(false);
-  offline :BehaviorSubject<boolean> = new BehaviorSubject(false);
-
 
   isFullLoaded:boolean = false;
 

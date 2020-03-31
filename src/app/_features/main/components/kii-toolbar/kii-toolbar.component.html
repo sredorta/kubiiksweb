@@ -6,6 +6,7 @@
           <app-toolbar></app-toolbar>
           </div>
           <div class="icons fcc">
+            <ng-container *ngIf="!offline">
               <ng-container *ngIf="loggedInUser.exists()">
                 <a mat-icon-button attr.aria-label="{{'m.menu.profile' | translate | async}}" [title]="loggedInUser.getFullName()" [routerLink]="'auth/profile' | translateRoute | async">
                     <img  [src]= "loggedInUser.getAvatar()" class="avatar">
@@ -19,12 +20,14 @@
                     <fa-icon [icon]="icons['login']"></fa-icon>
                   </a>
               </ng-container>
-            <kii-language-selector></kii-language-selector>
-            <ng-container *ngIf="loggedInUser.hasRoles()">
-                <a mat-icon-button [routerLink]="'admin/menu' | translateRoute | async">
-                  <fa-icon [icon]="icons['admin']"></fa-icon>
-                </a>
+              <kii-language-selector></kii-language-selector>
+              <ng-container *ngIf="loggedInUser.hasRoles()">
+                  <a mat-icon-button [routerLink]="'admin/menu' | translateRoute | async">
+                    <fa-icon [icon]="icons['admin']"></fa-icon>
+                  </a>
+              </ng-container>
             </ng-container>
+            <fa-icon *ngIf="offline" [icon]="icons['offline']"></fa-icon>
           </div>
         </mat-toolbar-row>
 </mat-toolbar>

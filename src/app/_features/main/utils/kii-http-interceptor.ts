@@ -12,7 +12,7 @@ import { KiiMainUserService } from '../services/kii-main-user.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { KiiMainDataService } from '../services/kii-main-data.service';
+import { KiiMainNetworkService } from '../services/kii-main-network.service';
 
 
 //We intercept all http requests and do some things here
@@ -23,7 +23,7 @@ export class KiiHttpInterceptor implements HttpInterceptor {
         private kiiTrans: KiiTranslateService,
         private kiiAuth: KiiMainUserService,
         private router : Router,
-        private data: KiiMainDataService,
+        private network: KiiMainNetworkService,
         private kiiBottomSheet: MatBottomSheet,
         //private bottomSheet: KiiBottomSheetComponent,
         @Inject(PLATFORM_ID) private _platformId: any, 
@@ -73,13 +73,13 @@ export class KiiHttpInterceptor implements HttpInterceptor {
                 console.log("HERE !!!",error);
                 switch(error.status) {
                     case 0: //No internet connection
-                        this.data.offline.next(true);
+                        this.network.offline.next(true);
                         break;
                     case 504:   //Timeout
-                        this.data.offline.next(true);
+                        this.network.offline.next(true);
                         break;    
                     case 401: //Bad auth
-                        this.data.offline.next(false);
+                        this.network.offline.next(false);
                         let message = this.kiiTrans.translations[this.kiiTrans.getCurrent()]['m.error.token'];
                         if (isPlatformBrowser(this._platformId)) {
                             console.log("INTERCEPTOR",error);
@@ -91,7 +91,7 @@ export class KiiHttpInterceptor implements HttpInterceptor {
                         }
                         break;
                     default: 
-                        this.data.offline.next(false);
+                        this.network.offline.next(false);
                         if (error && error.error && error.error.message)
                             this.openBottomSheet(error.error.message);   
                         break;    

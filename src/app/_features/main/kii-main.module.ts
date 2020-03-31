@@ -54,6 +54,7 @@ import { KiiToolbarComponent } from './components/kii-toolbar/kii-toolbar.compon
 import { KiiMainStatsService } from './services/kii-main-stats.service';
 import { KiiMainDataService } from './services/kii-main-data.service';
 import { KiiMainSettingService } from './services/kii-main-setting.service';
+import { KiiMainNetworkService } from './services/kii-main-network.service';
 import { KiiPopupDialogComponent } from './components/kii-popup-dialog/kii-popup-dialog.component';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
 import { KiiBottomSheetSoftwareUpdateComponent } from './components/kii-bottom-sheet-software-update/kii-bottom-sheet-software-update.component';
@@ -162,7 +163,7 @@ export class KiiMainModule {
   return {
     ngModule: KiiMainModule,
     providers: [
-      KiiMainUserService, KiiMainStatsService, KiiMainDataService, KiiMainSettingService, KiiMainArticleService
+      KiiMainUserService, KiiMainStatsService, KiiMainDataService, KiiMainSettingService, KiiMainArticleService, KiiMainNetworkService
     ],
   }
 }
