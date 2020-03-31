@@ -10,7 +10,7 @@
               <button mat-button color="primary" [routerLink]="'/admin/users' | translateRoute | async"><fa-icon [icon]="icons['users']"></fa-icon></button>
               <p>{{'admin.menu.users' | translate | async}}</p>
           </div>       
-          <div *ngIf="loggedInUser.hasRole('blog') || loggedInUser.hasRole('admin')" class="button-wrapper">
+          <div *ngIf="loggedInUser.hasRole('blog') || loggedInUser.hasRole('content') || loggedInUser.hasRole('admin')" class="button-wrapper">
                 <button mat-button color="primary" [routerLink]="'/admin/content' | translateRoute | async"><fa-icon [icon]="icons['content']"></fa-icon></button>
                 <p>{{'admin.menu.content' | translate | async}}</p>
           </div>    

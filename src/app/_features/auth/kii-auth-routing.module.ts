@@ -9,24 +9,27 @@ import { KiiProfileComponent } from './routes/kii-profile/kii-profile.component'
 import { KiiAlertsComponent } from './routes/kii-alerts/kii-alerts.component';
 import { KiiEstablishPasswordComponent } from './routes/kii-establish-password/kii-establish-password.component';
 import { KiiNewsletterUnsubscribeComponent } from './routes/kii-newsletter-unsubscribe/kii-newsletter-unsubscribe.component';
+import { RegisteredGuard } from '../main/guards/registered.guard';
+import { UnregisteredGuard } from '../main/guards/unregistered.guard';
 
 
 const routes: Routes = [
   { path: '',  component: KiiLoginComponent },
-  { path: 'login',  component: KiiLoginComponent },
-  { path: 'signup', component:KiiSignupComponent},
-  { path: 'reset-password', component:KiiResetPasswordComponent},
-  { path: 'establish-password', component:KiiEstablishPasswordComponent},
-  { path: 'validate-email', component:KiiEmailValidateComponent},
+  { path: 'login',  component: KiiLoginComponent,canActivate:[UnregisteredGuard] },
+  { path: 'signup', component:KiiSignupComponent,canActivate:[UnregisteredGuard]},
+  { path: 'reset-password', component:KiiResetPasswordComponent,canActivate:[UnregisteredGuard]},
+  { path: 'establish-password', component:KiiEstablishPasswordComponent,canActivate:[UnregisteredGuard]},
+  { path: 'validate-email', component:KiiEmailValidateComponent,canActivate:[UnregisteredGuard]},
   {
     path: 'login/validate/:token',
     component: KiiLoginOauthComponent,
     data: { skipRouteLocalization: true },
+    canActivate:[UnregisteredGuard]
     //runGuardsAndResolvers: 'always',
     //canActivate: [UnregisteredGuard]
   },
-  { path: 'profile', component:KiiProfileComponent},
-  { path: 'notifications', component:KiiAlertsComponent},
+  { path: 'profile', component:KiiProfileComponent,canActivate:[RegisteredGuard]},
+  { path: 'notifications', component:KiiAlertsComponent,canActivate:[RegisteredGuard]},
   { path: 'unsubscribe',component: KiiNewsletterUnsubscribeComponent}, //Newsletter unsubscribe
 
 

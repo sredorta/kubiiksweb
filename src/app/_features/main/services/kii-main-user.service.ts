@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject, of } from 'rxjs';
 import { Observable } from 'rxjs';
 import { tap, map, filter } from 'rxjs/operators';
 import { KiiTranslateService } from '../../translate/services/kii-translate.service';
@@ -48,7 +48,11 @@ export class KiiMainUserService {
 
   /** getAuthUser expects that we send the bearer token and will return the current user details */
   public getAuthUser() {
-    return this.http.get(environment.apiURL + '/auth/get').pipe(map(res => <IUser>res));
+    if (isPlatformBrowser(this.platform))
+      if (User.hasToken()) {
+        return this.http.get(environment.apiURL + '/auth/get').pipe(map(res => <IUser>res));
+      }
+    return of(null);  
   }
 
   public logout() {

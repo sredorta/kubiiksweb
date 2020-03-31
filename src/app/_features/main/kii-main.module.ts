@@ -66,6 +66,9 @@ import { KiiElementComponent } from './components/kii-element/kii-element.compon
 import { KiiAppearDirective } from './directives/kii-appear-directive';
 import { KiiHorizontalScrollerComponent } from './components/kii-horizontal-scroller/kii-horizontal-scroller.component';
 import { KiiLazyDirective } from './directives/kii-lazy-directive';
+import { RegisteredGuard } from './guards/registered.guard';
+import { UnregisteredGuard } from './guards/unregistered.guard';
+import { RoleGuard } from './guards/role.guard';
 
 
 @NgModule({
@@ -121,7 +124,7 @@ import { KiiLazyDirective } from './directives/kii-lazy-directive';
   ],
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
   entryComponents:[KiiBottomSheetCookiesComponent, KiiBottomSheetSoftwareUpdateComponent, KiiHttpErrorComponent, KiiPopupDialogComponent],
-  providers: [
+  providers: [RegisteredGuard,UnregisteredGuard,RoleGuard,
     { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
   ],
   exports:[

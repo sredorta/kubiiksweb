@@ -10,22 +10,21 @@ import { KiiAdminEmailComponent } from './routes/kii-admin-email/kii-admin-email
 import { KiiAdminDiskComponent } from './routes/kii-admin-disk/kii-admin-disk.component';
 import { KiiAdminNotificationComponent } from './routes/kii-admin-notification/kii-admin-notification.component';
 import { KiiAdminChatsComponent } from './routes/kii-admin-chats/kii-admin-chats.component';
+import { RoleGuard } from '../main/guards/role.guard';
 
 
 const routes: Routes = [
   { path: '',  component: KiiAdminMenuComponent },
-  { path: 'menu',  component: KiiAdminMenuComponent },
-  { path: 'settings',  component: KiiAdminSettingsComponent },
-  { path: 'content', component:KiiAdminContentComponent},
-  { path: 'emails', component:KiiAdminEmailComponent},
-  { path: 'notifications', component: KiiAdminNotificationComponent},
-  { path: 'stats', component:KiiAdminStatsComponent},
-  { path: 'users', component:KiiAdminUsersComponent},
-  { path: 'popup', component:KiiAdminPopupComponent},
-  { path: 'disk', component:KiiAdminDiskComponent},
-  { path: 'chats', component:KiiAdminChatsComponent},
-
-
+  { path: 'menu',  component: KiiAdminMenuComponent, canActivate: [RoleGuard],data: {roles:["kubiiks","admin","content","email","notification","stats","users","chat","blog"]} },
+  { path: 'settings',  component: KiiAdminSettingsComponent, canActivate: [RoleGuard],data: {roles:["kubiiks"]}},
+  { path: 'content', component:KiiAdminContentComponent, canActivate: [RoleGuard],data: {roles:["blog","content","admin"]}},
+  { path: 'emails', component:KiiAdminEmailComponent,canActivate: [RoleGuard],data: {roles:["email","admin"]}},
+  { path: 'notifications', component: KiiAdminNotificationComponent,canActivate: [RoleGuard],data: {roles:["notification","admin"]}},
+  { path: 'stats', component:KiiAdminStatsComponent, canActivate: [RoleGuard],data: {roles:["stats","admin"]}},
+  { path: 'users', component:KiiAdminUsersComponent, canActivate: [RoleGuard],data: {roles:["users","admin"]}},
+  { path: 'popup', component:KiiAdminPopupComponent, canActivate: [RoleGuard],data: {roles:["content","admin"]}},
+  { path: 'disk', component:KiiAdminDiskComponent, canActivate: [RoleGuard],data: {roles:["admin"]}},
+  { path: 'chats', component:KiiAdminChatsComponent, canActivate: [RoleGuard],data: {roles:["chat","admin"]}},
 
 ];
 

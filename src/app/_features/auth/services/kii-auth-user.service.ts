@@ -87,10 +87,7 @@ export class KiiAuthUserService {
     return this.http.post<any>(environment.apiURL + '/auth/validate-email',{id:params.id,key:params.key});
   }
 
-  /** getAuthUser expects that we send the bearer token and will return the current user details */
-  public getAuthUser() {
-    return this.http.get(environment.apiURL + '/auth/get').pipe(map(res => <IUser>res));
-  }
+
 
   /**Updates current user. Only need to be registered */
   public updateAuthUser(value:any) {

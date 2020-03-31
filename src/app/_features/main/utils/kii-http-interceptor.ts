@@ -80,16 +80,15 @@ export class KiiHttpInterceptor implements HttpInterceptor {
                         break;    
                     case 401: //Bad auth
                         this.data.offline.next(false);
-
+                        let message = this.kiiTrans.translations[this.kiiTrans.getCurrent()]['m.error.token'];
                         if (isPlatformBrowser(this._platformId)) {
+                            console.log("INTERCEPTOR",error);
                             User.removeToken();
                             this.kiiAuth.setLoggedInUser(new User(null));
-                            if (!error.error.message) 
-                                error.error.message = this.kiiTrans.translations[this.kiiTrans.getCurrent()]['m.error.token'];
-                            this.router.navigate(['/'+this.kiiTrans.getCurrent()+'/auth/login']);
-            
+                            message =  this.kiiTrans.translations[this.kiiTrans.getCurrent()]['m.error.token'];
+                            //this.router.navigate(['/'+this.kiiTrans.getCurrent()+'/auth/login']);
+                            this.openBottomSheet(message);
                         }
-                        this.openBottomSheet(error.error.message);
                         break;
                     default: 
                         this.data.offline.next(false);
