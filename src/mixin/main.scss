@@ -94,6 +94,7 @@
         -ms-scrollbar-width:thin;
     }
 
+
     ///////////////////////////////////////////////////////////////////////
     //POPUP DIALOG
     ///////////////////////////////////////////////////////////////////////    
@@ -141,6 +142,36 @@
             margin-inline-start: 0px;
             margin-inline-end: 0px;
         }
+        h1,h2 {
+            background: linear-gradient(to right,mat-color($primary), mat-color($accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: normal;
+        }  
+        h2 {
+            font-size: 24px;
+            font-weight: normal;
+        }
+        @media only screen and (min-width: 500px) { 
+            h1 {
+                font-size: 32px;
+            }  
+            h2 {
+                font-size: 28px;
+            }
+        }
+        @media only screen and (min-width: 900px) { 
+            h1 {
+                font-size: 38px;
+            }  
+            h2 {
+                font-size: 32px;
+            }
+        }
+
     }
     kii-article {
         .ck-content {
