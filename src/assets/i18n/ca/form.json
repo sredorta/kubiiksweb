@@ -1,0 +1,20 @@
+{
+    "f.err.required" : "Camp obligatori",
+    "f.err.minlength" : "Camp massa llarg",
+    "f.err.maxlength" : "Camp massa curt",
+    "f.err.min"       : "Valor massa petita",
+    "f.err.max"       : "Valor massa gran",
+    "f.err.email"     : "Format de correu electrònic incorrecte",
+    "f.err.password"  : "Contrasenya massa simple",
+    "f.err.checkPasswordsMatch": "Les contrasenyes no son iguals",
+    "f.err.pattern"   : "Formato incorrecte",
+    "f.cancel"        : "Anul·lar",
+    "f.save"          : "Guardar",
+    "f.yes"           : "Si",
+    "f.confirm.t"     : "Atenció",
+    "f.confirm.s"     : "Operació irreversible"  
+    }
+
+    
+
+

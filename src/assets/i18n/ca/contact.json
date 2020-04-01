@@ -1,0 +1,15 @@
+{
+    "c.header.t" : "Contacte",
+    "c.header.s" : "Un equip al seu servei",
+    "c.email.l": "Correu electrònic",
+    "c.email.p": "john@doe.com",
+    "c.email.h": "Escriu el teu correu electrònic",
+    "c.subject.l": "Títol",
+    "c.subject.p": "Mes informació",
+    "c.subject.h": "Escriu la raó per la que ens contactes",
+    "c.message.l": "Missatge",
+    "c.message.p": "Escriu el teu missatge aquí...",
+    "c.message.h": "Escriu el teu missatge",
+    "c.send": "Enviar"
+}
+

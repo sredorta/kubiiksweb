@@ -1,0 +1,50 @@
+{
+    "m.accept" : "Acceptar",
+    "m.decline" : "Refusar",
+    "m.register" : "Inscriure’s",
+
+    "m.header.t" : "kubiiks",
+    "m.header.s" : "Creador d’experiències web",
+
+    "m.menu.home" : "Inici",
+    "m.menu.blog" : "Tecnologia",
+    "m.menu.contact" : "Contacta’ns",
+    "m.menu.login"  : "Connectar-se",
+    "m.menu.signup" : "Crear un compte",
+    "m.menu.profile" : "El meu compte",
+    "m.menu.logout" : "Desconnexió",
+    "m.menu.cookies" : "Utilització de cookies",
+    "m.menu.user-data" : "Utilització de dades personals",
+    "m.menu.admin"  : "Àrea administrador",
+    "m.menu.install" : "Instal·lar la aplicació",
+    "m.menu.demo" : "Demo",
+
+    "m.error.token" : "La seva sessió ha caducat, torni’s a connectar",
+
+    "m.cookies.title" : "Utilització de cookies",
+    "m.cookies.subtitle": "Aquesta pàgina web o alguns dels seus components utilitzen cookies, que son necessàries per algunes funcionalitats com la generació de estadístiques o el compartir en xarxes socials. Acceptes l’utilització de cookies?",
+    "m.cookies.link" : "Vull saber més sobre què es guarda",
+    "m.footer.created": "Aplicació creada per",
+    "m.news.first.l"    : "Nom",
+    "m.news.last.l"    : "Nom",
+    "m.news.email.l"    : "Correu electrònic",
+    "m.news.legal"      : "Condiciones d’utilització de dades personals",
+
+    "m.created"            : "Creat",
+    "m.now"                : "Ara",
+    "m.yesterday"          : "Ahir",
+    "m.minutesago.one"     : "Fa un minut",
+    "m.hoursago.one"       : "Fa una hora",
+    "m.daysago.one"        : "Fa un dia",
+    "m.weeksago.one"       : "Fa una setmana",
+    "m.minutesago.more"    : "Fa {{count}} minuts",
+    "m.hoursago.more"      : "Fa {{count}} hores",
+    "m.daysago.more"       : "Fa {{count}} dies",
+    "m.weeksago.more"      : "Fa {{count}} setmanes",
+
+    "m.popup.close"         : "Accedir al lloc web",
+
+    "m.pwa.update.t" :"Una nova versió es disponible",
+    "m.pwa.update.b" : "Carregar"
+}
+
