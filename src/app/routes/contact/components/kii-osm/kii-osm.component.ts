@@ -15,10 +15,12 @@ declare var ol: any;
 })
 export class KiiOsmComponent extends KiiBaseAbstract implements OnInit {
 
-  map: any;
+  map: any; //Contains the initial map
+  mapdelay:any; //Contains the map after some delay for slow networks
   lat:number;
   lng:number;
   zoom:number;
+  isDelay : boolean = false; //Tells if we show initial or delayed map
 
   isBrowser : boolean = isPlatformBrowser(this._platformId);
 
@@ -31,6 +33,7 @@ export class KiiOsmComponent extends KiiBaseAbstract implements OnInit {
   ngOnInit() {
     if (this.isBrowser) {
       this.kiiMainContact.load('osmjs','osmcss').then(data => {
+        console.log("DATA:",data);
         this.initMap();
       }).catch(error=> console.log(error));
       this.addSubscriber(
@@ -59,11 +62,30 @@ export class KiiOsmComponent extends KiiBaseAbstract implements OnInit {
       })
     });
     this.addPoint(this.lat, this.lng);
+    setTimeout(()=> {
+      this.isDelay = true;
+      setTimeout(() => {
+        console.log("SHOWING DELAY MAP !");
+        this.mapdelay = new ol.Map({
+          target: 'mapdelay',
+          layers: [
+            new ol.layer.Tile({
+              source: new ol.source.OSM()
+            })
+          ],
+          view: new ol.View({
+            center: ol.proj.fromLonLat([this.lng, this.lat]),
+            zoom: this.zoom
+          })
+        });
+        this.addPoint(this.lat, this.lng,true);
+      });
+    },8000);
   }
 
 
   /**Adds marker to the coordinates */
-  addPoint(lat: number, lng: number) {
+  addPoint(lat: number, lng: number, delay:boolean = false) {
     var vectorLayer = new ol.layer.Vector({
       source: new ol.source.Vector({
         features: [new ol.Feature({
@@ -79,7 +101,10 @@ export class KiiOsmComponent extends KiiBaseAbstract implements OnInit {
         })
       })
     });
+    if (!delay)
     this.map.addLayer(vectorLayer);
+    else
+    this.mapdelay.addLayer(vectorLayer);
   }
 
 }

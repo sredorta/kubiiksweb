@@ -1,3 +1,4 @@
 <div class="kii-osm">
-        <div *ngIf="isBrowser" id="map" class="map"></div>
+        <div *ngIf="isBrowser && !isDelay" id="map" class="map"></div>
+        <div *ngIf="isBrowser && isDelay" id="mapdelay" class="map"></div>
 </div>
