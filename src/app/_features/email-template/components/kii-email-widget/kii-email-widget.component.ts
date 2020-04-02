@@ -194,10 +194,9 @@ export class KiiEmailWidgetComponent implements OnInit {
 
   /**Updates button content */
   updateButton() {
-    
       switch(this.widget.typeBtn) {
         case 'flat':
-          if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) 
+          if (this.widget.url && (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0))
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
             `<a href="${this.widget.url}"  target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};background:${this.widget.bgColorBtn}; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding: 10px 20px; mso-border-alt: none;">
                 <span style="line-height:120%;"><span>${this.widget.txtBtn}</span></span>
@@ -205,7 +204,7 @@ export class KiiEmailWidgetComponent implements OnInit {
           );
           break;
         case 'stroked':
-          if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) 
+          if (this.widget.url && (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0))
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
             `<a href="${this.widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};border: ${this.widget.colorBtn} 3px solid; border-radius: 8px; -webkit-border-radius: 8px; -moz-border-radius: 8px; width: auto; padding: 10px 20px; mso-border-alt: none;">
                 <span style="line-height:120%;"><span>${this.widget.txtBtn}</span></span>
@@ -213,8 +212,8 @@ export class KiiEmailWidgetComponent implements OnInit {
           );
           break;
         case 'image_button':
-          if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) 
-          if (this.widget.imageUrl.indexOf("http://") == 0 || this.widget.imageUrl.indexOf("https://") == 0) 
+          if (this.widget.url && (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0)) 
+          if (this.widget.imageUrl && (this.widget.imageUrl.indexOf("http://") == 0 || this.widget.imageUrl.indexOf("https://") == 0))
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
             `<a href="${this.widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};width: auto; padding: 5px; mso-border-alt: none;">
                 <img src=${this.widget.imageUrl} style="height:auto;max-width:${this.widget.imgWidth}px;width:100%" title=${this.widget.txtBtn} alt=${this.widget.txtBtn}>
@@ -222,7 +221,7 @@ export class KiiEmailWidgetComponent implements OnInit {
           );
           break;
         default:
-         if (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0) 
+         if (this.widget.url && (this.widget.url.indexOf("http://") == 0 || this.widget.url.indexOf("https://") == 0)) 
           this.trustedHtml = this.sanitize.bypassSecurityTrustHtml(
             `<a href="${this.widget.url}" target="_self" onclick="return false;" style="display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color:${this.widget.colorBtn};width: auto; padding: 0px 10px; mso-border-alt: none;">
                 <span style="line-height:120%;"><span>${this.widget.txtBtn}</span></span>

@@ -147,7 +147,7 @@ export class KiiMainDataService extends KiiBaseAbstract {
     }
 
     if (page.exists()) {
-      this.title.setTitle( this.setting.getByKey('sitename').value + " - "+ page.title);
+      this.title.setTitle( page.title);
       this.meta.updateTag({ name: 'description', content: page.description });
       this.meta.updateTag({name:"robots", content:"index, follow"});
       this.meta.updateTag({ property: 'og:title', content: this.setting.getByKey('sitename').value + " : " + page.title });

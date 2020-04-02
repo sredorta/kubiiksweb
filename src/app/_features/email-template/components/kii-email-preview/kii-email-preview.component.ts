@@ -197,8 +197,8 @@ export class KiiEmailPreviewComponent extends KiiFormAbstract implements OnInit 
   }  
   _addBody() {
     this.html = this.html + `
-      <div class="email-body" style="margin: 0px;padding: 0px;-webkit-text-size-adjust: 100%;>
-      <table align="center" width=${this.json.width} cellspacing="0" cellpadding="0" style="width:${this.json.width}px;vertical-align: top;max-width:${this.json.width}px;margin: 0 auto;background-color: ${this.json.bgColor};">
+      <div class="email-body" style="margin: 0px;padding: 0px;-webkit-text-size-adjust: 100%;">
+      <table align="center" width="100%" cellspacing="0" cellpadding="0" style="vertical-align: top;margin: 0 auto;background-color: ${this.json.bgColor};">
         <tbody>
             ${this._addContent()}
         </tbody>

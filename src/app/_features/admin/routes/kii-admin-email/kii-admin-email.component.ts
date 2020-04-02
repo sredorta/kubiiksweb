@@ -64,7 +64,7 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
     buttonsPosition:'right',
     storage: DiskType.EMAIL,
     maxWidth:'120px',
-    maxSize:600,
+    maxSize:700,
     crop:false,
     defaultImage: './assets/kiilib/images/no-photo.svg'
   }
@@ -74,9 +74,7 @@ export class KiiAdminEmailComponent extends KiiTableAbstract implements OnInit {
 
   constructor(
     private kiiTrans: KiiTranslateService,
-    private kiiMainSetting: KiiMainSettingService,
     private kiiAdminEmail: KiiAdminEmailService,
-    private KiiAdminSetting: KiiAdminSettingService,
     public articles: KiiMainArticleService,
     private dialog: MatDialog
     ) { 
