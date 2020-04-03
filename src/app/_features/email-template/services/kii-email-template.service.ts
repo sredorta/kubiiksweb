@@ -536,8 +536,8 @@ export class KiiEmailTemplateService {
     if (parent.type == EElemType.CONTAINER) {
       let container = <IEmailData>parent;
       let currIndex = container.blocks.findIndex(obj=> obj.position == item.position);
-      let prevIndex = container.blocks.findIndex(obj=> obj.position == item.position-1);
-        if (prevIndex>=0 && currIndex>=0) {
+      let prevIndex = currIndex-1;
+        if (container.blocks[prevIndex] && container.blocks[currIndex]) {
            let tmp = container.blocks[prevIndex].position;
            container.blocks[prevIndex].position = container.blocks[currIndex].position;
            container.blocks[currIndex].position = tmp;
@@ -546,8 +546,8 @@ export class KiiEmailTemplateService {
     if (parent.type == EElemType.CELL) {
       let cell = <IEmailCell>parent;
       let currIndex = cell.widgets.findIndex(obj=> obj.position == item.position);
-      let prevIndex = cell.widgets.findIndex(obj=> obj.position == item.position-1);
-        if (prevIndex>=0 && currIndex>=0) {
+      let prevIndex = currIndex-1;
+        if (cell.widgets[prevIndex] && cell.widgets[currIndex]) {
           let tmp = cell.widgets[prevIndex].position;
           cell.widgets[prevIndex].position = cell.widgets[currIndex].position;
           cell.widgets[currIndex].position = tmp;
@@ -562,8 +562,8 @@ export class KiiEmailTemplateService {
     if (parent.type == EElemType.CONTAINER) {
       let container = <IEmailData>parent;
       let currIndex = container.blocks.findIndex(obj=> obj.position == item.position);
-      let nextIndex = container.blocks.findIndex(obj=> obj.position == item.position+1);
-        if (nextIndex>=0 && currIndex>=0) {
+      let nextIndex = currIndex+1;
+        if (container.blocks[currIndex] && container.blocks[nextIndex]) {
            let tmp = container.blocks[currIndex].position;
            container.blocks[currIndex].position = container.blocks[nextIndex].position;
            container.blocks[nextIndex].position = tmp;
@@ -572,8 +572,8 @@ export class KiiEmailTemplateService {
     if (parent.type == EElemType.CELL) {
       let cell = <IEmailCell>parent;
       let currIndex = cell.widgets.findIndex(obj=> obj.position == item.position);
-      let nextIndex = cell.widgets.findIndex(obj=> obj.position == item.position+1);
-        if (nextIndex>=0 && currIndex>=0) {
+      let nextIndex = currIndex+1;
+        if (cell.widgets[currIndex] && cell.widgets[nextIndex]) {
           let tmp = cell.widgets[currIndex].position;
           cell.widgets[currIndex].position = cell.widgets[nextIndex].position;
           cell.widgets[nextIndex].position = tmp;
