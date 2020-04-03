@@ -229,6 +229,8 @@ export interface IEmailWidget {
 export class KiiEmailTemplateService {
 
   private data : IEmailData = {};
+
+  private savedData: IEmailData = null;
   
   /**Selection filter */
   private selectionFilter : EElemType = EElemType.BLOCK;
@@ -649,5 +651,23 @@ export class KiiEmailTemplateService {
   /**Returns padding in px format string */
   getPaddingPx(id:number, side: 'left' | 'right' |'top'|'bottom') {
     return this.getPadding(id,side) + 'px';
+  }
+
+  /**Saves data to apply to other template */
+  saveData() {
+    this.savedData = <IEmailData>JSON.parse(JSON.stringify(this.data));
+  }
+
+  /**Restores data saved */
+  restoreData() {
+    let value = this.savedData;
+    this.savedData = null;
+    this.data = value;
+  }
+
+  /**Checks if it has saved data */
+  hasSavedData() {
+    if (this.savedData == null) return false;
+    return true;
   }
 }

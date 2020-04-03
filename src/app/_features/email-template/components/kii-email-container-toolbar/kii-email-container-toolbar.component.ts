@@ -18,6 +18,8 @@ import { faLink } from '@fortawesome/free-solid-svg-icons/faLink';
 import { faMousePointer } from '@fortawesome/free-solid-svg-icons/faMousePointer';
 import { MatSliderChange } from '@angular/material';
 import { faSave } from '@fortawesome/free-solid-svg-icons/faSave';
+import { faCopy } from '@fortawesome/free-solid-svg-icons/faCopy';
+import { faPaste } from '@fortawesome/free-solid-svg-icons/faPaste';
 
 
 
@@ -50,7 +52,9 @@ export class KiiEmailContainerToolbarComponent  implements OnInit {
     image: faImage,
     text: faParagraph,
     button: faLink,
-    save: faSave
+    save: faSave,
+    copy: faCopy,
+    paste: faPaste
   };
 
  
@@ -204,6 +208,19 @@ export class KiiEmailContainerToolbarComponent  implements OnInit {
 
   onSaveData() {
     this.onSave.emit(true);
+  }
+  onCopyData() {
+    console.log("Copy data");
+    console.log(this.service.getJson());
+    this.service.saveData();
+  }
+  onPasteData() {
+    console.log("Paste data");
+    this.service.restoreData();
+  }
+
+  canPaste() {
+    return this.service.hasSavedData();
   }
 
 }

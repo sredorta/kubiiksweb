@@ -48,6 +48,9 @@
         </div>
     </mat-menu>
     <button mat-icon-button (click)="onSaveData()" class="save-button"><fa-icon [icon]="icons['save']"></fa-icon></button>
+    <button mat-icon-button (click)="onCopyData()" class="save-button"><fa-icon [icon]="icons['copy']"></fa-icon></button>
+    <button *ngIf="canPaste()" mat-icon-button (click)="onPasteData()" class="save-button"><fa-icon [icon]="icons['paste']"></fa-icon></button>
+
     </div>
     <!--ROW for SELECTED TYPE-->
     <div class="row extra">
