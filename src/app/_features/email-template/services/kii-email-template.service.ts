@@ -229,8 +229,6 @@ export interface IEmailWidget {
 export class KiiEmailTemplateService {
 
   private data : IEmailData = {};
-
-  private savedData: IEmailData = null;
   
   /**Selection filter */
   private selectionFilter : EElemType = EElemType.BLOCK;
@@ -655,19 +653,20 @@ export class KiiEmailTemplateService {
 
   /**Saves data to apply to other template */
   saveData() {
-    this.savedData = <IEmailData>JSON.parse(JSON.stringify(this.data));
+    localStorage.setItem('email-data',JSON.stringify(this.data));
   }
 
   /**Restores data saved */
   restoreData() {
-    let value = this.savedData;
-    this.savedData = null;
-    this.data = value;
+    if (localStorage.getItem('email-data')) {
+      this.data = <IEmailData>JSON.parse(localStorage.getItem('email-data'));
+      localStorage.removeItem('email-data');
+    }
   }
 
   /**Checks if it has saved data */
   hasSavedData() {
-    if (this.savedData == null) return false;
-    return true;
+    if (localStorage.getItem('email-data')) return true;
+    return false;
   }
 }
