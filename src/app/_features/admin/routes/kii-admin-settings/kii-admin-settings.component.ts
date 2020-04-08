@@ -24,8 +24,8 @@ export class KiiAdminSettingsComponent extends KiiBaseAbstract implements OnInit
   @ViewChild(MatSlideToggle, {static:false}) toggle : MatSlideToggle;
 
   configFavicon : IConfigImageUpload = {
-    label:"favicon",
-    hint:"Application favicon",
+    label:"",
+    hint:"",
     buttonsPosition:  'right',
     crop:true,
     maxSize:32,
@@ -35,8 +35,8 @@ export class KiiAdminSettingsComponent extends KiiBaseAbstract implements OnInit
     maxWidth: "150px"    //Max width of the image element
   }
   configIcon192 : IConfigImageUpload = {
-    label:"App icon",
-    hint:"Application icon 192x192",
+    label:"",
+    hint:"",
     buttonsPosition:  'right',
     crop:true,
     maxSize:192,
@@ -46,14 +46,25 @@ export class KiiAdminSettingsComponent extends KiiBaseAbstract implements OnInit
     maxWidth: "150px"    //Max width of the image element
   }
   configIcon512 : IConfigImageUpload = {
-    label:"App icon",
-    hint:"Application icon 512x512",
+    label:"",
+    hint:"",
     buttonsPosition:  'right',
     crop:true,
-    maxSize:192,
+    maxSize:512,
     fileName:"icon-512x512.png",    //When specified we do not regenerate a date name and keep this name
     storage: DiskType.DEFAULT,
     imageFormat: "image/x-png",
+    maxWidth: "150px"    //Max width of the image element
+  }
+  configLogo : IConfigImageUpload = {
+    label:"",
+    hint:"",
+    buttonsPosition:  'right',
+    crop:true,
+    maxSize:300,
+    fileName:"logo.jpg",    //When specified we do not regenerate a date name and keep this name
+    storage: DiskType.DEFAULT,
+    imageFormat: "image/jpeg",
     maxWidth: "150px"    //Max width of the image element
   }
 
