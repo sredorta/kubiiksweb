@@ -23,8 +23,9 @@ export class KiiSeoFormComponent extends KiiFormAbstract implements OnInit {
     label:"Sharing image",
     hint:"Page sharing image",
     buttonsPosition:  'right',
-    crop:true,
+    crop:false,
     maxSize:1000,
+    compression_rate:0.7,
     storage: DiskType.CONTENT,
     maxWidth: "150px"    //Max width of the image element
   }
@@ -75,6 +76,7 @@ export class KiiSeoFormComponent extends KiiFormAbstract implements OnInit {
   /**When we change page */
   onPageChange(event:MatSelectChange) {
     this.currentPage = this.kiiMainPage.getByKey(event.value);
+    console.log("CURRENT PAGE:",this.currentPage);
   }
 
 

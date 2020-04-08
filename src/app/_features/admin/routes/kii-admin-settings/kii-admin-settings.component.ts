@@ -95,6 +95,7 @@ export class KiiAdminSettingsComponent extends KiiBaseAbstract implements OnInit
 
     /**Saves SEO settings */
     saveSeo(result:any) {
+      console.log("SAVING:",result);
       this.addSubscriber(
         this.kiiPage.update(new Page(result)).subscribe(res => {
           this.kiiMainPage.refresh(res);
