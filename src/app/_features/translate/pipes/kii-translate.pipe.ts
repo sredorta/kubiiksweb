@@ -10,7 +10,7 @@ export class KiiTranslatePipe implements PipeTransform {
   subscription = [];
   constructor(private trans :KiiTranslateService) {}
   transform(value: any, ...args: any[]): any {
-      const _subject = new BehaviorSubject(value);
+      const _subject = new BehaviorSubject(""); //Return "value" during debug time
       this.subscription.push(this.trans.onLoaded.subscribe(res => {
         if (this.trans.translations[this.trans.getCurrent()]) 
         if (this.trans.translations[this.trans.getCurrent()].hasOwnProperty(value)) {
