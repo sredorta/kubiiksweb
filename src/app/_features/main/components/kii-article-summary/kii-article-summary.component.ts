@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Inject, PLATFORM_ID, ViewChild, SimpleChanges
 import { isPlatformServer, isPlatformBrowser } from '@angular/common';
 import { KiiBaseAbstract } from 'src/app/abstracts/kii-base.abstract';
 import { Article } from '../../models/article';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'kii-article-summary',
@@ -16,7 +17,9 @@ export class KiiArticleSummaryComponent extends KiiBaseAbstract implements OnIni
   /**Current article that we are editing */
   @Input() article : Article = new Article(null);
 
- 
+  /**Do not do lazyLoading on admin */
+  @Input() isAdmin : boolean = false;
+
 
 
   constructor() {super()}
@@ -33,7 +36,6 @@ export class KiiArticleSummaryComponent extends KiiBaseAbstract implements OnIni
   ngOnChanges(changes:SimpleChanges) {
     if (changes.article) {
       this.article = changes.article.currentValue;
-      //this.update();
     }
   } 
 

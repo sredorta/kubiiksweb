@@ -25,7 +25,7 @@
     </div>
     <div *ngIf="isEditing" class="editing">
         <kii-element  [ngClass]="article.cathegory">
-            <kii-article-summary [article]="previewArticle"></kii-article-summary>
+            <kii-article-summary [article]="previewArticle" [isAdmin]="true"></kii-article-summary>
             <kii-article [article]="previewArticle"></kii-article>
         </kii-element>
         <kii-article-summary-form [article]="article" (onChange)="updateView($event)" (kiiOnSubmit)="onSaveEdited($event)" (kiiOnCancel)="isEditing=false"></kii-article-summary-form>

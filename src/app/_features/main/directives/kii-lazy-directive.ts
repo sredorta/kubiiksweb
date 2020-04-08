@@ -19,7 +19,6 @@ export class KiiLazyDirective {
     @Input('kiiLazy') onChange : BehaviorSubject<boolean>;
 
 
-
     constructor(private _el: ElementRef, private _r : Renderer2,@Inject(PLATFORM_ID) private platform: any) { }
 
     public ngAfterViewInit () {    

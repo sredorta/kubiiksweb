@@ -4,12 +4,12 @@
 <div *ngIf="!articles.loaded" class="fcc" style="min-height: 140px">
         <kii-spinner ></kii-spinner>
 </div>
-<kii-article [article]="articles.getByKey('demo-header')"></kii-article>
+<kii-article [article]="articles.getByKey('demo-header')" class="add-padding"></kii-article>
 <div class="demo-container">
             <kii-element *ngFor="let article of articles.getByCathegory('demo-features')" [ngClass]="article.cathegory">
                 <kii-article-summary [article]="article"></kii-article-summary>
                 <kii-article [article]="article"></kii-article>
             </kii-element>
 </div>
-<kii-article [article]="articles.getByKey('demo-footer')"></kii-article>
+<kii-article [article]="articles.getByKey('demo-footer')" class="add-padding"></kii-article>
 <kii-footer></kii-footer>

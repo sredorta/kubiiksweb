@@ -1,6 +1,7 @@
   <div class="kii-article-summary-container">
       <div class="img-wrp">
-        <img kiiLazy src="./assets/kiilib/images/lazy.svg" [attr.data-src]="article.getImage()" alt="Image">
+        <img *ngIf="!isAdmin" kiiLazy src="./assets/kiilib/images/lazy.svg" [attr.data-src]="article.getImage()" alt="Image">
+        <img *ngIf="isAdmin" [src]="article.getImage()" alt="Image">
       </div>
       <div class="text-wrp">
         <p class="title">{{article.title}}</p>

@@ -99,12 +99,9 @@
     //POPUP DIALOG
     ///////////////////////////////////////////////////////////////////////    
     kii-popup-dialog {
-        .popup-wrp {
-            background:rgba(black,0.4);
-        }
-        .content {
-            padding:20px;
-            background:red;
+        .wrp {
+            max-width: 600px;
+            min-width: 280px;
         }
   
     }
@@ -155,6 +152,35 @@
         h2 {
             font-size: 22px;
             font-weight: normal;
+        }
+        figure.image.image-style-align-left {
+            float: none;
+            margin-left:0;
+            margin-right:auto;
+        }
+        figure.image.image-style-align-right {
+            float: none;
+            margin-left:auto;
+            margin-right:0;
+        }
+        figure.image.image_resized>figcaption {
+            display: block;
+        }
+        .image>figcaption {
+            display: table-caption;
+            caption-side: bottom;
+            word-break: break-word;
+            color: #333;
+            background-color: #f7f7f7;
+            padding: .6em;
+            font-size: .75em;
+            outline-offset: -1px;
+        }
+        figure.image.ck-widget {
+            min-width: 80px;
+        }
+        .ck-widget.table td.ck-editor__nested-editable.ck-editor__nested-editable_focused {
+            background: transparent;
         }
         @media only screen and (min-width: 500px) { 
             h1 {
