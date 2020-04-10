@@ -107,8 +107,12 @@
     }
     .cdk-overlay-pane.kii-popup-dialog .mat-dialog-container {
         box-sizing: border-box;
-        padding:5px;
         overflow-y:auto; 
+    }
+    @media only screen and (max-width: 400px) { 
+        .cdk-overlay-pane.kii-popup-dialog .mat-dialog-container {
+            padding:10px;
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////
@@ -200,7 +204,7 @@
                 font-size: 38px;
             }  
             h2 {
-                font-size: 30px;
+                font-size: 28px;
             }
         }
 

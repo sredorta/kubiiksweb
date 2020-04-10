@@ -210,7 +210,8 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
             this.dialog.open(KiiPopupDialogComponent, {
               scrollStrategy: new NoopScrollStrategy(),
               panelClass: "kii-popup-dialog",
-              maxWidth:"90vw"
+              maxWidth:"90vw",
+              maxHeight:"90vh"
             });
         },8000);
         if (this.cookies.areAccepted())
