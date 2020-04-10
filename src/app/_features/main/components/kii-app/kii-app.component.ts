@@ -208,7 +208,9 @@ export class KiiAppComponent extends KiiBaseAbstract implements OnInit {
       if (value != "disabled" && (!storage || !storage.includes(value))) {
         setTimeout(() => {
             this.dialog.open(KiiPopupDialogComponent, {
-              scrollStrategy: new NoopScrollStrategy()
+              scrollStrategy: new NoopScrollStrategy(),
+              panelClass: "kii-popup-dialog",
+              maxWidth:"90vw"
             });
         },8000);
         if (this.cookies.areAccepted())

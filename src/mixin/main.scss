@@ -101,9 +101,14 @@
     kii-popup-dialog {
         .wrp {
             max-width: 600px;
-            min-width: 280px;
+            min-width: 270px;
         }
   
+    }
+    .cdk-overlay-pane.kii-popup-dialog .mat-dialog-container {
+        box-sizing: border-box;
+        padding:5px;
+        overflow-y:auto; 
     }
 
     ///////////////////////////////////////////////////////////////////////
@@ -187,7 +192,7 @@
                 font-size: 32px;
             }  
             h2 {
-                font-size: 26px;
+                font-size: 24px;
             }
         }
         @media only screen and (min-width: 900px) { 
@@ -195,7 +200,7 @@
                 font-size: 38px;
             }  
             h2 {
-                font-size: 32px;
+                font-size: 30px;
             }
         }
 
