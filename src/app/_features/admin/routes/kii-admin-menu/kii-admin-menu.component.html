@@ -1,7 +1,7 @@
 <kii-toolbar></kii-toolbar>
 <kii-admin-theme></kii-admin-theme>
 <div class="wrapper admin-theme">
-        <div class="button-container">
+    <div class="button-container">
           <div *ngIf="loggedInUser.hasRole('kubiiks')" class="button-wrapper">
             <button mat-button color="primary" [routerLink]="'/admin/settings' | translateRoute | async"><fa-icon [icon]="icons['settings']"></fa-icon></button>
             <p>{{'admin.menu.settings' | translate | async}}</p>
@@ -47,6 +47,5 @@
               <button mat-button color="primary"><i class="fas fa-hand-holding-usd"></i></button>
               <p>Ventes</p>
           </div>  -->    
-        </div>
-      </div>  
-<button mat-button (click)="goBack()">Back</button>
+    </div>
+</div>  

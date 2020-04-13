@@ -42,7 +42,7 @@
     "admin.stats.current"              : "Période de l'analyse actuel (en jours)",
     "admin.stats.metric.visits"        : "Visites uniques",
     "admin.stats.metric.visitsduration": "Moyenne de durée d'une visite",
-    "admin.stats.metric.pages"         : "Total de pages consultés par visite",
+    "admin.stats.metric.pages"         : "Total de pages consultés",
     "admin.stats.metric.pagespersession" : "Moyenne de pages consultés par visite",
     "admin.stats.metric.pagesduration" : "Moyenne durée consultation des pages",
     "admin.stats.metric.socialclicks"  : "Total clics vers réseaux sociaux",

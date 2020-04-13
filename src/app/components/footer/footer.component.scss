@@ -20,28 +20,5 @@
             }
         }
     }
-    .details {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        flex-direction: column;
-        padding:30px 20px 0px 20px;
-        .title {
-            opacity: 0.6;
-            margin-top:0px;
-            font-size: 14px;
-            padding-left: 15px;
-            fa-icon {
-                margin-right: 10px;
-            }
-        }
-        .address {
-            padding-left:20px;
-        }
-    }
-}
-@media only screen and (min-width: 600px) {
-    .wrp .details {
-        flex-direction: row;
-    }
+
 }

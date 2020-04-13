@@ -73,13 +73,13 @@ export class KiiHttpInterceptor implements HttpInterceptor {
                 console.log("HERE !!!",error);
                 switch(error.status) {
                     case 0: //No internet connection
-                        this.network.offline.next(true);
+                        //this.network.offline.next(true);
                         break;
                     case 504:   //Timeout
-                        this.network.offline.next(true);
+                        //this.network.offline.next(true);
                         break;    
                     case 401: //Bad auth
-                        this.network.offline.next(false);
+                        //this.network.offline.next(false);
                         let message = "";
                         if (isPlatformBrowser(this._platformId)) {
                             console.log("INTERCEPTOR",error);
@@ -93,7 +93,7 @@ export class KiiHttpInterceptor implements HttpInterceptor {
                         }
                         break;
                     default: 
-                        this.network.offline.next(false);
+                        //this.network.offline.next(false);
                         if (error && error.error && error.error.message)
                             this.openBottomSheet(error.error.message);   
                         break;    

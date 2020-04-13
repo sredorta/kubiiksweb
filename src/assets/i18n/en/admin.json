@@ -41,7 +41,7 @@
     "admin.stats.current"              : "Current analysis period (in days)",
     "admin.stats.metric.visits"        : "Unique visits",
     "admin.stats.metric.visitsduration": "Average visit duration",
-    "admin.stats.metric.pages"         : "Navigated pages per visit",
+    "admin.stats.metric.pages"         : "Total pages visited",
     "admin.stats.metric.pagespersession" : "Average of navigated pages per visit",
     "admin.stats.metric.pagesduration" : "Average duration of page visits",
     "admin.stats.metric.socialclicks"  : "Total clicks to social networks",
