@@ -23,7 +23,9 @@ export class KiiToolbarComponent extends KiiBaseAbstract implements OnInit {
     admin:faCog,
     offline: faPlane
   };
-  constructor(private kiiAuth: KiiMainUserService, private network: KiiMainNetworkService) { super() }
+  constructor(private kiiAuth: KiiMainUserService, private network: KiiMainNetworkService) { 
+    super() 
+  }
 
   ngOnInit() {
     this.addSubscriber(

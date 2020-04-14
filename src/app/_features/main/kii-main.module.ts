@@ -125,7 +125,7 @@ import { RoleGuard } from './guards/role.guard';
   ],
   //providers:[DeviceDetectorService,KiiInjectorService,KiiLanguageService, KiiViewTransferService],
   entryComponents:[KiiBottomSheetCookiesComponent, KiiBottomSheetSoftwareUpdateComponent, KiiHttpErrorComponent, KiiPopupDialogComponent],
-  providers: [RegisteredGuard,UnregisteredGuard,RoleGuard,KiiMainNetworkService,
+  providers: [RegisteredGuard,UnregisteredGuard,RoleGuard,
     { provide: HTTP_INTERCEPTORS, useClass: KiiHttpInterceptor, multi: true }
   ],
   exports:[

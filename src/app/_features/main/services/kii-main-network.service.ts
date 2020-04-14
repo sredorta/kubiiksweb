@@ -15,15 +15,14 @@ export class KiiMainNetworkService {
 
 
   constructor(@Inject(PLATFORM_ID) private platform: any) { 
+    console.log("INIT OF NETWORK SERVICE !!!!")
     if (isPlatformBrowser(this.platform)) {
       window.ononline = (event) => {
-        console.log("online",event);
-        if (event && event.type && event.type == "online")
+        console.log("online",event.type);
           this.offline.next(false);
       };
       window.onoffline = (event) => {
-        console.log("offline",event);
-        if (event && event.type && event.type == "offline")
+        console.log("offline",event.type);
         this.offline.next(true);
       };
     }

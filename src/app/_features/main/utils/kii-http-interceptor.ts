@@ -73,10 +73,12 @@ export class KiiHttpInterceptor implements HttpInterceptor {
                 console.log("HERE !!!",error);
                 switch(error.status) {
                     case 0: //No internet connection
-                        //this.network.offline.next(true);
+                        this.network.offline.next(true);
+                        console.log("Setting offline to true");
                         break;
                     case 504:   //Timeout
-                        //this.network.offline.next(true);
+                        console.log("Setting offline to true");
+                        this.network.offline.next(true);
                         break;    
                     case 401: //Bad auth
                         //this.network.offline.next(false);
