@@ -46,7 +46,7 @@
     "angular-email-editor": "^0.6.0",
     "angular-google-charts": "^0.1.6",
     "deepmerge": "^4.2.2",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "hammerjs": "^2.0.8",
     "html-minifier-terser": "^5.0.5",
     "mosaico": "^0.17.5",
